@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2B9D79E82D45647E006BDA3E /* Build configuration list for PBXProject "qFB - iOS" */;
+			buildConfigurationList = 2B9D79E82D45647E006BDA3E /* Build configuration list for PBXProject "qFocus Browser" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2B9D79E82D45647E006BDA3E /* Build configuration list for PBXProject "qFB - iOS" */ = {
+		2B9D79E82D45647E006BDA3E /* Build configuration list for PBXProject "qFocus Browser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2B9D7A012D45647F006BDA3E /* Debug */,

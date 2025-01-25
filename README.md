@@ -35,7 +35,9 @@ If you do like any of my apps and want to support me with my efforts then please
     </tr>
 </table>
 
-
+</br>
+</br>
+</br>
 <div align="center">
-  <h1>Footer Text</h1>
+  <h1>-= The End =-</h1>
 </div>

@@ -1,5 +1,5 @@
 //
-//  BlockFacebookJS.swift
+//  hBlockFacebookJS.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2025-01-04.

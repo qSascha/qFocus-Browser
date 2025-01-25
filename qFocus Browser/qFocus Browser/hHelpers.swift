@@ -1,9 +1,10 @@
 //
-//  Helpers.swift
+//  hHelpers.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2024-12-08.
 //
+
 import Foundation
 import SwiftUI
 

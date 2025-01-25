@@ -1,5 +1,5 @@
 //
-//  WebView.swift
+//  hWebView.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2025-01-04.

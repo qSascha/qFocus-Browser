@@ -1,3 +1,10 @@
+//
+//  hBlockListManager.swift
+//  qFocus Browser
+//
+//  Created by Sascha on 2024-12-11.
+//
+
 import Foundation
 import WebKit
 import SwiftUI

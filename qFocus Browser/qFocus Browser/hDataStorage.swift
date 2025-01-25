@@ -1,5 +1,5 @@
 //
-//  dataStorage.swift
+//  hDataStorage.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2024-12-11.
@@ -7,8 +7,6 @@
 
 import SwiftData
 import SwiftUI
-
-
 
 
 

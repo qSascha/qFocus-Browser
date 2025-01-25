@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2B6BC4752D456B4500345E4D /* qFocus Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qFocus Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "qFocus Browser";
 			packageProductDependencies = (
+				2B6BC5762D4577D400345E4D /* ContentBlockerConverter */,
 			);
 			productName = "qFocus Browser";
 			productReference = 2B6BC4752D456B4500345E4D /* qFocus Browser.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2B6BC5752D4577D400345E4D /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B6BC4762D456B4500345E4D /* Products */;
 			projectDirPath = "";
@@ -341,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2B6BC5752D4577D400345E4D /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B6BC5762D4577D400345E4D /* ContentBlockerConverter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B6BC5752D4577D400345E4D /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
+			productName = ContentBlockerConverter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2B6BC46D2D456B4500345E4D /* Project object */;
 }

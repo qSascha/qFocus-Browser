@@ -4,29 +4,25 @@
 //
 //  Created by Sascha on 2025-01-25.
 //
-
 import SwiftUI
 import SwiftData
 
-@main
-struct qFocus_BrowserApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+
+
+
+
+@main
+struct Social_PrivacyApp: App {
+    @StateObject private var globals = GlobalVariables()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: [sitesStorage.self, settingsStorage.self], isAutosaveEnabled: false)
+                .environmentObject(globals)
         }
-        .modelContainer(sharedModelContainer)
+
     }
 }
+    

@@ -141,6 +141,7 @@ struct iOSOptionsEditSite: View {
                                 }
                         }
                         .listRowSeparator(.hidden)
+                        .padding(.top, 5)
 
                         HStack {
                             Text("Link")

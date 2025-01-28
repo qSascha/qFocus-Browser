@@ -21,70 +21,61 @@ import AVFoundation
 
 //MARK: Re-Initialize Data
 func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSiteURL: String, firstSiteFavIcon: Data) {
-
     // Delete existing records
     do {
+        // Delete sites
         let fetchDescriptor = FetchDescriptor<sitesStorage>()
         let existingSites = try modelContext.fetch(fetchDescriptor)
         for site in existingSites {
             modelContext.delete(site)
         }
         
+        // Delete settings
         let settingsDescriptor = FetchDescriptor<settingsStorage>()
         let existingSettings = try modelContext.fetch(settingsDescriptor)
         for setting in existingSettings {
             modelContext.delete(setting)
         }
-        print("Successfluly deleted existing data")
-    } catch {
-        print("Error deleting existing data: \(error)")
-    }
-    
-    // Insert new records
-    let firstSite = sitesStorage(
-        siteOrder: 0,
-        siteName: firstSiteName,
-        siteURL: firstSiteURL,
-        siteFavIcon: firstSiteFavIcon
-    )
-    modelContext.insert(firstSite)
-    print("First site inserted")
-    print("Name: \(firstSiteName)")
-    print("URL: \(firstSiteURL)")
-    print("Favicon: \(firstSiteFavIcon)")
-    
-    // Insert empty sites
-    for counter in 1..<5 {
-        let emptySite = sitesStorage(
-            siteOrder: counter,
-            siteName: "",
-            siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData()
-        )
-        modelContext.insert(emptySite)
-        print("Empty site \(counter) inserted")
-    }
-    
-    // Insert default settings
-    let defaultSettings = settingsStorage(
-        navOnTop: false,
-        hideSideIcons: false,
-        hideMainIcons: false,
-        bigIcons: true,
-        opacity: 0.8,
-        enableAdBlock: true
-    )
-    modelContext.insert(defaultSettings)
-    print("Default Settings inserted")
-    
-    // Save changes
-    do {
+        
+        // Delete ad block filters
+        let adBlockDescriptor = FetchDescriptor<adBlockFilters>()
+        let existingAdBlock = try modelContext.fetch(adBlockDescriptor)
+        for filter in existingAdBlock {
+            modelContext.delete(filter)
+        }
+        
         try modelContext.save()
     } catch {
-        print("Error saving data: \(error)")
+        // Handle error appropriately for your app
     }
+    
+    // Initialize with default values
+    initializeFiltersStorage(context: modelContext)
+    initializeWebSitesStorage(context: modelContext)
+    initializeDefaultSettings(context: modelContext)
+    
+    // Add first site enter by user during onboarding
+    let descriptor = FetchDescriptor<sitesStorage>(
+        predicate: #Predicate<sitesStorage> { site in
+            site.siteOrder == 1
+        }
+    )
+    do {
+        if let siteToUpdate = try modelContext.fetch(descriptor).first {
+            siteToUpdate.siteName = firstSiteName
+            siteToUpdate.siteURL = firstSiteURL
+            siteToUpdate.siteFavIcon = firstSiteFavIcon
+            
+            try modelContext.save()
+        } else {
+            print("ERROR: No record found for updating.")
+        }
+    } catch {
+        print("ERROR: Updating \"First Site\" failed: \(error.localizedDescription)")
+    }
+    
+    
 }
-
 
 
 
@@ -165,6 +156,10 @@ struct showNavigation: View {
                 }
             }
             .padding(.bottom, 30)
+            .onAppear {
+                print(FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!)
+
+            }
         }
     }
 }
@@ -236,18 +231,8 @@ struct FirstSite: View {
 
     @Query(sort: \sitesStorage.siteOrder) var webSites: [sitesStorage]
     @Query() var settingsData: [settingsStorage]
-//    @State private var tempName: String
-//    @State private var tempURL: String
-//    @State private var tempFavIcon: Data?
     @State private var typingTimer: Timer?
 
-/*
-    init(tempName: String, tempURL: String, tempFavIcon: Data? = nil) {
-        self.tempName = tempName
-        self.tempURL = tempURL
-        self.tempFavIcon = tempFavIcon
-    }
-*/
 
 
 
@@ -359,40 +344,6 @@ struct FirstSite: View {
                             }
                         }
                         
-                        
-/*
-                        AsyncImage(url: URL(string: "https://icons.duckduckgo.com/ip3/\(fqdnOnly).ico")!) { image in
-                            if let image = image.image {
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 50, height: 32, alignment: .leading)
-                                    .onChange(of: image) {
-                                        self.typingTimer?.invalidate()
-                                        
-                                        self.typingTimer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) { _ in
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                                let renderer = ImageRenderer(content: image)
-                                                globals.tempSiteFavIcon = renderer.uiImage?.pngData()
-
-                                            }
-                                        }
-                                    }
-
-                                    .clipShape(
-                                        RoundedRectangle(
-                                            cornerRadius: 18
-                                        )
-                                    )
-                            } else if image.error != nil {
-                                Image(systemName: "exclamationmark.circle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .foregroundColor(.red)
-                            }
-                        }
-*/
                         Spacer()
                         
                     }
@@ -529,36 +480,7 @@ struct Onboarding: View {
                 
             }
         }
-        .onAppear {
-            playSound()
-        }
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    func playSound() {
-        if let path = Bundle.main.path(forResource: "StartSound", ofType: "wav") {
-            let url = URL(fileURLWithPath: path)
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.play()
-            } catch {
-                print("Error playing sound: \(error)")
-            }
-        }
-    }
-
-
-    
-    
-    
-    
-    
     
 }
 

@@ -106,10 +106,12 @@ struct iOSOptionsView: View {
                     Section {
                         // ***** Various settings *****
                         @Bindable var settingsData = settingsData[0]
-                        Toggle("Navigation bar on top", isOn: $settingsData.navOnTop)
-                        Toggle("Hide main icons", isOn: $settingsData.hideMainIcons)
-                        Toggle("Hide side icons", isOn: $settingsData.hideSideIcons)
-                        Toggle("Big icons", isOn: $settingsData.bigIcons)
+                        Picker("Navigation", selection: $settingsData.navOption) {
+                            ForEach(navBarMode.allCases, id: \.self) { mode in
+                                Text(mode.rawValue)
+                                    .tag(mode)
+                            }
+                        }
                         Toggle("Enable adblocker", isOn: $settingsData.enableAdBlock)
                             .onChange(of: settingsData.enableAdBlock) { oldValue, newValue in
                                 Task {

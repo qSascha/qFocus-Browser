@@ -4,8 +4,15 @@
 //
 //  Created by Sascha on 2025-01-04.
 //
+
 import WebKit
 import SwiftUI
+
+
+
+
+
+
 
 // MARK: Content Blocking Web View Controller
 class ContentBlockingWebViewController: UIViewController {

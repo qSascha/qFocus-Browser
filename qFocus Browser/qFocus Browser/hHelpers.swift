@@ -64,10 +64,3 @@ func isiPad() -> Bool {
 
 
 
-
-
-
-
-
-
-

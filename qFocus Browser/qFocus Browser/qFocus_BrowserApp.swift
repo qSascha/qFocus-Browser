@@ -14,15 +14,15 @@ import SwiftData
 
 @main
 struct Social_PrivacyApp: App {
-    @StateObject private var globals = GlobalVariables()
+    @StateObject var globals = GlobalVariables()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [sitesStorage.self, settingsStorage.self], isAutosaveEnabled: false)
+                .modelContainer(for: [sitesStorage.self, settingsStorage.self, adBlockFilters.self], isAutosaveEnabled: false)
                 .environmentObject(globals)
         }
 
     }
 }
-    
+

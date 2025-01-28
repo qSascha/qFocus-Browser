@@ -11,7 +11,7 @@ import SwiftUI
 
 
 
-//MARK: Settings Storage
+//MARK: Settings-Storage
 enum navBarMode: String, CaseIterable, Codable {
     case bottom = "Bottom"
     case top = "Top"

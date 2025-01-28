@@ -101,7 +101,7 @@ struct NavBar: View {
 
     @State private var showOptions = false
 
-    @StateObject private var viewModel = ContentViewModel()
+    @EnvironmentObject private var viewModel: ContentViewModel
     @StateObject var globals = GlobalVariables()
 
     
@@ -116,7 +116,11 @@ struct NavBar: View {
             }
             
             HStack(alignment: .center, spacing: 0) {
-                
+                // ***** Invisible box to push button to the right *****
+                Rectangle()
+                .opacity(0)
+                .frame(width: 10, height: 10)
+
                 Button(action: {
                     showOptions.toggle()
                 }, label: {
@@ -129,13 +133,13 @@ struct NavBar: View {
                     
                 })
                 .frame(width: 50, height: 40, alignment: .center)
-                .sheet(isPresented: $showOptions){
+/*                .sheet(isPresented: $showOptions){
                     iOSOptionsView(viewModel: viewModel)
                         .presentationDetents([.large])
                         .environmentObject(globals)
-                    
+
                 }
-                
+*/
                 
                 if webSites.count == 1 {
                     
@@ -263,7 +267,7 @@ struct WebViews: View {
         sort: \sitesStorage.siteOrder
     ) var webSites: [sitesStorage]
 
-    @StateObject private var viewModel = ContentViewModel()
+    @EnvironmentObject private var viewModel: ContentViewModel
     @StateObject var globals = GlobalVariables()
 
     
@@ -296,7 +300,7 @@ struct AdBlockLoadStatus: View {
     ) var webSites: [sitesStorage]
     @Query() var settingsDataArray: [settingsStorage]
 
-    @StateObject private var viewModel = ContentViewModel()
+    @EnvironmentObject private var viewModel: ContentViewModel
 
     
     
@@ -327,12 +331,12 @@ struct AdBlockLoadStatus: View {
             // Enable Ad-Blocker, if onboarding finalized.
             if let settings = settingsDataArray.first {
                 Task {
-                    await viewModel.initializeBlocker(isEnabled: settings.enableAdBlock)
+                    await try viewModel.initializeBlocker(isEnabled: settings.enableAdBlock)
                 }
             }
           
             //Print path to simulator file path, if necessary
-            print(FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!)
+            //print(FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!)
         }
 
     }

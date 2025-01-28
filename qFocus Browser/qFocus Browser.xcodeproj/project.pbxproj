@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
+		2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF6E07A2D4A85C4007B606F /* ConverterTool */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */,
+				2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = "qFocus Browser";
 			packageProductDependencies = (
 				2B6BC5762D4577D400345E4D /* ContentBlockerConverter */,
+				2BF6E07A2D4A85C4007B606F /* ConverterTool */,
 			);
 			productName = "qFocus Browser";
 			productReference = 2B6BC4752D456B4500345E4D /* qFocus Browser.app */;
@@ -367,6 +370,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B6BC5752D4577D400345E4D /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
 			productName = ContentBlockerConverter;
+		};
+		2BF6E07A2D4A85C4007B606F /* ConverterTool */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B6BC5752D4577D400345E4D /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
+			productName = ConverterTool;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -24,17 +24,14 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
 
     @StateObject var globals = GlobalVariables()
+    @StateObject private var viewModel = ContentViewModel()
 
     @State private var showingDebugView = false
 
     @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
-//    private var webViewControllers: [ContentBlockingWebViewController] = []
     
 
-
-    
-    
     
     var body: some View {
 
@@ -56,14 +53,17 @@ struct ContentView: View {
                     
                     // ***** Navigation Bar *****
                     NavBar()
+                    .environmentObject(viewModel)
                     .zIndex(5)
                     
                     // ***** Loading screen for ad-blocker *****
                     AdBlockLoadStatus()
+                    .environmentObject(viewModel)
                     .zIndex(1)
 
                     // ***** Web Views *****
                     WebViews()
+                    .environmentObject(viewModel)
                     .zIndex(0)
 
                 }

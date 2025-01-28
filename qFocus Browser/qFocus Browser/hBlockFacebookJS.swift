@@ -89,8 +89,8 @@ class ScriptManager: NSObject, WKScriptMessageHandler {
     func loadScript(completion: @escaping (String?) -> Void) {
         
         if shouldUpdateScript() {
-            print("Downloading JavaScript")
-/*
+/*            print("Downloading JavaScript")
+
             downloadAndCacheScript { script in
                 if script == nil {
                     print("ERROR: Script download failed - received nil script")
@@ -119,7 +119,7 @@ class ScriptManager: NSObject, WKScriptMessageHandler {
             let timeInterval = Date().timeIntervalSince(lastUpdate)
             return timeInterval > updateInterval
         } else {
-            print("No record of last script update found. Updating script...")
+//            print("No record of last script update found. Updating script...")
             return true
         }
     }

@@ -53,34 +53,31 @@ class ContentViewModel: ObservableObject {
     }
 
     @MainActor
-    func initializeBlocker(isEnabled: Bool) async {
-        
+    func initializeBlocker(isEnabled: Bool) async throws {
         totalRuleLists = blockListURLs.count
         loadedRuleLists = 0
         
-        for (index, url) in blockListURLs.enumerated() {
+        for (_, url) in blockListURLs.enumerated() {
             do {
                 let result = try await blockListManager.processURL(url)
-                
-                if let compiledRules = result.compiled {
-                    // Apply rules to all web views
-                    for webViewController in webViewControllers {
-                        try await webViewController.addContentRules(with: [compiledRules])
-                    }
-                    print("BlockListManager: Successfully applied rules from \(url.lastPathComponent) to \(webViewControllers.count) WebViews")
+                print("Result: \(result.compiled.count) chunks")
+
+                // Apply all compiled chunks to web views
+                for webViewController in webViewControllers {
+                    try await webViewController.addContentRules(with: result.compiled)
                 }
+                
+                loadedRuleLists += 1
             } catch {
-                print("BlockListManager: Error processing block list: \(url): \(error.localizedDescription)")
+                print("rror processing block list: \(url): \(error.localizedDescription)")
             }
-            loadedRuleLists += 1
         }
-        
-        print("BlockListManager: Successfully processed \(loadedRuleLists)/\(totalRuleLists) lists")
+        print("Successfully processed \(loadedRuleLists)/\(totalRuleLists) lists")
     }
     
     @MainActor
     func toggleBlocking(isEnabled: Bool) async {
-        
+/*
         if isEnabled {
             // Initialize the blocker if it's being enabled
             totalRuleLists = blockListURLs.count
@@ -120,6 +117,7 @@ class ContentViewModel: ObservableObject {
                 print("Error removing content rules: \(error.localizedDescription)")
             }
         }
+ */
     }
 }
 

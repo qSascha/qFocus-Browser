@@ -6,6 +6,7 @@
 ### Xcode ###
 ## User settings
 xcuserdata/
+xcschememanagement
 
 ## Xcode 8 and earlier
 *.xcscmblueprint

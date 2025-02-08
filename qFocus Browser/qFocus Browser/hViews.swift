@@ -23,6 +23,8 @@ struct FloatingNavBar: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var globals: GlobalVariables
 
+    @ObservedObject var scriptManager: ScriptManager
+
     @State private var isShowingButtons = false
     @State private var showShareSheet = false
     @GestureState private var isDragging = false
@@ -30,12 +32,16 @@ struct FloatingNavBar: View {
     
     let pressFeedback = UIImpactFeedbackGenerator(style: .rigid)
     let tapFeedback = UIImpactFeedbackGenerator(style: .medium)
+
+    let menuIconSize: CGFloat = 32
+    
+    
     
     var body: some View {
         @Bindable var settingsData = settingsDataArray[0]
         
         ZStack {
-            // Replace Button with Image and add tap gesture
+            // Image and add tap gesture
             ZStack {
                 Circle()
                     .strokeBorder(Color.blue, lineWidth: 2)
@@ -95,62 +101,59 @@ struct FloatingNavBar: View {
 
             // Popup window with navigation buttons
             if isShowingButtons {
-                HStack(spacing: 2) {
-                    VStack(spacing: 0) {
+                HStack() {   // Two areas, right for share and options, left for all web sites
+                    
+                    VStack() {
                         // Top row of icons (even indexed icons)
-                        HStack(spacing: 4) {
+                        HStack() {
                             ForEach(webSites.indices, id: \.self) { index in
                                 if index % 2 == 0 {  // Even indices go in top row
-                                    Button(action: {
+                                    MenuButton(
+                                        index: index,
+                                        webSites: webSites,
+                                        menuIconSize: menuIconSize,
+                                        scriptManager: scriptManager
+                                    ) {
                                         globals.currentTab = index
                                         isShowingButtons = false
-                                    }, label: {
-                                        Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 32, height: 32)
-                                            .clipShape(Circle())
-                                            .padding(EdgeInsets(
-                                                top: 8,
-                                                leading: 10,
-                                                bottom: 2,
-                                                trailing: 10
-                                            ))
-                                    })
-                                }
+                                    }
+                                 }
                             }
                         }
-                        
+                        .padding(EdgeInsets(
+                            top: 10,
+                            leading: 10,
+                            bottom: 3,
+                            trailing: 5
+                        ))
+
                         // Bottom row of icons (odd indexed icons)
-                        HStack(spacing: 2) {
+                        HStack() {
                             ForEach(webSites.indices, id: \.self) { index in
                                 if index % 2 != 0 {  // Odd indices go in bottom row
-                                    Button(action: {
+                                    MenuButton(
+                                        index: index,
+                                        webSites: webSites,
+                                        menuIconSize: menuIconSize,
+                                        scriptManager: scriptManager
+                                    ) {
                                         globals.currentTab = index
                                         isShowingButtons = false
-                                    }, label: {
-                                        Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 32, height: 32)
-                                            .clipShape(Circle())
-                                            .padding(EdgeInsets(
-                                                top: 2,
-                                                leading: 10,
-                                                bottom: 8,
-                                                trailing: 10
-                                            ))
-                                    })
-                                }
+                                    }
+                                 }
                             }
                         }
+                        .padding(EdgeInsets(
+                            top: 3,
+                            leading: 10,
+                            bottom: 10,
+                            trailing: 5
+                        ))
+
                     }
-                    .background(.thinMaterial).opacity(settingsData.opacity)
 
                     // Settings and Share buttons
-                    VStack(spacing: 2) {
-                        
-                        Spacer()
+                    VStack() {
                         
                         Button(action: {
                             showShareSheet = true
@@ -158,41 +161,39 @@ struct FloatingNavBar: View {
                             Image(systemName: "square.and.arrow.up")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 24, height: 24)
+                                .frame(width: menuIconSize, height: menuIconSize)
                                 .foregroundColor(.blue)
                                 .padding(EdgeInsets(
-                                    top: 4,
-                                    leading: 4,
-                                    bottom: 2,
-                                    trailing: 6
+                                    top: 10,
+                                    leading: 10,
+                                    bottom: 3,
+                                    trailing: 10
                                 ))
+
                         }
-                        .frame(height: 34)
-                        
+
                         Button(action: {
                             globals.showOptionsView = true
                         }) {
-                            Image(systemName: "slider.vertical.3")
+                            Image(systemName: "slider.horizontal.3")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
+                                .frame(width: menuIconSize, height: menuIconSize)
                                 .foregroundColor(.blue)
                                 .padding(EdgeInsets(
-                                    top: 2,
-                                    leading: 4,
-                                    bottom: 4,
-                                    trailing: 6
+                                    top: 3,
+                                    leading: 10,
+                                    bottom: 10,
+                                    trailing: 10
                                 ))
+
                         }
-                        .frame(height: 34)
-                        
-                        Spacer()
                         
                     }
-                    .frame(height: 76)
-//                    .padding( 4)
+                    .background(.thinMaterial).opacity(settingsData.opacity)
+
                 }
-                .background(Color(UIColor.systemBackground))
+                .background(Color(.gray))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 10)
                 .position(
@@ -212,7 +213,40 @@ struct FloatingNavBar: View {
         }
     }
 }
-    
+
+
+// MARK: Menu Button
+private struct MenuButton: View {
+    let index: Int
+    let webSites: [sitesStorage]
+    let menuIconSize: CGFloat
+    @ObservedObject var scriptManager: ScriptManager
+    let action: () -> Void
+
+
+    var body: some View {
+        let host = URL(string: webSites[index].siteURL)?.host ?? ""
+        _ = scriptManager.domainsWithInjectedScripts.contains(host)
+        
+        return Button(action: action) {
+            Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: menuIconSize, height: menuIconSize)
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .fill(scriptManager.domainsWithInjectedScripts.contains(URL(string: webSites[index].siteURL)?.host ?? "") ? Color.green : Color.clear)
+                        .frame(width: 8, height: 8)
+                    , alignment: .bottomLeading
+                )
+        }
+    }
+}
+
+
+
+
 // ShareSheet struct for UIActivityViewController
 struct ShareSheet: UIViewControllerRepresentable {
     let activityItems: [Any]
@@ -270,7 +304,7 @@ struct NavBar: View {
                         globals.showOptionsView.toggle()
                     }, label: {
                         
-                        Image(systemName: "slider.vertical.3")
+                        Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .foregroundColor(.blue)
                             .aspectRatio(contentMode: .fit)
@@ -352,12 +386,12 @@ struct WebViews: View {
                         .zIndex(globals.currentTab == index ? 1 : 0)
                         .onAppear {
                             Task {
-                                await viewModel.updateWebView(at: index, with: webSites[index].siteURL, jsScript1: webSites[index].jsScript1, jsScript2: webSites[index].jsScript2, jsScript3: webSites[index].jsScript3)
+                                await viewModel.updateWebView(at: index, with: webSites[index].siteURL)
                             }
                         }
                         .onChange(of: webSites[index].siteURL) { _, newValue in
                             Task {
-                                await viewModel.updateWebView(at: index, with: newValue, jsScript1: webSites[index].jsScript1, jsScript2: webSites[index].jsScript2, jsScript3: webSites[index].jsScript3)
+                                await viewModel.updateWebView(at: index, with: newValue)
                             }
                         }
                 }

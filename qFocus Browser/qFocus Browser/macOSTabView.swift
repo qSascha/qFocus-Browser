@@ -57,7 +57,7 @@ public struct macOSTabView: View {
 
                 Button(action: {
                 }, label: {
-                    Image(systemName: "slider.vertical.3")
+                    Image(systemName: "slider.horizontal.3")
                         .resizable()
                         .foregroundColor(.blue)
                         .aspectRatio(contentMode: .fit)

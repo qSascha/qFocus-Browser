@@ -5,13 +5,7 @@
 //  Created by Sascha on 2025-01-25.
 //
 import SwiftUI
-//import SwiftData
 import WebKit
-
-
-
-
-
 
 // MARK: Content View Model
 @MainActor
@@ -23,17 +17,14 @@ class ContentViewModel: ObservableObject {
     @Published var totalRuleLists: Int = 0
     @Published var currentURL: String?
 
-    private var scriptManager: ScriptManager
+    let scriptManager: ScriptManager
     private var activeRuleIdentifiers: Set<String> = []
     private var currentCompiledRules: [WKContentRuleList] = []
     private var hasInitiallyLoaded: [Int: Bool] = [:]
     private var hasInitializedRules = false
     private let blockListManager = BlockListManager()
-
     
 
-
-    
     init() {
         self.scriptManager = ScriptManager()
 
@@ -58,66 +49,9 @@ class ContentViewModel: ObservableObject {
     }
 
     
-    
-    //MARK: Load Site Scripts
-    private func loadSiteScripts(for url: URL, webViewController: ContentBlockingWebViewController, jsScript1: String?, jsScript2: String?, jsScript3: String?) async {
-        var scriptsLoaded = false
-        
-        // Load scripts from URLs
-        if let scriptUrl1 = jsScript1, !scriptUrl1.isEmpty {
-            do {
-                if try await scriptManager.loadScript(urlString: scriptUrl1, identifier: "script1") {
-                    scriptsLoaded = true
-                }
-            } catch {
-                print("Failed to load script1 from URL: \(scriptUrl1)")
-            }
-        }
-        
-        if let scriptUrl2 = jsScript2, !scriptUrl2.isEmpty {
-            do {
-                if try await scriptManager.loadScript(urlString: scriptUrl2, identifier: "script2") {
-                    scriptsLoaded = true
-                }
-            } catch {
-                print("Failed to load script2 from URL: \(scriptUrl2)")
-            }
-        }
-        
-        if let scriptUrl3 = jsScript3, !scriptUrl3.isEmpty {
-            do {
-                if try await scriptManager.loadScript(urlString: scriptUrl3, identifier: "script3") {
-                    scriptsLoaded = true
-                }
-            } catch {
-                print("Failed to load script3 from URL: \(scriptUrl3)")
-            }
-        }
-        
-        // Only proceed with dependency loading if at least one script was loaded
-        if scriptsLoaded {
-            let group = DispatchGroup()
-            
-            for identifier in ["script1", "script2", "script3"] {
-                group.enter()
-                scriptManager.loadDependencies(for: identifier) { success in
-                    if !success {
-                        print("Failed to load dependencies for \(identifier)")
-                    }
-                    group.leave()
-                }
-            }
-            
-            group.notify(queue: .main) { [weak self] in
-                guard let self = self else { return }
-                self.scriptManager.injectScripts(into: webViewController.webView)
-            }
-        }
-    }
-    
-    
+
     //MARK: Update Web View
-    func updateWebView(at index: Int, with urlString: String, jsScript1: String? = nil, jsScript2: String? = nil, jsScript3: String? = nil) async {
+    func updateWebView(at index: Int, with urlString: String) async {
         guard index < webViewControllers.count,
               !urlString.isEmpty,
               let url = URL(string: urlString) else {
@@ -127,10 +61,10 @@ class ContentViewModel: ObservableObject {
         if hasInitiallyLoaded[index] != true {
             let webViewController = webViewControllers[index]
             
-            // First load site-specific scripts
-            await loadSiteScripts(for: url, webViewController: webViewController, jsScript1: jsScript1, jsScript2: jsScript2, jsScript3: jsScript3)
-            
-            // Then load the URL
+            // Load site-specific scripts
+            scriptManager.loadScripts(for: url, webViewController: webViewController)
+
+            // Load the URL
             webViewController.load(url: url)
             hasInitiallyLoaded[index] = true
         }
@@ -140,16 +74,14 @@ class ContentViewModel: ObservableObject {
     }
 
 
-    
+
+
     //MARK: Helper Functions
-    // Add a method to reset the initial load state if needed
     func resetInitialLoadState(for index: Int) {
         hasInitiallyLoaded[index] = false
     }
 
-    
-
-    @objc private func handleURLUpdate(_ notification: Notification) {  // Added parameter
+    @objc private func handleURLUpdate(_ notification: Notification) {
         // Force view update
         objectWillChange.send()
     }
@@ -165,8 +97,6 @@ class ContentViewModel: ObservableObject {
         }
         return webViewControllers[index]
     }
-    
-
 
     //MARK: Initialize Blocker
     @MainActor
@@ -202,8 +132,6 @@ class ContentViewModel: ObservableObject {
         showAdBlockLoadStatus = false
 
     }
-
-
 
     //MARK: Toggle Blocking
     @MainActor

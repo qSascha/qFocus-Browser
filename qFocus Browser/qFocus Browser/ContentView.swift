@@ -19,7 +19,7 @@ struct ContentView: View {
     @Query() var settingsDataArray: [settingsStorage]
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment(\.modelContext) private var modelContext
+//    @Environment(\.modelContext) private var modelContext
 
     @StateObject var globals = GlobalVariables()
     @StateObject var viewModel = ContentViewModel()
@@ -72,7 +72,7 @@ private struct MainContent: View {
             ZStack {
                 // Navigation Bar
                 if settingsDataArray[0].navOption == .freeFlow {
-                    FloatingNavBar()
+                    FloatingNavBar(scriptManager: viewModel.scriptManager)
                 } else {
                     NavBar()
                 }

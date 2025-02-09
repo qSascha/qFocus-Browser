@@ -91,7 +91,7 @@ struct AdBlockListRow: View {
                     Spacer()
                     
                     if filter.recommended {
-                        Text("Recommended")
+                        Text("Advised")
                             .font(.caption)
                             .foregroundColor(.green)
                             .padding(.horizontal, 6)

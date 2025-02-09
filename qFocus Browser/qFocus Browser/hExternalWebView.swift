@@ -1,5 +1,5 @@
 //
-//  ExternalWebViewController.swift
+//  hExternalWebViewController.swift
 //  qFocus Browser
 //
 //  Created by qSascha on 2025-02-01.
@@ -34,6 +34,7 @@ class ExternalWebViewController: UIViewController {
         super.viewDidLoad()
         fetchSettings()
         setupUI()
+        print("Link:\(url)")
         loadURL()
     }
 
@@ -88,9 +89,6 @@ class ExternalWebViewController: UIViewController {
                                             style: .plain,
                                             target: self,
                                             action: #selector(forwardButtonTapped))
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh,
-                                            target: self,
-                                            action: #selector(refreshButtonTapped))
         let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
                                          style: .plain,
                                          target: self,
@@ -103,7 +101,7 @@ class ExternalWebViewController: UIViewController {
                                          target: self,
                                          action: #selector(doneButtonTapped))
         
-        toolbar.items = [doneButton, flexSpace, backButton, flexSpace, forwardButton, flexSpace, refreshButton, shareButton, safariButton]
+        toolbar.items = [doneButton, flexSpace, backButton, flexSpace, forwardButton, flexSpace, shareButton, flexSpace, safariButton]
 
         // Setup constraints
         if settings?.navOption == .top {
@@ -226,10 +224,6 @@ class ExternalWebViewController: UIViewController {
         }
     }
     
-    @objc private func refreshButtonTapped() {
-        webView.reload()
-    }
-    
     @objc private func doneButtonTapped() {
         // Clear website data before dismissing
         WKWebsiteDataStore.default().removeData(
@@ -252,6 +246,11 @@ extension ExternalWebViewController: WKNavigationDelegate {
         decisionHandler(.allow)
     }
 }
+
+
+
+
+
 
 // MARK: - WKUIDelegate
 extension ExternalWebViewController: WKUIDelegate {

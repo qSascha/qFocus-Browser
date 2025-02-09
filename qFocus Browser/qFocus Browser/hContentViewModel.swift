@@ -23,7 +23,7 @@ class ContentViewModel: ObservableObject {
     private var hasInitiallyLoaded: [Int: Bool] = [:]
     private var hasInitializedRules = false
     private let blockListManager = BlockListManager()
-    
+
 
     init() {
         self.scriptManager = ScriptManager()

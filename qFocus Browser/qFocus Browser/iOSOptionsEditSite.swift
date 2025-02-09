@@ -142,7 +142,12 @@ struct iOSOptionsEditSite: View {
         }
     }
     
+
+
+    
+    //MARK: Save and Dismiss
     private func saveAndDismiss() {
+
         // Update the site data
         editSite.siteName = tempName
         editSite.siteURL = tempURL
@@ -163,6 +168,9 @@ struct iOSOptionsEditSite: View {
         // Save changes
         do {
             try modelContext.save()
+
+            NotificationCenter.default.post(name: NSNotification.Name("URLUpdated"), object: nil)
+
         } catch {
             print("Error saving site: \(error)")
         }

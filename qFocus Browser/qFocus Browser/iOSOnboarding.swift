@@ -265,6 +265,42 @@ struct iOSOnboarding: View {
                     VStack(alignment: .leading, spacing: 15) {
                         ForEach(adBlockLists) { filter in
                             HStack {
+                                // List Name and Info Button
+                                Button(action: {
+                                    showingExplanation = filter
+                                }) {
+                                    HStack {
+                                        Text(filter.identName)
+                                            .foregroundColor(.primary)
+                                        
+                                        Spacer()
+                                        
+                                        if filter.recommended {
+                                            Text("Advised")
+                                                .font(.caption)
+                                                .foregroundColor(.green)
+                                                .padding(.horizontal, 6)
+                                                .padding(.vertical, 2)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 4)
+                                                        .stroke(Color.green, lineWidth: 1)
+                                                )
+                                        }
+                                    }
+                                }
+                                
+                                // Toggle
+                                Toggle("", isOn: Binding(
+                                    get: { filter.enabled },
+                                    set: { newValue in
+                                        filter.enabled = newValue
+                                        try? modelContext.save()
+                                    }
+                                ))
+                                .labelsHidden()
+                            }
+/*
+                            HStack {
                                 Toggle(isOn: Binding(
                                     get: { filter.enabled },
                                     set: { newValue in
@@ -280,6 +316,7 @@ struct iOSOnboarding: View {
                                 }
                             }
                             .padding(.horizontal)
+*/
                         }
                     }
                 }

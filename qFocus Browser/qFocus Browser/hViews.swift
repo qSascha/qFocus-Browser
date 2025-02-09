@@ -157,6 +157,7 @@ struct FloatingNavBar: View {
                         
                         Button(action: {
                             showShareSheet = true
+                            isShowingButtons = false
                         }) {
                             Image(systemName: "square.and.arrow.up")
                                 .resizable()
@@ -174,6 +175,7 @@ struct FloatingNavBar: View {
 
                         Button(action: {
                             globals.showOptionsView = true
+                            isShowingButtons = false
                         }) {
                             Image(systemName: "slider.horizontal.3")
                                 .resizable()
@@ -389,7 +391,8 @@ struct WebViews: View {
                                 await viewModel.updateWebView(at: index, with: webSites[index].siteURL)
                             }
                         }
-                        .onChange(of: webSites[index].siteURL) { _, newValue in
+                        .onChange(of: webSites[index].siteURL) { oldValue, newValue in
+                            viewModel.resetInitialLoadState(for: index)
                             Task {
                                 await viewModel.updateWebView(at: index, with: newValue)
                             }

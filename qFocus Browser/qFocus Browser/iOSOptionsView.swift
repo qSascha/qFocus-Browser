@@ -93,27 +93,8 @@ struct iOSOptionsView: View {
                     // Settings Section
                     Section {
                         @Bindable var settingsData = settingsData[0]
-                        Picker("Navigation", selection: $settingsData.navOption) {
-                            ForEach(navBarMode.allCases, id: \.self) { mode in
-                                Text(mode.rawValue)
-                                    .tag(mode)
-                            }
-                        }
-                        .onChange(of: settingsData.navOption) { oldValue, newValue in
-                            if newValue == .top {
-                                settingsData.showTopBar = true
-                            }
-                        }
-                        
-                        Toggle("Show Top Bar", isOn: $settingsData.showTopBar)
-                            .disabled(settingsData.navOption == .top)
 
-                        Toggle("Show Bottom Bar", isOn: $settingsData.showBottomBar)
-                        HStack {
-                            Text("Bar opacity")
-                                .padding(.trailing, 30)
-                            Slider(value: $settingsData.opacity, in: 0.7...1.0, step: 0.1)
-                        }
+                        Toggle("Show Navigation Bar", isOn: $settingsData.showNavBar)
                         
                         NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData, viewModel: viewModel)) {
                             HStack {
@@ -136,14 +117,7 @@ struct iOSOptionsView: View {
                                 }
                             }
                         }
-/*
-                        Toggle("Enable adblocker", isOn: $settingsData.enableAdBlock)
-                            .onChange(of: settingsData.enableAdBlock) { oldValue, newValue in
-                                Task {
-                                    await viewModel.toggleBlocking(isEnabled: newValue)
-                                }
-                            }
-*/
+
                         NavigationLink(destination: iOSAboutView()) {
                             Text("About")
                         }

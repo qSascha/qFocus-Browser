@@ -12,31 +12,19 @@ import SwiftUI
 
 
 //MARK: Settings-Storage
-enum navBarMode: String, CaseIterable, Codable {
-    case bottom = "Bottom"
-    case top = "Top"
-    case freeFlow = "Free Flow"
-}
-
 @Model
 class settingsStorage {
     var id: UUID = UUID()
-    var navOption: navBarMode = navBarMode.bottom
-    var opacity: Double = 0.7
     var enableAdBlock: Bool = true
     var freeFlowX: Double = (UIScreen.main.bounds.width - 50)
     var freeFlowY: Double = (UIScreen.main.bounds.height - 100)
-    var showTopBar: Bool = true
-    var showBottomBar: Bool = true
+    var showNavBar: Bool = false
     
-    init(navOption: navBarMode, opacity: Double, enableAdBlock: Bool, freeFlowX: Double, freeFlowY: Double, showTopBar: Bool, showBottomBar: Bool) {
-        self.navOption = navOption
-        self.opacity = opacity
+    init( enableAdBlock: Bool, freeFlowX: Double, freeFlowY: Double, showNavBar: Bool) {
         self.enableAdBlock = enableAdBlock
         self.freeFlowX = freeFlowX
         self.freeFlowY = freeFlowY
-        self.showTopBar = showTopBar
-        self.showBottomBar = showBottomBar
+        self.showNavBar = showNavBar
     }
     
 }
@@ -45,13 +33,10 @@ func createDefaultSettings() -> [settingsStorage] {
     
     return [
         settingsStorage(
-            navOption: .freeFlow,
-            opacity: 0.7,
             enableAdBlock: true,
             freeFlowX: UIScreen.main.bounds.width - 50,
             freeFlowY: UIScreen.main.bounds.height - 70,
-            showTopBar: true,
-            showBottomBar: false
+            showNavBar: false
         )
     ]
 }

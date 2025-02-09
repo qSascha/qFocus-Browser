@@ -62,7 +62,8 @@ struct iOSOnboarding: View {
                 // Navigation
                 navigationButtons
                     .padding()
-                    .background(Color(UIColor.systemBackground))
+//                    .background(Color(UIColor.systemBackground))
+                    .background(Color(.qBlueLight))
                     .shadow(radius: 2)
             }
             .navigationBarHidden(true)
@@ -220,7 +221,7 @@ struct iOSOnboarding: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.white)
                 }
             }
             
@@ -232,7 +233,7 @@ struct iOSOnboarding: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.white)
                 }
                 .disabled(currentStep == 4 && !isFirstSiteValid)
             } else {
@@ -241,7 +242,7 @@ struct iOSOnboarding: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.white)
                 }
             }
         }

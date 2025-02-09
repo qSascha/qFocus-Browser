@@ -5,14 +5,14 @@
 //  Created by qSascha on 2025-02-01.
 //
 
-import WebKit
+@preconcurrency import WebKit
 import UIKit
 import SwiftUI
 
 
 
-
-class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIAdaptivePresentationControllerDelegate {
+//class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
     var webView: WKWebView!
     private var refreshControl: UIRefreshControl!
@@ -98,17 +98,11 @@ class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, 
     func removeContentRules() async throws {
         webView.configuration.userContentController.removeAllContentRuleLists()
     }
-}
-
-
-
-
-
-
-// MARK: - WKNavigationDelegate
-extension ContentBlockingWebViewController {
  
-    // Decide Policy For
+
+
+
+    // MARK: Decide Policy For
     // Check if a link has been interacted by the user and if the core domain is the same. If yes then open in the internal browser, otherwise in the external browser.
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url,
@@ -132,6 +126,7 @@ extension ContentBlockingWebViewController {
         let currentMainDomain = getDomainCore(currentHost)
         let targetMainDomain = getDomainCore(host)
         
+
         if currentMainDomain == targetMainDomain {
             // Allowing internal navigation to same domain
             decisionHandler(.allow)
@@ -141,14 +136,18 @@ extension ContentBlockingWebViewController {
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                let externalWebVC = ExternalWebViewController(url: url, modelContext: self.modelContext)
-                externalWebVC.modalPresentationStyle = .fullScreen
-                self.present(externalWebVC, animated: true)
+                let externalView = ExternalWebView(url: url)
+                let hostingController = UIHostingController(rootView: externalView)
+                hostingController.modalPresentationStyle = .fullScreen
+                self.present(hostingController, animated: true)
             }
+
         }
+
     }
     
-    // New Web View called "_blank" and similar
+    // MARK: New Web View
+    // called "_blank" and similar
     // Check if a link has been interacted by the user and if the core domain is the same. If yes then open in the internal browser, otherwise in the external browser.
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         guard let url = navigationAction.request.url,
@@ -167,20 +166,31 @@ extension ContentBlockingWebViewController {
         let currentMainDomain = getDomainCore(currentHost)
         let targetMainDomain = getDomainCore(host)
         
+        
+        // In your WKNavigationDelegate methods
         if currentMainDomain == targetMainDomain {
             // Loading in current webview same domain
             webView.load(navigationAction.request)
         } else {
             // Opening external browser for new window request, different domain
+
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                let externalWebVC = ExternalWebViewController(url: url, modelContext: self.modelContext)
-                externalWebVC.modalPresentationStyle = .fullScreen
-                self.present(externalWebVC, animated: true)
+                let externalView = ExternalWebView(url: url)
+                let hostingController = UIHostingController(rootView: externalView)
+                hostingController.modalPresentationStyle = .fullScreen
+                self.present(hostingController, animated: true)
             }
+
         }
+
         return nil
     }
+
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        // Handle any cleanup after dismissal if needed
+    }
+
 
     private func getDomainCore(_ host: String) -> String {
         let components = host.lowercased().split(separator: ".")

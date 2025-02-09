@@ -33,7 +33,6 @@ struct FloatingNavBar: View {
     let pressFeedback = UIImpactFeedbackGenerator(style: .rigid)
     let tapFeedback = UIImpactFeedbackGenerator(style: .medium)
 
-    let menuIconSize: CGFloat = 32
     
     
     
@@ -44,13 +43,13 @@ struct FloatingNavBar: View {
             // Image and add tap gesture
             ZStack {
                 Circle()
-                    .strokeBorder(Color.blue, lineWidth: 2)
+                    .strokeBorder(Color.qBlueLight, lineWidth: 2)
                     .frame(width: 52, height: 52)
 
                 Image(systemName: "command.circle.fill")
                     .resizable()
                     .frame(width: 44, height: 44)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.qBlueLight)
                     .background(Color.white)
                     .clipShape(Circle())
                     .shadow(radius: isDragging || isLongPressing ? 6 : 3)
@@ -111,7 +110,6 @@ struct FloatingNavBar: View {
                                     MenuButton(
                                         index: index,
                                         webSites: webSites,
-                                        menuIconSize: menuIconSize,
                                         scriptManager: scriptManager
                                     ) {
                                         globals.currentTab = index
@@ -134,7 +132,6 @@ struct FloatingNavBar: View {
                                     MenuButton(
                                         index: index,
                                         webSites: webSites,
-                                        menuIconSize: menuIconSize,
                                         scriptManager: scriptManager
                                     ) {
                                         globals.currentTab = index
@@ -162,12 +159,12 @@ struct FloatingNavBar: View {
                             Image(systemName: "square.and.arrow.up")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: menuIconSize, height: menuIconSize)
-                                .foregroundColor(.blue)
+                                .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
+                                .foregroundColor(.white)
                                 .padding(EdgeInsets(
-                                    top: 10,
+                                    top: 14,
                                     leading: 10,
-                                    bottom: 3,
+                                    bottom: 7,
                                     trailing: 10
                                 ))
 
@@ -180,22 +177,22 @@ struct FloatingNavBar: View {
                             Image(systemName: "slider.horizontal.3")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: menuIconSize, height: menuIconSize)
-                                .foregroundColor(.blue)
+                                .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
+                                .foregroundColor(.white)
                                 .padding(EdgeInsets(
-                                    top: 3,
+                                    top: 7,
                                     leading: 10,
-                                    bottom: 10,
+                                    bottom: 14,
                                     trailing: 10
                                 ))
 
                         }
                         
                     }
-                    .background(.thinMaterial).opacity(settingsData.opacity)
+                    .background(Color(.qBlueDark))
 
                 }
-                .background(Color(.gray))
+                .background(Color(.qBlueLight))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 10)
                 .position(
@@ -208,11 +205,7 @@ struct FloatingNavBar: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .zIndex(8)
-        .sheet(isPresented: $showShareSheet) {
-            if let url = URL(string: webSites[globals.currentTab].siteURL) {
-                ShareSheet(activityItems: [url])
-            }
-        }
+
     }
 }
 
@@ -221,9 +214,10 @@ struct FloatingNavBar: View {
 private struct MenuButton: View {
     let index: Int
     let webSites: [sitesStorage]
-    let menuIconSize: CGFloat
     @ObservedObject var scriptManager: ScriptManager
     let action: () -> Void
+
+    @EnvironmentObject var globals: GlobalVariables
 
 
     var body: some View {
@@ -234,7 +228,7 @@ private struct MenuButton: View {
             Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: menuIconSize, height: menuIconSize)
+                .frame(width: globals.menuIconSize, height: globals.menuIconSize)
                 .clipShape(Circle())
                 .overlay(
                     Circle()
@@ -282,72 +276,66 @@ struct NavBar: View {
     @EnvironmentObject private var viewModel: ContentViewModel
     @EnvironmentObject var globals: GlobalVariables
 
-    
+    @ObservedObject var scriptManager: ScriptManager
+
 
     var body: some View {
         @Bindable var settingsData = settingsDataArray[0]
 
         VStack(spacing: 0) {
             
-            if settingsData.navOption != .top {
-                Spacer()
-            }
-            
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center) {
                 
-                if settingsData.navOption != .freeFlow {
-                    
-                    // ***** Invisible box to push button to the right *****
-                    Rectangle()
-                        .opacity(0)
-                        .frame(width: 10, height: 10)
-                    
-                    Button(action: {
-                        globals.showOptionsView.toggle()
-                    }, label: {
-                        
-                        Image(systemName: "slider.horizontal.3")
-                            .resizable()
-                            .foregroundColor(.blue)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24, height: 24, alignment: .center)
-                        
-                    })
-                    .frame(width: 50, height: 40, alignment: .center)
-
-                    Spacer()
+                // ***** Invisible box to push button to the right *****
+                Rectangle()
+                    .opacity(0)
+                    .frame(width: 10, height: 10)
+                
+                Button(action: {
+                    globals.showOptionsView.toggle()
+                }) {
+                    Image(systemName: "slider.horizontal.3")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.white)
+                        .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
                 }
+
+                Spacer()
                 
                 ForEach(webSites.indices, id: \.self) { index in
-                    Button(action: {
+
+                    MenuButton(
+                        index: index,
+                        webSites: webSites,
+                        scriptManager: scriptManager
+                    ) {
                         globals.currentTab = index
-                    }, label: {
-                        Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
-                            .resizable()
-                            .foregroundColor(.blue)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 32, height: 32, alignment: .center)
-                            .clipShape(
-                                RoundedRectangle(
-                                    cornerRadius: 16
-                                )
-                            )
-                    })
-                    .frame(width: 40, height: 40, alignment: .center)
-                    
-                    if settingsData.navOption != .freeFlow { Spacer() }
-                    
+                    }
+
+                    Spacer()
+
                 }
- 
-                Spacer()
+                
+                Button(action: {
+                    globals.showShareSheet = true
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.white)
+                        .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
+                }
+
+                // ***** Invisible box to push button to the left *****
+                Rectangle()
+                    .opacity(0)
+                    .frame(width: 10, height: 10)
 
             }
-            .background(.thinMaterial).opacity(settingsData.opacity)
-            .padding(.bottom, (settingsData.navOption == .bottom && settingsData.showBottomBar) ? 0 : 15)
             
-            if(settingsData.navOption == .top) {
-                Spacer()
-            }
+            Spacer()
+
         }
         .zIndex(5)
 
@@ -376,7 +364,7 @@ struct WebViews: View {
         @Bindable var settingsData = settingsDataArray[0]
 
         VStack {
-            if(settingsData.navOption == .top) {
+            if (settingsData.showNavBar) {
                 Rectangle()
                     .opacity(0)
                     .frame(width: 30, height: 30, alignment: .center)
@@ -441,7 +429,7 @@ struct AdBlockLoadStatus: View {
                         .font(.caption)
                 }
                 .padding()
-                .background(.thinMaterial).opacity(settingsData.opacity)
+                .background(Color.qBlueLight.opacity(0.7))
                 .cornerRadius(10)
 
                 // ***** Invisible box to push up the message *****

@@ -45,25 +45,6 @@ class BlockListManager {
         try? PropertyListEncoder().encode(checksums).write(to: checksumURL)
     }
     
-/*    public func getIdentifierFromURL(_ url: URL) -> String {
-        // Get the path components
-        let components = url.pathComponents
-        
-        // Find the last meaningful component (excluding the filename)
-        for component in components.reversed() {
-            // Skip the filename (last component)
-            if component == components.last {
-                continue
-            }
-            // Skip empty or slash components
-            if !component.isEmpty && component != "/" {
-                return component
-            }
-        }
-        
-        // Fallback to the filename if no other component is found
-        return url.lastPathComponent
-    } */
     
     private func calculateChecksum(of data: Data) -> String {
         let hash = SHA256.hash(data: data)

@@ -95,7 +95,9 @@ struct iOSOptionsView: View {
                         @Bindable var settingsData = settingsData[0]
 
                         Toggle("Show Navigation Bar", isOn: $settingsData.showNavBar)
-                        
+
+                        Toggle("Enable Face ID", isOn: $settingsData.faceIDEnabled)
+
                         NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData, viewModel: viewModel)) {
                             HStack {
                                 Text("Ad Blocking")

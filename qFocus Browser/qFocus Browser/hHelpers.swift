@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import LocalAuthentication
+
 
 #if os(macOS)
     import AppKit
@@ -32,6 +34,7 @@ class GlobalVariables: ObservableObject {
 //    @Published var backupIcon: Data? = nil
     @Published var showOptionsView: Bool = false
     @Published var showShareSheet: Bool = false
+    @Published var faceIDEnabled: Bool = false
     @Published var menuIconSize: CGFloat = 32
     @Published var appVersion: String = "25.01"
 
@@ -40,6 +43,29 @@ class GlobalVariables: ObservableObject {
 
 
 
+// MARK: Face ID Authenticator
+class AuthenticationManager: ObservableObject {
+    @Published var isUnlocked = false
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                 localizedReason: "Unlock qFocus Browser") { success, error in
+                DispatchQueue.main.async {
+                    self.isUnlocked = success
+                }
+            }
+        }
+    }
+}
+
+
+
+
+/*
 // Convert an Image to Data
 @MainActor
 extension Image {
@@ -53,7 +79,7 @@ extension Image {
         return renderer.uiImage?.pngData()
     }
 }
-
+*/
 
 
 

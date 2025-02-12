@@ -143,7 +143,6 @@ class ScriptManager: ObservableObject {
                             }
                         }
                     }
-                    print("Scripts loaded: \(scriptsLoaded)")
 
                     if scriptsLoaded {
                         let group = DispatchGroup()
@@ -159,7 +158,7 @@ class ScriptManager: ObservableObject {
                         let strongSelf = self
                         
                         for identifier in scriptIdentifiers {
-                            print("Loading dependencies for script \(identifier)")
+//                            print("Loading dependencies for script \(identifier)")
                             group.enter()
                             strongSelf.loadDependencies(for: identifier) { success in
                                 defer { group.leave() }
@@ -167,16 +166,16 @@ class ScriptManager: ObservableObject {
                                 if !success {
                                     print("ERROR: Failed to load dependencies for \(identifier)")
                                 } else {
-                                    print("Successfully loaded dependencies for \(identifier)")
+//                                    print("Successfully loaded dependencies for \(identifier)")
                                 }
                             }
                         }
                         
-                        print("Waiting for all dependencies...")
+//                        print("Waiting for all dependencies...")
                         group.notify(queue: .main) {
-                            print("All dependencies completed. Proceeding with injection...")
+//                            print("All dependencies completed. Proceeding with injection...")
                             strongSelf.injectScripts(into: strongWebViewController.webView)
-                            print("Successfully injected scripts.")
+//                            print("Successfully injected scripts.")
                         }
                     }
                 } else {
@@ -194,14 +193,14 @@ class ScriptManager: ObservableObject {
 
     //MARK: Inject Script
     func injectScripts(into webView: WKWebView) {
-        print("Now inside the injectScripts function")
+//        print("Now inside the injectScripts function")
         guard let host = webView.url?.host else {
             print("No host found for webView")
             return
         }
 
-        print("Attempting to inject scripts for \(host)")
-        print("Current loadedScripts count: \(loadedScripts.count)")
+//        print("Attempting to inject scripts for \(host)")
+//        print("Current loadedScripts count: \(loadedScripts.count)")
 
         
         for (_, script) in loadedScripts {
@@ -216,8 +215,8 @@ class ScriptManager: ObservableObject {
         DispatchQueue.main.async {
             if !self.loadedScripts.isEmpty {
                 self.domainsWithInjectedScripts.insert(host)
-                print("Added domain to injected scripts: \(host)")
-                print("Current domains with scripts: \(self.domainsWithInjectedScripts)")
+//                print("Added domain to injected scripts: \(host)")
+//                print("Current domains with scripts: \(self.domainsWithInjectedScripts)")
             } else {
                 print("No scripts were loaded for: \(host)")
             }

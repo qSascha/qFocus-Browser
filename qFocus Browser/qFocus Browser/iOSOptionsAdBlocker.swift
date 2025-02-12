@@ -26,6 +26,7 @@ struct AdBlockSettingsView: View {
 
 
     var body: some View {
+
         NavigationView {
             List {
                 // Global Ad-Block Toggle
@@ -34,8 +35,50 @@ struct AdBlockSettingsView: View {
                         .tint(.blue)
                 }
                 
+                
+                if settingsData.enableAdBlock {
+                    
+                    HStack {
+                        Spacer()
+                        
+                        VStack {
+                            Text("Last Updated:")
+                            Text(settingsData.adBlockLastUpdate?.formatted(date: .abbreviated, time: .omitted) ?? "Never")
+                                .font(.caption)
+
+                            Button(action: {
+                                Task {
+                                    let enabledFilters = adBlockLists.filter { $0.enabled }
+//                                    await viewModel.toggleBlocking(isEnabled: false, enabledFilters: enabledFilters)
+                                    
+                                    // Force update with forceUpdate parameter set to true
+                                    try await viewModel.initializeBlocker(
+                                        settings: settingsData,
+                                        enabledFilters: enabledFilters,
+                                        modelContext: modelContext,
+                                        forceUpdate: true
+                                    )
+                                }
+                                
+                            }) {
+                                Text("Update Now")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.accentColor)
+                                    .cornerRadius(8)
+                                    .shadow(radius: 2)
+                            }
+
+                        }
+                        Spacer()
+                        
+                    }
+                    
+                }
+                
                 // Ad Block Lists
                 Section {
+
                     if settingsData.enableAdBlock {
                         ForEach(adBlockLists) { filter in
                             AdBlockListRow(filter: filter)
@@ -59,7 +102,7 @@ struct AdBlockSettingsView: View {
                     
                     if settingsData.enableAdBlock {
                         // Rebuild only for currently enabled filters
-                        try await viewModel.initializeBlocker(isEnabled: settingsData.enableAdBlock, enabledFilters: enabledFilters)
+                        try await viewModel.initializeBlocker(settings: settingsData, enabledFilters: enabledFilters, modelContext: modelContext)
                     }
                 }
             }

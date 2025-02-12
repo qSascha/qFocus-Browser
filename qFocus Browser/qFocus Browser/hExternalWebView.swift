@@ -49,7 +49,6 @@ struct ExternalWebView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Done") {
-                            print("Closing web view")
                             // Try dismissing with animation
                             withAnimation {
                                 dismiss()

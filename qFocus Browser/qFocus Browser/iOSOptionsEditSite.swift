@@ -92,6 +92,24 @@ struct iOSOptionsEditSite: View {
                                     fetchFavicon(for: tempURL)
                                 }
                             }
+
+                        // Favicon Display
+                        Spacer()
+                        if let image = faviconImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 32)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        } else {
+                            Image(systemName: "globe")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                                .foregroundColor(.gray)
+                        }
+
+
                     }
                     .padding(.top, 5)
                     
@@ -110,26 +128,12 @@ struct iOSOptionsEditSite: View {
                                 }
                             }
                     }
-                    
-                    // Favicon Display
-                    HStack {
-                        Spacer()
-                        if let image = faviconImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 32)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        } else {
-                            Image(systemName: "globe")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
+
+                    // Advanced Settings
+                    NavigationLink(destination: iOSOptionsEditAdvanced(editSite: editSite)) {
+                        Text("Advanced")
                     }
-                    .padding(.vertical, 10)
+
                 }
             }
         }
@@ -148,6 +152,12 @@ struct iOSOptionsEditSite: View {
     //MARK: Save and Dismiss
     private func saveAndDismiss() {
 
+
+        // If the URL changes then post a notification
+        if  editSite.siteURL != tempURL {
+            NotificationCenter.default.post(name: NSNotification.Name("UpdateViews"), object: nil)
+        }
+        
         // Update the site data
         editSite.siteName = tempName
         editSite.siteURL = tempURL
@@ -168,8 +178,6 @@ struct iOSOptionsEditSite: View {
         // Save changes
         do {
             try modelContext.save()
-
-            NotificationCenter.default.post(name: NSNotification.Name("URLUpdated"), object: nil)
 
         } catch {
             print("Error saving site: \(error)")

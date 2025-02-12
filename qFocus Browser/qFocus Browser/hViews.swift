@@ -376,16 +376,57 @@ struct WebViews: View {
                         .zIndex(globals.currentTab == index ? 1 : 0)
                         .onAppear {
                             Task {
-                                await viewModel.updateWebView(at: index, with: webSites[index].siteURL)
+                                await viewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                        .onChange(of: webSites[index].siteURL) { _, _ in
+                            viewModel.resetInitialLoadState(for: index)
+                            Task {
+                                await viewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                        .onChange(of: webSites[index].enableJSBlocker) { _, _ in
+                            Task {
+                                await viewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                        .onChange(of: webSites[index].requestDesktop) { _, _ in
+                            Task {
+                                await viewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                }
+
+
+/*
+                ForEach(0..<webSites.count, id: \.self) { index in
+                    WebViewContainer(webViewController: viewModel.getWebViewController(index))
+                        .zIndex(globals.currentTab == index ? 1 : 0)
+                        .onAppear {
+                            Task {
+                                await viewModel.updateWebView(index: index, urlString: webSites[index].siteURL, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: webSites[index].requestDesktop)
                             }
                         }
                         .onChange(of: webSites[index].siteURL) { oldValue, newValue in
                             viewModel.resetInitialLoadState(for: index)
                             Task {
-                                await viewModel.updateWebView(at: index, with: newValue)
+                                await viewModel.updateWebView(index: index, urlString: newValue, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: webSites[index].requestDesktop)
+                            }
+                        }
+                        .onChange(of: webSites[index].enableJSBlocker) { oldValue, newValue in
+                            Task {
+                                await viewModel.updateWebView( index: index, urlString: webSites[index].siteURL, enableJSBlocker: newValue, requestDesktop: webSites[index].requestDesktop)
+                            }
+                        }
+                        .onChange(of: webSites[index].requestDesktop) { oldValue, newValue in
+                            Task {
+                                await viewModel.updateWebView( index: index, urlString: webSites[index].siteURL, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: newValue)
                             }
                         }
                 }
+*/
+
+
             }
         }
     }

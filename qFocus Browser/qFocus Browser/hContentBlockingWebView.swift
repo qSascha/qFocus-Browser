@@ -12,23 +12,34 @@ import SwiftUI
 
 
 class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIAdaptivePresentationControllerDelegate {
-//class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
     var webView: WKWebView!
     private var refreshControl: UIRefreshControl!
     private var hasSetupWebView = false
+    private var initialRequestDesktop: Bool = false
+    private var currentRequestDesktop: Bool = false  // Add this to track current state
 
-    @Environment(\.modelContext) private var modelContext
+
+    init(requestDesktop: Bool = false) {
+        self.initialRequestDesktop = requestDesktop
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func loadView() {
         super.loadView()
         if !hasSetupWebView {
-            setupWebView()
+            setupWebView(requestDesktop: initialRequestDesktop)
             setupRefreshControl()
             hasSetupWebView = true
         }
     }
+
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,20 +47,65 @@ class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, 
         // Set both delegates for the webView
         webView.navigationDelegate = self
         webView.uiDelegate = self
-        
-        // Print confirmation of delegate setup
-        print("🔧 ContentBlockingWebViewController: Delegates set up")
     }
     
     
 
+    //MARK: Update Web View Conf
+    func updateWebViewConfiguration(requestDesktop: Bool) {
+        // Store the new state
+        self.currentRequestDesktop = requestDesktop
+        
+        // Create new configuration
+        let config = WKWebViewConfiguration()
+        let prefs = WKWebpagePreferences()
+        prefs.preferredContentMode = requestDesktop ? .desktop : .mobile
+        config.defaultWebpagePreferences = prefs
+        
+        // Apply user agent
+        let userAgent = requestDesktop ?
+            "Mozilla/5.0 (Macintosh; Apple Silicon Mac OS X 14_3_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15" :
+            nil
+        
+        // Ensure we're on the main thread
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Update user agent
+            self.webView.customUserAgent = userAgent
+            
+            // Update configuration
+            self.webView.configuration.defaultWebpagePreferences = prefs
+            
+            // Force reload from scratch
+            if let url = self.webView.url {
+                self.webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData))
+            } else {
+                self.webView.reload()
+            }
+        }
+    }
+
+    
+    
 
     //MARK: Setup Web View
-    func setupWebView() {
+//    func setupWebView() {
+    func setupWebView(requestDesktop: Bool) {
+        // Store initial state
+        self.currentRequestDesktop = requestDesktop
+
+
         let configuration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         configuration.userContentController = contentController
         
+        // Desktop or mobile site request
+        let webpagePreferences = WKWebpagePreferences()
+        webpagePreferences.preferredContentMode = requestDesktop ? .desktop : .mobile
+        configuration.defaultWebpagePreferences = webpagePreferences
+
+
         let processPool = WKProcessPool()
         configuration.processPool = processPool
         configuration.websiteDataStore = WKWebsiteDataStore.default()
@@ -59,7 +115,12 @@ class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, 
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = true
-        
+
+        // For desktop sites only
+        if requestDesktop {
+            webView.customUserAgent = "Mozilla/5.0 (Macintosh; Apple Silicon Mac OS X 14_3_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15"
+        }
+
         // Setup scroll view properties
         webView.scrollView.bounces = true
         webView.scrollView.alwaysBounceVertical = true
@@ -69,12 +130,16 @@ class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, 
         setupRefreshControl()
     }
 
-    
+
+    func forceRefreshConfiguration() {
+        updateWebViewConfiguration(requestDesktop: currentRequestDesktop)
+    }
+
 
     //MARK: Setup Refresh Control
     private func setupRefreshControl() {
         webView.scrollView.bounces = true
-        refreshControl = UIRefreshControl() // Assign to the instance variable
+        refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshWebView), for: UIControl.Event.valueChanged)
         webView.scrollView.addSubview(refreshControl)
     }
@@ -146,7 +211,7 @@ class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, 
 
     }
     
-    // MARK: New Web View
+    // MARK: "_blank" and similar
     // called "_blank" and similar
     // Check if a link has been interacted by the user and if the core domain is the same. If yes then open in the internal browser, otherwise in the external browser.
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

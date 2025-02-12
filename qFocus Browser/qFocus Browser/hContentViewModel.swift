@@ -5,17 +5,17 @@
 //  Created by Sascha on 2025-01-25.
 //
 import SwiftUI
+import SwiftData
 import WebKit
+
 
 // MARK: Content View Model
 @MainActor
 class ContentViewModel: ObservableObject {
-
     @Published private(set) var webViewControllers: [ContentBlockingWebViewController] = []
     @Published var showAdBlockLoadStatus: Bool = false
     @Published var loadedRuleLists: Int = 0
     @Published var totalRuleLists: Int = 0
-    @Published var currentURL: String?
 
     let scriptManager: ScriptManager
     private var activeRuleIdentifiers: Set<String> = []
@@ -23,56 +23,90 @@ class ContentViewModel: ObservableObject {
     private var hasInitiallyLoaded: [Int: Bool] = [:]
     private var hasInitializedRules = false
     private let blockListManager = BlockListManager()
+    
 
-
+    
+    
     init() {
         self.scriptManager = ScriptManager()
 
-        webViewControllers = (0...5).map { _ in
-            let controller = ContentBlockingWebViewController()
+        // Initialize with default settings
+        self.webViewControllers = (0...5).map { index in
+            let controller = ContentBlockingWebViewController(requestDesktop: false)
             controller.loadView()
-            controller.setupWebView()
             return controller
         }
-        
-        // Initialize load state for all indices
-        for i in 0...5 {
-            hasInitiallyLoaded[i] = false
-        }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleURLUpdate),
-            name: NSNotification.Name("URLUpdated"),
-            object: nil
-        )
     }
+
+
+    // Update controllers with site data
+    func updateWebViewControllers(with sites: [sitesStorage]) async {
+        
+        for index in 0..<webViewControllers.count {
+            if index < sites.count {
+                let site = sites[index]
+                
+                // Ensure we're on the main thread and force the update
+                await MainActor.run {
+                    self.webViewControllers[index].updateWebViewConfiguration(requestDesktop: site.requestDesktop)
+                    
+                    // Add a slight delay and force a refresh
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.webViewControllers[index].forceRefreshConfiguration()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    
+    
+    //MARK: Should Update Filter
+    func shouldUpdateFilters(lastUpdate: Date?) -> Bool {
+        guard let lastUpdate = lastUpdate else {
+            return true
+        }
+        
+        let sevenDays: TimeInterval = 7 * 24 * 60 * 60 // 7 days in seconds
+        return Date().timeIntervalSince(lastUpdate) >= sevenDays
+    }
+
 
     
 
     //MARK: Update Web View
-    func updateWebView(at index: Int, with urlString: String) async {
+    func updateWebView(index: Int, site: sitesStorage) async {
+        guard index < webViewControllers.count else { return }
+  
         guard index < webViewControllers.count,
-              !urlString.isEmpty,
-              let url = URL(string: urlString) else {
+              !site.siteURL.isEmpty,
+              let url = URL(string: site.siteURL) else {
                   return
               }
-        
-        if hasInitiallyLoaded[index] != true {
-            let webViewController = webViewControllers[index]
-            
-            // Load site-specific scripts
-            scriptManager.loadScripts(for: url, webViewController: webViewController)
 
-            // Load the URL
+        let webViewController = webViewControllers[index]
+        
+        // Clear existing scripts
+        webViewController.webView.configuration.userContentController.removeAllUserScripts()
+        
+        // Load new scripts if enabled
+        if site.enableJSBlocker {
+            scriptManager.loadScripts(for: url, webViewController: webViewController)
+        }
+
+        if hasInitiallyLoaded[index] != true {
+            // Initial page load
             webViewController.load(url: url)
             hasInitiallyLoaded[index] = true
+        } else {
+            // Reload the current page to apply changes
+            webViewController.webView.reload()
         }
-        
-        currentURL = urlString
+
         objectWillChange.send()
     }
-
 
 
 
@@ -81,15 +115,18 @@ class ContentViewModel: ObservableObject {
         hasInitiallyLoaded[index] = false
     }
 
-    @objc private func handleURLUpdate(_ notification: Notification) {
+
+    @objc private func handleUpdateRequest(_ notification: Notification) {
         // Force view update
         objectWillChange.send()
     }
     
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+
     func getWebViewController(_ index: Int) -> ContentBlockingWebViewController {
         guard index < webViewControllers.count else {
             print("ERROR: Requested web view controller index \(index) out of bounds")
@@ -98,40 +135,62 @@ class ContentViewModel: ObservableObject {
         return webViewControllers[index]
     }
 
+    
+    func updateDesktopMode(for index: Int, requestDesktop: Bool) {
+        guard index < webViewControllers.count else { return }
+        webViewControllers[index].updateWebViewConfiguration(requestDesktop: requestDesktop)
+    }
+
+
+
+
+
     //MARK: Initialize Blocker
     @MainActor
-    func initializeBlocker(isEnabled: Bool, enabledFilters: [adBlockFilters]) async throws {
+    func initializeBlocker(settings: settingsStorage, enabledFilters: [adBlockFilters], modelContext: ModelContext, forceUpdate: Bool = false) async throws {
         guard !hasInitializedRules else {
             return
         }
 
-        showAdBlockLoadStatus = true
-
-        totalRuleLists = enabledFilters.count
-        loadedRuleLists = 0
-        
-        for filter in enabledFilters {
-            guard let url = URL(string: filter.urlString) else {
-                print("Invalid URL for filter: \(filter.identName)")
-                continue
-            }
-            
-            do {
-                // Pass the filter's identName as the identifier
-                let result = try await blockListManager.processURL(url, identifier: filter.identName)
-                
-                for webViewController in webViewControllers {
-                    try await webViewController.addContentRules(with: result.compiled)
-                }
-                
-                loadedRuleLists += 1
-            } catch {
-                print("Error processing block list: \(filter.identName): \(error.localizedDescription)")
-            }
+        guard settings.enableAdBlock else {
+            return
         }
-        showAdBlockLoadStatus = false
 
+        // Check if update is needed
+        if forceUpdate || shouldUpdateFilters(lastUpdate: settings.adBlockLastUpdate) {
+            showAdBlockLoadStatus = true
+            defer { showAdBlockLoadStatus = false }
+
+            totalRuleLists = enabledFilters.count
+            loadedRuleLists = 0
+            
+            for filter in enabledFilters {
+                guard let url = URL(string: filter.urlString) else {
+                    continue
+                }
+
+                do {
+                    // Pass the filter's identName as the identifier
+                    let result = try await blockListManager.processURL(url, identifier: filter.identName)
+                    
+                    for webViewController in webViewControllers {
+                        try await webViewController.addContentRules(with: result.compiled)
+                    }
+                    
+                    loadedRuleLists += 1
+                } catch {
+                    print("Error processing block list: \(filter.identName): \(error.localizedDescription)")
+                }
+            }
+            settings.adBlockLastUpdate = Date()
+            try modelContext.save() // Explicitly save the changes
+
+            showAdBlockLoadStatus = false
+        }
     }
+
+
+
 
     //MARK: Toggle Blocking
     @MainActor

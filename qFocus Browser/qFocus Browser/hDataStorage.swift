@@ -19,12 +19,16 @@ class settingsStorage {
     var freeFlowX: Double = (UIScreen.main.bounds.width - 50)
     var freeFlowY: Double = (UIScreen.main.bounds.height - 100)
     var showNavBar: Bool = false
+    var adBlockLastUpdate: Date?
+    var faceIDEnabled: Bool = false
     
-    init( enableAdBlock: Bool, freeFlowX: Double, freeFlowY: Double, showNavBar: Bool) {
+    init( enableAdBlock: Bool, freeFlowX: Double, freeFlowY: Double, showNavBar: Bool, adBlockLastUpdate: Date, faceIDEnabled: Bool) {
         self.enableAdBlock = enableAdBlock
         self.freeFlowX = freeFlowX
         self.freeFlowY = freeFlowY
         self.showNavBar = showNavBar
+        self.adBlockLastUpdate = adBlockLastUpdate
+        self.faceIDEnabled = faceIDEnabled
     }
     
 }
@@ -36,7 +40,9 @@ func createDefaultSettings() -> [settingsStorage] {
             enableAdBlock: true,
             freeFlowX: UIScreen.main.bounds.width - 50,
             freeFlowY: UIScreen.main.bounds.height - 70,
-            showNavBar: false
+            showNavBar: false,
+            adBlockLastUpdate: Date(),
+            faceIDEnabled: false
         )
     ]
 }
@@ -56,7 +62,7 @@ func initializeDefaultSettings(context: ModelContext) {
     
     try? context.save()
     
-    print("Successfully initialized \(defaultSettings.count) Record(s).")
+    print("Successfully initialized \(defaultSettings.count) Settings record.")
 
 
 }
@@ -78,19 +84,17 @@ class sitesStorage {
     @Attribute(.externalStorage)
     var siteFavIcon: Data?
     
-    var jsScript1: String
-    var jsScript2: String
-    var jsScript3: String
+    var enableJSBlocker: Bool
+    var requestDesktop: Bool
 
 
-    init(siteOrder: Int, siteName: String, siteURL: String, siteFavIcon: Data? = nil, jsScript1: String, jsScript2: String, jsScript3: String) {
+    init(siteOrder: Int, siteName: String, siteURL: String, siteFavIcon: Data? = nil, enableJSBlocker: Bool, requestDesktop: Bool) {
         self.siteOrder = siteOrder
         self.siteName = siteName
         self.siteURL = siteURL
         self.siteFavIcon = siteFavIcon
-        self.jsScript1 = jsScript1
-        self.jsScript2 = jsScript2
-        self.jsScript3 = jsScript3
+        self.enableJSBlocker = enableJSBlocker
+        self.requestDesktop = requestDesktop
     }
 }
 
@@ -102,22 +106,16 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
         ),
         sitesStorage(
             siteOrder: 2,
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-//            siteName: "Reddit2",
-//            siteURL: "https://reddit.com",
-//            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-//            jsScript1: "https://update.greasyfork.org/scripts/405756/Reddit%20Promotion%20Blocker.user.js",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
 
         ),
         sitesStorage(
@@ -125,9 +123,8 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
 
         ),
         sitesStorage(
@@ -135,9 +132,8 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
 
         ),
         sitesStorage(
@@ -145,9 +141,8 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
 
         ),
         sitesStorage(
@@ -155,9 +150,8 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteName: "",
             siteURL: "",
             siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
-            jsScript1: "",
-            jsScript2: "",
-            jsScript3: ""
+            enableJSBlocker: true,
+            requestDesktop: false
 
         )
     ]

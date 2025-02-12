@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Photos
+import LocalAuthentication
 
 
 
@@ -29,10 +30,12 @@ struct iOSOnboarding: View {
     @State private var isFirstSiteValid = false
     @FocusState private var isNameFieldFocused: Bool
     
-    private let totalSteps = 6
+    @State private var stepFirstSite = 5
+    private let totalSteps = 7
     
     @Query(sort: \adBlockFilters.sortOrder) var adBlockLists: [adBlockFilters]
     @State private var showingExplanation: adBlockFilters?
+    @EnvironmentObject var globals: GlobalVariables
 
 
 
@@ -55,7 +58,6 @@ struct iOSOnboarding: View {
                         contentForStep
                             .padding(.horizontal, 20)
                         
-//                        Spacer(minLength: 50)
                     }
                 }
                 
@@ -123,7 +125,34 @@ struct iOSOnboarding: View {
                 }
             }
             
-        case 3:   // MARK: Photos Access
+        case 3:   // MARK: FaceID
+            ZStack{
+                VStack(spacing: 30) {
+                    Text("Enabling FaceID provides an extra layer of security for all the sites you add to the qFocus Browser app.")
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(8)
+                    
+//                    Spacer()
+
+                    Button("Enable FaceID") {
+                        enableFaceID()
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Spacer()
+                }
+
+                VStack(spacing: 60) {
+                    Spacer(minLength: 200)
+                    
+                    Image(systemName: "faceid")
+                        .font(.system(size: 150))
+                        .foregroundColor(.blue)
+
+                }
+            }
+            
+        case 4:   // MARK: Photos Access
             ZStack{
                 VStack(spacing: 30) {
                     Text("Allowing this app full access to your photos is no privacy risk, because this app is not processing them in any way. They are only used to pass them on to the sites when you upload a specific picture.")
@@ -156,7 +185,7 @@ struct iOSOnboarding: View {
                 }
             }
             
-        case 4:   // MARK: First Site
+        case 5:   // MARK: First Site
             FirstSiteView(
                 siteName: $siteName,
                 siteURL: $siteURL,
@@ -165,14 +194,14 @@ struct iOSOnboarding: View {
                 isNameFieldFocused: _isNameFieldFocused
             )
             
-        case 5: //MARK: AdBlock Selection
+        case 6: //MARK: AdBlock Selection
             AdBlockListSelector(
                 adBlockLists: adBlockLists,
                 showingExplanation: $showingExplanation
             )
 
             
-        case 6:   // MARK: Done
+        case 7:   // MARK: Done
             ZStack{
                 VStack(spacing: 60) {
                     Text("Enjoy using the qFocus Browser App!")
@@ -203,10 +232,11 @@ struct iOSOnboarding: View {
         switch currentStep {
         case 1: return "Welcome"
         case 2: return "Privacy"
-        case 3: return "Photos Access"
-        case 4: return "First Site"
-        case 5: return "Ad Blocking"
-        case 6: return "Done"
+        case 3: return "FaceID"
+        case 4: return "Photos Access"
+        case 5: return "First Site"
+        case 6: return "Ad Blocking"
+        case 7: return "Done"
         default: return ""
         }
     }
@@ -235,7 +265,7 @@ struct iOSOnboarding: View {
                         .frame(width: 30)
                         .foregroundColor(.white)
                 }
-                .disabled(currentStep == 4 && !isFirstSiteValid)
+                .disabled(currentStep == stepFirstSite && !isFirstSiteValid)
             } else {
                 Button(action: completeOnboarding) {
                     Image(systemName: "checkmark")
@@ -300,24 +330,7 @@ struct iOSOnboarding: View {
                                 ))
                                 .labelsHidden()
                             }
-/*
-                            HStack {
-                                Toggle(isOn: Binding(
-                                    get: { filter.enabled },
-                                    set: { newValue in
-                                        filter.enabled = newValue
-                                        try? modelContext.save()
-                                    }
-                                )) {
-                                    Button(action: {
-                                        showingExplanation = filter
-                                    }) {
-                                        Text(filter.identName)
-                                    }
-                                }
-                            }
-                            .padding(.horizontal)
-*/
+
                         }
                     }
                 }
@@ -374,7 +387,7 @@ struct iOSOnboarding: View {
     
     private func nextStep() {
         withAnimation {
-            if currentStep == 4 {
+            if currentStep == stepFirstSite {
                 saveFirstSite()
             }
             currentStep += 1
@@ -384,6 +397,31 @@ struct iOSOnboarding: View {
     private func completeOnboarding() {
         UserDefaults.standard.set(true, forKey: "onboardingComplete")
         dismiss()
+    }
+    
+    private func enableFaceID() {
+        let context = LAContext()
+        var error: NSError?
+        
+        // First check if device can use biometric authentication
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // Attempt to authenticate to confirm enrollment
+            context.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: "Enable Face ID for qFocus Browser"
+            ) { success, authError in
+                // Update the settings on the main thread
+                DispatchQueue.main.async {
+                    if success {
+                        // Successfully authenticated, enable Face ID in settings
+                        globals.faceIDEnabled = true
+                    }
+                }
+            }
+        } else {
+            // Device doesn't support Face ID
+            globals.faceIDEnabled = false
+        }
     }
     
     private func requestPhotoAccess() {
@@ -398,7 +436,8 @@ struct iOSOnboarding: View {
             modelContext: modelContext,
             firstSiteName: siteName,
             firstSiteURL: siteURL,
-            firstSiteFavIcon: faviconImage?.pngData() ?? Data()
+            firstSiteFavIcon: faviconImage?.pngData() ?? Data(),
+            faceIDEnabled: globals.faceIDEnabled
         )
     }
 }
@@ -485,7 +524,7 @@ struct FirstSiteView: View {
 
 
 //MARK: Re-Initialize Data
-func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSiteURL: String, firstSiteFavIcon: Data) {
+func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSiteURL: String, firstSiteFavIcon: Data, faceIDEnabled: Bool) {
     // Delete existing records
     do {
         // Delete sites
@@ -514,10 +553,12 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
         // Handle error appropriately for your app
     }
     
+    
     // Initialize with default values
     initializeFiltersStorage(context: modelContext)
     initializeWebSitesStorage(context: modelContext)
     initializeDefaultSettings(context: modelContext)
+    
     
     // Add first site enter by user during onboarding
     let descriptor = FetchDescriptor<sitesStorage>(
@@ -540,6 +581,25 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
     }
     
     
+    // Save faceIDEnalbed value to settings
+    let settingsDescriptor = FetchDescriptor<settingsStorage>(
+//        predicate: #Predicate<settingsStorage> { site in
+//            site.siteOrder == 1
+//        }
+    )
+    do {
+        if let settings = try modelContext.fetch(settingsDescriptor).first {
+            settings.faceIDEnabled = faceIDEnabled
+            
+            try modelContext.save()
+        } else {
+            print("ERROR: No record found for updating.")
+        }
+    } catch {
+        print("ERROR: Updating \"First Site\" failed: \(error.localizedDescription)")
+    }
+
+
 }
 
 

@@ -90,69 +90,96 @@ private struct MainContent: View {
     @EnvironmentObject var globals: GlobalVariables
     @EnvironmentObject var viewModel: ContentViewModel
     
+    @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
+    
+    
+    
+    
+    
 
     var body: some View {
-        
-        if authManager.isUnlocked || settingsDataArray[0].faceIDEnabled == false {
 
-        
-            GeometryReader { geometry in
-                ZStack {
-                    // Navigation Bar
-                    if settingsDataArray[0].showNavBar {
-                        NavBar(scriptManager: viewModel.scriptManager)
-                    } else {
-                        FloatingNavBar(scriptManager: viewModel.scriptManager)
-                    }
-                    
-                    // Loading screen for ad-blocker
-                    if viewModel.showAdBlockLoadStatus {
-                        AdBlockLoadStatus()
-                            .zIndex(1)
-                    }
-
-                    // Web Views
-                    WebViews()
-                        .zIndex(0)
+        //TODO: Find better solution
+        if settingsDataArray.isEmpty {
+            // Show loading or create default settings
+            ProgressView("Initializing Settings...")
+                .onAppear {
+                    initializeDefaultSettings(context: modelContext)
                 }
-                .background(Color(.qBlueLight))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .sheet(isPresented: $globals.showOptionsView) {
-                    iOSOptionsView(viewModel: viewModel)
-                        .presentationDetents([.large])
-                }
-            }
-            .onAppear {
-                // Enable Ad-Blocker, if onboarding finalized.
-                if let settings = settingsDataArray.first {
-                    Task {
-                        try await viewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
-                    }
-                }
-            }
-            .ignoresSafeArea(edges: .bottom)
-            .sheet(isPresented: $globals.showShareSheet) {
-                if let url = URL(string: webSites[globals.currentTab].siteURL) {
-                    ShareSheet(activityItems: [url])
-                        .presentationDetents([.medium, .large])
-                        .presentationDragIndicator(.visible)
-                }
-            }
-
-            
         } else {
-            VStack {
-                Image(systemName: "faceid")
-                    .font(.system(size: 50))
-                    .foregroundColor(.blue)
+            
+            if authManager.isUnlocked || settingsDataArray[0].faceIDEnabled == false {
                 
-                Text("Use Face ID to unlock")
-                    .padding()
+                
+                GeometryReader { geometry in
+                    ZStack {
+                        // Navigation Bar
+                        if settingsDataArray[0].showNavBar {
+                            NavBar(scriptManager: viewModel.scriptManager)
+                        } else {
+                            FloatingNavBar(scriptManager: viewModel.scriptManager)
+                        }
+                        
+                        // Loading screen for ad-blocker
+                        if viewModel.showAdBlockLoadStatus {
+                            AdBlockLoadStatus()
+                                .zIndex(1)
+                        }
+                        
+                        // Web Views
+                        WebViews()
+                            .zIndex(0)
+                    }
+                    .background(Color(.qBlueLight))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .sheet(isPresented: $globals.showOptionsView) {
+                        iOSOptionsView(viewModel: viewModel)
+                            .presentationDetents([.large])
+                    }
+                }
+                .ignoresSafeArea(edges: .bottom)
+                .onAppear {
+                    // Enable Ad-Blocker, if onboarding finalized.
+                    if let settings = settingsDataArray.first {
+                        Task {
+                            try await viewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                        }
+                    }
+                }
+                .onChange(of: onboardingComplete) { _, completed in
+                    if completed {
+                        if let settings = settingsDataArray.first {
+                            Task {
+                                print("Onboarding completed: Enabling ad blocker: \(settings.adBlockLastUpdate?.formatted() ?? "never")")
+                                try await viewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                            }
+                        }
+                    }
+                }
+                .sheet(isPresented: $globals.showShareSheet) {
+                    if let url = URL(string: webSites[globals.currentTab].siteURL) {
+                        ShareSheet(activityItems: [url])
+                            .presentationDetents([.medium, .large])
+                            .presentationDragIndicator(.visible)
+                    }
+                }
+                
+                
+            } else {
+                VStack {
+                    Image(systemName: "faceid")
+                        .font(.system(size: 50))
+                        .foregroundColor(.blue)
+                    
+                    Text("Use Face ID to unlock")
+                        .padding()
+                }
+                .onAppear {
+                    authManager.authenticate()
+                }
             }
-            .onAppear {
-                authManager.authenticate()
-            }
+            
         }
 
         

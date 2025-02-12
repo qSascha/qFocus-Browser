@@ -75,7 +75,7 @@ class BlockListManager {
     //MARK: processURL
     public func processURL(_ url: URL, identifier: String) async throws -> (simple: String, advanced: String, compiled: [WKContentRuleList]) {
         let lists = WKContentRuleListStore.default()
-        
+
         // Download and process content
         let (data, _) = try await URLSession.shared.data(from: url)
         let newChecksum = calculateChecksum(of: data)

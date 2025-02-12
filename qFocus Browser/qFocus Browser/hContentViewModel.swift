@@ -148,6 +148,14 @@ class ContentViewModel: ObservableObject {
     //MARK: Initialize Blocker
     @MainActor
     func initializeBlocker(settings: settingsStorage, enabledFilters: [adBlockFilters], modelContext: ModelContext, forceUpdate: Bool = false) async throws {
+
+        @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
+        guard onboardingComplete else {
+            return
+        }
+        print("ad-block update initiated")
+
+
         guard !hasInitializedRules else {
             return
         }
@@ -183,7 +191,7 @@ class ContentViewModel: ObservableObject {
                 }
             }
             settings.adBlockLastUpdate = Date()
-            try modelContext.save() // Explicitly save the changes
+            try modelContext.save()
 
             showAdBlockLoadStatus = false
         }

@@ -78,7 +78,7 @@ struct iOSOnboarding: View {
     private var contentForStep: some View {
         switch currentStep {
 
-        case 1:   // MARK: Welcome
+        case 1:   // MARK: Case 1
             ZStack{
                 VStack(spacing: 60) {
                     Text("Thank you for installing qFocus Browser, the app that helps you keep your social media private.")
@@ -104,7 +104,7 @@ struct iOSOnboarding: View {
                 }
             }
 
-        case 2:   // MARK: Privacy
+        case 2:   // MARK: Case 2
             ZStack{
                 VStack(spacing: 60) {
                     Text("Your privacy is important, and it is all that matters to me.")
@@ -125,7 +125,7 @@ struct iOSOnboarding: View {
                 }
             }
             
-        case 3:   // MARK: FaceID
+        case 3:   // MARK: Case 3
             ZStack{
                 VStack(spacing: 30) {
                     Text("Enabling FaceID provides an extra layer of security for all the sites you add to the qFocus Browser app.")
@@ -152,7 +152,7 @@ struct iOSOnboarding: View {
                 }
             }
             
-        case 4:   // MARK: Photos Access
+        case 4:   // MARK: Case 4
             ZStack{
                 VStack(spacing: 30) {
                     Text("Allowing this app full access to your photos is no privacy risk, because this app is not processing them in any way. They are only used to pass them on to the sites when you upload a specific picture.")
@@ -185,7 +185,7 @@ struct iOSOnboarding: View {
                 }
             }
             
-        case 5:   // MARK: First Site
+        case 5:   // MARK: Case 5
             FirstSiteView(
                 siteName: $siteName,
                 siteURL: $siteURL,
@@ -194,14 +194,14 @@ struct iOSOnboarding: View {
                 isNameFieldFocused: _isNameFieldFocused
             )
             
-        case 6: //MARK: AdBlock Selection
+        case 6: //MARK: Case: 6
             AdBlockListSelector(
                 adBlockLists: adBlockLists,
                 showingExplanation: $showingExplanation
             )
 
             
-        case 7:   // MARK: Done
+        case 7:   // MARK: Case 7
             ZStack{
                 VStack(spacing: 60) {
                     Text("Enjoy using the qFocus Browser App!")
@@ -548,16 +548,29 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
             modelContext.delete(filter)
         }
         
+        // Delete GreasyFork scripts
+        let greasyForkDescriptor = FetchDescriptor<adBlockFilters>()
+        let existingGreasyFork = try modelContext.fetch(greasyForkDescriptor)
+        for greasyItem in existingGreasyFork {
+            modelContext.delete(greasyItem)
+        }
+
         try modelContext.save()
     } catch {
         // Handle error appropriately for your app
+        print("Error deleting existing records: \(error)")
     }
     
     
+
+
     // Initialize with default values
     initializeFiltersStorage(context: modelContext)
     initializeWebSitesStorage(context: modelContext)
     initializeDefaultSettings(context: modelContext)
+    initializeGreasyScripts(context: modelContext)
+
+    
     
     
     // Add first site enter by user during onboarding

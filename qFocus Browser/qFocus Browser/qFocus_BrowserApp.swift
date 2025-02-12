@@ -16,7 +16,7 @@ struct qFocus_BrowserApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [sitesStorage.self, settingsStorage.self, adBlockFilters.self], isAutosaveEnabled: false)
+                .modelContainer(for: [sitesStorage.self, settingsStorage.self, adBlockFilters.self, greasyScripts.self], isAutosaveEnabled: false)
         }
     }
 }

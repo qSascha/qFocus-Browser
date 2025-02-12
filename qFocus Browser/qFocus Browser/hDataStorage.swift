@@ -16,16 +16,16 @@ import SwiftUI
 class settingsStorage {
     var id: UUID = UUID()
     var enableAdBlock: Bool = true
-    var freeFlowX: Double = (UIScreen.main.bounds.width - 50)
-    var freeFlowY: Double = (UIScreen.main.bounds.height - 100)
+    var freeFlowXPercent: Double
+    var freeFlowYPercent: Double
     var showNavBar: Bool = false
     var adBlockLastUpdate: Date?
     var faceIDEnabled: Bool = false
     
-    init( enableAdBlock: Bool, freeFlowX: Double, freeFlowY: Double, showNavBar: Bool, adBlockLastUpdate: Date, faceIDEnabled: Bool) {
+    init( enableAdBlock: Bool, freeFlowXPercent: Double, freeFlowYPercent: Double, showNavBar: Bool, adBlockLastUpdate: Date, faceIDEnabled: Bool) {
         self.enableAdBlock = enableAdBlock
-        self.freeFlowX = freeFlowX
-        self.freeFlowY = freeFlowY
+        self.freeFlowXPercent = freeFlowXPercent
+        self.freeFlowYPercent = freeFlowYPercent
         self.showNavBar = showNavBar
         self.adBlockLastUpdate = adBlockLastUpdate
         self.faceIDEnabled = faceIDEnabled
@@ -38,10 +38,10 @@ func createDefaultSettings() -> [settingsStorage] {
     return [
         settingsStorage(
             enableAdBlock: true,
-            freeFlowX: UIScreen.main.bounds.width - 50,
-            freeFlowY: UIScreen.main.bounds.height - 70,
+            freeFlowXPercent: 0.85,
+            freeFlowYPercent: 0.90,
             showNavBar: false,
-            adBlockLastUpdate: Date(),
+            adBlockLastUpdate: Calendar.current.date(byAdding: .day, value: -10, to: Date())!,
             faceIDEnabled: false
         )
     ]
@@ -63,6 +63,146 @@ func initializeDefaultSettings(context: ModelContext) {
     try? context.save()
     
     print("Successfully initialized \(defaultSettings.count) Settings record.")
+
+
+}
+
+
+
+
+
+
+//MARK: GreasyFork Scripts
+@Model
+final class greasyScripts {
+    var id: UUID = UUID()
+    var scriptName: String
+    var coreSite: String
+    var scriptEnabled: Bool
+    var scriptExplanation: String
+    var scriptLicense: String
+    var siteURL: String
+    var scriptURL: String
+    
+    init( scriptName: String,coreSite: String, scriptEnabled: Bool, scriptExplanation: String,scriptLicense: String, siteURL: String, scriptURL: String) {
+        self.scriptName = scriptName
+        self.coreSite = scriptName
+        self.scriptEnabled = scriptEnabled
+        self.scriptExplanation = scriptExplanation
+        self.scriptLicense = scriptLicense
+        self.siteURL = siteURL
+        self.scriptURL = scriptURL
+    }
+    
+}
+
+func createGreasyScripts() -> [greasyScripts] {
+    
+    return [
+        greasyScripts(
+            scriptName: "Reddit: Ad Blocker",
+            coreSite: "reddit.com",
+            scriptEnabled: true,
+            scriptExplanation: "Blocks the promoted content on Reddit between posts and also the advertisements on the side bar.",
+            scriptLicense: "not specified",
+            siteURL: "https://greasyfork.org/en/scripts/405756-reddit-promotion-blocker",
+            scriptURL: "https://update.greasyfork.org/scripts/405756/Reddit%20Promotion%20Blocker.user.js"
+        ),
+        greasyScripts(
+            scriptName: "X: Ad Blocker",
+            coreSite: "x.com",
+            scriptEnabled: true,
+            scriptExplanation: "This short script looks for the text \"Ad\" or \"Promoted tweet\" in a specific label and removes both the promoted tweet and the large bold heading that is sometimes added just above it. It also removes promoted \"trending topics\" on the right side of the screen.",
+            scriptLicense: "MIT",
+            siteURL: "https://greasyfork.org/en/scripts/458669-remove-ads-and-promoted-tweets-on-twitter",
+            scriptURL: "https://update.greasyfork.org/scripts/458669/Remove%20ads%20and%20promoted%20tweets%20on%20Twitter.user.js"
+        ),
+        greasyScripts(
+            scriptName: "YouTube: Age Restriction",
+            coreSite: "youtube.com",
+            scriptEnabled: true,
+            scriptExplanation: "Watch age restricted videos on YouTube without login and without age verification.",
+            scriptLicense: "MIT",
+            siteURL: "https://greasyfork.org/en/scripts/423851-simple-youtube-age-restriction-bypass",
+            scriptURL: "https://update.greasyfork.org/scripts/423851/Simple%20YouTube%20Age%20Restriction%20Bypass.user.js"
+        ),
+        greasyScripts(
+            scriptName: "Youtube: Ad Blocker",
+            coreSite: "youtube.com",
+            scriptEnabled: true,
+            scriptExplanation: "A script to remove YouTube ads, including static ads and video ads.",
+            scriptLicense: "MIT",
+            siteURL: "https://greasyfork.org/en/scripts/459541-youtube-adb",
+            scriptURL: "https://update.greasyfork.org/scripts/459541/YouTube去广告.user.js"
+        ),
+        greasyScripts(
+            scriptName: "X: Content Warning",
+            coreSite: "x.com",
+            scriptEnabled: true,
+            scriptExplanation: "Removes the content warning \"Sensitive Material\" and unhides the content",
+            scriptLicense: "gpl-3-0",
+            siteURL: "https://greasyfork.org/en/scripts/445650-twitter-remove-content-warning",
+            scriptURL: "https://update.greasyfork.org/scripts/445650/Twitter%20Remove%20Content%20Warning.user.js"
+        ),
+        greasyScripts(
+            scriptName: "Instagram: Ad Blocker",
+            coreSite: "instagram.com",
+            scriptEnabled: true,
+            scriptExplanation: "Block Instagram posts with \"Follow\", \"Suggested for you\", or \"Suggested posts\".",
+            scriptLicense: "MIT",
+            siteURL: "https://greasyfork.org/en/scripts/510716-block-instagram-ads-and-suggested-posts",
+            scriptURL: "https://update.greasyfork.org/scripts/510716/Block%20Instagram%20Ads%20and%20Suggested%20Posts.user.js"
+        ),
+        greasyScripts(
+            scriptName: "LinkedIn",
+            coreSite: "linkedin.com",
+            scriptEnabled: true,
+            scriptExplanation: "Removes promoted and suggested posts on LinkedIn.",
+            scriptLicense: "n/a",
+            siteURL: "https://greasyfork.org/en/scripts/386859-linkedinnopromoted",
+            scriptURL: "https://update.greasyfork.org/scripts/386859/LinkedInNoPromoted.user.js"
+        ),
+        greasyScripts(
+            scriptName: "Duolingo: Ad Blocker",
+            coreSite: "duolingo.com",
+            scriptEnabled: true,
+            scriptExplanation: "Block ads and unwanted promotional content on Duolingo, including dynamically named ad classes, while preserving essential lesson content and handling fullscreen ads by pressing the exit button automatically or selecting \"No Thanks\" on specific ads.",
+            scriptLicense: "n/a",
+            siteURL: "https://greasyfork.org/en/scripts/501941-super-duolingo-ad-blocker",
+            scriptURL: "https://update.greasyfork.org/scripts/501941/Super%20Duolingo%20Ad%20Blocker.user.js"
+        )
+        // ***************************************************************************************************************
+/*
+        greasyScripts(
+            scriptName: "",
+            coreSite: "",
+            scriptEnabled: true,
+            scriptExplanation: "",
+            scriptLicense: "",
+            siteURL: "",
+            scriptURL: ""
+        ),
+ */
+
+    ]
+}
+
+func initializeGreasyScripts(context: ModelContext) {
+
+    let descriptor = FetchDescriptor<greasyScripts>()
+    guard (try? context.fetch(descriptor))?.isEmpty ?? true else {
+        print("GreasyFork scripts already exist, skipping initialization.")
+        return
+    }
+    
+    let greasyScripts = createGreasyScripts()
+    for filter in greasyScripts {
+        context.insert(filter)
+    }
+    
+    try? context.save()
+    
+    print("Successfully initialized \(greasyScripts.count) GreasyFork scripts.")
 
 
 }

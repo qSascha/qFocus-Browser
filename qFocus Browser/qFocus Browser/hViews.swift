@@ -19,6 +19,7 @@ struct FloatingNavBar: View {
         sort: \sitesStorage.siteOrder
     ) var webSites: [sitesStorage]
     @Query() var settingsDataArray: [settingsStorage]
+
     @EnvironmentObject private var viewModel: ContentViewModel
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var globals: GlobalVariables
@@ -39,54 +40,66 @@ struct FloatingNavBar: View {
     var body: some View {
         @Bindable var settingsData = settingsDataArray[0]
         
-        ZStack {
-            // Image and add tap gesture
+        GeometryReader { geometry in
+            
+            
             ZStack {
-                Circle()
-                    .strokeBorder(Color.qBlueLight, lineWidth: 2)
-                    .frame(width: 52, height: 52)
-
-                Image(systemName: "command.circle.fill")
-                    .resizable()
-                    .frame(width: 44, height: 44)
-                    .foregroundColor(.qBlueLight)
-                    .background(Color.white)
-                    .clipShape(Circle())
-                    .shadow(radius: isDragging || isLongPressing ? 6 : 3)
-            }
-            .scaleEffect(isDragging || isLongPressing ? 1.1 : 1.0)
-            .position(x: CGFloat(settingsData.freeFlowX), y: CGFloat(settingsData.freeFlowY))
-            .onTapGesture {
-                withAnimation(.spring()) {
-                    isShowingButtons.toggle()
+                // Image and add tap gesture
+                ZStack {
+                    Circle()
+                        .strokeBorder(Color.qBlueLight, lineWidth: 2)
+                        .frame(width: 52, height: 52)
+                    
+                    Image(systemName: "command.circle.fill")
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                        .foregroundColor(.qBlueLight)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .shadow(radius: isDragging || isLongPressing ? 6 : 3)
                 }
-                tapFeedback.impactOccurred(intensity: 0.5)
-            }
-            .gesture(
-                LongPressGesture(minimumDuration: 0.5)
-                    .sequenced(before: DragGesture())
-                    .updating($isLongPressing) { value, state, _ in
-                        switch value {
-                        case .first(true):
-                            state = true
-                        case .second(true, nil):
-                            pressFeedback.impactOccurred(intensity: 1.0)
-                            state = true
-                        case .second(true, _):
-                            state = true
-                        default:
-                            state = false
-                        }
+                .scaleEffect(isDragging || isLongPressing ? 1.1 : 1.0)
+                //            .position(x: CGFloat(settingsData.freeFlowX), y: CGFloat(settingsData.freeFlowY))
+                .position(
+                    x: CGFloat(settingsData.freeFlowXPercent) * geometry.size.width,
+                    y: CGFloat(settingsData.freeFlowYPercent) * geometry.size.height
+                )
+                .onTapGesture {
+                    withAnimation(.spring()) {
+                        isShowingButtons.toggle()
                     }
-                    .simultaneously(with:
-                        DragGesture()
+                    tapFeedback.impactOccurred(intensity: 0.5)
+                }
+                .gesture(
+                    LongPressGesture(minimumDuration: 0.5)
+                        .sequenced(before: DragGesture())
+                        .updating($isLongPressing) { value, state, _ in
+                            switch value {
+                            case .first(true):
+                                state = true
+                            case .second(true, nil):
+                                pressFeedback.impactOccurred(intensity: 1.0)
+                                state = true
+                            case .second(true, _):
+                                state = true
+                            default:
+                                state = false
+                            }
+                        }
+                        .simultaneously(with:
+                                            DragGesture()
                             .updating($isDragging) { value, state, _ in
                                 state = true
                             }
                             .onChanged { gesture in
                                 if isDragging {
-                                    settingsData.freeFlowX = Double(gesture.location.x)
-                                    settingsData.freeFlowY = Double(gesture.location.y)
+                                    let newXPercent = Double(gesture.location.x / geometry.size.width)
+                                    let newYPercent = Double(gesture.location.y / geometry.size.height)
+                                    
+                                    // Clamp values between 0 and 1
+                                    settingsData.freeFlowXPercent = max(0, min(1, newXPercent))
+                                    settingsData.freeFlowYPercent = max(0, min(1, newYPercent))
+                                    
                                 }
                             }
                             .onEnded { _ in
@@ -94,113 +107,115 @@ struct FloatingNavBar: View {
                                 //Save new X and Y position of the button
                                 try? modelContext.save()
                             }
-                    )
-            )
-            .animation(.interactiveSpring(), value: isDragging)
-
-            // Popup window with navigation buttons
-            if isShowingButtons {
-                HStack() {   // Two areas, right for share and options, left for all web sites
-                    
-                    VStack() {
-                        // Top row of icons (even indexed icons)
-                        HStack() {
-                            ForEach(webSites.indices, id: \.self) { index in
-                                if index % 2 == 0 {  // Even indices go in top row
-                                    MenuButton(
-                                        index: index,
-                                        webSites: webSites,
-                                        scriptManager: scriptManager
-                                    ) {
-                                        globals.currentTab = index
-                                        isShowingButtons = false
-                                    }
-                                 }
-                            }
-                        }
-                        .padding(EdgeInsets(
-                            top: 10,
-                            leading: 10,
-                            bottom: 3,
-                            trailing: 5
-                        ))
-
-                        // Bottom row of icons (odd indexed icons)
-                        HStack() {
-                            ForEach(webSites.indices, id: \.self) { index in
-                                if index % 2 != 0 {  // Odd indices go in bottom row
-                                    MenuButton(
-                                        index: index,
-                                        webSites: webSites,
-                                        scriptManager: scriptManager
-                                    ) {
-                                        globals.currentTab = index
-                                        isShowingButtons = false
-                                    }
-                                 }
-                            }
-                        }
-                        .padding(EdgeInsets(
-                            top: 3,
-                            leading: 10,
-                            bottom: 10,
-                            trailing: 5
-                        ))
-
-                    }
-
-                    // Settings and Share buttons
-                    VStack() {
-                        
-                        Button(action: {
-                            showShareSheet = true
-                            isShowingButtons = false
-                        }) {
-                            Image(systemName: "square.and.arrow.up")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
-                                .foregroundColor(.white)
-                                .padding(EdgeInsets(
-                                    top: 14,
-                                    leading: 10,
-                                    bottom: 7,
-                                    trailing: 10
-                                ))
-
-                        }
-
-                        Button(action: {
-                            globals.showOptionsView = true
-                            isShowingButtons = false
-                        }) {
-                            Image(systemName: "slider.horizontal.3")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
-                                .foregroundColor(.white)
-                                .padding(EdgeInsets(
-                                    top: 7,
-                                    leading: 10,
-                                    bottom: 14,
-                                    trailing: 10
-                                ))
-
-                        }
-                        
-                    }
-                    .background(Color(.qBlueDark))
-
-                }
-                .background(Color(.qBlueLight))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .shadow(radius: 10)
-                .position(
-                    x: min(max(CGFloat(settingsData.freeFlowX), 100), UIScreen.main.bounds.width - 100),
-                    y: min(max(CGFloat(settingsData.freeFlowY) - 100, 100), UIScreen.main.bounds.height - 100)
+                                       )
                 )
-                .transition(.scale.combined(with: .opacity))
+                .animation(.interactiveSpring(), value: isDragging)
+                
+                // Popup window with navigation buttons
+                if isShowingButtons {
+                    HStack() {   // Two areas, right for share and options, left for all web sites
+                        
+                        VStack() {
+                            // Top row of icons (even indexed icons)
+                            HStack() {
+                                ForEach(webSites.indices, id: \.self) { index in
+                                    if index % 2 == 0 {  // Even indices go in top row
+                                        MenuButton(
+                                            index: index,
+                                            webSites: webSites,
+                                            scriptManager: scriptManager
+                                        ) {
+                                            globals.currentTab = index
+                                            isShowingButtons = false
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(EdgeInsets(
+                                top: 10,
+                                leading: 10,
+                                bottom: 3,
+                                trailing: 5
+                            ))
+                            
+                            // Bottom row of icons (odd indexed icons)
+                            HStack() {
+                                ForEach(webSites.indices, id: \.self) { index in
+                                    if index % 2 != 0 {  // Odd indices go in bottom row
+                                        MenuButton(
+                                            index: index,
+                                            webSites: webSites,
+                                            scriptManager: scriptManager
+                                        ) {
+                                            globals.currentTab = index
+                                            isShowingButtons = false
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(EdgeInsets(
+                                top: 3,
+                                leading: 10,
+                                bottom: 10,
+                                trailing: 5
+                            ))
+                            
+                        }
+                        
+                        // Settings and Share buttons
+                        VStack() {
+                            
+                            Button(action: {
+                                showShareSheet = true
+                                isShowingButtons = false
+                            }) {
+                                Image(systemName: "square.and.arrow.up")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
+                                    .foregroundColor(.white)
+                                    .padding(EdgeInsets(
+                                        top: 14,
+                                        leading: 10,
+                                        bottom: 7,
+                                        trailing: 10
+                                    ))
+                                
+                            }
+                            
+                            Button(action: {
+                                globals.showOptionsView = true
+                                isShowingButtons = false
+                            }) {
+                                Image(systemName: "slider.horizontal.3")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: (globals.menuIconSize * 0.75), height: (globals.menuIconSize * 0.75), alignment: .center)
+                                    .foregroundColor(.white)
+                                    .padding(EdgeInsets(
+                                        top: 7,
+                                        leading: 10,
+                                        bottom: 14,
+                                        trailing: 10
+                                    ))
+                                
+                            }
+                            
+                        }
+                        .background(Color(.qBlueDark))
+                        
+                    }
+                    .background(Color(.qBlueLight))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .shadow(radius: 10)
+                    .position(
+                        x: CGFloat(settingsData.freeFlowXPercent) * geometry.size.width,
+                        y: CGFloat(settingsData.freeFlowYPercent) * geometry.size.height
+                    )
+                    .transition(.scale.combined(with: .opacity))
+                }
             }
+            .frame( width: geometry.size.width, height: geometry.size.height)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()

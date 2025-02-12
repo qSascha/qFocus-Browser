@@ -93,7 +93,7 @@ struct iOSOptionsEditAdvanced: View {
                 } header: {
                     Text("Desktop Site")
                 } footer: {
-                    Text("Some website, like Facebook Messenger (https://messenger.com), only work properly on a desktop browser. Here you can enable this setting to allow you use the site, which otherwise will open in a mobile browser window.")
+                    Text("Some website, like Facebook Messenger (https://messenger.com), only work properly on a desktop browser. Here you can enable this setting to use the site even on your mobile phone.")
                 }
 
             }

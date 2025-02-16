@@ -1,5 +1,5 @@
 //
-//  hBlockListManager.swift
+//  hAdBlockManager.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2024-12-11.
@@ -16,7 +16,7 @@ import CryptoKit
 
 // MARK: Block List Manager
 @MainActor
-class BlockListManager {
+class AdBlockManager {
     private let cacheDirectory: URL
     private let checksumFileName = "checksums.plist"
     private var checksums: [String: String]
@@ -36,7 +36,7 @@ class BlockListManager {
                 checksums = [:]
             }
         } else {
-            fatalError("BlockListManager: Could not access documents directory")
+            fatalError("AdBlockManager: Could not access documents directory")
         }
     }
     
@@ -61,11 +61,11 @@ class BlockListManager {
         
         if let existingChecksum = checksums[identifier] {
             let hasChanged = existingChecksum != newChecksum
-            print("BlockListManager: Checksum check for \(identifier): \(hasChanged ? "Changed" : "Not changed")")
+            print("AdBlockManager: Checksum check for \(identifier): \(hasChanged ? "Changed" : "Not changed")")
             return hasChanged
         }
         
-        print("BlockListManager: No existing checksum for \(identifier)")
+        print("AdBlockManager: No existing checksum for \(identifier)")
         return true
     }
     

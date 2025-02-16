@@ -1,5 +1,5 @@
 //
-//  ContentBlockingWebViewController.swift
+//  hInternalWebView.swift
 //  qFocus Browser
 //
 //  Created by qSascha on 2025-02-01.
@@ -8,10 +8,82 @@
 @preconcurrency import WebKit
 import UIKit
 import SwiftUI
+import SwiftData
 
 
 
-class ContentBlockingWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIAdaptivePresentationControllerDelegate {
+
+
+//MARK: View: WebViews
+struct WebViews: View {
+    @Query(
+        filter: #Predicate<sitesStorage> { $0.siteName != ""},
+        sort: \sitesStorage.siteOrder
+    ) var webSites: [sitesStorage]
+    @Query() var settingsDataArray: [settingsStorage]
+
+    @EnvironmentObject private var startViewModel: StartViewModel
+    @EnvironmentObject var globals: GlobalVariables
+
+    
+    
+    var body: some View {
+        @Bindable var settingsData = settingsDataArray[0]
+
+        VStack {
+            if (settingsData.showNavBar) {
+                Rectangle()
+                    .opacity(0)
+                    .frame(width: 30, height: 30, alignment: .center)
+            }
+            
+            ZStack {
+                ForEach(0..<webSites.count, id: \.self) { index in
+                    WebViewContainer(webViewController: startViewModel.getWebViewController(index))
+                        .zIndex(globals.currentTab == index ? 1 : 0)
+                        .onAppear {
+                            Task {
+                                await startViewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                        .onChange(of: webSites[index].siteURL) { _, _ in
+                            startViewModel.resetInitialLoadState(for: index)
+                            Task {
+                                await startViewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                        .onChange(of: webSites[index].enableJSBlocker) { _, _ in
+                            Task {
+                                await startViewModel.updateWebView(index: index, site: webSites[index])
+                            }
+                        }
+                }
+
+            }
+        }
+    }
+}
+
+struct WebViewContainer: UIViewControllerRepresentable {
+    let webViewController: WebViewController
+    
+    func makeUIViewController(context: Context) -> WebViewController {
+        return webViewController
+    }
+    
+    func updateUIViewController(_ uiViewController: WebViewController, context: Context) {
+        // Update the view controller if needed
+    }
+}
+
+
+
+
+
+
+
+//MARK Web View Controller
+class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIAdaptivePresentationControllerDelegate {
 
     var webView: WKWebView!
     private var refreshControl: UIRefreshControl!

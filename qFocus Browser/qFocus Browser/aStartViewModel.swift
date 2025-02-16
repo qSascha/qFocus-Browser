@@ -1,5 +1,5 @@
 //
-//  hContentViewModel.swift
+//  hStartViewModel.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2025-01-25.
@@ -9,35 +9,70 @@ import SwiftData
 import WebKit
 
 
-// MARK: Content View Model
+// MARK: StartView Model
 @MainActor
-class ContentViewModel: ObservableObject {
-    @Published private(set) var webViewControllers: [ContentBlockingWebViewController] = []
+class StartViewModel: ObservableObject {
+    @Published private(set) var webViewControllers: [WebViewController] = []
     @Published var showAdBlockLoadStatus: Bool = false
     @Published var loadedRuleLists: Int = 0
     @Published var totalRuleLists: Int = 0
 
-    let scriptManager: ScriptManager
     private var activeRuleIdentifiers: Set<String> = []
     private var currentCompiledRules: [WKContentRuleList] = []
     private var hasInitiallyLoaded: [Int: Bool] = [:]
     private var hasInitializedRules = false
-    private let blockListManager = BlockListManager()
+    private let adBlockManager: AdBlockManager
+    private var modelContext: ModelContext
+    let greasyScripts: GreasyFork
+
+    @MainActor private(set) var settingsDataArray: [settingsStorage] = []
+    @MainActor private(set) var webSites: [sitesStorage] = []
     
 
-    
-    
-    init() {
-        self.scriptManager = ScriptManager()
+
+
+
+
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+        self.adBlockManager = AdBlockManager()
+        self.greasyScripts = GreasyFork(modelContext: modelContext)
+
+        Task {
+            fetchSettings()
+            fetchWebsites()
+        }
 
         // Initialize with default settings
         self.webViewControllers = (0...5).map { index in
-            let controller = ContentBlockingWebViewController(requestDesktop: false)
+            let controller = WebViewController(requestDesktop: false)
             controller.loadView()
             return controller
         }
     }
 
+    
+    
+    @MainActor
+    func fetchSettings() {
+        let descriptor = FetchDescriptor<settingsStorage>()
+        settingsDataArray = (try? modelContext.fetch(descriptor)) ?? []
+    }
+    
+    @MainActor
+    func fetchWebsites() {
+        // Creating a descriptor that matches your @Query parameters
+        let descriptor = FetchDescriptor<sitesStorage>(
+            predicate: #Predicate<sitesStorage> { $0.siteName != "" },
+            sortBy: [SortDescriptor(\.siteOrder)]
+        )
+        webSites = (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    
+    
+    
+    
 
     // Update controllers with site data
     func updateWebViewControllers(with sites: [sitesStorage]) async {
@@ -90,10 +125,14 @@ class ContentViewModel: ObservableObject {
         
         // Clear existing scripts
         webViewController.webView.configuration.userContentController.removeAllUserScripts()
+        print("All scripts removed.")
         
         // Load new scripts if enabled
         if site.enableJSBlocker {
-            scriptManager.loadScripts(for: url, webViewController: webViewController)
+            greasyScripts.loadScripts(for: url, webViewController: webViewController)
+        } else {
+            // Reload the current page to apply changes
+            webViewController.webView.reload()
         }
 
         if hasInitiallyLoaded[index] != true {
@@ -127,10 +166,10 @@ class ContentViewModel: ObservableObject {
     }
     
 
-    func getWebViewController(_ index: Int) -> ContentBlockingWebViewController {
+    func getWebViewController(_ index: Int) -> WebViewController {
         guard index < webViewControllers.count else {
             print("ERROR: Requested web view controller index \(index) out of bounds")
-            return ContentBlockingWebViewController()
+            return WebViewController()
         }
         return webViewControllers[index]
     }
@@ -179,7 +218,7 @@ class ContentViewModel: ObservableObject {
 
                 do {
                     // Pass the filter's identName as the identifier
-                    let result = try await blockListManager.processURL(url, identifier: filter.identName)
+                    let result = try await adBlockManager.processURL(url, identifier: filter.identName)
                     
                     for webViewController in webViewControllers {
                         try await webViewController.addContentRules(with: result.compiled)
@@ -216,7 +255,7 @@ class ContentViewModel: ObservableObject {
                 }
                 
                 do {
-                    let result = try await blockListManager.processURL(url, identifier: filter.identName)
+                    let result = try await adBlockManager.processURL(url, identifier: filter.identName)
                     currentCompiledRules.append(contentsOf: result.compiled)
                     
                     for webViewController in webViewControllers {

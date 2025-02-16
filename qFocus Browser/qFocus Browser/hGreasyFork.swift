@@ -1,20 +1,25 @@
 //
-//  ScriptManager.swift
+//  hGreasyFork.swift
 //  qFocus Browser
 //
-//  Created by Sascha on 2025-02-04.
+//  Created by Sascha on 2025-02-13.
 //
-
 import WebKit
 import Foundation
+import SwiftData
 
 
 
 
-class ScriptManager: ObservableObject {
 
+class GreasyFork: ObservableObject {
+    private let modelContext: ModelContext
     var loadedScripts: [String: (metadata: ScriptMetadata, code: String)] = [:]
     @Published private(set) var domainsWithInjectedScripts: Set<String> = []
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
 
 
     enum InjectionTime {
@@ -44,7 +49,6 @@ class ScriptManager: ObservableObject {
             self.description = metadataDict["description"]?.first
             self.version = metadataDict["version"]?.first
             
-            // Parse injection time
             let runAt = metadataDict["run-at"]?.first ?? "document-end"
             switch runAt {
             case "document-start":
@@ -55,11 +59,9 @@ class ScriptManager: ObservableObject {
                 self.injectionTime = .documentEnd
             }
             
-            // Parse requirements
             self.requires = metadataDict["require"] ?? []
         }
     }
-    
     
 
 
@@ -67,14 +69,12 @@ class ScriptManager: ObservableObject {
 
     //MARK: Parse Script
     func parseScript(_ content: String) -> (metadata: ScriptMetadata, code: String)? {
-        // Parse metadata block
         let pattern = #"(?:(\/\/ ==UserScript==[ \t]*?\r?\n([\S\s]*?)\r?\n\/\/ ==\/UserScript==)([\S\s]*))"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
               let match = regex.firstMatch(in: content, range: NSRange(content.startIndex..., in: content)) else {
             return nil
         }
         
-        // Extract metadata and code sections
         guard let metaRange = Range(match.range(at: 2), in: content),
               let codeRange = Range(match.range(at: 3), in: content) else {
             return nil
@@ -83,7 +83,6 @@ class ScriptManager: ObservableObject {
         let metaBlock = String(content[metaRange])
         let code = String(content[codeRange]).trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // Parse metadata lines
         var metadata: [String: [String]] = [:]
         let metaLines = metaBlock.split(whereSeparator: \.isNewline)
         
@@ -112,123 +111,201 @@ class ScriptManager: ObservableObject {
 
 
 
+
     //MARK: Load Script
-    func loadScripts(for siteURL: URL, webViewController: ContentBlockingWebViewController) {
-        // Store a strong reference to the webViewController
+    func loadScripts(for siteURL: URL, webViewController: WebViewController) {
         let strongWebViewController = webViewController
         let siteName = siteURL.host ?? ""
-        let fileManager = FileManager.default
-
-        print("----------------- Loading scripts for site: \(siteName)")
-
-        // Clear previous scripts when loading new ones
-//        loadedScripts.removeAll()
         
-        if let resourcePath = Bundle.main.resourcePath {
-            do {
-                let scriptsPath = ((resourcePath as NSString).appendingPathComponent("JavaScripts") as NSString)
-                    .appendingPathComponent(siteName)
-                if fileManager.fileExists(atPath: scriptsPath) {
-                    let scriptFiles = try FileManager.default.contentsOfDirectory(atPath: scriptsPath)
-                    
-                    var scriptsLoaded = false
-                    for scriptFile in scriptFiles {
-                        if scriptFile.hasSuffix(".js") {
-                            let fullPath = (scriptsPath as NSString).appendingPathComponent(scriptFile)
-                            let content = try String(contentsOf: URL(fileURLWithPath: fullPath), encoding: .utf8)
+        print("----------------- Loading GreasyFork scripts for site: \(siteName)")
+        
+        // Clear previous scripts when loading new ones
+        loadedScripts.removeAll()
+        
+        let descriptor = FetchDescriptor<greasyScripts>()
+        guard let greasyScripts = try? modelContext.fetch(descriptor) else {
+            print("Failed to fetch greasy scripts")
+            return
+        }
 
-                            if let parsed = parseScript(content) {
-                                loadedScripts[scriptFile] = parsed
-                                scriptsLoaded = true
-                            }
-                        }
-                    }
+        // Get the core domain for comparison
+        let coreDomain = getDomainCore(siteName)
+        print("DEBUG: Loading scripts for core domain: \(coreDomain)")
 
-                    if scriptsLoaded {
-                        let group = DispatchGroup()
-                        let scriptIdentifiers = Array(loadedScripts.keys)
-                        print("Script identifiers: \(scriptIdentifiers)")
-                        
-                        if scriptIdentifiers.isEmpty {
-                            print("No script identifiers found")
-                            return
+        // Filter scripts where the core domains match and the script is enabled
+        let matchingScripts = greasyScripts.filter { script in
+            return script.coreSite == coreDomain && script.scriptEnabled
+        }
+        
+        if matchingScripts.isEmpty {
+            print("No matching scripts found for domain: \(coreDomain)")
+            return
+        }
+        
+        // Create outer group for script loading
+        let loadingGroup = DispatchGroup()
+        // Create strong reference to self
+        let strongSelf = self
+        
+        for script in matchingScripts {
+            loadingGroup.enter()
+            print("Loading script: \(script.scriptName)")
+            
+            loadRemoteScript(from: script.scriptURL) { [weak self] result in
+                defer { loadingGroup.leave() }
+                
+                switch result {
+                case .success(let content):
+                    if let parsed = self?.parseScript(content) {
+                        DispatchQueue.main.async {
+                            self?.loadedScripts[script.scriptName] = parsed
                         }
-                        
-                        // Create a strong reference to self
-                        let strongSelf = self
-                        
-                        for identifier in scriptIdentifiers {
-//                            print("Loading dependencies for script \(identifier)")
-                            group.enter()
-                            strongSelf.loadDependencies(for: identifier) { success in
-                                defer { group.leave() }
-                                
-                                if !success {
-                                    print("ERROR: Failed to load dependencies for \(identifier)")
-                                } else {
-//                                    print("Successfully loaded dependencies for \(identifier)")
-                                }
-                            }
-                        }
-                        
-//                        print("Waiting for all dependencies...")
-                        group.notify(queue: .main) {
-//                            print("All dependencies completed. Proceeding with injection...")
-                            strongSelf.injectScripts(into: strongWebViewController.webView)
-//                            print("Successfully injected scripts.")
-                        }
+                    } else {
+                        print("Failed to parse script: \(script.scriptName)")
                     }
-                } else {
-                    print("WARNING: Scripts folder does not exist for \(siteName).")
+                case .failure(let error):
+                    print("Failed to load script \(script.scriptName): \(error)")
                 }
-            } catch {
-                print("ERROR: Failed to list/load contents: \(error)")
+            }
+        }
+        
+        // After all scripts are loaded, handle dependencies and injection
+        loadingGroup.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }
+            
+            let scriptIdentifiers = Array(self.loadedScripts.keys)
+            print("Loaded script identifiers: \(scriptIdentifiers)")
+            
+            if scriptIdentifiers.isEmpty {
+                print("No scripts were successfully loaded")
+                return
+            }
+            
+            // Create dependencies group
+            let dependenciesGroup = DispatchGroup()
+            
+            // Load dependencies for each script
+            for identifier in scriptIdentifiers {
+                dependenciesGroup.enter()
+                print("Loading dependencies for script: \(identifier)")
+                
+                strongSelf.loadDependencies(for: identifier) { success in
+                    defer { dependenciesGroup.leave() }
+                    
+                    if !success {
+                        print("ERROR: Failed to load dependencies for \(identifier)")
+                    } else {
+                        print("Successfully loaded dependencies for \(identifier)")
+                    }
+                }
+            }
+            
+            // After all dependencies are handled, inject the scripts
+            dependenciesGroup.notify(queue: .main) {
+                print("All dependencies loaded, proceeding with injection...")
+                strongSelf.injectScripts(into: strongWebViewController.webView)
+                print("Script injection completed")
             }
         }
     }
-    
+
+
+
+
+
+/*
+    func loadScripts(for siteURL: URL, webViewController: WebViewController) {
+        let strongWebViewController = webViewController
+        let siteName = siteURL.host ?? ""
+        
+        print("----------------- Loading GreasyFork scripts for site: \(siteName)")
+        
+        let descriptor = FetchDescriptor<greasyScripts>()
+        guard let greasyScripts = try? modelContext.fetch(descriptor) else {
+            print("Failed to fetch greasy scripts")
+            return
+        }
+
+
+        // Get the core domain for comparison
+        let coreDomain = getDomainCore(siteName)
+
+        // Filter scripts where the core domains match and the script is enabled
+        let matchingScripts = greasyScripts.filter { script in
+            return script.coreSite == coreDomain && script.scriptEnabled
+        }
+        
+        let group = DispatchGroup()
+        
+        for script in matchingScripts {
+            group.enter()
+            print("Loading script: \(script.scriptName)")
+            loadRemoteScript(from: script.scriptURL) { [weak self] result in
+                defer { group.leave() }
+                
+                switch result {
+                case .success(let content):
+                    if let parsed = self?.parseScript(content) {
+                        DispatchQueue.main.async {
+                            self?.loadedScripts[script.scriptName] = parsed
+                        }
+                    }
+                case .failure(let error):
+                    print("Failed to load script \(script.scriptName): \(error)")
+                }
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.injectScripts(into: strongWebViewController.webView)
+        }
+    }
+*/
+    private func getDomainCore(_ host: String) -> String {
+        let components = host.lowercased().split(separator: ".")
+        guard components.count >= 2 else { return host.lowercased() }
+        let mainDomain = components.suffix(2).joined(separator: ".")
+        return mainDomain
+    }
+
+
 
 
 
 
     //MARK: Inject Script
     func injectScripts(into webView: WKWebView) {
-//        print("Now inside the injectScripts function")
         guard let host = webView.url?.host else {
             print("No host found for webView")
             return
         }
 
-//        print("Attempting to inject scripts for \(host)")
-//        print("Current loadedScripts count: \(loadedScripts.count)")
-
-        
         for (_, script) in loadedScripts {
             let userScript = WKUserScript(
                 source: script.code,
                 injectionTime: script.metadata.injectionTime.webViewTime,
                 forMainFrameOnly: true
             )
+            print("Script injected")
             webView.configuration.userContentController.addUserScript(userScript)
         }
         
         DispatchQueue.main.async {
             if !self.loadedScripts.isEmpty {
                 self.domainsWithInjectedScripts.insert(host)
-//                print("Added domain to injected scripts: \(host)")
-//                print("Current domains with scripts: \(self.domainsWithInjectedScripts)")
             } else {
                 print("No scripts were loaded for: \(host)")
             }
         }
-
     }
+    
 
-    
-    
+
+
+
+
     //MARK: Load Dependencies
     func loadDependencies(for identifier: String, completion: @escaping (Bool) -> Void) {
-        
         guard let script = loadedScripts[identifier] else {
             completion(false)
             return
@@ -246,14 +323,12 @@ class ScriptManager: ObservableObject {
         for dependency in dependencies {
             group.enter()
             
-            // Load dependency
-            loadRemoteScript(from: dependency) { result in
+            loadRemoteScript(from: dependency) { [weak self] result in
                 switch result {
                 case .success(let content):
-                    // Prepend dependency to original script
-                    if let existingScript = self.loadedScripts[identifier] {
+                    if let existingScript = self?.loadedScripts[identifier] {
                         let newCode = content + "\n" + existingScript.code
-                        self.loadedScripts[identifier] = (existingScript.metadata, newCode)
+                        self?.loadedScripts[identifier] = (existingScript.metadata, newCode)
                     }
                 case .failure(_):
                     success = false
@@ -267,8 +342,11 @@ class ScriptManager: ObservableObject {
         }
     }
     
-    
-    
+
+
+
+
+
     //MARK: Load Remote Script
     private func loadRemoteScript(from url: String, completion: @escaping (Result<String, Error>) -> Void) {
         guard let url = URL(string: url) else {
@@ -287,15 +365,11 @@ class ScriptManager: ObservableObject {
                 completion(.failure(NSError(domain: "Invalid data", code: -2)))
                 return
             }
+   
             
             print("Loaded remote script: \(url)")
             completion(.success(content))
         }.resume()
     }
-
-    
 }
-
-
-
 

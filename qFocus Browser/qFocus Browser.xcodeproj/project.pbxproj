@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B049CF52D554870007EFE10 /* JavaScripts in Resources */ = {isa = PBXBuildFile; fileRef = 2B049CF42D53EAA4007EFE10 /* JavaScripts */; };
 		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
 		2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF6E07A2D4A85C4007B606F /* ConverterTool */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B049CF42D53EAA4007EFE10 /* JavaScripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JavaScripts; sourceTree = SOURCE_ROOT; };
 		2B6BC4752D456B4500345E4D /* qFocus Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qFocus Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -28,6 +26,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2B698AF82D6134550046358A /* JavaScripts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = JavaScripts;
+			sourceTree = "<group>";
+		};
 		2B6BC4772D456B4500345E4D /* qFocus Browser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -54,9 +57,9 @@
 		2B6BC46C2D456B4500345E4D = {
 			isa = PBXGroup;
 			children = (
+				2B698AF82D6134550046358A /* JavaScripts */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 				2B6BC4762D456B4500345E4D /* Products */,
-				2B049CF42D53EAA4007EFE10 /* JavaScripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,7 +140,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B049CF52D554870007EFE10 /* JavaScripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +164,7 @@
 				CODE_SIGN_ENTITLEMENTS = "qFocus Browser/qFocus_Browser.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"qFocus Browser/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = MT9GD8SG5G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -173,11 +175,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 25.01;
+				MARKETING_VERSION = 25.02;
 				PRODUCT_BUNDLE_IDENTIFIER = "qSascha.qFocus-Browser";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -198,7 +201,7 @@
 				CODE_SIGN_ENTITLEMENTS = "qFocus Browser/qFocus_Browser.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"qFocus Browser/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = MT9GD8SG5G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -209,11 +212,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 25.01;
+				MARKETING_VERSION = 25.02;
 				PRODUCT_BUNDLE_IDENTIFIER = "qSascha.qFocus-Browser";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

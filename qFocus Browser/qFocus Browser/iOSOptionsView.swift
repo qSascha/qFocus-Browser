@@ -21,9 +21,8 @@ struct iOSOptionsView: View {
     @Environment(\.modelContext) private var modelContext
 
     @EnvironmentObject var globals: GlobalVariables
+    @EnvironmentObject var startViewModel: StartViewModel
 
-    @ObservedObject var viewModel: ContentViewModel
-    
     @Query(sort: \sitesStorage.siteOrder) var webSites: [sitesStorage]
     @Query() var settingsData: [settingsStorage]
     @Query(sort: \adBlockFilters.sortOrder) var adBlockLists: [adBlockFilters]
@@ -98,7 +97,7 @@ struct iOSOptionsView: View {
 
                         Toggle("Enable Face ID", isOn: $settingsData.faceIDEnabled)
 
-                        NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData, viewModel: viewModel)) {
+                        NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData)) {
                             HStack {
                                 Text("Ad Blocking")
                                 Image(systemName: "shield.fill")

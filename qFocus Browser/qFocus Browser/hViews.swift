@@ -20,11 +20,10 @@ struct FloatingNavBar: View {
     ) var webSites: [sitesStorage]
     @Query() var settingsDataArray: [settingsStorage]
 
-    @EnvironmentObject private var viewModel: ContentViewModel
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var globals: GlobalVariables
-
-    @ObservedObject var scriptManager: ScriptManager
+    @EnvironmentObject var greasyFork: GreasyFork
+    @EnvironmentObject private var startViewModel: StartViewModel
 
     @State private var isShowingButtons = false
     @State private var showShareSheet = false
@@ -113,7 +112,7 @@ struct FloatingNavBar: View {
                 
                 // Popup window with navigation buttons
                 if isShowingButtons {
-                    HStack() {   // Two areas, right for share and options, left for all web sites
+                    HStack() {   // Two areas: right for share and options, left for all web sites
                         
                         VStack() {
                             // Top row of icons (even indexed icons)
@@ -122,8 +121,8 @@ struct FloatingNavBar: View {
                                     if index % 2 == 0 {  // Even indices go in top row
                                         MenuButton(
                                             index: index,
-                                            webSites: webSites,
-                                            scriptManager: scriptManager
+                                            webSites: webSites
+//                                            scriptManager: scriptManager
                                         ) {
                                             globals.currentTab = index
                                             isShowingButtons = false
@@ -144,8 +143,8 @@ struct FloatingNavBar: View {
                                     if index % 2 != 0 {  // Odd indices go in bottom row
                                         MenuButton(
                                             index: index,
-                                            webSites: webSites,
-                                            scriptManager: scriptManager
+                                            webSites: webSites
+//                                            scriptManager: scriptManager
                                         ) {
                                             globals.currentTab = index
                                             isShowingButtons = false
@@ -227,17 +226,18 @@ struct FloatingNavBar: View {
 
 // MARK: Menu Button
 private struct MenuButton: View {
+
     let index: Int
     let webSites: [sitesStorage]
-    @ObservedObject var scriptManager: ScriptManager
     let action: () -> Void
 
     @EnvironmentObject var globals: GlobalVariables
+    @EnvironmentObject var greasyScripts: GreasyFork
 
 
     var body: some View {
         let host = URL(string: webSites[index].siteURL)?.host ?? ""
-        _ = scriptManager.domainsWithInjectedScripts.contains(host)
+        _ = greasyScripts.domainsWithInjectedScripts.contains(host)
         
         return Button(action: action) {
             Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
@@ -247,7 +247,7 @@ private struct MenuButton: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .fill(scriptManager.domainsWithInjectedScripts.contains(URL(string: webSites[index].siteURL)?.host ?? "") ? Color.green : Color.clear)
+                        .fill(greasyScripts.domainsWithInjectedScripts.contains(URL(string: webSites[index].siteURL)?.host ?? "") ? Color.green : Color.clear)
                         .frame(width: 8, height: 8)
                     , alignment: .bottomLeading
                 )
@@ -288,11 +288,12 @@ struct NavBar: View {
     ) var webSites: [sitesStorage]
     @Query() var settingsDataArray: [settingsStorage]
 
-    @EnvironmentObject private var viewModel: ContentViewModel
+//    @EnvironmentObject private var viewModel: StartViewModel
     @EnvironmentObject var globals: GlobalVariables
+    @EnvironmentObject var greasyFork: GreasyFork
 
-    @ObservedObject var scriptManager: ScriptManager
 
+    
 
     var body: some View {
         @Bindable var settingsData = settingsDataArray[0]
@@ -322,8 +323,8 @@ struct NavBar: View {
 
                     MenuButton(
                         index: index,
-                        webSites: webSites,
-                        scriptManager: scriptManager
+                        webSites: webSites
+//                        scriptManager: scriptManager
                     ) {
                         globals.currentTab = index
                     }
@@ -362,103 +363,6 @@ struct NavBar: View {
 
 
 
-//MARK: View: WebViews
-struct WebViews: View {
-    @Query(
-        filter: #Predicate<sitesStorage> { $0.siteName != ""},
-        sort: \sitesStorage.siteOrder
-    ) var webSites: [sitesStorage]
-    @Query() var settingsDataArray: [settingsStorage]
-
-    @EnvironmentObject private var viewModel: ContentViewModel
-    @EnvironmentObject var globals: GlobalVariables
-
-    
-    
-    var body: some View {
-        @Bindable var settingsData = settingsDataArray[0]
-
-        VStack {
-            if (settingsData.showNavBar) {
-                Rectangle()
-                    .opacity(0)
-                    .frame(width: 30, height: 30, alignment: .center)
-            }
-            
-            ZStack {
-                ForEach(0..<webSites.count, id: \.self) { index in
-                    WebViewContainer(webViewController: viewModel.getWebViewController(index))
-                        .zIndex(globals.currentTab == index ? 1 : 0)
-                        .onAppear {
-                            Task {
-                                await viewModel.updateWebView(index: index, site: webSites[index])
-                            }
-                        }
-                        .onChange(of: webSites[index].siteURL) { _, _ in
-                            viewModel.resetInitialLoadState(for: index)
-                            Task {
-                                await viewModel.updateWebView(index: index, site: webSites[index])
-                            }
-                        }
-                        .onChange(of: webSites[index].enableJSBlocker) { _, _ in
-                            Task {
-                                await viewModel.updateWebView(index: index, site: webSites[index])
-                            }
-                        }
-                        .onChange(of: webSites[index].requestDesktop) { _, _ in
-                            Task {
-                                await viewModel.updateWebView(index: index, site: webSites[index])
-                            }
-                        }
-                }
-
-
-/*
-                ForEach(0..<webSites.count, id: \.self) { index in
-                    WebViewContainer(webViewController: viewModel.getWebViewController(index))
-                        .zIndex(globals.currentTab == index ? 1 : 0)
-                        .onAppear {
-                            Task {
-                                await viewModel.updateWebView(index: index, urlString: webSites[index].siteURL, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: webSites[index].requestDesktop)
-                            }
-                        }
-                        .onChange(of: webSites[index].siteURL) { oldValue, newValue in
-                            viewModel.resetInitialLoadState(for: index)
-                            Task {
-                                await viewModel.updateWebView(index: index, urlString: newValue, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: webSites[index].requestDesktop)
-                            }
-                        }
-                        .onChange(of: webSites[index].enableJSBlocker) { oldValue, newValue in
-                            Task {
-                                await viewModel.updateWebView( index: index, urlString: webSites[index].siteURL, enableJSBlocker: newValue, requestDesktop: webSites[index].requestDesktop)
-                            }
-                        }
-                        .onChange(of: webSites[index].requestDesktop) { oldValue, newValue in
-                            Task {
-                                await viewModel.updateWebView( index: index, urlString: webSites[index].siteURL, enableJSBlocker: webSites[index].enableJSBlocker, requestDesktop: newValue)
-                            }
-                        }
-                }
-*/
-
-
-            }
-        }
-    }
-}
-
-struct WebViewContainer: UIViewControllerRepresentable {
-    let webViewController: ContentBlockingWebViewController
-    
-    func makeUIViewController(context: Context) -> ContentBlockingWebViewController {
-        return webViewController
-    }
-    
-    func updateUIViewController(_ uiViewController: ContentBlockingWebViewController, context: Context) {
-        // Update the view controller if needed
-    }
-}
-
 
 
 
@@ -467,7 +371,7 @@ struct AdBlockLoadStatus: View {
 
     @Query() var settingsDataArray: [settingsStorage]
 
-    @EnvironmentObject var viewModel: ContentViewModel
+    @EnvironmentObject var startViewModel: StartViewModel
 
     
     
@@ -477,11 +381,11 @@ struct AdBlockLoadStatus: View {
         VStack {
             Spacer()
             
-            if settingsData.enableAdBlock && viewModel.loadedRuleLists < viewModel.totalRuleLists {
+            if settingsData.enableAdBlock && startViewModel.loadedRuleLists < startViewModel.totalRuleLists {
                 HStack {
                     ProgressView()
                         .padding(.horizontal)
-                    Text("Updating ad-blockers: \(viewModel.loadedRuleLists+1)/\(viewModel.totalRuleLists)")
+                    Text("Updating ad-blockers: \(startViewModel.loadedRuleLists+1)/\(startViewModel.totalRuleLists)")
                         .font(.caption)
                 }
                 .padding()

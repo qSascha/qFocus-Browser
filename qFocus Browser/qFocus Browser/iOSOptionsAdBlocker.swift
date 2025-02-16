@@ -20,7 +20,7 @@ struct AdBlockSettingsView: View {
     
     @Bindable var settingsData: settingsStorage
     @State private var showingExplanation: adBlockFilters?
-    @ObservedObject var viewModel: ContentViewModel
+    @EnvironmentObject var startViewModel: StartViewModel
 
 
 
@@ -49,10 +49,10 @@ struct AdBlockSettingsView: View {
                             Button(action: {
                                 Task {
                                     let enabledFilters = adBlockLists.filter { $0.enabled }
-//                                    await viewModel.toggleBlocking(isEnabled: false, enabledFilters: enabledFilters)
+//                                    await startViewModel.toggleBlocking(isEnabled: false, enabledFilters: enabledFilters)
                                     
                                     // Force update with forceUpdate parameter set to true
-                                    try await viewModel.initializeBlocker(
+                                    try await startViewModel.initializeBlocker(
                                         settings: settingsData,
                                         enabledFilters: enabledFilters,
                                         modelContext: modelContext,
@@ -98,11 +98,11 @@ struct AdBlockSettingsView: View {
                 Task {
                     // Toggle with false to remove all existing rules.
                     let enabledFilters = adBlockLists.filter { $0.enabled }
-                    await viewModel.toggleBlocking(isEnabled: false, enabledFilters: enabledFilters)
+                    await startViewModel.toggleBlocking(isEnabled: false, enabledFilters: enabledFilters)
                     
                     if settingsData.enableAdBlock {
                         // Rebuild only for currently enabled filters
-                        try await viewModel.initializeBlocker(settings: settingsData, enabledFilters: enabledFilters, modelContext: modelContext)
+                        try await startViewModel.initializeBlocker(settings: settingsData, enabledFilters: enabledFilters, modelContext: modelContext)
                     }
                 }
             }

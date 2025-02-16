@@ -135,9 +135,3 @@ public var body: some View {
 }
 
 
-
-#Preview {
-    ContentView()
-    .modelContainer(for: sitesStorage.self)
-    .frame(minWidth: 300, idealWidth: 500, minHeight: 300, idealHeight: 500)
-}

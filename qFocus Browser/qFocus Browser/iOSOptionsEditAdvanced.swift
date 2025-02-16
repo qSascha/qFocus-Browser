@@ -12,7 +12,7 @@ import UIKit
 struct iOSOptionsEditAdvanced: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var viewModel: ContentViewModel
+    @EnvironmentObject var startViewModel: StartViewModel
 
     @Bindable var editSite: sitesStorage
 
@@ -68,12 +68,11 @@ struct iOSOptionsEditAdvanced: View {
                 } header: {
                     Text("JavaScript")
                 } footer: {
-                    Text("qFocus Browser has several GreasyForks (https://greasyfork.org) scripts that can help block ads. These are implemented and enabled by default, but if you have any issues then you can disable them here.")
+                    Text("qFocus Browser has several GreasyFork (https://greasyfork.org) scripts that can help block ads. These are implemented and enabled by default, but if you have any issues then you can disable them here.")
                 }
                 
                 // Desktop Site
                 Section {
-//                    Toggle("Request Desktop Site", isOn: $editSite.requestDesktop)
                     Toggle("Request Desktop Site", isOn: Binding(
                         get: { editSite.requestDesktop },
                         set: { newValue in
@@ -86,7 +85,7 @@ struct iOSOptionsEditAdvanced: View {
                             }
 
                             // Update the web view configuration
-                            viewModel.updateDesktopMode(for: editSite.siteOrder - 1, requestDesktop: newValue)
+                            startViewModel.updateDesktopMode(for: editSite.siteOrder - 1, requestDesktop: newValue)
                         }
                     ))
 

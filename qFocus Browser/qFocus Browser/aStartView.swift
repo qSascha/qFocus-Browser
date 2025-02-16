@@ -11,49 +11,48 @@ import SwiftData
 
 
 
-struct ContentView: View {
-    @Query() var settingsDataArray: [settingsStorage]
-    @Query( filter: #Predicate<sitesStorage> { $0.siteName != ""},
-        sort: \sitesStorage.siteOrder
-    ) var webSites: [sitesStorage]
-
-
+struct StartView: View {
 
     // for debugging
     @State private var hasInitialized = false
 
-
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment(\.modelContext) private var modelContext
 
+    @StateObject private var startViewModel: StartViewModel
     @StateObject var globals = GlobalVariables()
-    @StateObject var viewModel = ContentViewModel()
 
     @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
 
-    
-    init() {
-        _viewModel = StateObject(wrappedValue: ContentViewModel())
-    }
 
+
+
+    init(modelContext: ModelContext) {
+        _startViewModel = StateObject(wrappedValue : StartViewModel(modelContext: modelContext))
+    }
+    
+    
+    
+
+    
     var body: some View {
         ZStack {
             MainContent()
                 .environmentObject(globals)
-                .environmentObject(viewModel)
+                .environmentObject(startViewModel)
+                .environmentObject(startViewModel.greasyScripts)
         }
         .onAppear {
             Task { @MainActor in
                 if !hasInitialized {
-                    await viewModel.updateWebViewControllers(with: Array(webSites))
+                    await startViewModel.updateWebViewControllers(with: Array(startViewModel.webSites))
                     hasInitialized = true
                 }
             }
         }
-        .onChange(of: webSites) { oldSites, newSites in
+        .onChange(of: startViewModel.webSites) { oldSites, newSites in
             Task { @MainActor in
-                await viewModel.updateWebViewControllers(with: Array(newSites))
+                await startViewModel.updateWebViewControllers(with: Array(newSites))
             }
         }
         .sheet(isPresented: .init(
@@ -88,7 +87,7 @@ private struct MainContent: View {
     @Environment(\.modelContext) private var modelContext
     
     @EnvironmentObject var globals: GlobalVariables
-    @EnvironmentObject var viewModel: ContentViewModel
+    @EnvironmentObject var startViewModel: StartViewModel
     
     @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
@@ -116,13 +115,15 @@ private struct MainContent: View {
                     ZStack {
                         // Navigation Bar
                         if settingsDataArray[0].showNavBar {
-                            NavBar(scriptManager: viewModel.scriptManager)
+                            NavBar()
+//                            NavBar(greasyScripts: startViewModel.greasyScripts)
                         } else {
-                            FloatingNavBar(scriptManager: viewModel.scriptManager)
+                            FloatingNavBar()
+//                            FloatingNavBar(greasyScripts: startViewModel.greasyScripts)
                         }
                         
                         // Loading screen for ad-blocker
-                        if viewModel.showAdBlockLoadStatus {
+                        if startViewModel.showAdBlockLoadStatus {
                             AdBlockLoadStatus()
                                 .zIndex(1)
                         }
@@ -134,7 +135,7 @@ private struct MainContent: View {
                     .background(Color(.qBlueLight))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .sheet(isPresented: $globals.showOptionsView) {
-                        iOSOptionsView(viewModel: viewModel)
+                        iOSOptionsView()
                             .presentationDetents([.large])
                     }
                 }
@@ -143,7 +144,7 @@ private struct MainContent: View {
                     // Enable Ad-Blocker, if onboarding finalized.
                     if let settings = settingsDataArray.first {
                         Task {
-                            try await viewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                            try await startViewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
                         }
                     }
                 }
@@ -152,7 +153,7 @@ private struct MainContent: View {
                         if let settings = settingsDataArray.first {
                             Task {
                                 print("Onboarding completed: Enabling ad blocker: \(settings.adBlockLastUpdate?.formatted() ?? "never")")
-                                try await viewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                                try await startViewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
                             }
                         }
                     }

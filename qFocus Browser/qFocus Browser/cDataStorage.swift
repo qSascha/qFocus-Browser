@@ -1,5 +1,5 @@
 //
-//  hDataStorage.swift
+//  cDataStorage.swift
 //  qFocus Browser
 //
 //  Created by Sascha on 2024-12-11.
@@ -84,9 +84,9 @@ final class greasyScripts {
     var siteURL: String
     var scriptURL: String
     
-    init( scriptName: String,coreSite: String, scriptEnabled: Bool, scriptExplanation: String,scriptLicense: String, siteURL: String, scriptURL: String) {
+    init( scriptName: String, coreSite: String, scriptEnabled: Bool, scriptExplanation: String,scriptLicense: String, siteURL: String, scriptURL: String) {
         self.scriptName = scriptName
-        self.coreSite = scriptName
+        self.coreSite = coreSite
         self.scriptEnabled = scriptEnabled
         self.scriptExplanation = scriptExplanation
         self.scriptLicense = scriptLicense

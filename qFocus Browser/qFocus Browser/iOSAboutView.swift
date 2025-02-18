@@ -36,7 +36,7 @@ struct iOSAboutView: View {
                     // App Title and Version
                     VStack(spacing: 10) {
                         HStack {
-                            Text("qFocus Browser")
+                            Text("header_qFocus".localized)
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue)
@@ -52,7 +52,7 @@ struct iOSAboutView: View {
                             ExternalWebViewWrapper(url: URL(string: "https://qsascha.dev")!)
                         }
 
-                        Text("Version \(globals.appVersion)")
+                        Text("version".localized(with: globals.appVersion))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -62,22 +62,22 @@ struct iOSAboutView: View {
 
                 // Description Section
                 Group {
-                    Text("Thank you")
+                    Text("header_thank_you".localized)
                         .font(.headline)
                     
-                    Text("I would like to say thank you to my fantastic wife Kina, for supporting me in what I am doing and for being my biggest cheerleader.")
+                    Text("thankyou_text1".localized)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("In addition I want thank my friend Khedron for inspiering me to create this app and helping me to get it off the ground.\n")
+                    Text("thankyou_text2".localized)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 
 
                 // Credits Section
                 Group {
-                    Text("Credits")
+                    Text("header_credits".localized)
                         .font(.headline)
                     
-                    Text("qFocus Browser uses the following open source projects:")
+                    Text("credits_text".localized)
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading, spacing: 8) {

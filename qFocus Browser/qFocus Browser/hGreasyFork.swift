@@ -12,14 +12,26 @@ import SwiftData
 
 
 
+
+
+
 class GreasyFork: ObservableObject {
     private let modelContext: ModelContext
+    private let globals: GlobalVariables
+
     var loadedScripts: [String: (metadata: ScriptMetadata, code: String)] = [:]
     @Published private(set) var domainsWithInjectedScripts: Set<String> = []
     
-    init(modelContext: ModelContext) {
+
+
+
+
+    init(modelContext: ModelContext, globals: GlobalVariables) {
         self.modelContext = modelContext
+        self.globals = globals
     }
+    
+
 
 
     enum InjectionTime {
@@ -37,6 +49,9 @@ class GreasyFork: ObservableObject {
         }
     }
     
+
+
+
     struct ScriptMetadata {
         let name: String
         let description: String?
@@ -117,14 +132,15 @@ class GreasyFork: ObservableObject {
         let strongWebViewController = webViewController
         let siteName = siteURL.host ?? ""
         
-        print("----------------- Loading GreasyFork scripts for site: \(siteName)")
+        print("Loading GreasyFork scripts for site: \(siteName)")
         
         // Clear previous scripts when loading new ones
         loadedScripts.removeAll()
         
-        let descriptor = FetchDescriptor<greasyScripts>()
-        guard let greasyScripts = try? modelContext.fetch(descriptor) else {
-            print("Failed to fetch greasy scripts")
+        // Fetch script settings from SwiftData
+        let descriptor = FetchDescriptor<greasyScriptSetting>()
+        guard let scriptSettings = try? modelContext.fetch(descriptor) else {
+            print("Failed to fetch script settings")
             return
         }
 
@@ -132,9 +148,11 @@ class GreasyFork: ObservableObject {
         let coreDomain = getDomainCore(siteName)
         print("DEBUG: Loading scripts for core domain: \(coreDomain)")
 
-        // Filter scripts where the core domains match and the script is enabled
-        let matchingScripts = greasyScripts.filter { script in
-            return script.coreSite == coreDomain && script.scriptEnabled
+        // Filter scripts where the core domains match and the script is enabled in settings
+        let matchingScripts = globals.greaseForkList.filter { script in
+            // Check if script matches domain and has an enabled setting
+            return script.coreSite == coreDomain &&
+                   scriptSettings.first(where: { $0.scriptID == script.scriptID })?.scriptEnabled ?? script.scriptEnabled
         }
         
         if matchingScripts.isEmpty {
@@ -209,65 +227,35 @@ class GreasyFork: ObservableObject {
         }
     }
 
-
-
-
-
 /*
-    func loadScripts(for siteURL: URL, webViewController: WebViewController) {
-        let strongWebViewController = webViewController
-        let siteName = siteURL.host ?? ""
-        
-        print("----------------- Loading GreasyFork scripts for site: \(siteName)")
-        
-        let descriptor = FetchDescriptor<greasyScripts>()
-        guard let greasyScripts = try? modelContext.fetch(descriptor) else {
-            print("Failed to fetch greasy scripts")
-            return
-        }
-
-
-        // Get the core domain for comparison
-        let coreDomain = getDomainCore(siteName)
-
-        // Filter scripts where the core domains match and the script is enabled
-        let matchingScripts = greasyScripts.filter { script in
-            return script.coreSite == coreDomain && script.scriptEnabled
-        }
-        
-        let group = DispatchGroup()
-        
-        for script in matchingScripts {
-            group.enter()
-            print("Loading script: \(script.scriptName)")
-            loadRemoteScript(from: script.scriptURL) { [weak self] result in
-                defer { group.leave() }
-                
-                switch result {
-                case .success(let content):
-                    if let parsed = self?.parseScript(content) {
-                        DispatchQueue.main.async {
-                            self?.loadedScripts[script.scriptName] = parsed
-                        }
-                    }
-                case .failure(let error):
-                    print("Failed to load script \(script.scriptName): \(error)")
-                }
-            }
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            self?.injectScripts(into: strongWebViewController.webView)
-        }
-    }
-*/
     private func getDomainCore(_ host: String) -> String {
         let components = host.lowercased().split(separator: ".")
         guard components.count >= 2 else { return host.lowercased() }
         let mainDomain = components.suffix(2).joined(separator: ".")
         return mainDomain
     }
+*/
+    
+    
+    
+    
+    
+    //MARK: Clear Injected Scripts
+    func clearInjectedScripts() {
+        DispatchQueue.main.async {
+            self.domainsWithInjectedScripts.removeAll()
+        }
+    }
 
+
+
+    
+    //MARK: Remove Single Injected Scripts
+    func removeInjectedScripts(forHost host: String) {
+        DispatchQueue.main.async {
+            self.domainsWithInjectedScripts.remove(host)
+        }
+    }
 
 
 
@@ -286,13 +274,12 @@ class GreasyFork: ObservableObject {
                 injectionTime: script.metadata.injectionTime.webViewTime,
                 forMainFrameOnly: true
             )
-            print("Script injected")
             webView.configuration.userContentController.addUserScript(userScript)
         }
         
         DispatchQueue.main.async {
             if !self.loadedScripts.isEmpty {
-                self.domainsWithInjectedScripts.insert(host)
+                self.domainsWithInjectedScripts.insert(getDomainCore(host))
             } else {
                 print("No scripts were loaded for: \(host)")
             }

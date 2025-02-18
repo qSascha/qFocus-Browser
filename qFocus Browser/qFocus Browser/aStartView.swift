@@ -28,8 +28,20 @@ struct StartView: View {
 
 
     init(modelContext: ModelContext) {
-        _startViewModel = StateObject(wrappedValue : StartViewModel(modelContext: modelContext))
+        // Create GlobalVariables first
+        let globalsInstance = GlobalVariables()
+        // Then create StartViewModel with the globals instance
+        _startViewModel = StateObject(wrappedValue: StartViewModel(
+            modelContext: modelContext,
+            globals: globalsInstance
+        ))
+        // Finally, initialize the globals StateObject
+        _globals = StateObject(wrappedValue: globalsInstance)
     }
+
+//    init(modelContext: ModelContext) {
+//        _startViewModel = StateObject(wrappedValue : StartViewModel(modelContext: modelContext, globals: globals))
+//    }
     
     
     
@@ -76,9 +88,8 @@ private struct MainContent: View {
         filter: #Predicate<sitesStorage> { $0.siteName != ""},
         sort: \sitesStorage.siteOrder
     ) var webSites: [sitesStorage]
-    @Query(filter: #Predicate<adBlockFilters> { $0.enabled == true },
-           sort: [SortDescriptor(\adBlockFilters.sortOrder, order: .reverse)]
-    ) var enabledFilters: [adBlockFilters]
+    @Query(filter: #Predicate<adBlockFilterSetting> { $0.enabled == true }
+    ) var filterSettings: [adBlockFilterSetting]
 
     @Query() var settingsDataArray: [settingsStorage]
 
@@ -116,10 +127,8 @@ private struct MainContent: View {
                         // Navigation Bar
                         if settingsDataArray[0].showNavBar {
                             NavBar()
-//                            NavBar(greasyScripts: startViewModel.greasyScripts)
                         } else {
                             FloatingNavBar()
-//                            FloatingNavBar(greasyScripts: startViewModel.greasyScripts)
                         }
                         
                         // Loading screen for ad-blocker
@@ -144,7 +153,7 @@ private struct MainContent: View {
                     // Enable Ad-Blocker, if onboarding finalized.
                     if let settings = settingsDataArray.first {
                         Task {
-                            try await startViewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                            try await startViewModel.initializeBlocker(settings: settings, filterSettings: filterSettings, modelContext: modelContext, forceUpdate: false)
                         }
                     }
                 }
@@ -153,7 +162,7 @@ private struct MainContent: View {
                         if let settings = settingsDataArray.first {
                             Task {
                                 print("Onboarding completed: Enabling ad blocker: \(settings.adBlockLastUpdate?.formatted() ?? "never")")
-                                try await startViewModel.initializeBlocker(settings: settings, enabledFilters: enabledFilters, modelContext: modelContext, forceUpdate: false)
+                                try await startViewModel.initializeBlocker(settings: settings, filterSettings: filterSettings, modelContext: modelContext, forceUpdate: false)
                             }
                         }
                     }
@@ -173,7 +182,7 @@ private struct MainContent: View {
                         .font(.system(size: 50))
                         .foregroundColor(.blue)
                     
-                    Text("Use Face ID to unlock")
+                    Text("faceID_unlock".localized)
                         .padding()
                 }
                 .onAppear {

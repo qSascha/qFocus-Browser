@@ -31,6 +31,11 @@
 			path = JavaScripts;
 			sourceTree = "<group>";
 		};
+		2B698BA72D6259920046358A /* Localizations */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Localizations;
+			sourceTree = "<group>";
+		};
 		2B6BC4772D456B4500345E4D /* qFocus Browser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -57,6 +62,7 @@
 		2B6BC46C2D456B4500345E4D = {
 			isa = PBXGroup;
 			children = (
+				2B698BA72D6259920046358A /* Localizations */,
 				2B698AF82D6134550046358A /* JavaScripts */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 				2B6BC4762D456B4500345E4D /* Products */,
@@ -87,6 +93,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				2B698BA72D6259920046358A /* Localizations */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 			);
 			name = "qFocus Browser";

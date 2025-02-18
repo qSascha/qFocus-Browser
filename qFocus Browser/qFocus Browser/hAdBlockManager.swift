@@ -14,7 +14,7 @@ import CryptoKit
 
 
 
-// MARK: Block List Manager
+// MARK: Ad Block Manager
 @MainActor
 class AdBlockManager {
     private let cacheDirectory: URL

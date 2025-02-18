@@ -33,8 +33,8 @@ struct iOSOnboarding: View {
     @State private var stepFirstSite = 5
     private let totalSteps = 7
     
-    @Query(sort: \adBlockFilters.sortOrder) var adBlockLists: [adBlockFilters]
-    @State private var showingExplanation: adBlockFilters?
+    @State private var showingExplanation: AdBlockFilterItem?
+
     @EnvironmentObject var globals: GlobalVariables
 
 
@@ -64,7 +64,6 @@ struct iOSOnboarding: View {
                 // Navigation
                 navigationButtons
                     .padding()
-//                    .background(Color(UIColor.systemBackground))
                     .background(Color(.qBlueLight))
                     .shadow(radius: 2)
             }
@@ -81,7 +80,7 @@ struct iOSOnboarding: View {
         case 1:   // MARK: Case 1
             ZStack{
                 VStack(spacing: 60) {
-                    Text("Thank you for installing qFocus Browser, the app that helps you keep your social media private.")
+                    Text("welcome_text".localized)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -107,7 +106,7 @@ struct iOSOnboarding: View {
         case 2:   // MARK: Case 2
             ZStack{
                 VStack(spacing: 60) {
-                    Text("Your privacy is important, and it is all that matters to me.")
+                    Text("privacy_text".localized)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -128,13 +127,11 @@ struct iOSOnboarding: View {
         case 3:   // MARK: Case 3
             ZStack{
                 VStack(spacing: 30) {
-                    Text("Enabling FaceID provides an extra layer of security for all the sites you add to the qFocus Browser app.")
+                    Text("faceid_text".localized)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
-//                    Spacer()
-
-                    Button("Enable FaceID") {
+                    Button("faceid_button") {
                         enableFaceID()
                     }
                     .buttonStyle(.borderedProminent)
@@ -155,13 +152,11 @@ struct iOSOnboarding: View {
         case 4:   // MARK: Case 4
             ZStack{
                 VStack(spacing: 30) {
-                    Text("Allowing this app full access to your photos is no privacy risk, because this app is not processing them in any way. They are only used to pass them on to the sites when you upload a specific picture.")
+                    Text("photos_text".localized)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
-//                    Spacer()
-
-                    Button("Grant Photos Access") {
+                    Button("photos_button".localized) {
                         requestPhotoAccess()
                     }
                     .buttonStyle(.borderedProminent)
@@ -196,7 +191,7 @@ struct iOSOnboarding: View {
             
         case 6: //MARK: Case: 6
             AdBlockListSelector(
-                adBlockLists: adBlockLists,
+                adBlockLists: globals.adBlockList,
                 showingExplanation: $showingExplanation
             )
 
@@ -204,7 +199,7 @@ struct iOSOnboarding: View {
         case 7:   // MARK: Case 7
             ZStack{
                 VStack(spacing: 60) {
-                    Text("Enjoy using the qFocus Browser App!")
+                    Text("done_text".localized)
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -230,19 +225,19 @@ struct iOSOnboarding: View {
     
     private var headerForStep: String {
         switch currentStep {
-        case 1: return "Welcome"
-        case 2: return "Privacy"
-        case 3: return "FaceID"
-        case 4: return "Photos Access"
-        case 5: return "First Site"
-        case 6: return "Ad Blocking"
-        case 7: return "Done"
+        case 1: return "welcome_header".localized()
+        case 2: return "privacy_header".localized()
+        case 3: return "facdid_header".localized()
+        case 4: return "photos_header".localized()
+        case 5: return "first_site_header".localized()
+        case 6: return "adblocking_header".localized()
+        case 7: return "done_header".localized()
         default: return ""
         }
     }
     
+
     // MARK: - Navigation
-    
     private var navigationButtons: some View {
         HStack {
             if currentStep > 1 {
@@ -283,18 +278,20 @@ struct iOSOnboarding: View {
 
     //MARK: AdBlock Selector
     struct AdBlockListSelector: View {
-        let adBlockLists: [adBlockFilters]
-        @Binding var showingExplanation: adBlockFilters?
+        @StateObject var globals = GlobalVariables()
+        let adBlockLists: [AdBlockFilterItem]
+        @Binding var showingExplanation: AdBlockFilterItem?
         @Environment(\.modelContext) private var modelContext
-        
+        @Query private var filterSettings: [adBlockFilterSetting]
+
         var body: some View {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Select ad blocking lists from below. The ones pre-selected are the ones with the best impact on your experience.\nNote: Click on the name of a list to learn more about it.")
+                Text("adblocking_text".localized)
                     .padding(.bottom)
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
-                        ForEach(adBlockLists) { filter in
+                        ForEach(globals.adBlockList) { filter in
                             HStack {
                                 // List Name and Info Button
                                 Button(action: {
@@ -306,7 +303,7 @@ struct iOSOnboarding: View {
                                         
                                         Spacer()
                                         
-                                        if filter.recommended {
+                                        if filter.preSelectediOS {
                                             Text("Advised")
                                                 .font(.caption)
                                                 .foregroundColor(.green)
@@ -321,14 +318,16 @@ struct iOSOnboarding: View {
                                 }
                                 
                                 // Toggle
-                                Toggle("", isOn: Binding(
-                                    get: { filter.enabled },
-                                    set: { newValue in
-                                        filter.enabled = newValue
-                                        try? modelContext.save()
-                                    }
-                                ))
-                                .labelsHidden()
+                                if let setting = filterSettings.first(where: { $0.filterID == filter.filterID }) {
+                                    Toggle("", isOn: Binding(
+                                        get: { setting.enabled },
+                                        set: { newValue in
+                                            setting.enabled = newValue
+                                            try? modelContext.save()
+                                        }
+                                    ))
+                                    .labelsHidden()
+                                }
                             }
 
                         }
@@ -341,18 +340,26 @@ struct iOSOnboarding: View {
             }
             .onAppear {
                 // Set initial states based on preSelectedIOS
-                for filter in adBlockLists {
-                    if filter.preSelectediOS {
-                        filter.enabled = true
-                        try? modelContext.save()
-                    }
-                }
+                // Initialize all filter settings if they don't exist
+                  for filter in globals.adBlockList {
+                      // Check if setting already exists
+                      if !filterSettings.contains(where: { $0.filterID == filter.filterID }) {
+                          // Create new setting with preSelectediOS as initial state
+                          let newSetting = adBlockFilterSetting(
+                              filterID: filter.filterID,
+                              enabled: filter.preSelectediOS
+                          )
+                          modelContext.insert(newSetting)
+                      }
+                  }
+                  try? modelContext.save()
             }
         }
     }
 
+
     struct ExplanationView: View {
-        let filter: adBlockFilters
+        let filter: AdBlockFilterItem
         @Environment(\.dismiss) private var dismiss
         
         var body: some View {
@@ -365,7 +372,7 @@ struct iOSOnboarding: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
+                        Button("done_button".localized) {
                             dismiss()
                         }
                     }
@@ -399,6 +406,9 @@ struct iOSOnboarding: View {
         dismiss()
     }
     
+
+
+
     private func enableFaceID() {
         let context = LAContext()
         var error: NSError?
@@ -424,12 +434,18 @@ struct iOSOnboarding: View {
         }
     }
     
+
+
+
     private func requestPhotoAccess() {
         PHPhotoLibrary.requestAuthorization { status in
             // Handle the authorization status
         }
     }
     
+
+
+
     private func saveFirstSite() {
         // Implementation of saving the first site
         reinitializeData(
@@ -441,6 +457,10 @@ struct iOSOnboarding: View {
         )
     }
 }
+
+
+
+
 
 // MARK: - First Site View
 struct FirstSiteView: View {
@@ -542,14 +562,14 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
         }
         
         // Delete ad block filters
-        let adBlockDescriptor = FetchDescriptor<adBlockFilters>()
+        let adBlockDescriptor = FetchDescriptor<adBlockFilterSetting>()
         let existingAdBlock = try modelContext.fetch(adBlockDescriptor)
         for filter in existingAdBlock {
             modelContext.delete(filter)
         }
         
         // Delete GreasyFork scripts
-        let greasyForkDescriptor = FetchDescriptor<adBlockFilters>()
+        let greasyForkDescriptor = FetchDescriptor<greasyScriptSetting>()
         let existingGreasyFork = try modelContext.fetch(greasyForkDescriptor)
         for greasyItem in existingGreasyFork {
             modelContext.delete(greasyItem)
@@ -565,10 +585,8 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
 
 
     // Initialize with default values
-    initializeFiltersStorage(context: modelContext)
     initializeWebSitesStorage(context: modelContext)
     initializeDefaultSettings(context: modelContext)
-    initializeGreasyScripts(context: modelContext)
 
     
     
@@ -594,12 +612,12 @@ func reinitializeData(modelContext: ModelContext, firstSiteName: String, firstSi
     }
     
     
+
+
+
     // Save faceIDEnalbed value to settings
-    let settingsDescriptor = FetchDescriptor<settingsStorage>(
-//        predicate: #Predicate<settingsStorage> { site in
-//            site.siteOrder == 1
-//        }
-    )
+    let settingsDescriptor = FetchDescriptor<settingsStorage>()
+
     do {
         if let settings = try modelContext.fetch(settingsDescriptor).first {
             settings.faceIDEnabled = faceIDEnabled

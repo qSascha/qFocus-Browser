@@ -48,7 +48,7 @@ struct ExternalWebView: View {
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Done") {
+                        Button("done_button".localized) {
                             // Try dismissing with animation
                             withAnimation {
                                 dismiss()

@@ -25,11 +25,9 @@ struct iOSOptionsView: View {
 
     @Query(sort: \sitesStorage.siteOrder) var webSites: [sitesStorage]
     @Query() var settingsData: [settingsStorage]
-    @Query(sort: \adBlockFilters.sortOrder) var adBlockLists: [adBlockFilters]
+    @Query() var filterSettings: [adBlockFilterSetting]
 
     @State private var sliderValue: Double = 3.0
-    
-    
     
     var body: some View {
         NavigationView {
@@ -45,7 +43,7 @@ struct iOSOptionsView: View {
                             }
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("Done")
+                            Text("done_button".localized)
                         }
                         Spacer()
                     }
@@ -53,7 +51,7 @@ struct iOSOptionsView: View {
 
                     HStack {
                         Spacer()
-                        Text("Options")
+                        Text("options_header".localized)
                             .font(.title)
                         Spacer()
                     }
@@ -62,7 +60,7 @@ struct iOSOptionsView: View {
                 // Combined List with multiple sections
                 List {
                     // Websites Section
-                    Section(header: Text("Websites")) {
+                    Section(header: Text("websites_header".localized)) {
                         ForEach(webSites.indices, id: \.self) { sitePointer in
                             NavigationLink(destination: iOSOptionsEditSite(editSite: webSites[sitePointer])) {
                                 HStack {
@@ -99,42 +97,39 @@ struct iOSOptionsView: View {
 
                         NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData)) {
                             HStack {
-                                Text("Ad Blocking")
+                                Text("adblocking_header".localized)
                                 Image(systemName: "shield.fill")
                                     .foregroundColor(settingsData.enableAdBlock ? .green : .gray)
                                 
                                 Spacer()
                                 
-                                // Optional: Show count of enabled filters
+                                // Updated: Show count of enabled filters using the new model
                                 if settingsData.enableAdBlock {
-                                    Text("\(adBlockLists.filter { $0.enabled }.count) active")
+                                    Text("\(filterSettings.filter { $0.enabled }.count) active")
                                         .font(.caption)
                                         .foregroundColor(.gray)
                                 } else {
-                                    Text("disabled")
+                                    Text("adblocking_disabled".localized)
                                         .font(.caption)
                                         .foregroundColor(.gray)
-
                                 }
                             }
                         }
 
                         NavigationLink(destination: iOSAboutView()) {
-                            Text("About")
+                            Text("navigation_about".localized)
                         }
                     } header: {
-                        Text("Settings")
+                        Text("header_settings".localized)
                     } footer: {
-                        Text("Version \(globals.appVersion)")
+                        Text("version".localized(with: globals.appVersion))
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
             }
         }
     }
-
 }
-
 
 
 

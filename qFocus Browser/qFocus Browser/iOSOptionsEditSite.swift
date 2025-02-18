@@ -14,6 +14,9 @@ func fqdnOnly(from url: String) -> String {
               .replacingOccurrences(of: "http://", with: "")
 }
 
+
+
+
 struct iOSOptionsEditSite: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
@@ -59,7 +62,7 @@ struct iOSOptionsEditSite: View {
                     Button(action: saveAndDismiss) {
                         HStack {
                             Image(systemName: "chevron.backward")
-                            Text("Save")
+                            Text("save_button".localized)
                         }
                     }
                     Spacer()
@@ -80,7 +83,7 @@ struct iOSOptionsEditSite: View {
                 Section(header: Text("Site Information").padding(.top)) {
                     // Name Field
                     HStack {
-                        Text("Name")
+                        Text("form_name".localized)
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempName)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -115,7 +118,7 @@ struct iOSOptionsEditSite: View {
                     
                     // URL Field
                     HStack {
-                        Text("Link")
+                        Text("form_link".localized)
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempURL)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -131,7 +134,7 @@ struct iOSOptionsEditSite: View {
 
                     // Advanced Settings
                     NavigationLink(destination: iOSOptionsEditAdvanced(editSite: editSite)) {
-                        Text("Advanced")
+                        Text("navigation_advanced".localized)
                     }
 
                 }

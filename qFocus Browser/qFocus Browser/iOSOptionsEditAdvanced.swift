@@ -31,7 +31,7 @@ struct iOSOptionsEditAdvanced: View {
                     Button(action: saveAndDismiss) {
                         HStack {
                             Image(systemName: "chevron.backward")
-                            Text("Save")
+                            Text("save_button".localized)
                         }
                     }
                     Spacer()
@@ -53,7 +53,7 @@ struct iOSOptionsEditAdvanced: View {
                 
                 //JavaScript
                 Section {
-                    Toggle("Enable JavaScript ad-blocker", isOn: $editSite.enableJSBlocker)
+                    Toggle("toggle_enable_javascript".localized, isOn: $editSite.enableJSBlocker)
                         .onChange(of: editSite.enableJSBlocker) { _, newValue in
                             // Save changes
                             do {
@@ -66,14 +66,14 @@ struct iOSOptionsEditAdvanced: View {
                             NotificationCenter.default.post( name: NSNotification.Name("UpdateViews"), object: nil )
                         }
                 } header: {
-                    Text("JavaScript")
+                    Text("header_javascript".localized)
                 } footer: {
-                    Text("qFocus Browser has several GreasyFork (https://greasyfork.org) scripts that can help block ads. These are implemented and enabled by default, but if you have any issues then you can disable them here.")
+                    Text("greasyfork_text".localized)
                 }
                 
                 // Desktop Site
                 Section {
-                    Toggle("Request Desktop Site", isOn: Binding(
+                    Toggle("toggle_request_desktop".localized, isOn: Binding(
                         get: { editSite.requestDesktop },
                         set: { newValue in
                             // Save changes
@@ -90,9 +90,9 @@ struct iOSOptionsEditAdvanced: View {
                     ))
 
                 } header: {
-                    Text("Desktop Site")
+                    Text("header_desktop".localized)
                 } footer: {
-                    Text("Some website, like Facebook Messenger (https://messenger.com), only work properly on a desktop browser. Here you can enable this setting to use the site even on your mobile phone.")
+                    Text("desktop_text".localized)
                 }
 
             }

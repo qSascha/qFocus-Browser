@@ -122,7 +122,6 @@ struct FloatingNavBar: View {
                                         MenuButton(
                                             index: index,
                                             webSites: webSites
-//                                            scriptManager: scriptManager
                                         ) {
                                             globals.currentTab = index
                                             isShowingButtons = false
@@ -144,7 +143,6 @@ struct FloatingNavBar: View {
                                         MenuButton(
                                             index: index,
                                             webSites: webSites
-//                                            scriptManager: scriptManager
                                         ) {
                                             globals.currentTab = index
                                             isShowingButtons = false
@@ -208,8 +206,8 @@ struct FloatingNavBar: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 10)
                     .position(
-                        x: CGFloat(settingsData.freeFlowXPercent) * geometry.size.width,
-                        y: CGFloat(settingsData.freeFlowYPercent) * geometry.size.height
+                        x: min(max(CGFloat(settingsData.freeFlowXPercent) * geometry.size.width, 100), geometry.size.width - 100),
+                        y: min(max(CGFloat(settingsData.freeFlowYPercent) * geometry.size.height - 100, 100),geometry.size.height - 100)
                     )
                     .transition(.scale.combined(with: .opacity))
                 }
@@ -247,7 +245,7 @@ private struct MenuButton: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .fill(greasyScripts.domainsWithInjectedScripts.contains(URL(string: webSites[index].siteURL)?.host ?? "") ? Color.green : Color.clear)
+                        .fill(greasyScripts.domainsWithInjectedScripts.contains(host) ? Color.green : Color.clear)
                         .frame(width: 8, height: 8)
                     , alignment: .bottomLeading
                 )
@@ -324,7 +322,6 @@ struct NavBar: View {
                     MenuButton(
                         index: index,
                         webSites: webSites
-//                        scriptManager: scriptManager
                     ) {
                         globals.currentTab = index
                     }
@@ -385,7 +382,7 @@ struct AdBlockLoadStatus: View {
                 HStack {
                     ProgressView()
                         .padding(.horizontal)
-                    Text("Updating ad-blockers: \(startViewModel.loadedRuleLists+1)/\(startViewModel.totalRuleLists)")
+                    Text("updating_adblockers_progress".localized(with: startViewModel.loadedRuleLists + 1, startViewModel.totalRuleLists))
                         .font(.caption)
                 }
                 .padding()

@@ -32,6 +32,12 @@ class GlobalVariables: ObservableObject {
     @Published var faceIDEnabled: Bool = false
     @Published var menuIconSize: CGFloat = 32
     @Published var appVersion: String = "25.02"
+    @Published var greaseForkList: [greasyScriptItem] = createGreasyScriptsList() {
+        didSet { objectWillChange.send() }
+    }
+    @Published var adBlockList: [AdBlockFilterItem] = createAdBlockFilterList() {
+        didSet { objectWillChange.send() }
+    }
 
 }
 
@@ -56,6 +62,34 @@ class AuthenticationManager: ObservableObject {
         }
     }
 }
+
+
+
+
+
+// String Localization
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: "")
+    }
+    
+    func localized(with arguments: CVarArg...) -> String {
+        String(format: NSLocalizedString(self, comment: ""), arguments: arguments)
+    }
+}
+
+
+
+
+
+func getDomainCore(_ host: String) -> String {
+    let components = host.lowercased().split(separator: ".")
+    guard components.count >= 2 else { return host.lowercased() }
+    let mainDomain = components.suffix(2).joined(separator: ".")
+    return mainDomain
+}
+
+
 
 
 

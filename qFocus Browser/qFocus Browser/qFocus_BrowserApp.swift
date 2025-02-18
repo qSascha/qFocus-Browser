@@ -21,8 +21,8 @@ struct qFocus_BrowserApp: App {
                 schema: Schema([
                     sitesStorage.self,
                     settingsStorage.self,
-                    adBlockFilters.self,
-                    greasyScripts.self
+                    adBlockFilterSetting.self,
+                    greasyScriptSetting.self
                 ])
             )
             
@@ -30,8 +30,8 @@ struct qFocus_BrowserApp: App {
             modelContainer = try ModelContainer(
                 for: sitesStorage.self,
                 settingsStorage.self,
-                adBlockFilters.self,
-                greasyScripts.self,
+                adBlockFilterSetting.self,
+                greasyScriptSetting.self,
                 configurations: configuration
             )
 

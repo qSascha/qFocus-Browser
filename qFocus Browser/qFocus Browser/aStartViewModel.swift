@@ -9,6 +9,10 @@ import SwiftData
 import WebKit
 
 
+
+
+
+
 // MARK: StartView Model
 @MainActor
 class StartViewModel: ObservableObject {
@@ -16,43 +20,60 @@ class StartViewModel: ObservableObject {
     @Published var showAdBlockLoadStatus: Bool = false
     @Published var loadedRuleLists: Int = 0
     @Published var totalRuleLists: Int = 0
-
+    
     private var activeRuleIdentifiers: Set<String> = []
     private var currentCompiledRules: [WKContentRuleList] = []
     private var hasInitiallyLoaded: [Int: Bool] = [:]
     private var hasInitializedRules = false
     private let adBlockManager: AdBlockManager
     private var modelContext: ModelContext
+    private let globals: GlobalVariables
     let greasyScripts: GreasyFork
-
+    
     @MainActor private(set) var settingsDataArray: [settingsStorage] = []
     @MainActor private(set) var webSites: [sitesStorage] = []
     
+    
+    
+    
+    
 
-
-
-
-
-    init(modelContext: ModelContext) {
+    init(modelContext: ModelContext, globals: GlobalVariables) {
         self.modelContext = modelContext
+        self.globals = globals
         self.adBlockManager = AdBlockManager()
-        self.greasyScripts = GreasyFork(modelContext: modelContext)
-
+        self.greasyScripts = GreasyFork(modelContext: modelContext, globals: globals)
+        
         Task {
             fetchSettings()
             fetchWebsites()
         }
-
+        
         // Initialize with default settings
         self.webViewControllers = (0...5).map { index in
             let controller = WebViewController(requestDesktop: false)
             controller.loadView()
             return controller
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleScriptUpdate),
+            name: NSNotification.Name("UpdateViews"),
+            object: nil
+        )
+
+    }
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
-    
-    
+
+
+
+
     @MainActor
     func fetchSettings() {
         let descriptor = FetchDescriptor<settingsStorage>()
@@ -68,15 +89,26 @@ class StartViewModel: ObservableObject {
         )
         webSites = (try? modelContext.fetch(descriptor)) ?? []
     }
+    
+    
+    
+    // Objective-C caller for updateWebViewControllers
+    @objc private func handleScriptUpdate() {
+        print("Start handleScriptUpdate")
+        Task {
+            await updateWebViewControllers(with: webSites)
+        }
+    }
 
     
-    
-    
-    
-
     // Update controllers with site data
     func updateWebViewControllers(with sites: [sitesStorage]) async {
+        print("Start updateWebViewControllers")
         
+        await MainActor.run {
+            greasyScripts.clearInjectedScripts()
+        }
+
         for index in 0..<webViewControllers.count {
             if index < sites.count {
                 let site = sites[index]
@@ -93,9 +125,9 @@ class StartViewModel: ObservableObject {
             }
         }
     }
-
-
-
+    
+    
+    
     
     
     //MARK: Should Update Filter
@@ -107,24 +139,29 @@ class StartViewModel: ObservableObject {
         let sevenDays: TimeInterval = 7 * 24 * 60 * 60 // 7 days in seconds
         return Date().timeIntervalSince(lastUpdate) >= sevenDays
     }
-
-
     
-
+    
+    
+    
     //MARK: Update Web View
     func updateWebView(index: Int, site: sitesStorage) async {
         guard index < webViewControllers.count else { return }
-  
+        
         guard index < webViewControllers.count,
               !site.siteURL.isEmpty,
               let url = URL(string: site.siteURL) else {
-                  return
-              }
-
+            return
+        }
+        
         let webViewController = webViewControllers[index]
         
         // Clear existing scripts
         webViewController.webView.configuration.userContentController.removeAllUserScripts()
+        if let host = url.host {
+            await MainActor.run {
+                greasyScripts.removeInjectedScripts(forHost: host)
+            }
+        }
         print("All scripts removed.")
         
         // Load new scripts if enabled
@@ -134,7 +171,7 @@ class StartViewModel: ObservableObject {
             // Reload the current page to apply changes
             webViewController.webView.reload()
         }
-
+        
         if hasInitiallyLoaded[index] != true {
             // Initial page load
             webViewController.load(url: url)
@@ -143,29 +180,24 @@ class StartViewModel: ObservableObject {
             // Reload the current page to apply changes
             webViewController.webView.reload()
         }
-
+        
         objectWillChange.send()
     }
-
-
-
+    
+    
+    
     //MARK: Helper Functions
     func resetInitialLoadState(for index: Int) {
         hasInitiallyLoaded[index] = false
     }
-
-
+    
+    
     @objc private func handleUpdateRequest(_ notification: Notification) {
         // Force view update
         objectWillChange.send()
     }
     
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
-
     func getWebViewController(_ index: Int) -> WebViewController {
         guard index < webViewControllers.count else {
             print("ERROR: Requested web view controller index \(index) out of bounds")
@@ -173,41 +205,48 @@ class StartViewModel: ObservableObject {
         }
         return webViewControllers[index]
     }
-
+    
     
     func updateDesktopMode(for index: Int, requestDesktop: Bool) {
         guard index < webViewControllers.count else { return }
         webViewControllers[index].updateWebViewConfiguration(requestDesktop: requestDesktop)
     }
-
-
-
-
-
+    
+    
+    
+    
+    
     //MARK: Initialize Blocker
     @MainActor
-    func initializeBlocker(settings: settingsStorage, enabledFilters: [adBlockFilters], modelContext: ModelContext, forceUpdate: Bool = false) async throws {
-
+    func initializeBlocker(settings: settingsStorage, filterSettings: [adBlockFilterSetting], modelContext: ModelContext, forceUpdate: Bool = false) async throws {
         @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
         guard onboardingComplete else {
             return
         }
         print("ad-block update initiated")
-
-
+        
         guard !hasInitializedRules else {
             return
         }
-
+        
         guard settings.enableAdBlock else {
             return
         }
-
+        
         // Check if update is needed
         if forceUpdate || shouldUpdateFilters(lastUpdate: settings.adBlockLastUpdate) {
             showAdBlockLoadStatus = true
             defer { showAdBlockLoadStatus = false }
-
+            
+            // Get enabled filters by matching filterSettings with allFilters
+            let enabledFilters = filterSettings
+                .filter { setting in
+                    setting.enabled && globals.adBlockList.contains { $0.filterID == setting.filterID }
+                }
+                .compactMap { setting in
+                    globals.adBlockList.first { $0.filterID == setting.filterID }
+                }
+            
             totalRuleLists = enabledFilters.count
             loadedRuleLists = 0
             
@@ -215,7 +254,7 @@ class StartViewModel: ObservableObject {
                 guard let url = URL(string: filter.urlString) else {
                     continue
                 }
-
+                
                 do {
                     // Pass the filter's identName as the identifier
                     let result = try await adBlockManager.processURL(url, identifier: filter.identName)
@@ -229,21 +268,32 @@ class StartViewModel: ObservableObject {
                     print("Error processing block list: \(filter.identName): \(error.localizedDescription)")
                 }
             }
+            
             settings.adBlockLastUpdate = Date()
             try modelContext.save()
-
+            
             showAdBlockLoadStatus = false
         }
     }
-
-
-
-
+    
+    
+    
+    
+    
+    
     //MARK: Toggle Blocking
     @MainActor
-    func toggleBlocking(isEnabled: Bool, enabledFilters: [adBlockFilters]) async {
-
+    func toggleBlocking(isEnabled: Bool, filterSettings: [adBlockFilterSetting]) async {
         if isEnabled {
+            // Get enabled filters by matching filterSettings with allFilters
+            let enabledFilters = filterSettings
+                .filter { setting in
+                    setting.enabled && globals.adBlockList.contains { $0.filterID == setting.filterID }
+                }
+                .compactMap { setting in
+                    globals.adBlockList.first { $0.filterID == setting.filterID }
+                }
+
             totalRuleLists = enabledFilters.count
             loadedRuleLists = 0
 
@@ -268,7 +318,6 @@ class StartViewModel: ObservableObject {
                 }
             }
         } else {
-
             currentCompiledRules = []
             loadedRuleLists = 0
             totalRuleLists = 0
@@ -280,10 +329,10 @@ class StartViewModel: ObservableObject {
             } catch {
                 print("Error removing content rules: \(error.localizedDescription)")
             }
-
         }
-
     }
+
+    
 }
 
 

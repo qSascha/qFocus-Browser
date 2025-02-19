@@ -43,7 +43,7 @@ struct iOSOptionsView: View {
                             }
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("done_button".localized)
+                            Text("general.done")
                         }
                         Spacer()
                     }
@@ -51,7 +51,7 @@ struct iOSOptionsView: View {
 
                     HStack {
                         Spacer()
-                        Text("options_header".localized)
+                        Text("options.header.text")
                             .font(.title)
                         Spacer()
                     }
@@ -60,7 +60,7 @@ struct iOSOptionsView: View {
                 // Combined List with multiple sections
                 List {
                     // Websites Section
-                    Section(header: Text("websites_header".localized)) {
+                    Section(header: Text("options.websites.header")) {
                         ForEach(webSites.indices, id: \.self) { sitePointer in
                             NavigationLink(destination: iOSOptionsEditSite(editSite: webSites[sitePointer])) {
                                 HStack {
@@ -91,13 +91,13 @@ struct iOSOptionsView: View {
                     Section {
                         @Bindable var settingsData = settingsData[0]
 
-                        Toggle("Show Navigation Bar", isOn: $settingsData.showNavBar)
+                        Toggle("options.settings.toggleNavbar", isOn: $settingsData.showNavBar)
 
-                        Toggle("Enable Face ID", isOn: $settingsData.faceIDEnabled)
+                        Toggle("options.settings.toggleEnableFaceID", isOn: $settingsData.faceIDEnabled)
 
                         NavigationLink(destination: AdBlockSettingsView(settingsData: settingsData)) {
                             HStack {
-                                Text("adblocking_header".localized)
+                                Text("options.settings.NavigationAdBlocking")
                                 Image(systemName: "shield.fill")
                                     .foregroundColor(settingsData.enableAdBlock ? .green : .gray)
                                 
@@ -105,11 +105,11 @@ struct iOSOptionsView: View {
                                 
                                 // Updated: Show count of enabled filters using the new model
                                 if settingsData.enableAdBlock {
-                                    Text("\(filterSettings.filter { $0.enabled }.count) active")
+                                    Text("\(filterSettings.filter { $0.enabled }.count) adblock.activeCounts")
                                         .font(.caption)
                                         .foregroundColor(.gray)
                                 } else {
-                                    Text("adblocking_disabled".localized)
+                                    Text("options.settings.adblockLabelDisabled")
                                         .font(.caption)
                                         .foregroundColor(.gray)
                                 }
@@ -117,12 +117,12 @@ struct iOSOptionsView: View {
                         }
 
                         NavigationLink(destination: iOSAboutView()) {
-                            Text("navigation_about".localized)
+                            Text("options.settings.navigationAbout")
                         }
                     } header: {
-                        Text("header_settings".localized)
+                        Text("options.settings.header")
                     } footer: {
-                        Text("version".localized(with: globals.appVersion))
+                        Text("general.version \(globals.appVersion)")
                     }
                 }
                 .listStyle(InsetGroupedListStyle())

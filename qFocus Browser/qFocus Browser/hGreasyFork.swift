@@ -167,7 +167,6 @@ class GreasyFork: ObservableObject {
         
         for script in matchingScripts {
             loadingGroup.enter()
-            print("Loading script: \(script.scriptName)")
             
             loadRemoteScript(from: script.scriptURL) { [weak self] result in
                 defer { loadingGroup.leave() }
@@ -192,7 +191,6 @@ class GreasyFork: ObservableObject {
             guard let self = self else { return }
             
             let scriptIdentifiers = Array(self.loadedScripts.keys)
-            print("Loaded script identifiers: \(scriptIdentifiers)")
             
             if scriptIdentifiers.isEmpty {
                 print("No scripts were successfully loaded")
@@ -205,7 +203,6 @@ class GreasyFork: ObservableObject {
             // Load dependencies for each script
             for identifier in scriptIdentifiers {
                 dependenciesGroup.enter()
-                print("Loading dependencies for script: \(identifier)")
                 
                 strongSelf.loadDependencies(for: identifier) { success in
                     defer { dependenciesGroup.leave() }
@@ -227,15 +224,6 @@ class GreasyFork: ObservableObject {
         }
     }
 
-/*
-    private func getDomainCore(_ host: String) -> String {
-        let components = host.lowercased().split(separator: ".")
-        guard components.count >= 2 else { return host.lowercased() }
-        let mainDomain = components.suffix(2).joined(separator: ".")
-        return mainDomain
-    }
-*/
-    
     
     
     
@@ -353,8 +341,6 @@ class GreasyFork: ObservableObject {
                 return
             }
    
-            
-            print("Loaded remote script: \(url)")
             completion(.success(content))
         }.resume()
     }

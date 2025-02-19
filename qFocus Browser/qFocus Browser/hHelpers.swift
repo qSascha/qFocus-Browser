@@ -67,27 +67,31 @@ class AuthenticationManager: ObservableObject {
 
 
 
-// String Localization
-extension String {
-    var localized: String {
-        NSLocalizedString(self, comment: "")
-    }
-    
-    func localized(with arguments: CVarArg...) -> String {
-        String(format: NSLocalizedString(self, comment: ""), arguments: arguments)
-    }
+//MARK: Language information
+func languageIsRightToLeft() -> Bool {
+    return Locale.current.language.characterDirection == .rightToLeft
+}
+
+func deviceLanguage() -> String {
+    return Locale.current.language.languageCode?.identifier ?? "en"
 }
 
 
 
 
 
+
+
+// TODO: Really needed? Can't we use the "host" value, e.g. in the MenuButton view?
 func getDomainCore(_ host: String) -> String {
     let components = host.lowercased().split(separator: ".")
     guard components.count >= 2 else { return host.lowercased() }
     let mainDomain = components.suffix(2).joined(separator: ".")
     return mainDomain
 }
+
+
+
 
 
 

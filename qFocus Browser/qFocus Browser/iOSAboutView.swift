@@ -36,7 +36,7 @@ struct iOSAboutView: View {
                     // App Title and Version
                     VStack(spacing: 10) {
                         HStack {
-                            Text("header_qFocus".localized)
+                            Text("about.header.appName")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue)
@@ -52,7 +52,7 @@ struct iOSAboutView: View {
                             ExternalWebViewWrapper(url: URL(string: "https://qsascha.dev")!)
                         }
 
-                        Text("version".localized(with: globals.appVersion))
+                        Text("general.version \(globals.appVersion)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -62,28 +62,28 @@ struct iOSAboutView: View {
 
                 // Description Section
                 Group {
-                    Text("header_thank_you".localized)
+                    Text("about.thanks.header")
                         .font(.headline)
                     
-                    Text("thankyou_text1".localized)
+                    Text("about.thanks.text1")
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("thankyou_text2".localized)
+                    Text("about.thanks.text2")
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 
 
                 // Credits Section
                 Group {
-                    Text("header_credits".localized)
+                    Text("about.credits.header")
                         .font(.headline)
                     
-                    Text("credits_text".localized)
+                    Text("about.credits.text")
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Link("AdGuard Filters", destination: URL(string: "https://github.com/AdguardTeam/FiltersRegistry")!)
+                        Link("about.link.adguardFilters", destination: URL(string: "https://github.com/AdguardTeam/FiltersRegistry")!)
                             .foregroundColor(.blue)
-                        Link("AdGuard Filter Converter", destination: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
+                        Link("about.link.adguardConverter", destination: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
                             .foregroundColor(.blue)
 
                     }
@@ -92,11 +92,12 @@ struct iOSAboutView: View {
                 // Copyright Notice
                 HStack(spacing: 0) {
                     
-                    Text("© 2025 ")
+//                    Text("© 2025")
+                    Text("about.copyright")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.top, 20)
-                    Link("qSascha", destination: URL(string: "https://qSascha.dev")!)
+                    Link(" qSascha", destination: URL(string: "https://qSascha.dev")!)
                         .font(.footnote)
                         .foregroundColor(.blue)
                         .padding(.top, 20)
@@ -107,19 +108,7 @@ struct iOSAboutView: View {
         }
     }
     
-    // Helper function to create bullet points
-    private func bulletPoint(_ text: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text("•")
-            Text(text)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-    }
 }
 
-// Preview provider
-#Preview {
-    iOSAboutView()
-}
 
 #endif

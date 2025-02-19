@@ -48,7 +48,7 @@ struct ExternalWebView: View {
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button("done_button".localized) {
+                        Button("general.done") {
                             // Try dismissing with animation
                             withAnimation {
                                 dismiss()
@@ -181,12 +181,6 @@ struct WebViewRepresentable: UIViewRepresentable {
     }
 
     
-/*
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        viewModel.updateNavigationState()
-    }
-*/
-
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }

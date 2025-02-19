@@ -65,7 +65,6 @@ class AdBlockManager {
             return hasChanged
         }
         
-        print("AdBlockManager: No existing checksum for \(identifier)")
         return true
     }
     

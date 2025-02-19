@@ -382,7 +382,7 @@ struct AdBlockLoadStatus: View {
                 HStack {
                     ProgressView()
                         .padding(.horizontal)
-                    Text("updating_adblockers_progress".localized(with: startViewModel.loadedRuleLists + 1, startViewModel.totalRuleLists))
+                    Text("adblock.update.message \(startViewModel.loadedRuleLists + 1)/\(startViewModel.totalRuleLists)")
                         .font(.caption)
                 }
                 .padding()

@@ -94,7 +94,6 @@ class StartViewModel: ObservableObject {
     
     // Objective-C caller for updateWebViewControllers
     @objc private func handleScriptUpdate() {
-        print("Start handleScriptUpdate")
         Task {
             await updateWebViewControllers(with: webSites)
         }
@@ -103,7 +102,6 @@ class StartViewModel: ObservableObject {
     
     // Update controllers with site data
     func updateWebViewControllers(with sites: [sitesStorage]) async {
-        print("Start updateWebViewControllers")
         
         await MainActor.run {
             greasyScripts.clearInjectedScripts()
@@ -162,7 +160,6 @@ class StartViewModel: ObservableObject {
                 greasyScripts.removeInjectedScripts(forHost: host)
             }
         }
-        print("All scripts removed.")
         
         // Load new scripts if enabled
         if site.enableJSBlocker {
@@ -223,7 +220,6 @@ class StartViewModel: ObservableObject {
         guard onboardingComplete else {
             return
         }
-        print("ad-block update initiated")
         
         guard !hasInitializedRules else {
             return
@@ -299,7 +295,6 @@ class StartViewModel: ObservableObject {
 
             for filter in enabledFilters {
                 guard let url = URL(string: filter.urlString) else {
-                    print("Invalid URL for filter: \(filter.identName)")
                     loadedRuleLists += 1
                     continue
                 }

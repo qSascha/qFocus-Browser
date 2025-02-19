@@ -31,7 +31,7 @@ struct iOSOptionsEditAdvanced: View {
                     Button(action: saveAndDismiss) {
                         HStack {
                             Image(systemName: "chevron.backward")
-                            Text("save_button".localized)
+                            Text("general.save")
                         }
                     }
                     Spacer()
@@ -51,9 +51,8 @@ struct iOSOptionsEditAdvanced: View {
             
             Form {
                 
-                //JavaScript
                 Section {
-                    Toggle("toggle_enable_javascript".localized, isOn: $editSite.enableJSBlocker)
+                    Toggle("optionsAdvanced.enableBlocker.toggle", isOn: $editSite.enableJSBlocker)
                         .onChange(of: editSite.enableJSBlocker) { _, newValue in
                             // Save changes
                             do {
@@ -66,14 +65,14 @@ struct iOSOptionsEditAdvanced: View {
                             NotificationCenter.default.post( name: NSNotification.Name("UpdateViews"), object: nil )
                         }
                 } header: {
-                    Text("header_javascript".localized)
+                    Text("optionsAdvanced.enableBlocker.header")
                 } footer: {
-                    Text("greasyfork_text".localized)
+                    Text("optionsAdvanced.enableBlocker.footer")
                 }
                 
                 // Desktop Site
                 Section {
-                    Toggle("toggle_request_desktop".localized, isOn: Binding(
+                    Toggle("optionsAdvanced.desktopSite.toggle", isOn: Binding(
                         get: { editSite.requestDesktop },
                         set: { newValue in
                             // Save changes
@@ -90,9 +89,9 @@ struct iOSOptionsEditAdvanced: View {
                     ))
 
                 } header: {
-                    Text("header_desktop".localized)
+                    Text("optionsAdvanced.desktopSite.header")
                 } footer: {
-                    Text("desktop_text".localized)
+                    Text("optionsAdvanced.desktopSite.footer")
                 }
 
             }

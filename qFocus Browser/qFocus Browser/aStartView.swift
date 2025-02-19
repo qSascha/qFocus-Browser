@@ -113,7 +113,7 @@ private struct MainContent: View {
         //TODO: Find better solution
         if settingsDataArray.isEmpty {
             // Show loading or create default settings
-            ProgressView("Initializing Settings...")
+            ProgressView("general.initializing")
                 .onAppear {
                     initializeDefaultSettings(context: modelContext)
                 }
@@ -182,7 +182,7 @@ private struct MainContent: View {
                         .font(.system(size: 50))
                         .foregroundColor(.blue)
                     
-                    Text("faceID_unlock".localized)
+                    Text("general.request.faceID")
                         .padding()
                 }
                 .onAppear {

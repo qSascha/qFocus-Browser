@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 import UIKit
 
+
+
 func fqdnOnly(from url: String) -> String {
     return url.replacingOccurrences(of: "https://", with: "")
               .replacingOccurrences(of: "http://", with: "")
@@ -39,6 +41,8 @@ struct iOSOptionsEditSite: View {
         _tempURL = State(initialValue: editSite.siteURL)
     }
     
+
+
     func fetchFavicon(for url: String) {
         guard !url.isEmpty else { return }
         
@@ -54,6 +58,11 @@ struct iOSOptionsEditSite: View {
         }.resume()
     }
     
+
+
+
+
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Header with Save Button
@@ -62,7 +71,7 @@ struct iOSOptionsEditSite: View {
                     Button(action: saveAndDismiss) {
                         HStack {
                             Image(systemName: "chevron.backward")
-                            Text("save_button".localized)
+                            Text("general.save")
                         }
                     }
                     Spacer()
@@ -80,10 +89,10 @@ struct iOSOptionsEditSite: View {
             
             // Form Fields
             Form {
-                Section(header: Text("Site Information").padding(.top)) {
+                Section {
                     // Name Field
                     HStack {
-                        Text("form_name".localized)
+                        Text("optionsEdit.site.name")
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempName)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -118,7 +127,7 @@ struct iOSOptionsEditSite: View {
                     
                     // URL Field
                     HStack {
-                        Text("form_link".localized)
+                        Text("optionsEdit.site.Link")
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempURL)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -134,15 +143,25 @@ struct iOSOptionsEditSite: View {
 
                     // Advanced Settings
                     NavigationLink(destination: iOSOptionsEditAdvanced(editSite: editSite)) {
-                        Text("navigation_advanced".localized)
+                        Text("optionsEdit.navigation.advanced")
                     }
 
+                } header: {
+                    Text("optionsEdit.site.header")
                 }
+                footer: {
+                    Text("optionsEdit.site.footer")
+                }
+
             }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            isNameFieldFocused = true
+            if tempName.isEmpty {
+                isNameFieldFocused = true
+            } else {
+                isNameFieldFocused = false
+            }
             if !tempURL.isEmpty {
                 fetchFavicon(for: tempURL)
             }

@@ -80,7 +80,7 @@ struct iOSOnboarding: View {
         case 1:   // MARK: Case 1
             ZStack{
                 VStack(spacing: 60) {
-                    Text("welcome_text".localized)
+                    Text("onboarding.010welcome.text")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -106,7 +106,7 @@ struct iOSOnboarding: View {
         case 2:   // MARK: Case 2
             ZStack{
                 VStack(spacing: 60) {
-                    Text("privacy_text".localized)
+                    Text("onboarding.020privacy.text")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -127,11 +127,11 @@ struct iOSOnboarding: View {
         case 3:   // MARK: Case 3
             ZStack{
                 VStack(spacing: 30) {
-                    Text("faceid_text".localized)
+                    Text("onboarding.030faceid.text")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
-                    Button("faceid_button") {
+                    Button("onboarding.030faceid.button") {
                         enableFaceID()
                     }
                     .buttonStyle(.borderedProminent)
@@ -152,11 +152,11 @@ struct iOSOnboarding: View {
         case 4:   // MARK: Case 4
             ZStack{
                 VStack(spacing: 30) {
-                    Text("photos_text".localized)
+                    Text("onboarding.040photos.text")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
-                    Button("photos_button".localized) {
+                    Button("onboarding.040photos.button") {
                         requestPhotoAccess()
                     }
                     .buttonStyle(.borderedProminent)
@@ -199,7 +199,7 @@ struct iOSOnboarding: View {
         case 7:   // MARK: Case 7
             ZStack{
                 VStack(spacing: 60) {
-                    Text("done_text".localized)
+                    Text("general.done")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -225,13 +225,13 @@ struct iOSOnboarding: View {
     
     private var headerForStep: String {
         switch currentStep {
-        case 1: return "welcome_header".localized()
-        case 2: return "privacy_header".localized()
-        case 3: return "facdid_header".localized()
-        case 4: return "photos_header".localized()
-        case 5: return "first_site_header".localized()
-        case 6: return "adblocking_header".localized()
-        case 7: return "done_header".localized()
+        case 1: return String(localized: "onboarding.010welcome.header")
+        case 2: return String(localized: "onboarding.020privacy.header")
+        case 3: return String(localized: "onboarding.030faceID.header")
+        case 4: return String(localized: "onboarding.040photos.header")
+        case 5: return String(localized: "onboarding.050firstsite.header")
+        case 6: return String(localized: "onboarding.060adblock.header")
+        case 7: return String(localized: "onboarding.070done.header")
         default: return ""
         }
     }
@@ -286,7 +286,7 @@ struct iOSOnboarding: View {
 
         var body: some View {
             VStack(alignment: .leading, spacing: 20) {
-                Text("adblocking_text".localized)
+                Text("onboarding.060adblock.text")
                     .padding(.bottom)
                 
                 ScrollView {
@@ -304,7 +304,7 @@ struct iOSOnboarding: View {
                                         Spacer()
                                         
                                         if filter.preSelectediOS {
-                                            Text("Advised")
+                                            Text("adblock.label.advised")
                                                 .font(.caption)
                                                 .foregroundColor(.green)
                                                 .padding(.horizontal, 6)
@@ -372,7 +372,7 @@ struct iOSOnboarding: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("done_button".localized) {
+                        Button("general.done") {
                             dismiss()
                         }
                     }
@@ -418,7 +418,7 @@ struct iOSOnboarding: View {
             // Attempt to authenticate to confirm enrollment
             context.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
-                localizedReason: "Enable Face ID for qFocus Browser"
+                localizedReason: "onboarding.030faceID.localizedReason"
             ) { success, authError in
                 // Update the settings on the main thread
                 DispatchQueue.main.async {
@@ -476,7 +476,7 @@ struct FirstSiteView: View {
         VStack(spacing: 20) {
             // Name Field
             HStack {
-                Text("Name")
+                Text("onboarding.050firstsite.formName")
                     .frame(width: 50, alignment: .leading)
                 TextField("", text: $siteName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -488,7 +488,7 @@ struct FirstSiteView: View {
             
             // URL Field
             HStack {
-                Text("Link")
+                Text("onboarding.050firstsite.formLink")
                     .frame(width: 50, alignment: .leading)
                 TextField("", text: $siteURL)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

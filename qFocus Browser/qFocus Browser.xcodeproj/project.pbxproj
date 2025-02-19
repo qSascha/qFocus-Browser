@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B698D362D65E40C0046358A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2B698D352D65E40C0046358A /* Localizable.xcstrings */; };
 		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
 		2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF6E07A2D4A85C4007B606F /* ConverterTool */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B698D352D65E40C0046358A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = "qFocus Browser/Localizable.xcstrings"; sourceTree = "<group>"; };
 		2B6BC4752D456B4500345E4D /* qFocus Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qFocus Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -26,16 +28,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2B698AF82D6134550046358A /* JavaScripts */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = JavaScripts;
-			sourceTree = "<group>";
-		};
-		2B698BA72D6259920046358A /* Localizations */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Localizations;
-			sourceTree = "<group>";
-		};
 		2B6BC4772D456B4500345E4D /* qFocus Browser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -62,8 +54,7 @@
 		2B6BC46C2D456B4500345E4D = {
 			isa = PBXGroup;
 			children = (
-				2B698BA72D6259920046358A /* Localizations */,
-				2B698AF82D6134550046358A /* JavaScripts */,
+				2B698D352D65E40C0046358A /* Localizable.xcstrings */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 				2B6BC4762D456B4500345E4D /* Products */,
 			);
@@ -93,7 +84,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2B698BA72D6259920046358A /* Localizations */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 			);
 			name = "qFocus Browser";
@@ -121,10 +111,12 @@
 				};
 			};
 			buildConfigurationList = 2B6BC4702D456B4500345E4D /* Build configuration list for PBXProject "qFocus Browser" */;
-			developmentRegion = en;
+			developmentRegion = gv;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
+				gv,
 				Base,
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
@@ -147,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B698D362D65E40C0046358A /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +171,8 @@
 				INFOPLIST_FILE = "qFocus Browser/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "qFocus Browser";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock qFocus Browser";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "If you want to upload or download pictures from websites.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -215,6 +210,8 @@
 				INFOPLIST_FILE = "qFocus Browser/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "qFocus Browser";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock qFocus Browser";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "If you want to upload or download pictures from websites.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -296,6 +293,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -352,6 +350,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

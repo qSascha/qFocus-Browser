@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B698D362D65E40C0046358A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2B698D352D65E40C0046358A /* Localizable.xcstrings */; };
 		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
 		2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF6E07A2D4A85C4007B606F /* ConverterTool */; };
+		2BFBF21E2D68F885003E79F7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B698D352D65E40C0046358A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = "qFocus Browser/Localizable.xcstrings"; sourceTree = "<group>"; };
 		2B6BC4752D456B4500345E4D /* qFocus Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qFocus Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,7 +54,7 @@
 		2B6BC46C2D456B4500345E4D = {
 			isa = PBXGroup;
 			children = (
-				2B698D352D65E40C0046358A /* Localizable.xcstrings */,
+				2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 				2B6BC4762D456B4500345E4D /* Products */,
 			);
@@ -111,13 +111,13 @@
 				};
 			};
 			buildConfigurationList = 2B6BC4702D456B4500345E4D /* Build configuration list for PBXProject "qFocus Browser" */;
-			developmentRegion = gv;
+			developmentRegion = aa;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				de,
-				gv,
-				Base,
+				sv,
+				aa,
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
 			minimizedProjectReferenceProxies = 1;
@@ -139,7 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B698D362D65E40C0046358A /* Localizable.xcstrings in Resources */,
+				2BFBF21E2D68F885003E79F7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

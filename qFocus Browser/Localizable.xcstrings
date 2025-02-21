@@ -1,0 +1,2493 @@
+{
+  "sourceLanguage" : "aa",
+  "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
+    " qSascha" : {
+      "comment" : " qSascha",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " qSascha"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " qSascha"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " qSascha"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " qSascha"
+          }
+        }
+      }
+    },
+    "%lld adblock.activeCounts" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld im Einsatz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld on duty"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld på vakt"
+          }
+        }
+      }
+    },
+    "about.copyright" : {
+      "comment" : "© 2025",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025"
+          }
+        }
+      }
+    },
+    "about.credits.header" : {
+      "comment" : "Section header for the credits part.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fantastische Helfer"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Awesome People to Thank"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjältarna bakom allt"
+          }
+        }
+      }
+    },
+    "about.credits.text" : {
+      "comment" : "Credits text, before the links to the different 3rd party packages used.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Magie hinter dem qFocus Browser kommt von diesen großartigen Open-Source-Ressourcen:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The magic behind qFocus Browser comes from these fantastic open source resources:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser-magin kommer från dessa fantastiska open source-resurser:"
+          }
+        }
+      }
+    },
+    "about.header.appName" : {
+      "comment" : "The name of the app. Use original, don't translate.",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        }
+      }
+    },
+    "about.link.adguardConverter" : {
+      "comment" : "Name of the link to the 3rd party package used.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filter Converter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filter Converter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filterkonverterare"
+          }
+        }
+      }
+    },
+    "about.link.adguardFilters" : {
+      "comment" : "Name of the link to the 3rd party package used.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filters"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AdGuard Filter"
+          }
+        }
+      }
+    },
+    "about.thanks.header" : {
+      "comment" : "Section header followed by two texts.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vielen Dank"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank You Very Much"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tack så mycket"
+          }
+        }
+      }
+    },
+    "about.thanks.text1" : {
+      "comment" : "First thank you text.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ich möchte meiner fantastischen Frau Kina danken, die mich bei dem unterstützt, was ich tue, und meine größte Cheerleaderin ist."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I would like to say thank you to my fantastic wife Kina, for supporting me in what I am doing and for being my biggest cheerleader."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jag vill tacka min fantastiska fru Kina, som stöttar mig i allt jag gör och är min största hejarklack."
+          }
+        }
+      }
+    },
+    "about.thanks.text2" : {
+      "comment" : "Second thank you text.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Außerdem möchte ich meinem Freund Khedron danken, der mich inspiriert hat, diese App zu erstellen und mir geholfen hat, sie zum Laufen zu bringen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In addition, I want to thank my friend Khedron for inspiring me to create this app and helping me to get it off the ground."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dessutom vill jag tacka min vän Khedron som inspirerade mig att skapa denna app och hjälpte mig att få den på banan."
+          }
+        }
+      }
+    },
+    "adblock.enable.toggle" : {
+      "comment" : "Global toggle for ad-blocking.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schalte Ad-Blocking-Superkräfte ein"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn On Ad-Blocking Superpowers"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera annonsblockeringens superkrafter"
+          }
+        }
+      }
+    },
+    "adblock.header" : {
+      "comment" : "The header of the ad-block view",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad-Blocking-Magie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad-Blocking Magic"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annonsblockeringsmagi"
+          }
+        }
+      }
+    },
+    "adblock.label.advised" : {
+      "comment" : "A label shown in each list item that is important and recommended for the user to enable.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empfohlen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advised"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rekommenderad"
+          }
+        }
+      }
+    },
+    "adblock.lastupdate.label" : {
+      "comment" : "A section header followed by the date the ad-block lists have last been updated.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt aktualisiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Updated"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senast uppdaterad"
+          }
+        }
+      }
+    },
+    "adblock.message.disabled" : {
+      "comment" : "This message is only shown if the user has turned of the global ad-block setting.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey! Schalte erst mal den Schalter um, um deine Ad-Blocking-Kräfte freizuschalten!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey! Flip that switch to unlock your ad-blocking powers first!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hallå där! Dra i spaken för att låsa upp dina annonsblockeringskrafter!"
+          }
+        }
+      }
+    },
+    "adblock.section.header" : {
+      "comment" : "Header for all the filters shown in a list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle deine Schutzschilde"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pick Your Shields"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välj dina sköldar"
+          }
+        }
+      }
+    },
+    "adblock.update.message %lld/%lld" : {
+      "comment" : "Message shown while the ad-block lists are updating, together with the number of lists that have been updated and the total that needs to be updated.",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "adblock.update.message %1$lld/%2$lld"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbessere dein Ad-Blocking %1$lld/%2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leveling up your ad-blocking %1$lld/%2$lld"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisera din annonsblockerare %1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "adblock.updatenow.button" : {
+      "comment" : "Button the user can press to force an update now, without waiting for the next update.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jetzt Power aufleveln!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power Up Now!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boosta direkt!"
+          }
+        }
+      }
+    },
+    "adblocklist.annoyances.explanation" : {
+      "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sagt 'Tschüss' zu diesen nervigen Cookie-Popups, App-Download-Vorschlägen und anderem digitalen Kram, den niemand bestellt hat!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Says 'bye-bye' to those pesky cookie popups, app download suggestions, and other digital nuisances that nobody asked for!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Säger 'hejdå' till jobbiga cookie-popups, app-nedladdningsförslag och annat digitalt trassel som ingen bett om!"
+          }
+        }
+      }
+    },
+    "adblocklist.annoyances.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nervkram"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annoyances"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irritationsmoment"
+          }
+        }
+      }
+    },
+    "adblocklist.language_chinese.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit chinesischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Chinese content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med kinesiskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_chinese.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chinesische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chinese Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kinesiska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_dutch.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit niederländischen Inhalten.\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove ads from websites with Dutch content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med nederländskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_dutch.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niederländische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dutch Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nederländska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_english.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit englischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with English content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med engelskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_english.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Englische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engelska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_french.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit französischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with French content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med franskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_french.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Französische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "French Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Franska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_german.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit deutschen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with German content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med tyskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_german.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deutsche Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "German Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tyska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_japanese.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit japanischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove ads from websites with Japanese content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med japanskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_japanese.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Japanische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Japanese Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Japanska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_portuguese.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit portugiesischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Portugese content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med portugisiskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_portuguese.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portugiesische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portuguese Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portugisiska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_russian.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit russischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Russian content"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med ryskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_russian.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Russische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Russian Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ryska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_spanish.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit spanischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Spanish content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med spanskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_spanish.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanish Languages"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_turkish.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit türkischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Turkish content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med turkiskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_turkish.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Türkische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turkish Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turkiska"
+          }
+        }
+      }
+    },
+    "adblocklist.language_ukrainian.explanation" : {
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt Werbung von Websites mit ukrainischen Inhalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes ads from websites with Ukrainian content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort annonser från webbplatser med ukrainskt innehåll."
+          }
+        }
+      }
+    },
+    "adblocklist.language_ukrainian.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukrainische Sprache"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukranian Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukrainska"
+          }
+        }
+      }
+    },
+    "adblocklist.mobile_ads.explanation" : {
+      "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schmeißt all diese mobilen Werbenetzwerke raus. Dein Handy wird gleich viel sauberer aussehen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kicks all those mobile ad networks to the curb. Your phone's about to get a whole lot cleaner!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sparkar ut alla mobila annonsnätverk. Nu blir din mobil mycket fräschare!"
+          }
+        }
+      }
+    },
+    "adblocklist.mobile_ads.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mobile Werbung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mobile Ads"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mobilannonser"
+          }
+        }
+      }
+    },
+    "adblocklist.quick_fixes.explanation" : {
+      "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie ein digitales Pflaster - flickt schnell alle Filterprobleme auf beliebten Websites. Bäm, Problem gelöst!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Like a digital band-aid – quickly patches up any filtering hiccups on popular websites. Boom, problem solved!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Som ett digitalt plåster - fixar snabbt alla filterstruliga populära sajter. Klart på stubinen!"
+          }
+        }
+      }
+    },
+    "adblocklist.quick_fixes.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schnelle Fixes"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Fixes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snabbfixar"
+          }
+        }
+      }
+    },
+    "adblocklist.social_media.explanation" : {
+      "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Winkt den nervigen 'Like'- und 'Tweet'-Buttons zum Abschied, die dir folgen wie ein verlorener Welpe!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waves goodbye to those clingy 'Like' and 'Tweet' buttons that follow you around like a lost puppy!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vinkar hejdå till alla klängiga 'Gilla'- och 'Tweeta'-knappar som följer efter dig som vilsna valpar!"
+          }
+        }
+      }
+    },
+    "adblocklist.social_media.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Social Media"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Social Media"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sociala Medier"
+          }
+        }
+      }
+    },
+    "adblocklist.tracking_protection.explanation" : {
+      "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hält diese neugierigen Tracking-Tools davon ab, jeden deiner Online-Schritte zu verfolgen. Surfe, als ob niemand zuschaut (weil sie es jetzt nicht mehr können)!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keeps those nosy tracking tools from following your every move online. Browse like nobody's watching (because now they can't)!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Håller nyfikna spårningsverktyg borta från dina digitala fotspår. Surfa som om ingen tittar (för det gör de inte längre)!"
+          }
+        }
+      }
+    },
+    "adblocklist.tracking_protection.name" : {
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tracking-Schutz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tracking Protection"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spårningsskydd"
+          }
+        }
+      }
+    },
+    "general.done" : {
+      "comment" : "Button used in the top left corner of views, to close them.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klart"
+          }
+        }
+      }
+    },
+    "general.initializing" : {
+      "comment" : "Message shown on app launch, if required, during initialization.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mache deine Privatsphäre-Festung startklar..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting your privacy fortress ready..."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Förbereder ditt integritetsfäste..."
+          }
+        }
+      }
+    },
+    "general.request.faceID" : {
+      "comment" : "Message shown on app launch, informing the user to use FaceID to unlock the app.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID zum Entsperren verwenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Face ID to unlock"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Använd Face ID för att låsa upp"
+          }
+        }
+      }
+    },
+    "general.save" : {
+      "comment" : "Button used in the top left corner of views, to save the changes and close the view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara"
+          }
+        }
+      }
+    },
+    "general.version %@" : {
+      "comment" : "Version followed by year a month and sometimes a letter. E.g. \"25.02\" or \"25.02.a\".",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %@"
+          }
+        }
+      }
+    },
+    "greasy.duolingo.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockiert Werbung und unerwünschte Werbeinhalte auf Duolingo, einschließlich dynamisch benannter Werbeklassen, während wesentliche Lektionsinhalte erhalten bleiben und Vollbildwerbung durch automatisches Drücken der Exit-Taste oder Auswahl von \"Nein danke\" bei bestimmten Anzeigen behandelt wird."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block ads and unwanted promotional content on Duolingo, including dynamically named ad classes, while preserving essential lesson content and handling fullscreen ads by pressing the exit button automatically or selecting \\\"No Thanks\\\" on specific ads."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockerar annonser och oönskat reklaminnehåll på Duolingo, hanterar dynamiskt namngivna annonsklasser och tar hand om helskärmsannonser automatiskt genom att klicka på avsluta eller välja \"Nej tack\"."
+          }
+        }
+      }
+    },
+    "greasy.duolingo.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duolingo: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duolingo: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duolingo: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.instagram.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockiert Instagram-Beiträge mit \"Folgen\", \"Für dich vorgeschlagen\" oder \"Vorgeschlagene Beiträge\"."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block Instagram posts with \"Follow\", \"Suggested for you\", or \"Suggested posts\"."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockerar Instagram-inlägg med \"Följ\", \"Föreslaget för dig\" eller \"Föreslagna inlägg\"."
+          }
+        }
+      }
+    },
+    "greasy.instagram.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.linkedin.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt gesponserte und vorgeschlagene Beiträge auf LinkedIn."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes promoted and suggested posts on LinkedIn."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort sponsrade och föreslagna inlägg på LinkedIn."
+          }
+        }
+      }
+    },
+    "greasy.linkedin.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LinkedIn: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LinkedIn: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LinkedIn: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.reddit.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockiert die gesponserten Inhalte auf Reddit zwischen den Beiträgen und auch die Werbung in der Seitenleiste."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocks the promoted content on Reddit between posts and also the advertisements on the side bar."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockerar sponsrat innehåll mellan Reddit-inlägg och annonser i sidofältet."
+          }
+        }
+      }
+    },
+    "greasy.reddit.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddit: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddit: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddit: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.x.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses kurze Skript sucht nach dem Text \"Werbung\" oder \"Gesponserter Tweet\" in einem bestimmten Label und entfernt sowohl den gesponserten Tweet als auch die große fette Überschrift, die manchmal direkt darüber hinzugefügt wird. Es entfernt auch gesponserte \"Trending Topics\" auf der rechten Seite des Bildschirms."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This short script looks for the text \"Ad\" or \"Promoted tweet\" in a specific label and removes both the promoted tweet and the large bold heading that is sometimes added just above it. It also removes promoted \"trending topics\" on the right side of the screen."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detta smarta skript letar efter texten \"Annons\" eller \"Sponsrad tweet\" och tar bort både den sponsrade tweeten och den tjocka rubriken ovanför. Den tar även bort sponsrade trender i sidofältet."
+          }
+        }
+      }
+    },
+    "greasy.x.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.x.contentwarning_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernt die Inhaltswarnung \"Sensibles Material\" und macht den Inhalt sichtbar."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes the content warning \"Sensitive Material\" and unhides the content."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort innehållsvarningen \"Känsligt material\" och visar innehållet direkt."
+          }
+        }
+      }
+    },
+    "greasy.x.contentwarning_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Inhaltswarnung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Content Warning"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Innehållsvarning"
+          }
+        }
+      }
+    },
+    "greasy.youtube.adblocker_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zapped YouTube-Werbung schneller weg als du \"Werbung überspringen\" sagen kannst - sowohl die statischen als auch die, die deine Videoparty crashen wollen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaps away YouTube ads faster than you can say \"skip ad\" - both the still ones and those trying to crash your video party!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blixtar bort YouTube-annonser snabbare än du hinner säga \"hoppa över reklam\" - både stillbilder och videoannonser!"
+          }
+        }
+      }
+    },
+    "greasy.youtube.adblocker_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Werbeblocker"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Youtube: Ad Blocker"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Annonsblockerare"
+          }
+        }
+      }
+    },
+    "greasy.youtube.agerestriction_2025-02-16.explanation" : {
+      "comment" : "Explanation of the features this GreasyFork script provides.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umgeht diese nervigen Altersbarrieren auf YouTube ohne den ganzen Login-Tanz."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bypasses those annoying age gates on YouTube without the whole login song and dance."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar sig förbi tråkiga åldersgränser på YouTube utan krångel med inloggning."
+          }
+        }
+      }
+    },
+    "greasy.youtube.agerestriction_2025-02-16.name" : {
+      "comment" : "Name of the GreasyFork script. Put together of two parts. First the website, followed by a general term of what the script does.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Altersbeschränkung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Age Restriction"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Åldersgräns"
+          }
+        }
+      }
+    },
+    "onboarding.010welcome.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välkommen"
+          }
+        }
+      }
+    },
+    "onboarding.010welcome.text" : {
+      "comment" : "General text, welcoming the user to the app.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey du, Champion der Privatsphäre! Willkommen beim qFocus Browser, wo deine Social Media-Aktivitäten zwischen dir und deinem Bildschirm bleiben - genau so, wie es sein soll."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey there, privacy champion! Welcome to qFocus Browser, where your social media stays between you and your screen – exactly how it should be."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hej integritetskämpe! Välkommen till qFocus Browser, där dina sociala medier stannar mellan dig och din skärm - precis som det ska vara."
+          }
+        }
+      }
+    },
+    "onboarding.020privacy.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privatsphäre"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integritet"
+          }
+        }
+      }
+    },
+    "onboarding.020privacy.text" : {
+      "comment" : "Privacy is the out most importance and the main feature of this app. This is explained to the user here.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier ist unser Ding: Deine Privatsphäre ist nicht nur ein Feature - es ist DAS Feature. Keine Wenns und Abers oder heimliche Tracking-Cookies!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here's our thing: your privacy isn't just a feature – it's THE feature. No ifs, ands, or sneaky tracking cookies about it!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Här är grejen: din integritet är inte bara en funktion - det är DEN viktigaste funktionen. Inga men, om eller spårningskakor!"
+          }
+        }
+      }
+    },
+    "onboarding.030faceid.button" : {
+      "comment" : "Button the user can press to setup faceID for this app.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID aktivieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable FaceID"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera FaceID"
+          }
+        }
+      }
+    },
+    "onboarding.030faceID.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID"
+          }
+        }
+      }
+    },
+    "onboarding.030faceid.text" : {
+      "comment" : "Explaining the user that this app has support for FaceID protection.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willst du dein Surfen noch sicherer machen? Lass uns Face ID hinzufügen, um alles richtig abzusichern!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to make your browsing extra secure? Let's add Face ID to keep things locked down tight!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vill du göra din surfning ännu säkrare? Låt oss lägga till Face ID för maximal trygghet!"
+          }
+        }
+      }
+    },
+    "onboarding.040photos.button" : {
+      "comment" : "If the user wants to grant this app access to the photo library the user can press this button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotozugriff erlauben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grant Photos Access"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tillåt fotoåtkomst"
+          }
+        }
+      }
+    },
+    "onboarding.040photos.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotozugriff"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photos Access"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoåtkomst"
+          }
+        }
+      }
+    },
+    "onboarding.040photos.text" : {
+      "comment" : "Explanation that it is safe to grant this app access to the photos library.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Sorge! Wenn wir nach Fotozugriff fragen, dann nur damit du Bilder teilen kannst, WENN DU es willst. Wir schauen nicht rein, verarbeiten nichts oder machen irgendwas Heimliches mit deinen Fotos - versprochen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't worry! When we ask for photo access, it's just so you can share pics when YOU want to. We don't peek, process, or do anything sneaky with your photos – pinky promise!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen fara! När vi ber om fotoåtkomst är det bara så att DU kan dela bilder när DU vill. Vi kikar inte, bearbetar inget eller gör något lurigt med dina foton - svurit på minsta fingret!"
+          }
+        }
+      }
+    },
+    "onboarding.050firstsite.formLink" : {
+      "comment" : "Name of a form field where the user can provide/adjust the URL of the website he wants to add.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länk"
+          }
+        }
+      }
+    },
+    "onboarding.050firstsite.formName" : {
+      "comment" : "Name of a form field where tje user can provide the name of the website the user wants to add.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namn"
+          }
+        }
+      }
+    },
+    "onboarding.050firstsite.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erste Website"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Site"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Första sajten"
+          }
+        }
+      }
+    },
+    "onboarding.060adblock.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werbeblockierung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad Blocking"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annonsblockering"
+          }
+        }
+      }
+    },
+    "onboarding.060adblock.text" : {
+      "comment" : "Explaining to the user to enable the ad-blocking lists he wants.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit deine Werbeblock-Schilde auszuwählen! Wir haben die vorausgewählt, die dir die smoothste Fahrt geben, aber du kannst gerne selbst mixen und matchen.\nProfi-Tipp: Tippe auf einen Filternamen, um zu erfahren, was er macht!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to pick your ad-blocking shields! We've pre-selected the ones that'll give you the smoothest ride, but feel free to mix and match.\\nPro tip: Tap any filter name to learn what it does!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dags att välja dina annonsblockeringssköldar! Vi har förvalt de som ger dig den smidigaste upplevelsen, men blanda och matcha gärna.\nProffstips: Tryck på ett filternamn för att se vad det gör!"
+          }
+        }
+      }
+    },
+    "onboarding.070done.header" : {
+      "comment" : "Header of this step/view during the onboarding process.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles klar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Set"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nu kör vi…"
+          }
+        }
+      }
+    },
+    "options.header.text" : {
+      "comment" : "Header for this view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställningar"
+          }
+        }
+      }
+    },
+    "options.settings.adblockLabelDisabled" : {
+      "comment" : "A label shown in a navigation item, indicating that no ad-block list is currently enabled. All of them are disabled.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "deaktiviert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "disabled"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "inaktiverad"
+          }
+        }
+      }
+    },
+    "options.settings.header" : {
+      "comment" : "Section header",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställningar"
+          }
+        }
+      }
+    },
+    "options.settings.navigationAbout" : {
+      "comment" : "Navigation item, leading the user to the About view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über qFocus Browser"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om qFocus Browser"
+          }
+        }
+      }
+    },
+    "options.settings.NavigationAdBlocking" : {
+      "comment" : "Navigation item leading the user to the Ad Blocking view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werbeblockierung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad Blocking"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annonsblockering"
+          }
+        }
+      }
+    },
+    "options.settings.toggleEnableFaceID" : {
+      "comment" : "A toggle the user can use to enable or disable the usage of FaceID",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID Magie aktivieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable Face ID Magic"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera Face ID-magi"
+          }
+        }
+      }
+    },
+    "options.settings.toggleNavbar" : {
+      "comment" : "By default the UI is using a floating button for navigation. With this toggle the user can enable an navigation bar instead, that will be shown at the top of the screen.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigationsleiste verwenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the Navigation Bar"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa navigeringsfältet"
+          }
+        }
+      }
+    },
+    "options.websites.header" : {
+      "comment" : "Section header",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webseiten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Websites"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webbplatser"
+          }
+        }
+      }
+    },
+    "optionsAdvanced.desktopSite.footer" : {
+      "comment" : "Footer explaining when to use a feature. Should be 2 - 3 sentences long.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einige Webseiten (wir schauen dich an, Facebook Messenger!) funktionieren besser im Desktop-Modus. Schalte ihn hier ein, um das volle Erlebnis zu bekommen, auch auf deinem Handy!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some websites (looking at you, Facebook Messenger!) work better in desktop mode. Switch it on here to get the full experience, even on your phone!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vissa sajter (vi tittar på dig, Facebook Messenger!) funkar bättre i skrivbordsläge. Slå på det här för att få hela upplevelsen, även på mobilen!"
+          }
+        }
+      }
+    },
+    "optionsAdvanced.desktopSite.header" : {
+      "comment" : "Section header",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desktop-Webseite"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desktop Site"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrivbordsläge"
+          }
+        }
+      }
+    },
+    "optionsAdvanced.desktopSite.toggle" : {
+      "comment" : "Toggle to enable disable this feature.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desktop-Webseite aktivieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable Desktop Site"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera skrivbordsläge"
+          }
+        }
+      }
+    },
+    "optionsAdvanced.enableBlocker.footer" : {
+      "comment" : "Footer explaining when to use a feature. Should be 2 - 3 sentences long",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wir haben ein paar super GreasyFork-Skripte eingepackt, die diese nervige Werbung fernhalten. Sie sind standardmäßig an, aber wenn was komisch wird, kannst du sie hier umschalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We've packed some awesome GreasyFork scripts that help keep those pesky ads away. They're on by default, but if anything gets wonky, you can toggle them right here."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vi har packat in några superbra GreasyFork-skript som håller irriterande annonser borta. De är på som standard, men om något krånglar kan du stänga av dem här."
+          }
+        }
+      }
+    },
+    "optionsAdvanced.enableBlocker.header" : {
+      "comment" : "Section header",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GreasyForks Skripte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GreasyForks Scripts"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GreasyForks-skript"
+          }
+        }
+      }
+    },
+    "optionsAdvanced.enableBlocker.toggle" : {
+      "comment" : "Toggle to enable disable this feature.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GreasyFork Skripte aktivieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable GreasyFork Scripts"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera GreasyFork-skript"
+          }
+        }
+      }
+    },
+    "optionsEdit.navigation.advanced" : {
+      "comment" : "Navigation item, leading the user to the Advanced view.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweitert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advanced"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avancerat"
+          }
+        }
+      }
+    },
+    "optionsEdit.site.footer" : {
+      "comment" : "Short explanation how to delete / remove a site.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchtest du eine Website entfernen? Lösche einfach ihren Namen und - schwupps! - sie ist weg wie die Kekse von gestern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to remove a website? Just clear its name and – poof! – it's gone like yesterday's cookies."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vill du ta bort en webbplats? Rensa bara namnet så - poff! - är den borta som gårdagens kakor."
+          }
+        }
+      }
+    },
+    "optionsEdit.site.header" : {
+      "comment" : "Section header.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webseite-Details"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site Details"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sajtdetaljer"
+          }
+        }
+      }
+    },
+    "optionsEdit.site.Link" : {
+      "comment" : "Name of a form field where the user can provide the name of the website the user wants to add.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länk"
+          }
+        }
+      }
+    },
+    "optionsEdit.site.name" : {
+      "comment" : "Name of a form field where the user can provide/adjust the URL of the website he wants to add.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namn"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

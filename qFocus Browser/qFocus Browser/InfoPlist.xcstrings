@@ -1,0 +1,102 @@
+{
+  "sourceLanguage" : "aa",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "qFocus Browser"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "qFocus Browser"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "qFocus Browser"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "qFocus Browser"
+          }
+        }
+      }
+    },
+    "NSFaceIDUsageDescription" : {
+      "comment" : "Privacy - Face ID Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Use Face ID to unlock qFocus Browser"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutze Face ID, um qFocus Browser zu entsperren"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lås upp qFocus Browser med ditt vackra ansikte"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "comment" : "Privacy - Photo Library Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "If you want to upload or download pictures from websites."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Damit du Bilder von Webseiten hoch- oder runterladen kannst."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "För att du ska kunna dela med dig av dina fantastiska bilder på nätet (eller spara några därifrån)."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

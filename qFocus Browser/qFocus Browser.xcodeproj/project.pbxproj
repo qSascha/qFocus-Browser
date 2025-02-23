@@ -122,6 +122,8 @@
 				sv,
 				aa,
 				es,
+				"pt-PT",
+				fr,
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
 			minimizedProjectReferenceProxies = 1;

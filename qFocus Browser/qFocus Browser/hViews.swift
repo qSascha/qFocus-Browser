@@ -238,7 +238,7 @@ private struct MenuButton: View {
         _ = greasyScripts.domainsWithInjectedScripts.contains(host)
         
         return Button(action: action) {
-            Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "exclamationmark.circle")!)
+            Image(uiImage: UIImage(data: webSites[index].siteFavIcon!) ?? UIImage(systemName: "globe")!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: globals.menuIconSize, height: globals.menuIconSize)

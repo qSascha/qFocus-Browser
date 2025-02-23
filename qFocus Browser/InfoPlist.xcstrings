@@ -29,6 +29,18 @@
             "value" : "qFocus Browser"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -60,6 +72,18 @@
           }
         },
         "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
@@ -101,6 +125,18 @@
             "value" : "Desbloquea qFocus Browser con tu hermoso rostro!"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouillez qFocus Browser avec votre beau visage."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloqueie o Navegador qFocus com sua linda cara."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -135,6 +171,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Para que puedas compartir tus fotos maravillosas con el mundo entero, ¡y presumir un poquito!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour partager vos magnifiques photos sur Internet."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para compartilhar suas fotos maravilhosas na Internet."
           }
         },
         "sv" : {

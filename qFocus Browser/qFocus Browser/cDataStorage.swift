@@ -244,7 +244,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 1,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
         ),
@@ -252,7 +254,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 2,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
 
@@ -261,7 +265,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 3,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
 
@@ -270,7 +276,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 4,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
 
@@ -279,7 +287,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 5,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
 
@@ -288,7 +298,9 @@ func createDefaultWebSites() -> [sitesStorage] {
             siteOrder: 6,
             siteName: "",
             siteURL: "",
-            siteFavIcon: UIImage(systemName: "exclamationmark.circle")?.pngData(),
+            siteFavIcon: UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData(),
             enableJSBlocker: true,
             requestDesktop: false
 

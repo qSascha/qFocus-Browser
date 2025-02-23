@@ -193,7 +193,9 @@ struct iOSOptionsEditSite: View {
         // Handle empty name case
         if tempName.isEmpty {
             editSite.siteURL = ""
-            editSite.siteFavIcon = UIImage(systemName: "exclamationmark.circle")?.pngData()
+            editSite.siteFavIcon = UIImage(systemName: "globe")?
+                .withTintColor(.gray, renderingMode: .alwaysTemplate)
+                .pngData()
         }
         
         collector.save(event: "Site Added", parameter: tempURL)

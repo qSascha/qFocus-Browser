@@ -19,7 +19,8 @@ import LocalAuthentication
 struct iOSOnboarding: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    
+    @EnvironmentObject var collector: Collector
+
     @State private var currentStep = 1
     @State private var siteName = ""
     @State private var siteURL = ""
@@ -199,7 +200,7 @@ struct iOSOnboarding: View {
         case 7:   // MARK: Case 7
             ZStack{
                 VStack(spacing: 60) {
-                    Text("general.done")
+                    Text("onboarding.070done.text")
                         .multilineTextAlignment(.center)
                         .lineSpacing(8)
                     
@@ -283,7 +284,7 @@ struct iOSOnboarding: View {
         @Binding var showingExplanation: AdBlockFilterItem?
         @Environment(\.modelContext) private var modelContext
         @Query private var filterSettings: [adBlockFilterSetting]
-
+        
         var body: some View {
             VStack(alignment: .leading, spacing: 20) {
                 Text("onboarding.060adblock.text")
@@ -291,7 +292,7 @@ struct iOSOnboarding: View {
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
-                        ForEach(globals.adBlockList) { filter in
+                        ForEach(reorderedAdBlockList()) { filter in
                             HStack {
                                 // List Name and Info Button
                                 Button(action: {
@@ -316,20 +317,30 @@ struct iOSOnboarding: View {
                                         }
                                     }
                                 }
-                                
-                                // Toggle
-                                if let setting = filterSettings.first(where: { $0.filterID == filter.filterID }) {
-                                    Toggle("", isOn: Binding(
-                                        get: { setting.enabled },
-                                        set: { newValue in
-                                            setting.enabled = newValue
-                                            try? modelContext.save()
-                                        }
-                                    ))
-                                    .labelsHidden()
-                                }
-                            }
 
+                                // Toggle
+                                Toggle("", isOn: Binding(
+                                     get: {
+                                         if let setting = filterSettings.first(where: { $0.filterID == filter.filterID }) {
+                                             return setting.enabled
+                                         } else {
+                                             return filter.preSelectediOS
+                                         }
+                                     },
+                                     set: { newValue in
+                                         if let existingSetting = filterSettings.first(where: { $0.filterID == filter.filterID }) {
+                                             existingSetting.enabled = newValue
+                                         } else {
+                                             let newSetting = adBlockFilterSetting(filterID: filter.filterID, enabled: newValue)
+                                             modelContext.insert(newSetting)
+                                         }
+                                         try? modelContext.save()
+                                     }
+                                 ))
+                                .labelsHidden()
+
+                            }
+                            
                         }
                     }
                 }
@@ -341,22 +352,39 @@ struct iOSOnboarding: View {
             .onAppear {
                 // Set initial states based on preSelectedIOS
                 // Initialize all filter settings if they don't exist
-                  for filter in globals.adBlockList {
-                      // Check if setting already exists
-                      if !filterSettings.contains(where: { $0.filterID == filter.filterID }) {
-                          // Create new setting with preSelectediOS as initial state
-                          let newSetting = adBlockFilterSetting(
-                              filterID: filter.filterID,
-                              enabled: filter.preSelectediOS
-                          )
-                          modelContext.insert(newSetting)
-                      }
-                  }
-                  try? modelContext.save()
+                for filter in reorderedAdBlockList() {
+                    // Check if setting already exists
+                    if !filterSettings.contains(where: { $0.filterID == filter.filterID }) {
+                        // Create new setting with preSelectediOS as initial state
+                        let newSetting = adBlockFilterSetting(
+                            filterID: filter.filterID,
+                            enabled: filter.preSelectediOS
+                        )
+                        modelContext.insert(newSetting)
+                    }
+                }
+                try? modelContext.save()
             }
         }
+        
+
+        
+        private func reorderedAdBlockList() -> [AdBlockFilterItem] {
+            let deviceLanguage = String(Locale.preferredLanguages[0].prefix(2))
+            var reorderedList = globals.adBlockList
+            if let index = reorderedList.firstIndex(where: { $0.languageCode == deviceLanguage }) {
+                var languageItem = reorderedList.remove(at: index)
+                languageItem.preSelectediOS = true
+                reorderedList.insert(languageItem, at: 5)
+            }
+            return reorderedList
+        }
+        
     }
 
+
+    
+    
 
     struct ExplanationView: View {
         let filter: AdBlockFilterItem
@@ -403,6 +431,7 @@ struct iOSOnboarding: View {
     
     private func completeOnboarding() {
         UserDefaults.standard.set(true, forKey: "onboardingComplete")
+        collector.save(event: "Onboarding", parameter: "Complete")
         dismiss()
     }
     

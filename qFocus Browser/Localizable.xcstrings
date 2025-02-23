@@ -25,6 +25,12 @@
             "value" : " qSascha"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " qSascha"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45,6 +51,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld on duty"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld en acción"
           }
         },
         "sv" : {
@@ -76,6 +88,12 @@
             "value" : "© 2025"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -97,6 +115,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Awesome People to Thank"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gente increíble a quien agradecer"
           }
         },
         "sv" : {
@@ -122,6 +146,12 @@
             "value" : "The magic behind qFocus Browser comes from these fantastic open source resources:"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La magia detrás del navegador qFocus viene de estos fantásticos recursos de código abierto:"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -131,7 +161,7 @@
       }
     },
     "about.header.appName" : {
-      "comment" : "The name of the app. Use original, don't translate.",
+      "comment" : "qFocus Browser",
       "localizations" : {
         "aa" : {
           "stringUnit" : {
@@ -146,6 +176,12 @@
           }
         },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
@@ -174,6 +210,12 @@
             "value" : "AdGuard Filter Converter"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertidor de Filtros AdGuard"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -195,6 +237,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AdGuard Filters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtros AdGuard"
           }
         },
         "sv" : {
@@ -220,6 +268,12 @@
             "value" : "Thank You Very Much"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -241,6 +295,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "I would like to say thank you to my fantastic wife Kina, for supporting me in what I am doing and for being my biggest cheerleader."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiero agradecer a mi fantástica esposa Kina, por apoyarme en lo que hago y ser mi mayor fan."
           }
         },
         "sv" : {
@@ -266,6 +326,12 @@
             "value" : "In addition, I want to thank my friend Khedron for inspiring me to create this app and helping me to get it off the ground."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Además, quiero agradecer a mi amigo Khedron por inspirarme a crear esta aplicación y ayudarme a ponerla en marcha."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -287,6 +353,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Turn On Ad-Blocking Superpowers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa tus superpoderes anti-anuncios"
           }
         },
         "sv" : {
@@ -312,6 +384,12 @@
             "value" : "Ad-Blocking Magic"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Magia Anti-anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -333,6 +411,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Advised"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recomendado"
           }
         },
         "sv" : {
@@ -358,6 +442,12 @@
             "value" : "Last Updated"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -381,6 +471,12 @@
             "value" : "Hey! Flip that switch to unlock your ad-blocking powers first!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Oye! ¡Activa el interruptor para desbloquear tus poderes anti-anuncios primero!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -402,6 +498,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pick Your Shields"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige tus escudos"
           }
         },
         "sv" : {
@@ -433,6 +535,12 @@
             "value" : "Leveling up your ad-blocking %1$lld/%2$lld"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potenciando tu bloqueador %1$lld/%2$lld"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -454,6 +562,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Power Up Now!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Potencia ahora!"
           }
         },
         "sv" : {
@@ -479,6 +593,12 @@
             "value" : "Says 'bye-bye' to those pesky cookie popups, app download suggestions, and other digital nuisances that nobody asked for!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Le dice 'adiós' a esas molestas ventanas de cookies, sugerencias de descarga de apps y otras molestias digitales que nadie pidió!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -500,6 +620,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annoyances"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Molestias"
           }
         },
         "sv" : {
@@ -525,6 +651,12 @@
             "value" : "Removes ads from websites with Chinese content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en chino."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -546,6 +678,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chinese Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma chino"
           }
         },
         "sv" : {
@@ -571,6 +709,12 @@
             "value" : "Remove ads from websites with Dutch content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en holandés."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -592,6 +736,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dutch Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma holandés"
           }
         },
         "sv" : {
@@ -617,6 +767,12 @@
             "value" : "Removes ads from websites with English content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en inglés."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -638,6 +794,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "English Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma inglés"
           }
         },
         "sv" : {
@@ -663,6 +825,12 @@
             "value" : "Removes ads from websites with French content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en francés."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -684,6 +852,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "French Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma francés"
           }
         },
         "sv" : {
@@ -709,6 +883,12 @@
             "value" : "Removes ads from websites with German content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en alemán."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -730,6 +910,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "German Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma alemán"
           }
         },
         "sv" : {
@@ -755,6 +941,12 @@
             "value" : "Remove ads from websites with Japanese content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en japonés."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -776,6 +968,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Japanese Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma japonés"
           }
         },
         "sv" : {
@@ -801,6 +999,12 @@
             "value" : "Removes ads from websites with Portugese content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en portugués."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -822,6 +1026,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Portuguese Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma portugués"
           }
         },
         "sv" : {
@@ -847,6 +1057,12 @@
             "value" : "Removes ads from websites with Russian content"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en ruso."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -868,6 +1084,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Russian Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma ruso"
           }
         },
         "sv" : {
@@ -893,6 +1115,12 @@
             "value" : "Removes ads from websites with Spanish content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en español."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -914,6 +1142,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spanish Languages"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma español"
           }
         },
         "sv" : {
@@ -939,6 +1173,12 @@
             "value" : "Removes ads from websites with Turkish content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en turco."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -960,6 +1200,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Turkish Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma turco"
           }
         },
         "sv" : {
@@ -985,6 +1231,12 @@
             "value" : "Removes ads from websites with Ukrainian content."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina anuncios de sitios web con contenido en ucraniano."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1006,6 +1258,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukranian Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma ucraniano"
           }
         },
         "sv" : {
@@ -1031,6 +1289,12 @@
             "value" : "Kicks all those mobile ad networks to the curb. Your phone's about to get a whole lot cleaner!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Manda a volar todas esas redes de anuncios móviles! ¡Tu teléfono va a quedar más limpio que una patena!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1052,6 +1316,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mobile Ads"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuncios móviles"
           }
         },
         "sv" : {
@@ -1077,6 +1347,12 @@
             "value" : "Like a digital band-aid – quickly patches up any filtering hiccups on popular websites. Boom, problem solved!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como una tirita digital: arregla rápidamente cualquier fallo en los filtros de los sitios más populares. ¡Problema resuelto en un pispás!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1098,6 +1374,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quick Fixes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soluciones rápidas"
           }
         },
         "sv" : {
@@ -1123,6 +1405,12 @@
             "value" : "Waves goodbye to those clingy 'Like' and 'Tweet' buttons that follow you around like a lost puppy!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Le dice chao a esos botones pegajosos de 'Me gusta' y 'Tweet' que te siguen como cachorritos perdidos!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1144,6 +1432,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Social Media"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redes Sociales"
           }
         },
         "sv" : {
@@ -1169,6 +1463,12 @@
             "value" : "Keeps those nosy tracking tools from following your every move online. Browse like nobody's watching (because now they can't)!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene alejadas esas herramientas cotillas que rastrean cada paso que das en línea. ¡Navega como si nadie estuviera mirando (porque ahora no pueden)!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1190,6 +1490,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tracking Protection"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protección contra rastreo"
           }
         },
         "sv" : {
@@ -1215,6 +1521,12 @@
             "value" : "Done"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1236,6 +1548,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Getting your privacy fortress ready..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparando tu fortaleza de privacidad..."
           }
         },
         "sv" : {
@@ -1261,6 +1579,12 @@
             "value" : "Use Face ID to unlock"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Face ID para desbloquear"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1282,6 +1606,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         },
         "sv" : {
@@ -1307,6 +1637,12 @@
             "value" : "Version %@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión %@"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1328,6 +1664,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Block ads and unwanted promotional content on Duolingo, including dynamically named ad classes, while preserving essential lesson content and handling fullscreen ads by pressing the exit button automatically or selecting \\\"No Thanks\\\" on specific ads."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquea anuncios y contenido promocional no deseado en Duolingo, incluyendo clases de anuncios con nombres dinámicos, mientras mantiene el contenido esencial de las lecciones y maneja los anuncios de pantalla completa automáticamente."
           }
         },
         "sv" : {
@@ -1353,6 +1695,12 @@
             "value" : "Duolingo: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duolingo: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1374,6 +1722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Block Instagram posts with \"Follow\", \"Suggested for you\", or \"Suggested posts\"."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquea publicaciones de Instagram con \"Seguir\", \"Sugerido para ti\" o \"Publicaciones sugeridas\"."
           }
         },
         "sv" : {
@@ -1399,6 +1753,12 @@
             "value" : "Instagram: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1420,6 +1780,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Removes promoted and suggested posts on LinkedIn."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina publicaciones promocionadas y sugeridas en LinkedIn."
           }
         },
         "sv" : {
@@ -1445,6 +1811,12 @@
             "value" : "LinkedIn: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LinkedIn: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1466,6 +1838,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blocks the promoted content on Reddit between posts and also the advertisements on the side bar."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquea el contenido promocionado entre las publicaciones de Reddit y la publicidad en la barra lateral."
           }
         },
         "sv" : {
@@ -1491,6 +1869,12 @@
             "value" : "Reddit: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddit: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1512,6 +1896,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This short script looks for the text \"Ad\" or \"Promoted tweet\" in a specific label and removes both the promoted tweet and the large bold heading that is sometimes added just above it. It also removes promoted \"trending topics\" on the right side of the screen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este pequeño script busca el texto \"Anuncio\" o \"Tweet promocionado\" y elimina tanto el tweet promocionado como el encabezado grande que a veces aparece arriba. También elimina los \"temas tendencia\" promocionados en la barra lateral."
           }
         },
         "sv" : {
@@ -1537,6 +1927,12 @@
             "value" : "X: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1558,6 +1954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Removes the content warning \"Sensitive Material\" and unhides the content."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina la advertencia de \"Contenido sensible\" y muestra el contenido directamente."
           }
         },
         "sv" : {
@@ -1583,6 +1985,12 @@
             "value" : "X: Content Warning"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X: Advertencia de contenido"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1604,6 +2012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaps away YouTube ads faster than you can say \"skip ad\" - both the still ones and those trying to crash your video party!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Elimina los anuncios de YouTube más rápido que decir \"saltar anuncio\" - tanto los fijos como los que intentan interrumpir tu maratón de videos!"
           }
         },
         "sv" : {
@@ -1629,6 +2043,12 @@
             "value" : "Youtube: Ad Blocker"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Bloqueador de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1650,6 +2070,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bypasses those annoying age gates on YouTube without the whole login song and dance."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esquiva esas molestas restricciones de edad en YouTube sin todo el rollo de iniciar sesión."
           }
         },
         "sv" : {
@@ -1675,6 +2101,12 @@
             "value" : "YouTube: Age Restriction"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube: Restricción de edad"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1696,6 +2128,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Welcome"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido"
           }
         },
         "sv" : {
@@ -1721,6 +2159,12 @@
             "value" : "Hey there, privacy champion! Welcome to qFocus Browser, where your social media stays between you and your screen – exactly how it should be."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Hola, campeón de la privacidad! Bienvenido a qFocus Browser, donde tus redes sociales se quedan entre tú y tu pantalla - ¡justo como debe ser!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1742,6 +2186,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad"
           }
         },
         "sv" : {
@@ -1767,6 +2217,12 @@
             "value" : "Here's our thing: your privacy isn't just a feature – it's THE feature. No ifs, ands, or sneaky tracking cookies about it!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquí está la cosa: tu privacidad no es solo una característica más - ¡es LA característica! ¡Sin peros ni cookies espías!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1790,6 +2246,12 @@
             "value" : "Enable FaceID"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar FaceID"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1808,6 +2270,12 @@
           }
         },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FaceID"
@@ -1836,6 +2304,12 @@
             "value" : "Want to make your browsing extra secure? Let's add Face ID to keep things locked down tight!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quieres hacer tu navegación aún más segura? ¡Vamos a añadir Face ID para blindar todo como una caja fuerte!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1857,6 +2331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grant Photos Access"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitir acceso a fotos"
           }
         },
         "sv" : {
@@ -1882,6 +2362,12 @@
             "value" : "Photos Access"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceso a fotos"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1903,6 +2389,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Don't worry! When we ask for photo access, it's just so you can share pics when YOU want to. We don't peek, process, or do anything sneaky with your photos – pinky promise!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Tranqui! Cuando pedimos acceso a tus fotos, es solo para que TÚ puedas compartir fotos cuando TÚ quieras. No fisgoneamos, no procesamos, ni hacemos nada raro con tus fotos - ¡palabra de scout!"
           }
         },
         "sv" : {
@@ -1928,6 +2420,12 @@
             "value" : "Link"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlace"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1949,6 +2447,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         },
         "sv" : {
@@ -1974,6 +2478,12 @@
             "value" : "First Site"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primer sitio"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1995,6 +2505,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ad Blocking"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueo de anuncios"
           }
         },
         "sv" : {
@@ -2020,6 +2536,12 @@
             "value" : "Time to pick your ad-blocking shields! We've pre-selected the ones that'll give you the smoothest ride, but feel free to mix and match.\\nPro tip: Tap any filter name to learn what it does!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Hora de elegir tus escudos anti-anuncios! Hemos preseleccionado los que te darán la experiencia más suave, pero siéntete libre de mezclar y combinar.\nConsejo pro: ¡Toca cualquier nombre de filtro para saber qué hace!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2034,13 +2556,47 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alles klar"
+            "value" : "Fertig"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "All Set"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Todo listo!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klart"
+          }
+        }
+      }
+    },
+    "onboarding.070done.text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Und los geht’s!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s go and surf well."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Ya está todo!"
           }
         },
         "sv" : {
@@ -2066,6 +2622,12 @@
             "value" : "Options"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opciones"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2087,6 +2649,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "disabled"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "desactivado"
           }
         },
         "sv" : {
@@ -2112,6 +2680,12 @@
             "value" : "Settings"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2133,6 +2707,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de"
           }
         },
         "sv" : {
@@ -2158,6 +2738,12 @@
             "value" : "Ad Blocking"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueo de anuncios"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2179,6 +2765,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable Face ID Magic"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar la magia de Face ID"
           }
         },
         "sv" : {
@@ -2204,6 +2796,12 @@
             "value" : "Show the Navigation Bar"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar la barra de navegación"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2225,6 +2823,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Websites"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sitios web"
           }
         },
         "sv" : {
@@ -2250,6 +2854,12 @@
             "value" : "Some websites (looking at you, Facebook Messenger!) work better in desktop mode. Switch it on here to get the full experience, even on your phone!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Algunos sitios (¡te miramos a ti, Facebook Messenger!) funcionan mejor en modo escritorio. ¡Actívalo aquí para obtener la experiencia completa, incluso en tu móvil!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2271,6 +2881,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desktop Site"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sitio versión escritorio"
           }
         },
         "sv" : {
@@ -2296,6 +2912,12 @@
             "value" : "Enable Desktop Site"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar versión escritorio"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2317,6 +2939,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "We've packed some awesome GreasyFork scripts that help keep those pesky ads away. They're on by default, but if anything gets wonky, you can toggle them right here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hemos empaquetado unos scripts increíbles de GreasyFork que mantienen los anuncios molestos a raya. Están activados por defecto, pero si algo se pone raro, puedes ajustarlos aquí."
           }
         },
         "sv" : {
@@ -2342,6 +2970,12 @@
             "value" : "GreasyForks Scripts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scripts GreasyFork"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2363,6 +2997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable GreasyFork Scripts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar scripts GreasyFork"
           }
         },
         "sv" : {
@@ -2388,6 +3028,12 @@
             "value" : "Advanced"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avanzado"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2409,6 +3055,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Want to remove a website? Just clear its name and – poof! – it's gone like yesterday's cookies."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quieres eliminar un sitio web? Solo borra su nombre y - ¡puf! - desaparece como por arte de magia."
           }
         },
         "sv" : {
@@ -2434,6 +3086,12 @@
             "value" : "Site Details"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles del sitio"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2457,6 +3115,12 @@
             "value" : "Link"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlace"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2478,6 +3142,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         },
         "sv" : {

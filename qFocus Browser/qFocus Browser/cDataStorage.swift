@@ -16,13 +16,13 @@ import SwiftUI
 class settingsStorage {
     var id: UUID = UUID()
     var enableAdBlock: Bool = true
-    var freeFlowXPercent: Double
-    var freeFlowYPercent: Double
+    var freeFlowXPercent: Double = 0.85
+    var freeFlowYPercent: Double = 0.75
     var showNavBar: Bool = false
     var adBlockLastUpdate: Date?
     var faceIDEnabled: Bool = false
     
-    init( enableAdBlock: Bool, freeFlowXPercent: Double, freeFlowYPercent: Double, showNavBar: Bool, adBlockLastUpdate: Date, faceIDEnabled: Bool) {
+    init(enableAdBlock: Bool = true, freeFlowXPercent: Double = 0.85, freeFlowYPercent: Double = 0.75, showNavBar: Bool = false, adBlockLastUpdate: Date? = nil, faceIDEnabled: Bool = false) {
         self.enableAdBlock = enableAdBlock
         self.freeFlowXPercent = freeFlowXPercent
         self.freeFlowYPercent = freeFlowYPercent
@@ -30,8 +30,8 @@ class settingsStorage {
         self.adBlockLastUpdate = adBlockLastUpdate
         self.faceIDEnabled = faceIDEnabled
     }
-    
 }
+
 
 func createDefaultSettings() -> [settingsStorage] {
     
@@ -39,13 +39,14 @@ func createDefaultSettings() -> [settingsStorage] {
         settingsStorage(
             enableAdBlock: true,
             freeFlowXPercent: 0.85,
-            freeFlowYPercent: 0.90,
+            freeFlowYPercent: 0.75,
             showNavBar: false,
             adBlockLastUpdate: Calendar.current.date(byAdding: .day, value: -10, to: Date())!,
             faceIDEnabled: false
         )
     ]
 }
+
 
 func initializeDefaultSettings(context: ModelContext) {
 
@@ -76,14 +77,13 @@ func initializeDefaultSettings(context: ModelContext) {
 @Model
 final class greasyScriptSetting {
     var id: UUID = UUID()
-    var scriptID: String
-    var scriptEnabled: Bool
+    var scriptID: String = ""
+    var scriptEnabled: Bool = true
     
-    init( scriptID: String, scriptEnabled: Bool) {
+    init(scriptID: String = "", scriptEnabled: Bool = true) {
         self.scriptID = scriptID
         self.scriptEnabled = scriptEnabled
     }
-    
 }
 
 
@@ -215,18 +215,17 @@ func createGreasyScriptsList() -> [greasyScriptItem] {
 @Model
 class sitesStorage {
     var id: UUID = UUID()
-    var siteOrder: Int
-    var siteName: String
-    var siteURL: String
+    var siteOrder: Int = 0
+    var siteName: String = ""
+    var siteURL: String = ""
 
     @Attribute(.externalStorage)
-    var siteFavIcon: Data?
+    var siteFavIcon: Data? = nil
     
-    var enableJSBlocker: Bool
-    var requestDesktop: Bool
+    var enableJSBlocker: Bool = true
+    var requestDesktop: Bool = false
 
-
-    init(siteOrder: Int, siteName: String, siteURL: String, siteFavIcon: Data? = nil, enableJSBlocker: Bool, requestDesktop: Bool) {
+    init(siteOrder: Int = 0, siteName: String = "", siteURL: String = "", siteFavIcon: Data? = nil, enableJSBlocker: Bool = true, requestDesktop: Bool = false) {
         self.siteOrder = siteOrder
         self.siteName = siteName
         self.siteURL = siteURL
@@ -235,6 +234,8 @@ class sitesStorage {
         self.requestDesktop = requestDesktop
     }
 }
+
+
 
 func createDefaultWebSites() -> [sitesStorage] {
     
@@ -295,6 +296,7 @@ func createDefaultWebSites() -> [sitesStorage] {
     ]
 }
 
+
 func initializeWebSitesStorage(context: ModelContext) {
 
     let descriptor = FetchDescriptor<sitesStorage>()
@@ -323,15 +325,14 @@ func initializeWebSitesStorage(context: ModelContext) {
 @Model
 class adBlockFilterSetting {
     var id: UUID = UUID()
-    var filterID: String
-    var enabled: Bool
+    var filterID: String = ""
+    var enabled: Bool = true
 
-    init(filterID: String, enabled: Bool) {
+    init(filterID: String = "", enabled: Bool = true) {
         self.filterID = filterID
         self.enabled = enabled
     }
 }
-
 
 
 
@@ -344,7 +345,7 @@ struct AdBlockFilterItem: Identifiable {
     let id: String
     let sortOrder: Int
     let filterID: String
-    let preSelectediOS: Bool
+    var preSelectediOS: Bool
     let preSelectedmacOS: Bool
     let urlString: String
     let languageCode: String
@@ -364,7 +365,6 @@ struct AdBlockFilterItem: Identifiable {
     }
     
 }
-
 
 
 func createAdBlockFilterList() -> [AdBlockFilterItem] {
@@ -422,8 +422,8 @@ func createAdBlockFilterList() -> [AdBlockFilterItem] {
         AdBlockFilterItem(
             sortOrder: 6,
             filterID: "language_english",
-            preSelectediOS: false,
-            preSelectedmacOS: false,
+            preSelectediOS: true,
+            preSelectedmacOS: true,
             urlString: "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
             languageCode: "en",
             identName: String(localized: "adblocklist.language_english.name"),

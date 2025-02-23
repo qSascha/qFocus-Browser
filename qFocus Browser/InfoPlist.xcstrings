@@ -17,9 +17,21 @@
             "value" : "qFocus Browser"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "sv" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "qFocus Browser"
           }
         }
@@ -41,9 +53,21 @@
             "value" : "qFocus Browser"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "sv" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "qFocus Browser"
           }
         }
@@ -65,10 +89,22 @@
             "value" : "Nutze Face ID, um qFocus Browser zu entsperren"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock qFocus Browser with your beautiful face."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloquea qFocus Browser con tu hermoso rostro!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Lås upp qFocus Browser med ditt vackra ansikte"
+            "state" : "translated",
+            "value" : "Lås upp qFocus Browser med ditt vackra ansikte."
           }
         }
       }
@@ -89,9 +125,21 @@
             "value" : "Damit du Bilder von Webseiten hoch- oder runterladen kannst."
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To upload your wonderful pictures to the Internet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para que puedas compartir tus fotos maravillosas con el mundo entero, ¡y presumir un poquito!"
+          }
+        },
         "sv" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "För att du ska kunna dela med dig av dina fantastiska bilder på nätet (eller spara några därifrån)."
           }
         }

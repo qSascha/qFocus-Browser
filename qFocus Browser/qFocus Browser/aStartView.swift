@@ -20,6 +20,7 @@ struct StartView: View {
 
     @StateObject private var startViewModel: StartViewModel
     @StateObject var globals = GlobalVariables()
+    @StateObject var collector = Collector()
 
     @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
@@ -28,6 +29,7 @@ struct StartView: View {
 
 
     init(modelContext: ModelContext) {
+        
         // Create GlobalVariables first
         let globalsInstance = GlobalVariables()
         // Then create StartViewModel with the globals instance
@@ -39,10 +41,6 @@ struct StartView: View {
         _globals = StateObject(wrappedValue: globalsInstance)
     }
 
-//    init(modelContext: ModelContext) {
-//        _startViewModel = StateObject(wrappedValue : StartViewModel(modelContext: modelContext, globals: globals))
-//    }
-    
     
     
 
@@ -51,12 +49,21 @@ struct StartView: View {
         ZStack {
             MainContent()
                 .environmentObject(globals)
+                .environmentObject(collector)
                 .environmentObject(startViewModel)
                 .environmentObject(startViewModel.greasyScripts)
         }
         .onAppear {
             Task { @MainActor in
                 if !hasInitialized {
+
+                    let deviceInfo = DeviceInfo.getDeviceIdentifier()
+                    collector.save(event: "Launched", parameter: deviceInfo)
+                    
+                    let deviceLanguage = String(Locale.preferredLanguages[0].prefix(2))
+                    collector.save(event: "Language", parameter: deviceLanguage)
+
+
                     await startViewModel.updateWebViewControllers(with: Array(startViewModel.webSites))
                     hasInitialized = true
                 }
@@ -75,6 +82,7 @@ struct StartView: View {
             iOSOnboarding()
                 .interactiveDismissDisabled()
                 .environmentObject(globals)
+                .environmentObject(collector)
         }
     }
 }

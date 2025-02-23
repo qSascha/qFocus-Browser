@@ -13,6 +13,7 @@ import UIKit
 
 struct iOSAboutView: View {
     @EnvironmentObject var globals: GlobalVariables
+    @EnvironmentObject var collector: Collector
     @State private var showWebView = false
 
     var body: some View {
@@ -105,6 +106,9 @@ struct iOSAboutView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding()
+            .onAppear() {
+                collector.save(event: "Viewed", parameter: "About")
+            }
         }
     }
     

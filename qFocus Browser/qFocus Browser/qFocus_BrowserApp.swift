@@ -6,7 +6,7 @@
 //
 import SwiftUI
 import SwiftData
-
+import CloudKit
 
 
 
@@ -22,21 +22,28 @@ struct qFocus_BrowserApp: App {
                     sitesStorage.self,
                     settingsStorage.self,
                     adBlockFilterSetting.self,
-                    greasyScriptSetting.self
+                    greasyScriptSetting.self,
+                    collectorModel.self
                 ])
+                , cloudKitDatabase: .none
             )
-            
+
+
             // Initialize the container with configuration
             modelContainer = try ModelContainer(
                 for: sitesStorage.self,
                 settingsStorage.self,
                 adBlockFilterSetting.self,
                 greasyScriptSetting.self,
+                collectorModel.self,
                 configurations: configuration
             )
 
+
             // Disable autosave on the context level
             modelContainer.mainContext.autosaveEnabled = false
+
+
 
         } catch {
             fatalError("Could not initialize ModelContainer: \(error)")
@@ -56,16 +63,56 @@ struct qFocus_BrowserApp: App {
 
 
 
+
+
+
+
+
+
 /*
+@main
 struct qFocus_BrowserApp: App {
+    let localContainer: ModelContainer
+    
+    init() {
+        do {
+            // Create configuration without autosave
+            let localConfiguration = ModelConfiguration(
+                schema: Schema([
+                    sitesStorage.self,
+                    settingsStorage.self,
+                    adBlockFilterSetting.self,
+                    greasyScriptSetting.self
+                ])
+            )
+            
+            // Initialize the container with configuration
+            localContainer = try ModelContainer(
+                for: sitesStorage.self,
+                settingsStorage.self,
+                adBlockFilterSetting.self,
+                greasyScriptSetting.self,
+                configurations: localConfiguration
+            )
+
+            // Disable autosave on the context level
+            localContainer.mainContext.autosaveEnabled = false
+
+        } catch {
+            fatalError("Could not initialize ModelContainer: \(error)")
+        }
+    }
     
     var body: some Scene {
         WindowGroup {
-            StartView()
-                .modelContainer(for: [sitesStorage.self, settingsStorage.self, adBlockFilters.self, greasyScripts.self], isAutosaveEnabled: false)
+            StartView(modelContext: localContainer.mainContext)
+                .modelContainer(localContainer)
         }
     }
 }
 */
+
+
+
 
 

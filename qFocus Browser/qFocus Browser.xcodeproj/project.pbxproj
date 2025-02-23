@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		2B6BC5772D4577D400345E4D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6BC5762D4577D400345E4D /* ContentBlockerConverter */; };
 		2BF6E07B2D4A85C4007B606F /* ConverterTool in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF6E07A2D4A85C4007B606F /* ConverterTool */; };
+		2BFBF21B2D67D388003E79F7 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF1FC2D67D388003E79F7 /* InfoPlist.xcstrings */; };
 		2BFBF21E2D68F885003E79F7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2B6BC4752D456B4500345E4D /* qFocus Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qFocus Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFBF1FC2D67D388003E79F7 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				2BFBF21D2D68F885003E79F7 /* Localizable.xcstrings */,
+				2BFBF1FC2D67D388003E79F7 /* InfoPlist.xcstrings */,
 				2B6BC4772D456B4500345E4D /* qFocus Browser */,
 				2B6BC4762D456B4500345E4D /* Products */,
 			);
@@ -118,6 +121,7 @@
 				de,
 				sv,
 				aa,
+				es,
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
 			minimizedProjectReferenceProxies = 1;
@@ -140,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BFBF21E2D68F885003E79F7 /* Localizable.xcstrings in Resources */,
+				2BFBF21B2D67D388003E79F7 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

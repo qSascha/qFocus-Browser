@@ -23,14 +23,15 @@ struct AdBlockSettingsView: View {
     @State private var showingExplanation: AdBlockFilterItem?
     @EnvironmentObject var startViewModel: StartViewModel
     @EnvironmentObject var globals: GlobalVariables
+    @EnvironmentObject var collector: Collector
 
-
-
-
-
-
+    
+    
+    
+    
+    
     var body: some View {
-
+        
         NavigationView {
             List {
                 // Global Ad-Block Toggle
@@ -47,7 +48,7 @@ struct AdBlockSettingsView: View {
                             Text("adblock.lastupdate.label")
                             Text(settingsData.adBlockLastUpdate?.formatted(date: .abbreviated, time: .omitted) ?? "never")
                                 .font(.caption)
-
+                            
                             Button(action: {
                                 Task {
                                     // Force update with forceUpdate parameter set to true
@@ -73,9 +74,9 @@ struct AdBlockSettingsView: View {
                 
                 // Ad Block Lists
                 Section {
-
+                    
                     if settingsData.enableAdBlock {
-                        ForEach(globals.adBlockList) { filter in
+                        ForEach(reorderedAdBlockList()) { filter in
                             AdBlockListRow(filter: filter)
                         }
                     } else {
@@ -89,6 +90,9 @@ struct AdBlockSettingsView: View {
             }
             .navigationTitle("adblock.header")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear() {
+                collector.save(event: "Viewed", parameter: "Ad Blocking")
+            }
             .onDisappear {
                 Task {
                     // Toggle with false to remove all existing rules.
@@ -106,7 +110,21 @@ struct AdBlockSettingsView: View {
             }
         }
     }
+    
+
+    private func reorderedAdBlockList() -> [AdBlockFilterItem] {
+        let deviceLanguage = String(Locale.preferredLanguages[0].prefix(2))
+        var reorderedList = globals.adBlockList
+        if let index = reorderedList.firstIndex(where: { $0.languageCode == deviceLanguage }) {
+            var languageItem = reorderedList.remove(at: index)
+            languageItem.preSelectediOS = true
+            reorderedList.insert(languageItem, at: 5)
+        }
+        return reorderedList
+    }
+    
 }
+
 
 
 
@@ -166,6 +184,11 @@ struct AdBlockListRow: View {
         }
         .sheet(isPresented: $showingExplanation) {
             ExplanationView(filter: filter)
+                .interactiveDismissDisabled()
+                .presentationBackgroundInteraction(.enabled)
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+                .ignoresSafeArea()
         }
     }
 }

@@ -22,6 +22,7 @@ struct iOSOptionsView: View {
 
     @EnvironmentObject var globals: GlobalVariables
     @EnvironmentObject var startViewModel: StartViewModel
+    @EnvironmentObject var collector: Collector
 
     @Query(sort: \sitesStorage.siteOrder) var webSites: [sitesStorage]
     @Query() var settingsData: [settingsStorage]
@@ -127,12 +128,13 @@ struct iOSOptionsView: View {
                 }
                 .listStyle(InsetGroupedListStyle())
             }
+            .onAppear() {
+                collector.save(event: "Viewed", parameter: "Options")
+            }
         }
     }
 }
 
-
-
-
-
 #endif
+
+

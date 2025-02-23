@@ -13,6 +13,7 @@ struct iOSOptionsEditAdvanced: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var startViewModel: StartViewModel
+    @EnvironmentObject var collector: Collector
 
     @Bindable var editSite: sitesStorage
 
@@ -97,6 +98,9 @@ struct iOSOptionsEditAdvanced: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear() {
+            collector.save(event: "Viewed", parameter: "Advanced Options")
+        }
 
     }
     

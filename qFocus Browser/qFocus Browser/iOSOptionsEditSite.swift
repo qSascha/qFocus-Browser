@@ -22,11 +22,10 @@ func fqdnOnly(from url: String) -> String {
 struct iOSOptionsEditSite: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
-    
-    // Site being edited
+    @EnvironmentObject var collector: Collector
+
     var editSite: sitesStorage
     
-    // UI State
     @State private var tempName: String
     @State private var tempURL: String
     @State private var faviconImage: UIImage?
@@ -197,6 +196,8 @@ struct iOSOptionsEditSite: View {
             editSite.siteFavIcon = UIImage(systemName: "exclamationmark.circle")?.pngData()
         }
         
+        collector.save(event: "Site Added", parameter: tempURL)
+
         // Save changes
         do {
             try modelContext.save()

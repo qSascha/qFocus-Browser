@@ -146,7 +146,6 @@ class GreasyFork: ObservableObject {
 
         // Get the core domain for comparison
         let coreDomain = getDomainCore(siteName)
-        print("DEBUG: Loading scripts for core domain: \(coreDomain)")
 
         // Filter scripts where the core domains match and the script is enabled in settings
         let matchingScripts = globals.greaseForkList.filter { script in

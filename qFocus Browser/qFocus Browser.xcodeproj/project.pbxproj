@@ -124,6 +124,10 @@
 				es,
 				"pt-PT",
 				fr,
+				it,
+				ru,
+				uk,
+				hi,
 			);
 			mainGroup = 2B6BC46C2D456B4500345E4D;
 			minimizedProjectReferenceProxies = 1;

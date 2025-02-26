@@ -96,8 +96,8 @@ struct FloatingNavBar: View {
                                     let newYPercent = Double(gesture.location.y / geometry.size.height)
                                     
                                     // Clamp values between 0 and 1
-                                    settingsData.freeFlowXPercent = max(0, min(1, newXPercent))
-                                    settingsData.freeFlowYPercent = max(0, min(1, newYPercent))
+                                    settingsData.freeFlowXPercent = max(0.1, min(0.9, newXPercent))
+                                    settingsData.freeFlowYPercent = max(0.1, min(0.95, newYPercent))
                                     
                                 }
                             }

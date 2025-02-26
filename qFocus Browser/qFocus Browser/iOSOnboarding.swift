@@ -41,35 +41,33 @@ struct iOSOnboarding: View {
 
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                // Content
-                ScrollView {
-                    VStack(spacing: 30) {
-                        // Header
-                        Text(headerForStep)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.blue)
-                            .padding(.top, 30)
+        VStack(spacing: 0) {
+            // Content
+            ScrollView {
+                VStack(spacing: 10) {
+                    // Header
+                    Text(headerForStep)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                        .padding(.top, 40)
 
-                        Spacer()
+                    Spacer()
 
-                        // Main Content
-                        contentForStep
-                            .padding(.horizontal, 20)
-                        
-                    }
+                    // Main Content
+                    contentForStep
+                        .padding(.horizontal, 20)
+                    
                 }
-                
-                // Navigation
-                navigationButtons
-                    .padding()
-                    .background(Color(.qBlueLight))
-                    .shadow(radius: 2)
             }
-            .navigationBarHidden(true)
+            
+            // Navigation
+            navigationButtons
+                .padding()
+                .background(Color(.qBlueLight))
+                .shadow(radius: 2)
         }
+        .navigationBarHidden(true)
     }
     
     // MARK: - Step Content
@@ -348,6 +346,7 @@ struct iOSOnboarding: View {
             .padding()
             .sheet(item: $showingExplanation) { filter in
                 ExplanationView(filter: filter)
+                    .presentationDetents([.medium])
             }
             .onAppear {
                 // Set initial states based on preSelectedIOS
@@ -386,15 +385,35 @@ struct iOSOnboarding: View {
     
     
 
+
+    //MARK: Explanation View
     struct ExplanationView: View {
-        let filter: AdBlockFilterItem
         @Environment(\.dismiss) private var dismiss
+        let filter: AdBlockFilterItem
         
         var body: some View {
-            NavigationView {
-                ScrollView {
-                    Text(filter.explanation)
-                        .padding()
+
+            NavigationStack {
+                
+                    VStack(alignment: .leading, spacing: 6) {
+
+                        if filter.preSelectediOS {
+                            HStack {
+                                Image(systemName: "checkmark.seal.fill")
+                                    .foregroundColor(.green)
+                                Text("adblock.label.advised")
+                                    .font(.callout)
+                                    .foregroundColor(.green)
+                                Spacer()
+                            }
+                            .padding()
+                        }
+
+                        Text(filter.explanation)
+                            .padding()
+                        
+                        Spacer()
+                        
                 }
                 .navigationTitle(filter.identName)
                 .navigationBarTitleDisplayMode(.inline)
@@ -406,7 +425,7 @@ struct iOSOnboarding: View {
                     }
                 }
             }
-            .presentationDetents([.medium])
+
         }
     }
 
@@ -508,7 +527,6 @@ struct FirstSiteView: View {
                 Text("onboarding.050firstsite.formName")
                     .frame(width: 50, alignment: .leading)
                 TextField("", text: $siteName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .focused($isNameFieldFocused)
                     .onChange(of: siteName) { _, newValue in
                         updateURL(from: newValue)
@@ -520,7 +538,6 @@ struct FirstSiteView: View {
                 Text("onboarding.050firstsite.formLink")
                     .frame(width: 50, alignment: .leading)
                 TextField("", text: $siteURL)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled(true)
                     .onChange(of: siteURL) { _, newValue in
@@ -533,8 +550,8 @@ struct FirstSiteView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 50, height: 32)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .frame(width: 50, height: 50)
+                    .clipShape(RoundedRectangle(cornerRadius: 32))
             }
         }
         .padding()

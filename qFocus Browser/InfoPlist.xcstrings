@@ -35,13 +35,37 @@
             "value" : "qFocus Browser"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
@@ -83,13 +107,37 @@
             "value" : "qFocus Browser"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
         "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "qFocus Browser"
@@ -131,16 +179,40 @@
             "value" : "Déverrouillez qFocus Browser avec votre beau visage."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अपने सुंदर चेहरे से क्यूफोकस ब्राउज़र अनलॉक करें।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sblocca qFocus Browser con il tuo bellissimo volto."
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desbloqueie o Navegador qFocus com sua linda cara."
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разблокируйте qFocus Browser своим прекрасным лицом."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lås upp qFocus Browser med ditt vackra ansikte."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розблокуйте qFocus Браузер своїм чарівним обличчям."
           }
         }
       }
@@ -179,16 +251,40 @@
             "value" : "Pour partager vos magnifiques photos sur Internet."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अपनी शानदार तस्वीरों को इंटरनेट पर अपलोड करने के लिए।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per caricare le tue meravigliose foto su Internet."
+          }
+        },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Para compartilhar suas fotos maravilhosas na Internet."
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтобы загрузить ваши замечательные фотографии в интернет."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "För att du ska kunna dela med dig av dina fantastiska bilder på nätet (eller spara några därifrån)."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Щоб завантажити ваші неймовірні світлини в Інтернет."
           }
         }
       }

@@ -217,6 +217,9 @@ class StartViewModel: ObservableObject {
     @MainActor
     func initializeBlocker(settings: settingsStorage, filterSettings: [adBlockFilterSetting], modelContext: ModelContext, forceUpdate: Bool = false) async throws {
         @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
+
+        print("Here-1")
+
         guard onboardingComplete else {
             return
         }
@@ -228,7 +231,8 @@ class StartViewModel: ObservableObject {
         guard settings.enableAdBlock else {
             return
         }
-        
+        print("Here-2")
+
         // Check if update is needed
         if forceUpdate || shouldUpdateFilters(lastUpdate: settings.adBlockLastUpdate) {
             showAdBlockLoadStatus = true
@@ -245,12 +249,15 @@ class StartViewModel: ObservableObject {
             
             totalRuleLists = enabledFilters.count
             loadedRuleLists = 0
-            
+            print("Here-3")
+
             for filter in enabledFilters {
                 guard let url = URL(string: filter.urlString) else {
                     continue
                 }
-                
+
+                print("Here-4")
+
                 do {
                     // Pass the filter's identName as the identifier
                     let result = try await adBlockManager.processURL(url, identifier: filter.identName)
@@ -260,6 +267,7 @@ class StartViewModel: ObservableObject {
                     }
                     
                     loadedRuleLists += 1
+                    print("Here-5...")
                 } catch {
                     print("Error processing block list: \(filter.identName): \(error.localizedDescription)")
                 }
@@ -267,7 +275,8 @@ class StartViewModel: ObservableObject {
             
             settings.adBlockLastUpdate = Date()
             try modelContext.save()
-            
+            print("Here-999")
+
             showAdBlockLoadStatus = false
         }
     }

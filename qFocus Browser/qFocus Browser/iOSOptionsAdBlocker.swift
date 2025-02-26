@@ -16,7 +16,6 @@ import SwiftData
 struct AdBlockSettingsView: View {
     @Query() var filterSettings: [adBlockFilterSetting]
     
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
     @Bindable var settingsData: settingsStorage
@@ -32,80 +31,81 @@ struct AdBlockSettingsView: View {
     
     var body: some View {
         
-        NavigationView {
-            List {
-                // Global Ad-Block Toggle
-                Section {
-                    Toggle("adblock.enable.toggle", isOn: $settingsData.enableAdBlock)
-                        .tint(.blue)
+        List {
+
+            // Global Ad-Block Toggle
+            Section {
+                Toggle("adblock.enable.toggle", isOn: $settingsData.enableAdBlock)
+                    .tint(.blue)
+                    .onChange(of: settingsData.enableAdBlock) {
+                        try? modelContext.save()
+                    }
+            }
+            
+            if settingsData.enableAdBlock {
+                HStack {
+                    Spacer()
+                    
+                    VStack {
+                        Text("adblock.lastupdate.label")
+                        Text(settingsData.adBlockLastUpdate?.formatted(date: .abbreviated, time: .omitted) ?? "never")
+                            .font(.caption)
+                        
+                        Button(action: {
+                            Task {
+                                // Force update with forceUpdate parameter set to true
+                                try await startViewModel.initializeBlocker(
+                                    settings: settingsData,
+                                    filterSettings: filterSettings,
+                                    modelContext: modelContext,
+                                    forceUpdate: true
+                                )
+                            }
+                        }) {
+                            Text("adblock.updatenow.button")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.accentColor)
+                                .cornerRadius(8)
+                                .shadow(radius: 2)
+                        }
+                    }
+                    Spacer()
                 }
+            }
+            
+            // Ad Block Lists
+            Section {
                 
                 if settingsData.enableAdBlock {
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            Text("adblock.lastupdate.label")
-                            Text(settingsData.adBlockLastUpdate?.formatted(date: .abbreviated, time: .omitted) ?? "never")
-                                .font(.caption)
-                            
-                            Button(action: {
-                                Task {
-                                    // Force update with forceUpdate parameter set to true
-                                    try await startViewModel.initializeBlocker(
-                                        settings: settingsData,
-                                        filterSettings: filterSettings,
-                                        modelContext: modelContext,
-                                        forceUpdate: true
-                                    )
-                                }
-                            }) {
-                                Text("adblock.updatenow.button")
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.accentColor)
-                                    .cornerRadius(8)
-                                    .shadow(radius: 2)
-                            }
-                        }
-                        Spacer()
+                    ForEach(reorderedAdBlockList()) { filter in
+                        AdBlockListRow(filter: filter)
                     }
+                } else {
+                    Text("adblock.message.disabled")
+                        .foregroundColor(.gray)
+                        .italic()
                 }
+            } header: {
+                Text("adblock.section.header")
+            }
+        }
+        .navigationTitle("adblock.header")
+        .onAppear() {
+            collector.save(event: "Viewed", parameter: "Ad Blocking")
+        }
+        .onDisappear {
+            Task {
+                // Toggle with false to remove all existing rules.
+                await startViewModel.toggleBlocking(isEnabled: false, filterSettings: filterSettings)
                 
-                // Ad Block Lists
-                Section {
-                    
-                    if settingsData.enableAdBlock {
-                        ForEach(reorderedAdBlockList()) { filter in
-                            AdBlockListRow(filter: filter)
-                        }
-                    } else {
-                        Text("adblock.message.disabled")
-                            .foregroundColor(.gray)
-                            .italic()
-                    }
-                } header: {
-                    Text("adblock.section.header")
-                }
-            }
-            .navigationTitle("adblock.header")
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear() {
-                collector.save(event: "Viewed", parameter: "Ad Blocking")
-            }
-            .onDisappear {
-                Task {
-                    // Toggle with false to remove all existing rules.
-                    await startViewModel.toggleBlocking(isEnabled: false, filterSettings: filterSettings)
-                    
-                    if settingsData.enableAdBlock {
-                        // Rebuild only for currently enabled filters
-                        try await startViewModel.initializeBlocker(
-                            settings: settingsData,
-                            filterSettings: filterSettings,
-                            modelContext: modelContext
-                        )
-                    }
+                if settingsData.enableAdBlock {
+                    // Rebuild only for currently enabled filters
+                    try await startViewModel.initializeBlocker(
+                        settings: settingsData,
+                        filterSettings: filterSettings,
+                        modelContext: modelContext
+                    )
                 }
             }
         }
@@ -165,7 +165,7 @@ struct AdBlockListRow: View {
                 }
             }
             
-            // Toggle
+            // Toggle individual ad-block list
             Toggle("", isOn: Binding(
                 get: {
                     filterSettings.first(where: { $0.filterID == filter.filterID })?.enabled ?? filter.preSelectediOS
@@ -184,11 +184,7 @@ struct AdBlockListRow: View {
         }
         .sheet(isPresented: $showingExplanation) {
             ExplanationView(filter: filter)
-                .interactiveDismissDisabled()
-                .presentationBackgroundInteraction(.enabled)
                 .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-                .ignoresSafeArea()
         }
     }
 }
@@ -204,12 +200,11 @@ struct ExplanationView: View {
     let filter: AdBlockFilterItem
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(filter.explanation)
-                        .padding()
-                    
+
+        NavigationStack {
+            
+                VStack(alignment: .leading, spacing: 6) {
+
                     if filter.preSelectediOS {
                         HStack {
                             Image(systemName: "checkmark.seal.fill")
@@ -217,10 +212,16 @@ struct ExplanationView: View {
                             Text("adblock.label.advised")
                                 .font(.callout)
                                 .foregroundColor(.green)
+                            Spacer()
                         }
                         .padding()
                     }
-                }
+
+                    Text(filter.explanation)
+                        .padding()
+                    
+                    Spacer()
+                    
             }
             .navigationTitle(filter.identName)
             .navigationBarTitleDisplayMode(.inline)
@@ -232,6 +233,7 @@ struct ExplanationView: View {
                 }
             }
         }
+
     }
 }
 

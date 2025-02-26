@@ -25,8 +25,11 @@ struct iOSOptionsEditAdvanced: View {
     
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+
+        List {
+
             // Header with Save Button
+/*
             ZStack {
                 HStack {
                     Button(action: saveAndDismiss) {
@@ -48,58 +51,60 @@ struct iOSOptionsEditAdvanced: View {
                 }
                 Spacer()
             }
-
+*/
             
-            Form {
-                
-                Section {
-                    Toggle("optionsAdvanced.enableBlocker.toggle", isOn: $editSite.enableJSBlocker)
-                        .onChange(of: editSite.enableJSBlocker) { _, newValue in
-                            // Save changes
-                            do {
-                                try modelContext.save()
-                            } catch {
-                                print("Error saving site: \(error)")
-                            }
-
-                            // Post notification to update the web view
-                            NotificationCenter.default.post( name: NSNotification.Name("UpdateViews"), object: nil )
+            Section {
+                Toggle("optionsAdvanced.enableBlocker.toggle", isOn: $editSite.enableJSBlocker)
+                    .onChange(of: editSite.enableJSBlocker) { _, newValue in
+                        // Save changes
+                        do {
+                            try modelContext.save()
+                        } catch {
+                            print("Error saving site: \(error)")
                         }
-                } header: {
-                    Text("optionsAdvanced.enableBlocker.header")
-                } footer: {
-                    Text("optionsAdvanced.enableBlocker.footer")
-                }
-                
-                // Desktop Site
-                Section {
-                    Toggle("optionsAdvanced.desktopSite.toggle", isOn: Binding(
-                        get: { editSite.requestDesktop },
-                        set: { newValue in
-                            // Save changes
-                            editSite.requestDesktop = newValue
-                            do {
-                                try modelContext.save()
-                            } catch {
-                                print("Error saving site: \(error)")
-                            }
 
-                            // Update the web view configuration
-                            startViewModel.updateDesktopMode(for: editSite.siteOrder - 1, requestDesktop: newValue)
+                        // Post notification to update the web view
+                        NotificationCenter.default.post( name: NSNotification.Name("UpdateViews"), object: nil )
+                    }
+            }
+            header: {
+                Text("optionsAdvanced.enableBlocker.header")
+            } footer: {
+                Text("optionsAdvanced.enableBlocker.footer")
+            }
+            
+            // Desktop Site
+            Section {
+                Toggle("optionsAdvanced.desktopSite.toggle", isOn: Binding(
+                    get: { editSite.requestDesktop },
+                    set: { newValue in
+                        // Save changes
+                        editSite.requestDesktop = newValue
+                        do {
+                            try modelContext.save()
+                        } catch {
+                            print("Error saving site: \(error)")
                         }
-                    ))
 
-                } header: {
-                    Text("optionsAdvanced.desktopSite.header")
-                } footer: {
-                    Text("optionsAdvanced.desktopSite.footer")
-                }
+                        // Update the web view configuration
+                        startViewModel.updateDesktopMode(for: editSite.siteOrder - 1, requestDesktop: newValue)
+                    }
+                ))
 
             }
+            header: {
+                Text("optionsAdvanced.desktopSite.header")
+            } footer: {
+                Text("optionsAdvanced.desktopSite.footer")
+            }
+
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationTitle(editSite.siteName)
         .onAppear() {
             collector.save(event: "Viewed", parameter: "Advanced Options")
+        }
+        .onDisappear{
+            saveData()
         }
 
     }
@@ -107,8 +112,8 @@ struct iOSOptionsEditAdvanced: View {
 
 
     
-    //MARK: Save and Dismiss
-    private func saveAndDismiss() {
+    //MARK: Save Data on Exit
+    private func saveData() {
 
  
         // Save changes
@@ -118,8 +123,6 @@ struct iOSOptionsEditAdvanced: View {
             print("Error saving site: \(error)")
         }
         
-        // Dismiss the view
-        presentationMode.wrappedValue.dismiss()
     }
 }
 

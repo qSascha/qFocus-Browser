@@ -63,29 +63,7 @@ struct iOSOptionsEditSite: View {
 
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Header with Save Button
-            ZStack {
-                HStack {
-                    Button(action: saveAndDismiss) {
-                        HStack {
-                            Image(systemName: "chevron.backward")
-                            Text("general.save")
-                        }
-                    }
-                    Spacer()
-                }
-                .padding()
-                
-                HStack {
-                    Spacer()
-                    Text(tempName)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                }
-            }
-            
+
             // Form Fields
             Form {
                 Section {
@@ -94,7 +72,6 @@ struct iOSOptionsEditSite: View {
                         Text("optionsEdit.site.name")
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempName)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
                             .focused($isNameFieldFocused)
                             .onChange(of: tempName) { _, newValue in
                                 debounceTimer?.invalidate()
@@ -110,8 +87,8 @@ struct iOSOptionsEditSite: View {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 50, height: 32)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .frame(width: 32, height: 32)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
                         } else {
                             Image(systemName: "globe")
                                 .resizable()
@@ -122,14 +99,12 @@ struct iOSOptionsEditSite: View {
 
 
                     }
-                    .padding(.top, 5)
-                    
+
                     // URL Field
                     HStack {
                         Text("optionsEdit.site.Link")
                             .frame(width: 50, alignment: .leading)
                         TextField("", text: $tempURL)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled(true)
                             .onChange(of: tempURL) { _, newValue in
@@ -140,30 +115,35 @@ struct iOSOptionsEditSite: View {
                             }
                     }
 
-                    // Advanced Settings
-                    NavigationLink(destination: iOSOptionsEditAdvanced(editSite: editSite)) {
-                        Text("optionsEdit.navigation.advanced")
-                    }
-
-                } header: {
+                }
+                header: {
                     Text("optionsEdit.site.header")
                 }
                 footer: {
                     Text("optionsEdit.site.footer")
                 }
+                .onAppear {
+                    if tempName.isEmpty {
+                        isNameFieldFocused = true
+                    } else {
+                        isNameFieldFocused = false
+                    }
+                    if !tempURL.isEmpty {
+                        fetchFavicon(for: tempURL)
+                    }
+                }
+
+                Section {
+                    // Advanced Settings
+                    NavigationLink(destination: iOSOptionsEditAdvanced(editSite: editSite)) {
+                        Text("optionsEdit.navigation.advanced")
+                    }
+                }
 
             }
-        }
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            if tempName.isEmpty {
-                isNameFieldFocused = true
-            } else {
-                isNameFieldFocused = false
-            }
-            if !tempURL.isEmpty {
-                fetchFavicon(for: tempURL)
-            }
+        .navigationTitle(tempName)
+        .onDisappear{
+            saveData()
         }
     }
     
@@ -171,7 +151,7 @@ struct iOSOptionsEditSite: View {
 
     
     //MARK: Save and Dismiss
-    private func saveAndDismiss() {
+    private func saveData() {
 
 
         // If the URL changes then post a notification
@@ -208,8 +188,6 @@ struct iOSOptionsEditSite: View {
             print("Error saving site: \(error)")
         }
         
-        // Dismiss the view
-        presentationMode.wrappedValue.dismiss()
     }
 }
 

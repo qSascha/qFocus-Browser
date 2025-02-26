@@ -19,6 +19,7 @@ import UIKit
 struct iOSOptionsView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
 
     @EnvironmentObject var globals: GlobalVariables
     @EnvironmentObject var startViewModel: StartViewModel
@@ -27,99 +28,81 @@ struct iOSOptionsView: View {
     @Query(sort: \sitesStorage.siteOrder) var webSites: [sitesStorage]
     @Query() var settingsData: [settingsStorage]
     @Query() var filterSettings: [adBlockFilterSetting]
-    
-    let iconSize : CGFloat = 30
 
-//    @State private var sliderValue: Double = 3.0
+    private let iconSize : CGFloat = 30
+
     
 
     var body: some View {
 
-
-        NavigationView {
-            VStack(spacing: 0) {
-                // Header ZStack for easy center of header
-                ZStack {
-                    HStack {
-                        Button(action: {
-                            do {
-                                try modelContext.save()
-                            } catch {
-                                print("Error: Saving options failed.")
-                            }
-                            self.presentationMode.wrappedValue.dismiss()
-                        }) {
-                            Text("general.done")
+        NavigationStack {
+            
+            
+            // Combined List with multiple sections
+            List {
+                
+                Section {
+                    NavigationLink(destination: iOSPromotion()) {
+                        HStack {
+                            Image(uiImage: UIImage(named: "Promotion-BMC-logo")!)
+                                .resizable()
+                                .frame(width: iconSize * 1.3, height: iconSize*1.3)
+                                .cornerRadius(iconSize*1.3/2)
+                                .padding(.vertical, 2)
+                            
+                            Text("options.settings.navigationPromotion")
+                                .padding(.leading)
                         }
-                        Spacer()
-                    }
-                    .padding()
-
-                    HStack {
-                        Spacer()
-                        Text("options.header.text")
-                            .font(.title)
-                        Spacer()
                     }
                 }
-
-
-                // Combined List with multiple sections
-                List {
-
-                    Section {
-                        NavigationLink(destination: iOSPromotion()) {
+                
+                
+                // Websites Section
+                Section(header: Text("options.websites.header")) {
+                    ForEach(webSites.indices, id: \.self) { sitePointer in
+                        NavigationLink(destination: iOSOptionsEditSite(editSite: webSites[sitePointer])) {
                             HStack {
-                                Image(uiImage: UIImage(named: "Promotion-BMC-logo")!)
-                                    .resizable()
-                                    .frame(width: iconSize * 1.3, height: iconSize*1.3)
-                                    .cornerRadius(iconSize*1.3/2)
-                                    .padding(.vertical, 2)
-
-                                Text("options.settings.navigationPromotion")
-                                    .padding(.leading)
-                            }
-                        }
-                    }
-
-
-                    // Websites Section
-                    Section(header: Text("options.websites.header")) {
-                        ForEach(webSites.indices, id: \.self) { sitePointer in
-                            NavigationLink(destination: iOSOptionsEditSite(editSite: webSites[sitePointer])) {
-                                HStack {
-
-
-                                    if let tempIcon = UIImage(data: webSites[sitePointer].siteFavIcon!) {
-                                        Image(uiImage: tempIcon)
-                                            .resizable()
-                                            .frame(width: iconSize, height: iconSize)
-                                            .clipShape(RoundedRectangle(cornerRadius: iconSize/2))
-                                    }
-
-                                    VStack {
-                                        Text(webSites[sitePointer].siteName)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        Text(webSites[sitePointer].siteURL)
-                                            .font(.caption)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    .padding(.leading)
+                                
+                                
+                                if let tempIcon = UIImage(data: webSites[sitePointer].siteFavIcon!) {
+                                    Image(uiImage: tempIcon)
+                                        .resizable()
+                                        .frame(width: iconSize, height: iconSize)
+                                        .clipShape(RoundedRectangle(cornerRadius: iconSize/2))
                                 }
+                                
+                                VStack {
+                                    Text(webSites[sitePointer].siteName)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Text(webSites[sitePointer].siteURL)
+                                        .font(.caption)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .padding(.leading)
                             }
                         }
                     }
-
-                    // Settings Section
-                    iOSOptionsViewSettings()
-
                 }
-                .listStyle(InsetGroupedListStyle())
+                
+                // Settings Section
+                iOSOptionsViewSettings()
+                
             }
+            .listStyle(InsetGroupedListStyle())
+            .navigationTitle("options.header.text")
+            .toolbar {
+                 ToolbarItem(placement: .navigationBarTrailing) {
+                     Button("general.done") {
+                         try? modelContext.save()
+                         dismiss()
+                     }
+                 }
+             }
             .onAppear() {
                 collector.save(event: "Viewed", parameter: "Options")
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

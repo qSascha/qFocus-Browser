@@ -46,6 +46,7 @@ struct StartView: View {
 
     
     var body: some View {
+
         ZStack {
             MainContent()
                 .environmentObject(globals)
@@ -56,14 +57,14 @@ struct StartView: View {
         .onAppear {
             Task { @MainActor in
                 if !hasInitialized {
-
+                    
                     let deviceInfo = DeviceInfo.getDeviceIdentifier()
                     collector.save(event: "Launched", parameter: deviceInfo)
                     
                     let deviceLanguage = String(Locale.preferredLanguages[0].prefix(2))
                     collector.save(event: "Language", parameter: deviceLanguage)
-
-
+                    
+                    
                     await startViewModel.updateWebViewControllers(with: Array(startViewModel.webSites))
                     hasInitialized = true
                 }
@@ -75,7 +76,7 @@ struct StartView: View {
             }
         }
         .sheet(isPresented: .init(
-//            get: { true },
+            //            get: { true },
             get: { !onboardingComplete },
             set: { if !$0 { onboardingComplete = true } }
         )) {
@@ -110,8 +111,6 @@ private struct MainContent: View {
     
     @AppStorage("onboardingComplete") var onboardingComplete: Bool = false
 
-    
-    
     
     
     

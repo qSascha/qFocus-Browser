@@ -82,14 +82,18 @@ struct WebViewContainer: UIViewControllerRepresentable {
 
 
 
-//MARK Web View Controller
+//MARK: CLASS Web View Controller
 class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIAdaptivePresentationControllerDelegate {
 
     var webView: WKWebView!
     private var refreshControl: UIRefreshControl!
     private var hasSetupWebView = false
     private var initialRequestDesktop: Bool = false
-    private var currentRequestDesktop: Bool = false  // Add this to track current state
+    private var currentRequestDesktop: Bool = false
+
+    private var isHandlingExternalNavigation = false
+    private var lastNavigationTime: Date?
+    private let navigationCooldown: TimeInterval = 0.5
 
 
     init(requestDesktop: Bool = false) {
@@ -242,91 +246,100 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, U
     // MARK: Decide Policy For
     // Check if a link has been interacted by the user and if the core domain is the same. If yes then open in the internal browser, otherwise in the external browser.
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard let url = navigationAction.request.url,
-              let host = url.host else {
-            decisionHandler(.allow)
-            return
-        }
-        
-        // If it's not a user-initiated link click, allow internal navigation
-        if navigationAction.navigationType != .linkActivated {
-            decisionHandler(.allow)
-            return
-        }
-        
-        guard let currentHost = webView.url?.host else {
-            decisionHandler(.allow)
-            return
-        }
-        
-        // Compare domain cores for user-initiated navigation
-        let currentMainDomain = getDomainCore(currentHost)
-        let targetMainDomain = getDomainCore(host)
-        
+         // Check if we're in the cooldown period after dismissal
+         if let lastNav = lastNavigationTime,
+            Date().timeIntervalSince(lastNav) < navigationCooldown {
+             decisionHandler(.cancel)
+             return
+         }
 
-        if currentMainDomain == targetMainDomain {
-            // Allowing internal navigation to same domain
-            decisionHandler(.allow)
-        } else {
-            //Opening external browser for navigation to different domain
-            decisionHandler(.cancel)
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                let externalView = ExternalWebView(url: url)
-                let hostingController = UIHostingController(rootView: externalView)
-                hostingController.modalPresentationStyle = .fullScreen
-                self.present(hostingController, animated: true)
-            }
+         // If we're handling external navigation, prevent any other navigation
+         if isHandlingExternalNavigation {
+             decisionHandler(.cancel)
+             return
+         }
 
-        }
+         guard let url = navigationAction.request.url,
+               let host = url.host else {
+             decisionHandler(.allow)
+             return
+         }
+         
+         // If it's not a user-initiated link click, allow internal navigation
+         if navigationAction.navigationType != .linkActivated {
+             decisionHandler(.allow)
+             return
+         }
+         
+         guard let currentHost = webView.url?.host else {
+             decisionHandler(.allow)
+             return
+         }
+         
+         let currentMainDomain = getDomainCore(currentHost)
+         let targetMainDomain = getDomainCore(host)
+         
+         if currentMainDomain == targetMainDomain {
+             decisionHandler(.allow)
+         } else {
+             decisionHandler(.cancel)
+             
+             isHandlingExternalNavigation = true
+             
+             DispatchQueue.main.async { [weak self] in
+                 guard let self = self else { return }
+                 let externalViewController = ExternalWebViewUIK(url: url)
+                 externalViewController.delegate = self
+                 let navigationController = UINavigationController(rootViewController: externalViewController)
+                 navigationController.modalPresentationStyle = .fullScreen
+                 self.present(navigationController, animated: true)
+             }
+         }
+     }
 
-    }
+    
+    
+    
     
     // MARK: "_blank" and similar
     // called "_blank" and similar
     // Check if a link has been interacted by the user and if the core domain is the same. If yes then open in the internal browser, otherwise in the external browser.
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        guard let url = navigationAction.request.url,
-              let host = url.host else {
-            // No host found in request
-            return nil
-        }
-        
-        guard let currentHost = webView.url?.host else {
-            // Loading new window request in current webview
-            webView.load(navigationAction.request)
-            return nil
-        }
-        
-        // Treat new window requests as user-initiated and compare domain cores
-        let currentMainDomain = getDomainCore(currentHost)
-        let targetMainDomain = getDomainCore(host)
-        
-        
-        // In your WKNavigationDelegate methods
-        if currentMainDomain == targetMainDomain {
-            // Loading in current webview same domain
-            webView.load(navigationAction.request)
-        } else {
-            // Opening external browser for new window request, different domain
+         if isHandlingExternalNavigation {
+             return nil
+         }
 
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                let externalView = ExternalWebView(url: url)
-                let hostingController = UIHostingController(rootView: externalView)
-                hostingController.modalPresentationStyle = .fullScreen
-                self.present(hostingController, animated: true)
-            }
+         guard let url = navigationAction.request.url,
+               let host = url.host else {
+             return nil
+         }
+         
+         guard let currentHost = webView.url?.host else {
+             webView.load(navigationAction.request)
+             return nil
+         }
+         
+         let currentMainDomain = getDomainCore(currentHost)
+         let targetMainDomain = getDomainCore(host)
+         
+         if currentMainDomain == targetMainDomain {
+             webView.load(navigationAction.request)
+         } else {
+             isHandlingExternalNavigation = true
+             
+             DispatchQueue.main.async { [weak self] in
+                 guard let self = self else { return }
+                 let externalViewController = ExternalWebViewUIK(url: url)
+                 externalViewController.delegate = self
+                 let navigationController = UINavigationController(rootViewController: externalViewController)
+                 navigationController.modalPresentationStyle = .fullScreen
+                 self.present(navigationController, animated: true)
+             }
+         }
+         return nil
+     }
 
-        }
 
-        return nil
-    }
-
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        // Handle any cleanup after dismissal if needed
-    }
 
 
     private func getDomainCore(_ host: String) -> String {
@@ -341,4 +354,23 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, U
 
 
 
+// Add protocol for ExternalWebViewUIK delegate
+protocol ExternalWebViewUIKDelegate: AnyObject {
+    func externalWebViewWillDismiss()
+    func externalWebViewDidDismiss()
+}
+
+// Add extension to WebViewController to implement the delegate
+extension WebViewController: ExternalWebViewUIKDelegate {
+    func externalWebViewWillDismiss() {
+        isHandlingExternalNavigation = true
+        lastNavigationTime = Date()
+    }
+    
+    func externalWebViewDidDismiss() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + navigationCooldown) { [weak self] in
+            self?.isHandlingExternalNavigation = false
+        }
+    }
+}
 

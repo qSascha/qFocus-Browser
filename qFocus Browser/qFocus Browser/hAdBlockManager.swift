@@ -79,6 +79,7 @@ class AdBlockManager {
         let (data, _) = try await URLSession.shared.data(from: url)
         let newChecksum = calculateChecksum(of: data)
         
+        print("Getting checksum for \(identifier): \(newChecksum)")
         // Check if we already have this version compiled
         if let existingChecksum = checksums[identifier], existingChecksum == newChecksum {
 

@@ -14,8 +14,9 @@ import UIKit
 struct iOSAboutView: View {
     @EnvironmentObject var globals: GlobalVariables
     @EnvironmentObject var collector: Collector
-    @State private var showWebView = false
 
+
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -36,21 +37,19 @@ struct iOSAboutView: View {
                     
                     // App Title and Version
                     VStack(spacing: 10) {
-                        HStack {
-                            Text("about.header.appName")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(.blue)
-
-                            Image(systemName: "link.circle")
-                                .font(.title)
-                                .foregroundColor(.blue)
-                        }
-                        .onTapGesture {
-                            showWebView = true
-                        }
-                        .fullScreenCover(isPresented: $showWebView) {
-                            ExternalWebViewWrapper(url: URL(string: "https://qsascha.dev")!)
+                        NavigationLink(
+                            destination: ExternalWebView(url: URL(string: "https://qsascha.dev/qfocus-browser/")!)
+                        ) {
+                            HStack {
+                                Text("about.header.appName")
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.blue)
+                                
+                                Image(systemName: "link.circle")
+                                    .font(.title)
+                                    .foregroundColor(.blue)
+                            }
                         }
 
                         Text("general.version \(globals.appVersion)")
@@ -65,7 +64,6 @@ struct iOSAboutView: View {
                 Group {
                     Text("about.thanks.header")
                         .font(.headline)
-                    
                     Text("about.thanks.text1")
                         .fixedSize(horizontal: false, vertical: true)
                     Text("about.thanks.text2")
@@ -79,13 +77,22 @@ struct iOSAboutView: View {
                         .font(.headline)
                     
                     Text("about.credits.text")
-                        .fixedSize(horizontal: false, vertical: true)
+//                        .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Link("about.link.adguardFilters", destination: URL(string: "https://github.com/AdguardTeam/FiltersRegistry")!)
-                            .foregroundColor(.blue)
-                        Link("about.link.adguardConverter", destination: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
-                            .foregroundColor(.blue)
+                        NavigationLink(
+                            destination: ExternalWebView(url: URL(string: "https://github.com/AdguardTeam/FiltersRegistry")!)
+                        ) {
+                            Text("about.link.adguardFilters")
+                                .foregroundColor(.blue)
+                        }
+
+                        NavigationLink(
+                            destination: ExternalWebView(url: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
+                        ) {
+                            Text("about.link.adguardConverter")
+                                .foregroundColor(.blue)
+                        }
 
                     }
                 }
@@ -93,15 +100,19 @@ struct iOSAboutView: View {
                 // Copyright Notice
                 HStack(spacing: 0) {
                     
-//                    Text("© 2025")
                     Text("about.copyright")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.top, 20)
-                    Link(" qSascha", destination: URL(string: "https://qSascha.dev")!)
-                        .font(.footnote)
-                        .foregroundColor(.blue)
-                        .padding(.top, 20)
+
+                    NavigationLink(
+                        destination: ExternalWebView(url: URL(string: "https://qSascha.dev")!)
+                    ) {
+                        Text(" qSascha")
+                            .font(.footnote)
+                            .foregroundColor(.blue)
+                            .padding(.top, 20)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
             }
@@ -109,6 +120,8 @@ struct iOSAboutView: View {
             .onAppear() {
                 collector.save(event: "Viewed", parameter: "About")
             }
+
+
         }
     }
     

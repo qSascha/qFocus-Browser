@@ -1,0 +1,33 @@
+//MARK: Wrappers
+
+//Bindable
+SwiftUI Bindable for Seamless Data Binding in Your Apps
+
+//Binding
+When you use @Binding, you’re essentially creating a live connection between the data in the parent view and the data in the child view.
+This means that any changes made to the data inside the child view will instantly reflect in the parent view and vice versa.
+It’s like having a real-time sync feature for your data!
+
+//ObservedObject
+@ObservedObject is a property wrapper in SwiftUI that allows a view to watch an external object that conforms to the ObservableObject protocol.
+It notifies the view to update when any of the object's @Published properties change, enabling dynamic and responsive user interfaces.
+
+//StateObject
+There is one important difference between @StateObject and @ObservedObject, which is ownership – which view created the object
+and which view is just watching it.
+The rule is this: whichever view is the first to create your object must use @StateObject, to tell SwiftUI it is the owner of the data
+and is responsible for keeping it alive. All other views must use @ObservedObject, to tell SwiftUI they want to watch the object
+for changes but don’t own it directly.
+
+//State
+@State is one of the most commonly used property wrappers in SwiftUI. It’s designed to handle mutable state within a single view.
+By marking a variable with @State, you enable SwiftUI to track its changes and automatically update the view whenever the state changes.
+Remember that @State should only be used within a View, as it is intended for simple, localized state management.
+
+//EnvironmentObject
+This is a value that is made available to your views through the application itself – it’s shared data that every view
+can read if they want to. So, if your app had some important model data that all views needed to read,
+you could either hand it from view to view to view or just put it into the environment where every view has instant access to it.
+Think of @EnvironmentObject as a massive convenience for times when you need to pass lots of data around your app.
+Because all views point to the same model, if one view changes the model all views immediately update – there’s no risk of getting
+different parts of your app out of sync.

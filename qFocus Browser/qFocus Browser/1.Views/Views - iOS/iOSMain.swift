@@ -66,7 +66,7 @@ struct iOSMain: View {
             }
         }
         .onAppear {
-           adBlockUC.compileAdBlockLists()
+            adBlockUC.compileAdBlockLists(manually: false)
         }
         .sheet(item: $viewModel.externalURL, onDismiss: {
             viewModel.externalURL = nil

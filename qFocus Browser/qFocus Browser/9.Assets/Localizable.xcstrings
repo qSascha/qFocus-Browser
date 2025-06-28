@@ -997,8 +997,12 @@
         }
       }
     },
+    "Ad-Block Frequency" : {
+
+    },
     "adblock.enable.toggle" : {
       "comment" : "Global toggle for ad-blocking.",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1620,6 +1624,9 @@
           }
         }
       }
+    },
+    "adblock.update.msgManually" : {
+
     },
     "adblock.updatenow.button" : {
       "comment" : "Button the user can press to force an update now, without waiting for the next update.",
@@ -4427,6 +4434,9 @@
     "Add Website" : {
 
     },
+    "Always" : {
+
+    },
     "Authentication Failed" : {
 
     },
@@ -4437,6 +4447,12 @@
 
     },
     "by" : {
+
+    },
+    "Daily" : {
+
+    },
+    "Disabled" : {
 
     },
     "Face ID authentication was unsuccessful. Please try again." : {
@@ -6231,6 +6247,9 @@
       }
     },
     "Loading..." : {
+
+    },
+    "Monthly" : {
 
     },
     "onboarding.010welcome.header" : {
@@ -9764,6 +9783,9 @@
 
     },
     "Retry" : {
+
+    },
+    "Weekly" : {
 
     }
   },

@@ -99,7 +99,7 @@ final class WebViewVM: NSObject, ObservableObject {
         let userContentController = WKUserContentController()
 
         // Enable AdBlocking
-        if settingsRepo.get().enableAdBlock && site.enableAdBlocker {
+        if settingsRepo.get().adBlockUpdateFrequency != 0 && site.enableAdBlocker {
             for setting in adBlockRepo.getAllEnabled() {
                 do {
                     if let ruleList = try await WKContentRuleListStore.default().contentRuleList(forIdentifier: setting.filterID) {
@@ -226,58 +226,156 @@ extension WebViewVM: WKNavigationDelegate {
         preferences: WKWebpagePreferences,
         decisionHandler: @escaping @MainActor @Sendable (WKNavigationActionPolicy, WKWebpagePreferences) -> Void
     ) {
+        // Only process user-initiated taps
+        guard navigationAction.navigationType == .linkActivated,
+              let url = navigationAction.request.url,
+              let scheme = url.scheme?.lowercased() else {
+            // Allow all other navigations (including JS, redirects, etc.)
+            decisionHandler(.allow, preferences)
+            return
+        }
 
-        // Save current URL for ShareSheet usagae
-        currentURL = webView.url
-
-        print("🔍 Navigation attempt to: \(navigationAction.request.url?.absoluteString ?? "nil")")
-        
-
-        // Cooldown logic to prevent repeated triggers
-        if let lastNav = lastNavigationTime,
-           Date().timeIntervalSince(lastNav) < 1 {
+        // Handle mailto:, tel:, etc. externally
+        let externalSchemes = ["mailto", "tel", "sms", "maps", "facetime"]
+        if externalSchemes.contains(scheme) {
+            UIApplication.shared.open(url)
             decisionHandler(.cancel, preferences)
             return
         }
 
-        guard let url = navigationAction.request.url,
-              let host = url.host else {
-            decisionHandler(.allow, preferences)
-            return
-        }
-        print("🌐 Target host: \(host)")
-
-        // Only intercept actual link clicks
-        print("➡️ Navigation type: \(navigationAction.navigationType.rawValue)")
-        if navigationAction.navigationType != .linkActivated {
+        // Only handle http(s) links in the following logic
+        guard scheme == "http" || scheme == "https" else {
             decisionHandler(.allow, preferences)
             return
         }
 
-        guard let currentHost = webView.url?.host else {
+        // Compare domain for internal/external navigation
+        guard let targetHost = url.host,
+              let currentHost = webView.url?.host else {
             decisionHandler(.allow, preferences)
             return
         }
-        print("🏠 Current host: \(currentHost)")
-
         let currentMainDomain = getDomainCore(currentHost)
-        let targetMainDomain = getDomainCore(host)
-        print("🔍 Comparing domains: current=\(currentMainDomain), target=\(targetMainDomain)")
+        let targetMainDomain = getDomainCore(targetHost)
 
         if currentMainDomain == targetMainDomain {
-            decisionHandler(.allow, preferences)
+            print("URL: \(url)")
+            let request = URLRequest(url: url)
+            decisionHandler(.cancel, preferences)
+            webView.load(request)
             return
         } else {
             decisionHandler(.cancel, preferences)
-            isHandlingExternalNavigation = true
-
-            print("🚪 Opening external browser for: \(url.absoluteString)")
-            DispatchQueue.main.async {
-                CombineRepo.shared.triggerExternalBrowser.send(url)
-            }
+            CombineRepo.shared.triggerExternalBrowser.send(url)
         }
-
     }
+
+
+
+
+    
+    
+    
+    
+    
+    
+  /*
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        // Check if we're in the cooldown period after dismissal
+        if let lastNav = lastNavigationTime,
+           Date().timeIntervalSince(lastNav) < 0.5 {
+            decisionHandler(.cancel)
+            return
+        }
+        
+        // If we're handling external navigation, prevent any other navigation
+        if isHandlingExternalNavigation {
+            decisionHandler(.cancel)
+            return
+        }
+        
+        guard let url = navigationAction.request.url,
+              let host = url.host else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        // If it's not a user-initiated link click, allow internal navigation
+        if navigationAction.navigationType != .linkActivated {
+            decisionHandler(.allow)
+            return
+        }
+        
+        guard let currentHost = webView.url?.host else {
+            print("URL-Host: \(url)")
+            let request = URLRequest(url: url)
+            decisionHandler(.cancel)
+            webView.load(request)
+            return
+        }
+        
+        let currentMainDomain = getDomainCore(currentHost)
+        let targetMainDomain = getDomainCore(host)
+        
+        if currentMainDomain == targetMainDomain {
+            print("URL-Domain: \(url)")
+            let request = URLRequest(url: url)
+            decisionHandler(.cancel)
+            webView.load(request)
+            return
+        } else {
+            decisionHandler(.cancel)
+            CombineRepo.shared.triggerExternalBrowser.send(url)
+        }
+    }
+    */
+
+
+
+    /// Handles requests to create a new web view (e.g., for popups).
+    /// Instead of creating a new window, this method either loads the URL in the current web view
+    /// if it's in the same domain, or presents it in an external view if it's from a different domain.
+    /// This approach maintains the focus-oriented browsing experience.
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if isHandlingExternalNavigation {
+            return nil
+        }
+        
+        guard let url = navigationAction.request.url,
+              let host = url.host else {
+            return nil
+        }
+        
+        guard let currentHost = webView.url?.host else {
+            webView.load(navigationAction.request)
+            return nil
+        }
+        
+        let currentMainDomain = getDomainCore(currentHost)
+        let targetMainDomain = getDomainCore(host)
+        
+        if currentMainDomain == targetMainDomain {
+            webView.load(navigationAction.request)
+        } else {
+            CombineRepo.shared.triggerExternalBrowser.send(url)
+
+        }
+        return nil
+    }
+    
+    /// Extracts the core domain from a hostname.
+    /// Takes a hostname string and returns the main domain (e.g., "example.com" from "www.example.com").
+    /// This is used for domain comparison when enforcing navigation restrictions.
+    private func getDomainCore(_ host: String) -> String {
+        let components = host.lowercased().split(separator: ".")
+        guard components.count >= 2 else { return host.lowercased() }
+        let mainDomain = components.suffix(2).joined(separator: ".")
+        return mainDomain
+    }
+
+
+
+
 
 }
 
@@ -309,3 +407,4 @@ extension WebViewVM: UIScrollViewDelegate {
         lastContentOffsetY = currentOffsetY
     }
 }
+

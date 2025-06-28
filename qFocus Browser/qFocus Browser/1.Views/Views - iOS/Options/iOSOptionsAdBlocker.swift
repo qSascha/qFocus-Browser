@@ -14,14 +14,19 @@ struct iOSAdBlockSettings: View {
 
     @State private var showingExplanation: AdBlockFilterDisplayItem?
 
-
     
     var body: some View {
         List {
             // Global Ad-Block Toggle
             Section {
-                Toggle("adblock.enable.toggle", isOn: viewModel.enableAdBlockToggle)
-                    .tint(.blue)
+                Picker("Ad-Block Frequency", selection: viewModel.adBlockUpdateFrequency) {
+                    Text("Disabled").tag(Int16(0))
+                    Text("Always").tag(Int16(1))
+                    Text("Daily").tag(Int16(2))
+                    Text("Weekly").tag(Int16(3))
+                    Text("Monthly").tag(Int16(4))
+                }
+                
             }
 
             if viewModel.isAdBlockEnabled {

@@ -169,11 +169,11 @@ struct iOSOptions: View {
                     HStack {
                         Text("options.settings.NavigationAdBlocking")
                         Image(systemName: "shield.fill")
-                            .foregroundColor(viewModel.enableAdBlock ? .green : .gray)
+                            .foregroundColor(viewModel.adBlockUpdateFrequency != 0 ? .green : .gray)
                         
                         Spacer()
                         
-                        if viewModel.enableAdBlock {
+                        if viewModel.adBlockUpdateFrequency != 0 {
                             Text("\(viewModel.enabledFilterCount) adblock.activeCounts")
                                 .font(.caption)
                             .foregroundColor(.gray)
@@ -199,8 +199,3 @@ struct iOSOptions: View {
     
 }
 
-
-
-#Preview {
-    iOSOptions()
-}

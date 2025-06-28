@@ -63,12 +63,12 @@ final class OptionsVM: ObservableObject {
     
 
     
-    //MARK: Enable AdBlock
-    var enableAdBlock: Bool {
-        get { settings.enableAdBlock }
+    //MARK: AdBlock Update Frequency
+    var adBlockUpdateFrequency: Int16 {
+        get { settings.adBlockUpdateFrequency }
         set {
             settingsRepo.update { settings in
-                settings.enableAdBlock = newValue
+                settings.adBlockUpdateFrequency = newValue
             }
         }
     }
@@ -111,3 +111,4 @@ final class OptionsVM: ObservableObject {
     }
 
 }
+

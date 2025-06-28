@@ -18,15 +18,14 @@ final class iOSAdBlockSettingsVM: ObservableObject {
     @Published var filterItems: [AdBlockFilterDisplayItem] = []
 
 
-    
-    var enableAdBlockToggle: Binding<Bool> {
-        Binding<Bool>(
+    var adBlockUpdateFrequency: Binding<Int16> {
+        Binding<Int16>(
             get: {
-                self.settingsRepo.get().enableAdBlock
+                self.settingsRepo.get().adBlockUpdateFrequency
             },
             set: { newValue in
                 self.settingsRepo.update { settings in
-                    settings.enableAdBlock = newValue
+                    settings.adBlockUpdateFrequency = newValue
                 }
                 CombineRepo.shared.updateWebSites.send()
             }
@@ -34,7 +33,11 @@ final class iOSAdBlockSettingsVM: ObservableObject {
     }
     
     var isAdBlockEnabled: Bool {
-        settingsRepo.get().enableAdBlock
+        if settingsRepo.get().adBlockUpdateFrequency > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
 
@@ -79,8 +82,7 @@ final class iOSAdBlockSettingsVM: ObservableObject {
     
     //MARK: Update Now Button
     func updateNow() async {
-        adBlockUC.compileAdBlockLists()
-
+        adBlockUC.compileAdBlockLists(manually: true)
     }
     
     

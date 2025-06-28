@@ -42,7 +42,7 @@ class StartVM: ObservableObject {
 
         let settings = settingsRepo.get()
         print("🔧 Settings:")
-        print("• enableAdBlock: \(settings.enableAdBlock)")
+//        print("• AdBlock Frequency: \(settings.adBlockUpdateFrequency)")
         print("• freeFlowXPercent: \(settings.freeFlowXPercent)")
         print("• freeFlowYPercent: \(settings.freeFlowYPercent)")
         print("• adBlockLastUpdate: \(settings.adBlockLastUpdate?.description ?? "nil")")

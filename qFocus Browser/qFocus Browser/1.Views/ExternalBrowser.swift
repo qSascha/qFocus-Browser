@@ -165,9 +165,4 @@ struct ActivityView: UIViewControllerRepresentable {
 
 
 
-#Preview {
-    ExternalBrowserView(
-        viewModel: ExternalBrowserVM(url: URL(string: "https://apple.com")!)
-    )
-}
 

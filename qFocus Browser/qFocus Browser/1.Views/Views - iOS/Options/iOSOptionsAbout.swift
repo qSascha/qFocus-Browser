@@ -15,6 +15,7 @@ struct iOSAbout: View {
     
     
     var body: some View {
+        
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 

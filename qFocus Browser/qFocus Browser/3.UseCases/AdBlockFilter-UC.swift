@@ -24,6 +24,7 @@ final class AdBlockFilterUC: ObservableObject {
     @Published var updatingFilters: Bool = false
     @Published var totalCounter: Int = 0
     @Published var updateCounter: Int = 0
+    @Published var triggeredManually: Bool = false
 
     
     
@@ -39,7 +40,31 @@ final class AdBlockFilterUC: ObservableObject {
 
     //MARK: Update Lists
     /// Processes all enabled AdBlockLists
-    func compileAdBlockLists() {
+    func compileAdBlockLists(manually: Bool) {
+
+        let frequency = settingsRepo.get().adBlockUpdateFrequency
+        let lastUpdate = settingsRepo.get().adBlockLastUpdate ?? Date.distantPast
+        let now = Date()
+        var shouldUpdate = false
+        switch frequency {
+        case 1:
+            shouldUpdate = true
+        case 2:
+            let isSameDay = Calendar.current.isDate(now, inSameDayAs: lastUpdate)
+            shouldUpdate = !isSameDay
+        case 3:
+            shouldUpdate = now > Calendar.current.date(byAdding: .day, value: 6, to: lastUpdate)!
+        case 4:
+            shouldUpdate = now > Calendar.current.date(byAdding: .day, value: 29, to: lastUpdate)!
+        default:
+            shouldUpdate = false
+        }
+        if !manually && !shouldUpdate {
+            return
+        }
+        print("------------ Updating ...")
+
+        triggeredManually = manually
         updatingFilters = true
 
         Task { @MainActor in
@@ -58,12 +83,25 @@ final class AdBlockFilterUC: ObservableObject {
             print("Lists to update: \(filtersToCompile.count)")
             #endif
 
-            for filter in filtersToCompile {
-                await Task.detached(priority: .utility) {
+            // Compile all parallel
+            let tasks = filtersToCompile.map { filter in
+                Task.detached(priority: .utility) { [self] in
                     await self.compileFilter(filter)
-                }.value
+                }
+            }
+            for task in tasks {
+                await task.value
             }
 
+            /* Sequential
+             for filter in filtersToCompile {
+                 await Task.detached(priority: .utility) {
+                     await self.compileFilter(filter)
+                 }.value
+             }
+             */
+            
+            
             settingsRepo.update() { settings in
                 settings.adBlockLastUpdate = Date()
             }
@@ -71,7 +109,9 @@ final class AdBlockFilterUC: ObservableObject {
             updatingFilters = false
 
             // If triggered manuall, through Update button in AdBlock settings then update all webviews.
-            CombineRepo.shared.updateWebSites.send()
+            if manually {
+                CombineRepo.shared.updateWebSites.send()
+            }
         }
     }
     
@@ -273,3 +313,4 @@ final class AdBlockFilterUC: ObservableObject {
     
     
 }
+

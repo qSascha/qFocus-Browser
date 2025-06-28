@@ -11,6 +11,7 @@ import SwiftUI
 
 @MainActor
 class OnboardingVM: ObservableObject {
+    
     enum PictureAccessLevel: String, Equatable, CaseIterable {
         case unknown
         case full
@@ -65,9 +66,9 @@ class OnboardingVM: ObservableObject {
         print("Onboarding Complete - Step 0 -----------------------------------------")
         settingsRepo.update() { settings in
             settings.onboardingComplete = true;
-            settings.enableAdBlock = true;
             settings.freeFlowXPercent = 0.75;
             settings.freeFlowYPercent = 0.85;
+            settings.adBlockUpdateFrequency = 1;
         }
         // Inform the StartView about this.
         isComplete = true

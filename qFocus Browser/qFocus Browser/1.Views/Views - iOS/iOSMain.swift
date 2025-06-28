@@ -26,13 +26,6 @@ struct iOSMain: View {
             // Navigation Bar
             NavBar(coordinator: coordinator)
 
-/*
-            if optionsVM.showNavBar {
-                NavBar(coordinator: coordinator)
-            } else {
-                FloatingNavBar(coordinator: coordinator)
-            }
-*/
             // Loading message for ad-blocker
             if adBlockUC.updatingFilters {
                  AdBlockLoadStatus()
@@ -41,25 +34,15 @@ struct iOSMain: View {
 
 
             // Web Views
-            VStack {
-/*
-                if (optionsVM.showNavBar) {
-                    Rectangle()
-                        .opacity(0)
-                        .frame(maxWidth: .infinity, maxHeight: 30)
-                }
-*/
-                ZStack {
-                    // Simply shows ZStack of WebView Views.
-                    // Binds selectedWebViewID to control which one is visible.
-                    // No knowledge of how web views are created, loaded, or configured.
+            ZStack {
+                // Simply shows ZStack of WebView Views.
+                // Binds selectedWebViewID to control which one is visible.
 
-                    ForEach(viewModel.sitesDetails.map { $0 }, id: \.id) { item in
-                        WebView(viewModel: item.viewModel)
-                            .opacity(viewModel.selectedWebViewID == item.id ? 1 : 0)
-                    }
-
+                ForEach(viewModel.sitesDetails.map { $0 }, id: \.id) { item in
+                    WebView(viewModel: item.viewModel)
+                        .opacity(viewModel.selectedWebViewID == item.id ? 1 : 0)
                 }
+
             }
             .onAppear {
                 Task {
@@ -68,16 +51,15 @@ struct iOSMain: View {
             }
 
         }
-//        .background(Color(.qBlueLight))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .bottom)
         .fullScreenCover(isPresented: $coordinator.showOptionsView) {
             iOSOptions()
         }
         .sheet(isPresented: $coordinator.showShareSheet) {
-            //TODO: Replace with correct URL
-            if let url = URL(string: "https://reddit.com") {
-                //TODO: Share current URL
+            if let selectedID = viewModel.selectedWebViewID,
+               let siteDetail = viewModel.sitesDetails.first(where: { $0.id == selectedID }),
+               let url = siteDetail.viewModel.currentURL {
                 ShareSheet(activityItems: [url])
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)

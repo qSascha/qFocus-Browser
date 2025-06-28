@@ -54,7 +54,6 @@ final class MainVM: ObservableObject {
         self.sitesDetails.removeAll()
         
         // Fetch the latest site configurations
-//        let sites = sitesRepo.getAllSites(order: .descending)
         let sites = sitesRepo.getAllSites()
         var newDetails: [SitesDetails] = []
         

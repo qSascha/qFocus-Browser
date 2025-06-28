@@ -15,6 +15,7 @@ final class WebViewVM: NSObject, ObservableObject {
     @Published var estimatedProgress: Double = 0.0
     @Published var canGoBack: Bool = false
     @Published var canGoForward: Bool = false
+    @Published var currentURL: URL?
     private var lastNavigationTime: Date?
     private var initialHost: String?
 
@@ -34,10 +35,6 @@ final class WebViewVM: NSObject, ObservableObject {
     private let minTriggerInterval: TimeInterval = 0.4
     private let minTriggerDistance: CGFloat = 60
 
-    
-//    private var jsBlockerRuleList: WKContentRuleList?
-//    private var adBlockerRuleList: WKContentRuleList?
-    
     var webViewID: UUID = UUID()
     
     
@@ -230,8 +227,10 @@ extension WebViewVM: WKNavigationDelegate {
         decisionHandler: @escaping @MainActor @Sendable (WKNavigationActionPolicy, WKWebpagePreferences) -> Void
     ) {
 
+        // Save current URL for ShareSheet usagae
+        currentURL = webView.url
+
         print("🔍 Navigation attempt to: \(navigationAction.request.url?.absoluteString ?? "nil")")
-        
         
 
         // Cooldown logic to prevent repeated triggers
@@ -240,16 +239,7 @@ extension WebViewVM: WKNavigationDelegate {
             decisionHandler(.cancel, preferences)
             return
         }
-        print("⏱ Cooldown check passed")
-/*
-        // Abort if we're already handling another external nav
-        if isHandlingExternalNavigation {
-            print("🔁 External navigation in progress: \(isHandlingExternalNavigation)")
-            decisionHandler(.cancel, preferences)
-            return
-        }
-        print("🔁 External navigation in progress: \(isHandlingExternalNavigation)")
-*/
+
         guard let url = navigationAction.request.url,
               let host = url.host else {
             decisionHandler(.allow, preferences)

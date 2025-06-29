@@ -9,7 +9,7 @@ import WebKit
 
 
 @MainActor
-final class ExternalBrowserVM: ObservableObject {
+final class ExternalBrowserVM: NSObject, ObservableObject {
     @Published var webView: WKWebView
     @Published var url: URL
 
@@ -20,10 +20,13 @@ final class ExternalBrowserVM: ObservableObject {
         self.url = url
 
         let config = WKWebViewConfiguration()
-        config.websiteDataStore = .nonPersistent() // New cookie store per instance
+        config.websiteDataStore = .nonPersistent()
         config.allowsInlineMediaPlayback = true
-
+        
         self.webView = WKWebView(frame: .zero, configuration: config)
+        
+        super.init()
+        
         self.webView.allowsBackForwardNavigationGestures = true
         self.webView.scrollView.bounces = true
         self.webView.scrollView.refreshControl = UIRefreshControl()
@@ -35,6 +38,9 @@ final class ExternalBrowserVM: ObservableObject {
         )
 
         self.webView.load(URLRequest(url: url))
+        
+        webView.navigationDelegate = self
+
     }
 
     
@@ -72,3 +78,87 @@ final class ExternalBrowserVM: ObservableObject {
         [webView.url?.absoluteString ?? url.absoluteString]
     }
 }
+
+
+
+//MARK: Navigation Delegate
+extension ExternalBrowserVM: WKNavigationDelegate {
+   
+    
+    @objc
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        preferences: WKWebpagePreferences,
+        decisionHandler: @escaping @MainActor @Sendable (WKNavigationActionPolicy, WKWebpagePreferences) -> Void
+    ) {
+        // Only process user-initiated taps
+        guard navigationAction.navigationType == .linkActivated,
+              let url = navigationAction.request.url,
+              let scheme = url.scheme?.lowercased() else {
+            // Allow all other navigations (including JS, redirects, etc.)
+            decisionHandler(.allow, preferences)
+            return
+        }
+
+        // Handle mailto:, tel:, etc. externally
+        let externalSchemes = ["mailto", "tel", "sms", "maps", "facetime"]
+        if externalSchemes.contains(scheme) {
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel, preferences)
+            return
+        }
+
+        // Only handle http(s) links in the following logic
+        guard scheme == "http" || scheme == "https" else {
+            decisionHandler(.allow, preferences)
+            return
+        }
+
+        // Compare domain for internal/external navigation
+        guard let targetHost = url.host,
+              let currentHost = webView.url?.host else {
+            decisionHandler(.allow, preferences)
+            return
+        }
+        let currentMainDomain = getDomainCore(currentHost)
+        let targetMainDomain = getDomainCore(targetHost)
+
+        if currentMainDomain == targetMainDomain {
+            print("URL: \(url)")
+            let request = URLRequest(url: url)
+            decisionHandler(.cancel, preferences)
+            webView.load(request)
+            return
+        } else {
+            decisionHandler(.allow, preferences)
+            return
+        }
+    }
+
+
+
+
+    
+    
+    
+
+    /// Handles requests to create a new web view (e.g., for popups).
+    /// Instead of creating a new window, this method either loads the URL in the current web view
+    /// if it's in the same domain, or presents it in an external view if it's from a different domain.
+    /// This approach maintains the focus-oriented browsing experience.
+    func webView(
+        _ webView: WKWebView,
+        createWebViewWith configuration: WKWebViewConfiguration,
+        for navigationAction: WKNavigationAction,
+        windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
+
+        
+        webView.load(navigationAction.request)
+        return nil
+    }
+
+    
+}
+

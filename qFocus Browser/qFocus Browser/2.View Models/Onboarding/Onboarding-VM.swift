@@ -68,7 +68,7 @@ class OnboardingVM: ObservableObject {
             settings.onboardingComplete = true;
             settings.freeFlowXPercent = 0.75;
             settings.freeFlowYPercent = 0.85;
-            settings.adBlockUpdateFrequency = 1;
+            settings.adBlockUpdateFrequency = 3;   // Weekly
         }
         // Inform the StartView about this.
         isComplete = true

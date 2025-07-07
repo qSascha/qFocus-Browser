@@ -1,0 +1,6 @@
+//
+//  iOSOptionsGreasyWiz.swift
+//  qFocus Browser
+//
+//
+

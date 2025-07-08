@@ -10,11 +10,12 @@ import SwiftUI
 
 @MainActor
 final class iOSAdBlockSettingsVM: ObservableObject {
-    let adBlockUC: AdBlockFilterUC
+    @ObservedObject var adBlockUC: AdBlockFilterUC
     let sitesRepo: SitesRepo
     let settingsRepo: SettingsRepo
     var adBlockFilterRepo: AdBlockFilterRepo
     
+    @Published var isUpdating: Bool = false
     @Published var filterItems: [AdBlockFilterDisplayItem] = []
 
 

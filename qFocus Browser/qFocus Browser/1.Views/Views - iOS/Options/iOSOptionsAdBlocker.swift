@@ -19,7 +19,7 @@ struct iOSAdBlockSettings: View {
         List {
             // Global Ad-Block Toggle
             Section {
-                Picker("Ad-Block Frequency", selection: viewModel.adBlockUpdateFrequency) {
+                Picker("UpdateFrequency", selection: viewModel.adBlockUpdateFrequency) {
                     Text("Disabled").tag(Int16(0))
                     Text("Always").tag(Int16(1))
                     Text("Daily").tag(Int16(2))
@@ -29,16 +29,23 @@ struct iOSAdBlockSettings: View {
                 
             }
 
-            if viewModel.isAdBlockEnabled {
+            if viewModel.isAdBlockEnabled{
                 HStack {
                     Spacer()
                     VStack {
                         Text("adblock.lastupdate.label")
-                        Text(viewModel.lastUpdateDate())
-                            .font(.caption)
+
+                        if viewModel.adBlockUC.updatingFilters   || viewModel.isUpdating {
+                            Text("updating now")
+                                .font(.caption)
+                        } else {
+                            Text(viewModel.lastUpdateDate())
+                                .font(.caption)
+                        }
 
                         Button(action: {
                             Task {
+                                viewModel.isUpdating = true
                                 await viewModel.updateNow()
                             }
                         }) {
@@ -178,5 +185,4 @@ struct ExplanationView: View {
         }
     }
 }
-
 

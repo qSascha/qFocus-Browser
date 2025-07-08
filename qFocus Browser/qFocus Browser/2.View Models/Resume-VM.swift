@@ -1,15 +1,16 @@
 //
-//  LoadingVM.swift
+//  ResumeVM.swift
 //  qFocus Browser
 //
 //
 import Foundation
 import SwiftUI
+import Combine
 
 
 
 @MainActor
-class LoadingVM: ObservableObject {
+class ResumeVM: ObservableObject {
     private let settingsRepo: SettingsRepo
 
     @Published var showAuthenticationSheet: Bool = false
@@ -18,33 +19,28 @@ class LoadingVM: ObservableObject {
     
     private(set) var faceIDEnabled: Bool = false
 
-    
+
 
     //MARK: init
     init( settingsRepo: SettingsRepo) {
         self.settingsRepo = settingsRepo
-
+        
     }
  
     
 
     //MARK: Start
-    func start(platform: AppPlatform) {
+    func start() {
         self.faceIDEnabled = settingsRepo.get().faceIDEnabled
-
-#if DEBUG
-        let timer: Double = 1
-#else
-        let timer: Double = 3
-#endif
+        self.isFinished = false
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + timer) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if self.faceIDEnabled {
                 // Open authentication sheet
                 self.showAuthenticationSheet = true
             } else {
                 // Directly proceed after loading
-                self.isFinished = true
+                self.authenticationSucceeded()
             }
         }
     }
@@ -52,8 +48,12 @@ class LoadingVM: ObservableObject {
     
     
     func authenticationSucceeded() {
-        closeSheets()
-        self.isFinished = true
+        showAuthenticationSheet = false
+        showAuthenticationFailedSheet = false
+
+        isFinished = true
+        CombineRepo.shared.dismissResuming.send()
+        CombineRepo.shared.updateNavigationBar.send(false)
     }
     
     
@@ -70,11 +70,5 @@ class LoadingVM: ObservableObject {
         showAuthenticationSheet = true
     }
     
-    
-    
-    func closeSheets() {
-        showAuthenticationSheet = false
-        showAuthenticationFailedSheet = false
-    }
-    
 }
+

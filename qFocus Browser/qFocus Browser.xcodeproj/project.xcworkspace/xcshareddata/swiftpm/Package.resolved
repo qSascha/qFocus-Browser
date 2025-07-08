@@ -1,13 +1,13 @@
 {
-  "originHash" : "70769605db5737c9a54c69001d2bedbf85b6ac30c88fbd45be5692a45eebef3a",
+  "originHash" : "e6945f6647e6b294e8809de80106db8fb5aca150ec469fd35720f1d05b4058f6",
   "pins" : [
     {
       "identity" : "factory",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "revision" : "56129530a97d89d03f610685d348d333af4989bb",
-        "version" : "2.5.2"
+        "revision" : "ccc898f21992ebc130bc04cc197460a5ae230bcf",
+        "version" : "2.5.3"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AdguardTeam/SafariConverterLib",
       "state" : {
-        "branch" : "master",
-        "revision" : "db0270762cb8c72e8293688aefcd37146c82e4df"
+        "revision" : "db0270762cb8c72e8293688aefcd37146c82e4df",
+        "version" : "3.0.0"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ameshkov/swift-psl",
       "state" : {
-        "revision" : "5546925284ce4c1d87e61eee0a903ea1d7d01cb2",
-        "version" : "1.1.15"
+        "revision" : "3681a18d7a32c0e84e264a2756688f8eda70b92a",
+        "version" : "1.1.41"
       }
     }
   ],

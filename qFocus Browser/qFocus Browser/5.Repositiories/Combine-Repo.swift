@@ -83,8 +83,31 @@ final class CombineRepo {
     /// Parameters:
     /// minimize - a bool to inform to minimize or restore the navigation bar
     ///
-    /// Emits when the user scrolls a webview up (true) or down (false)
+    /// 1. Emits when the user scrolls a webview up (true) or down (false)
+    /// 2. Emits when resuming from background to show the nav bar.
     let updateNavigationBar = PassthroughSubject<Bool, Never>()
+
+    
+    
+    /// Observer 1: GreasySettingsVM - to list of Greasy Scripts in the list
+    /// Linked to function: refreshCustomScripts
+    ///
+    /// Parameters:
+    /// none
+    ///
+    /// Emits when the individual site has been added, edited or deleted
+    let updateGreasyScripts = PassthroughSubject<Void, Never>()
+
+    
+    
+    /// Observer 1: MainVM - to dismiss the Resuming View
+    /// Linked to function: variable: isResuming
+    ///
+    /// Parameters:
+    /// none
+    ///
+    /// Emits when the individual site has been added, edited or deleted
+    let dismissResuming = PassthroughSubject<Void, Never>()
 
     
     

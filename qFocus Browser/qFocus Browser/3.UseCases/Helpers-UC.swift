@@ -9,6 +9,12 @@ import SwiftUI
 
 
 
+//MARK: App Version
+let appVersion = "25.06"
+let copyRightYear = "2025"
+
+
+
 //MARK: generateBlueSystemImage
 func generateBlueSystemImage(named systemName: String, size: CGFloat = 32) -> UIImage? {
     let config = UIImage.SymbolConfiguration(pointSize: size, weight: .regular)
@@ -65,3 +71,5 @@ struct IdentifiableURL: Identifiable {
     let id = UUID()
     let url: URL
 }
+
+

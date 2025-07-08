@@ -16,6 +16,7 @@ class StartVM: ObservableObject {
     @Published var sitesRepo: SitesRepo
 
     @Published var state: StartViewState = .initial
+    
 
     
     
@@ -50,7 +51,7 @@ class StartVM: ObservableObject {
         print("• onboardingComplete: \(settings.onboardingComplete)")
         #endif
 
-    }
+        }
 
     
     

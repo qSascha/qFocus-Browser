@@ -99,6 +99,16 @@
         }
       }
     },
+    "%@ %@" : {
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "%lld adblock.activeCounts" : {
       "localizations" : {
         "ar" : {
@@ -190,8 +200,27 @@
     "%lld remaining" : {
 
     },
+    "%lld/400" : {
+
+    },
+    "© %@" : {
+
+    },
+    "1. Disable all other scripts, temporarily, so you can test the beheavior of the added script and see if it works as expected" : {
+
+    },
+    "2. Scripts that are not designed for mobile Safari may not work as expected." : {
+
+    },
+    "3. If you encounter any problems with the script then please contact the script author." : {
+
+    },
+    "4. If you add a script that doesn't provide the expected functionality then please ensure to disable or uninstall it, as it may lead to additional unexpected behavior." : {
+
+    },
     "about.copyright" : {
       "comment" : "© 2025",
+      "extractionState" : "stale",
       "localizations" : {
         "aa" : {
           "stringUnit" : {
@@ -996,9 +1025,6 @@
           }
         }
       }
-    },
-    "Ad-Block Frequency" : {
-
     },
     "adblock.enable.toggle" : {
       "comment" : "Global toggle for ad-blocking.",
@@ -4431,10 +4457,16 @@
         }
       }
     },
+    "Add Custom Script" : {
+
+    },
     "Add Website" : {
 
     },
     "Always" : {
+
+    },
+    "Attention" : {
 
     },
     "Authentication Failed" : {
@@ -4449,7 +4481,19 @@
     "by" : {
 
     },
+    "Confirm" : {
+
+    },
+    "Connect Site" : {
+
+    },
     "Daily" : {
+
+    },
+    "Delete" : {
+
+    },
+    "disabled" : {
 
     },
     "Disabled" : {
@@ -4819,9 +4863,6 @@
         }
       }
     },
-    "general.version v25.05" : {
-
-    },
     "greasy.duolingo.adblocker_2025-02-16.explanation" : {
       "comment" : "Explanation of the features this GreasyFork script provides.",
       "localizations" : {
@@ -4999,6 +5040,9 @@
           }
         }
       }
+    },
+    "greasy.header" : {
+
     },
     "greasy.instagram.adblocker_2025-02-16.explanation" : {
       "comment" : "Explanation of the features this GreasyFork script provides.",
@@ -5533,6 +5577,9 @@
           }
         }
       }
+    },
+    "greasy.wizard.header" : {
+
     },
     "greasy.x.adblocker_2025-02-16.explanation" : {
       "comment" : "Explanation of the features this GreasyFork script provides.",
@@ -6246,10 +6293,34 @@
         }
       }
     },
+    "greasyedit.header" : {
+
+    },
+    "greasyedit.sect-info.header" : {
+
+    },
+    "greasyedit.sect-picker.footer" : {
+
+    },
+    "greasyedit.sect-picker.header" : {
+
+    },
+    "Hints & Tips" : {
+
+    },
+    "Instructions" : {
+
+    },
     "Loading..." : {
 
     },
     "Monthly" : {
+
+    },
+    "Name:" : {
+
+    },
+    "none/disabled" : {
 
     },
     "onboarding.010welcome.header" : {
@@ -8396,6 +8467,9 @@
         }
       }
     },
+    "options.settings.toggleGreasyMonkey" : {
+
+    },
     "options.settings.toggleNavbar" : {
       "comment" : "By default the UI is using a floating button for navigation. With this toggle the user can enable an navigation bar instead, that will be shown at the top of the screen.",
       "extractionState" : "stale",
@@ -9231,6 +9305,27 @@
         }
       }
     },
+    "optionsEdit.settings.greasy.custom.footer" : {
+
+    },
+    "optionsEdit.settings.greasy.custom.header" : {
+
+    },
+    "optionsEdit.settings.greasy.default.footer" : {
+
+    },
+    "optionsEdit.settings.greasy.default.header" : {
+
+    },
+    "optionsEdit.settings.greasy.disabled" : {
+
+    },
+    "optionsEdit.settings.greasy.toggle.footer" : {
+
+    },
+    "optionsEdit.settings.greasy.toggle.header" : {
+
+    },
     "optionsEdit.site.footer" : {
       "comment" : "Short explanation how to delete / remove a site.",
       "localizations" : {
@@ -9783,6 +9878,30 @@
 
     },
     "Retry" : {
+
+    },
+    "Some scripts are very powerful and may cause problems with qFocus Browser. If you are unsure about adding a script then please do not add it." : {
+
+    },
+    "Sometimes when when you click on \"Install this Script\" you will be presented with a \"How to install\"-pop-up.\nWhen this happens click on \"(I already have a user script manager. let me install it!)\"" : {
+
+    },
+    "This feature allows you to add a Greasy Fork script to your browser. Greasy Fork is a website that allows you to find and download scripts for qFocus Browser." : {
+
+    },
+    "This is an advanced feature. Please read below carefully and if you don't know what any of this means then this feature is not for you." : {
+
+    },
+    "UpdateFrequency" : {
+
+    },
+    "updating now" : {
+
+    },
+    "URL: %@" : {
+
+    },
+    "value:options.settings.NavigationGreasy" : {
 
     },
     "Weekly" : {

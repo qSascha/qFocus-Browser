@@ -48,7 +48,7 @@ class NavigationVM: ObservableObject {
         // Update when webview scrolling
         CombineRepo.shared.updateNavigationBar
             .sink { [weak self] hide in
-                print("Scrolling received: \(hide)")
+//                print("Scrolling received: \(hide)")
                 self?.minimizeNavBar = hide
             }
             .store(in: &cancellables)

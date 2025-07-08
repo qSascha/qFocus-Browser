@@ -17,16 +17,16 @@ final class GreasyScriptUC: ObservableObject {
     var loadedScripts: [String: (metadata: ScriptMetadata, code: String)] = [:]
     private(set) var domainsWithInjectedScripts: Set<String> = []
     
-    var greaseForkList: [greasyScriptItem] = createGreasyScriptsList() {
-        didSet { objectWillChange.send()}
+    var greaseForkList: [GreasyScriptStorage] {
+        didSet { objectWillChange.send() }
     }
-
     
     
     //MARK:Init
     init(greasyRepo: GreasyScriptRepo, settingsRepo: SettingsRepo) {
         self.greasyRepo = greasyRepo
         self.settingsRepo = settingsRepo
+        self.greaseForkList = greasyRepo.getAllScripts()
     }
     
     
@@ -258,6 +258,10 @@ final class GreasyScriptUC: ObservableObject {
         }
         
         var userScripts: [WKUserScript] = []
+        
+        if settingsRepo.get().greasyScriptsEnabled == false {
+            return userScripts
+        }
         
         for (_, script) in loadedScripts {
             let userScript = WKUserScript(

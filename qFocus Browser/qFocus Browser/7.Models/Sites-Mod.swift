@@ -41,3 +41,4 @@ class SitesStorage: NSManagedObject {
         return NSFetchRequest<SitesStorage>(entityName: "SitesStorage")
     }
 }
+

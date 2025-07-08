@@ -21,6 +21,7 @@ class OnboardingVM: ObservableObject {
     }
 
     private let settingsRepo: SettingsRepo
+    private let greasyRepo: GreasyScriptRepo
 
     @Published var currentStep: Int = 1
     @Published var isComplete: Bool = false
@@ -29,8 +30,9 @@ class OnboardingVM: ObservableObject {
 
     
 
-    init(settingsRepo: SettingsRepo) {
+    init(settingsRepo: SettingsRepo, greasyRepo: GreasyScriptRepo) {
         self.settingsRepo = settingsRepo
+        self.greasyRepo = greasyRepo
     }
 
 
@@ -69,7 +71,14 @@ class OnboardingVM: ObservableObject {
             settings.freeFlowXPercent = 0.75;
             settings.freeFlowYPercent = 0.85;
             settings.adBlockUpdateFrequency = 3;   // Weekly
+            settings.greasyScriptsEnabled = true
         }
+
+
+        // Insert default GreasyFork Scripts
+        greasyRepo.createDefaultGreasyScripts()
+
+        
         // Inform the StartView about this.
         isComplete = true
     }

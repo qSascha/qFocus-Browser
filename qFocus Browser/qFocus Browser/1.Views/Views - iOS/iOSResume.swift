@@ -1,5 +1,5 @@
 //
-//  iOSLoad.swift
+//  iOSResume.swift
 //  qFocus Browser
 //
 //
@@ -8,8 +8,8 @@ import FactoryKit
 
 
 
-struct iOSLoad: View {
-    @InjectedObject(\.loadingVM) var viewModel: LoadingVM
+struct iOSResume: View {
+    @InjectedObject(\.resumeVM) var viewModel: ResumeVM
 
 
     var body: some View {
@@ -55,9 +55,9 @@ struct iOSLoad: View {
         .background(Color.gray)
         .ignoresSafeArea()
         .onAppear {
-            viewModel.start(platform: DeviceInfo.shared.platform)
+            viewModel.start()
 #if DEBUG
-            print("⚠️ iOSLoad")
+            print("⚠️ Resuming from background")
 #endif
         }
         .sheet(isPresented: $viewModel.showAuthenticationSheet) {

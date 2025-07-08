@@ -64,7 +64,20 @@ extension Container {
             }
         }.scope(.shared)
     }
+
     
+    var greasySettingsVM: Factory<GreasySettingsVM> {
+        Factory(self) {
+            MainActor.assumeIsolated {
+                GreasySettingsVM(
+                    sitesRepo: self.sitesRepo(),
+                    settingsRepo: self.settingsRepo(),
+                    greasyRepo: self.greasyRepo()
+                )
+            }
+        }.scope(.shared)
+    }
+
     
     var loadingVM: Factory<LoadingVM> {
         Factory(self) {
@@ -104,7 +117,8 @@ extension Container {
         Factory(self) {
             MainActor.assumeIsolated {
                 OnboardingVM(
-                    settingsRepo: self.settingsRepo()
+                    settingsRepo: self.settingsRepo(),
+                    greasyRepo: self.greasyRepo()
                 )
             }
         }.scope(.shared)
@@ -117,7 +131,19 @@ extension Container {
                 OptionsVM(
                     sitesRepo: self.sitesRepo(),
                     settingsRepo: self.settingsRepo(),
-                    adBlockFilterRepo: self.adBlockFilterRepo()
+                    adBlockFilterRepo: self.adBlockFilterRepo(),
+                )
+            }
+        }.scope(.shared)
+    }
+    
+
+    
+    var resumeVM: Factory<ResumeVM> {
+        Factory(self) {
+            MainActor.assumeIsolated {
+                ResumeVM(
+                    settingsRepo: self.settingsRepo()
                 )
             }
         }.scope(.shared)
@@ -195,6 +221,12 @@ extension Container {
         }.scope(.shared)
     }
 
+    var adBlockFilterRepo: Factory<AdBlockFilterRepo> {
+        Factory(self) {
+            AdBlockFilterRepo(context: self.managedObjectContext())
+        }.scope(.shared)
+    }
+
     
 }
     
@@ -223,14 +255,6 @@ extension Container {
         }.scope(.shared)
     }
 
-
-    var adBlockFilterRepo: Factory<AdBlockFilterRepo> {
-        Factory(self) {
-            AdBlockFilterRepo(context: self.managedObjectContext())
-        }.scope(.shared)
-    }
-
-
 }
 
 
@@ -257,5 +281,4 @@ extension Container {
     }
     
 }
-
 

@@ -56,6 +56,9 @@ struct iOSMain: View {
         .fullScreenCover(isPresented: $coordinator.showOptionsView) {
             iOSOptions()
         }
+        .fullScreenCover(isPresented: $viewModel.isResuming) {
+            iOSResume()
+        }
         .sheet(isPresented: $coordinator.showShareSheet) {
             if let selectedID = viewModel.selectedWebViewID,
                let siteDetail = viewModel.sitesDetails.first(where: { $0.id == selectedID }),

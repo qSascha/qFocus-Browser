@@ -28,13 +28,13 @@ final class WebViewVM: NSObject, ObservableObject {
     private let settingsRepo: SettingsRepo
     private let sitesRepo: SitesRepo
     private let greasyScriptUC: GreasyScriptUC
-    private var lastContentOffsetY: CGFloat = 0
 
+    private var lastContentOffsetY: CGFloat = 0
     private var lastScrollTriggerTime: Date = .distantPast
     private var accumulatedScrollDistance: CGFloat = 0
-    private let minTriggerInterval: TimeInterval = 0.4
-    private let minTriggerDistance: CGFloat = 60
-
+    private let minUpTriggerDistance: CGFloat = 3
+    private let minDownTriggerDistance: CGFloat = 8
+    
     var webViewID: UUID = UUID()
     
     
@@ -277,59 +277,6 @@ extension WebViewVM: WKNavigationDelegate {
     
     
     
-    
-    
-  /*
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        // Check if we're in the cooldown period after dismissal
-        if let lastNav = lastNavigationTime,
-           Date().timeIntervalSince(lastNav) < 0.5 {
-            decisionHandler(.cancel)
-            return
-        }
-        
-        // If we're handling external navigation, prevent any other navigation
-        if isHandlingExternalNavigation {
-            decisionHandler(.cancel)
-            return
-        }
-        
-        guard let url = navigationAction.request.url,
-              let host = url.host else {
-            decisionHandler(.allow)
-            return
-        }
-        
-        // If it's not a user-initiated link click, allow internal navigation
-        if navigationAction.navigationType != .linkActivated {
-            decisionHandler(.allow)
-            return
-        }
-        
-        guard let currentHost = webView.url?.host else {
-            print("URL-Host: \(url)")
-            let request = URLRequest(url: url)
-            decisionHandler(.cancel)
-            webView.load(request)
-            return
-        }
-        
-        let currentMainDomain = getDomainCore(currentHost)
-        let targetMainDomain = getDomainCore(host)
-        
-        if currentMainDomain == targetMainDomain {
-            print("URL-Domain: \(url)")
-            let request = URLRequest(url: url)
-            decisionHandler(.cancel)
-            webView.load(request)
-            return
-        } else {
-            decisionHandler(.cancel)
-            CombineRepo.shared.triggerExternalBrowser.send(url)
-        }
-    }
-    */
-
 
 
     /// Handles requests to create a new web view (e.g., for popups).
@@ -388,22 +335,31 @@ extension WebViewVM: UIScrollViewDelegate {
         let deltaY = currentOffsetY - lastContentOffsetY
         accumulatedScrollDistance += deltaY
         let now = Date()
-        
-        if abs(accumulatedScrollDistance) >= minTriggerDistance && now.timeIntervalSince(lastScrollTriggerTime) >= minTriggerInterval {
-            if accumulatedScrollDistance > 0 {
-                print("Scrolling Down: \(accumulatedScrollDistance)")
+
+        if accumulatedScrollDistance < 0 {
+            // Scrolling down
+//            if accumulatedScrollDistance >= minDownTriggerDistance && now.timeIntervalSince(lastScrollTriggerTime) >= minDownTriggerInterval {
+//            if now.timeIntervalSince(lastScrollTriggerTime) >= minDownTriggerInterval {
+            if abs(accumulatedScrollDistance) >= minDownTriggerDistance {
+//                print("Scrolling Down: \(accumulatedScrollDistance)")
                 // Send Combine event for down
-                CombineRepo.shared.updateNavigationBar.send(true)
-
-            } else if accumulatedScrollDistance < 0 {
-                print("Scrolling Up: \(accumulatedScrollDistance)")
-                // Send Combine event for up
                 CombineRepo.shared.updateNavigationBar.send(false)
-
+                lastScrollTriggerTime = now
+                accumulatedScrollDistance = 0
             }
-            lastScrollTriggerTime = now
-            accumulatedScrollDistance = 0
+        } else if accumulatedScrollDistance > 0 {
+            // Scrolling up
+//            if abs(accumulatedScrollDistance) >= minUpTriggerDistance && now.timeIntervalSince(lastScrollTriggerTime) >= minUpTriggerInterval {
+//            if now.timeIntervalSince(lastScrollTriggerTime) >= minUpTriggerInterval {
+            if abs(accumulatedScrollDistance) >= minUpTriggerDistance {
+//                print("Scrolling Up: \(accumulatedScrollDistance)")
+                // Send Combine event for up
+                CombineRepo.shared.updateNavigationBar.send(true)
+                lastScrollTriggerTime = now
+                accumulatedScrollDistance = 0
+            }
         }
+        accumulatedScrollDistance = 0
         lastContentOffsetY = currentOffsetY
     }
 }

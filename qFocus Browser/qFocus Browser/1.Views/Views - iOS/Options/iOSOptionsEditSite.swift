@@ -15,19 +15,15 @@ struct iOSEditSite: View {
     @StateObject private var viewModel: OptionsEditSiteVM
     @FocusState private var isNameFieldFocused: Bool
     @State private var siteToEdit: SitesStorage
-    private var isNewSite: Bool
     @State private var debounceTimer: Timer?
 
 
 
-    init(editSite: SitesStorage?, repo: SitesRepo) {
-//        let site = editSite ?? SitesStorageModel()
-        _viewModel = StateObject(wrappedValue: OptionsEditSiteVM(editSite: editSite, sitesRepo: repo))
+    init(editSite: SitesStorage?, sitesRepo: SitesRepo) {
+        _viewModel = StateObject(wrappedValue: OptionsEditSiteVM(editSite: editSite, sitesRepo: sitesRepo))
         _siteToEdit = State(initialValue: editSite ?? SitesStorage())
-        self.isNewSite = (editSite == nil)
     }
   
-    
     
     var body: some View {
         // Form Fields
@@ -148,10 +144,22 @@ struct iOSEditSite: View {
 
         }
         .navigationTitle(viewModel.isNewSite ? Text("optionsEdit.title.addSite") : Text(viewModel.tempName))
+        .toolbar {
+            if !viewModel.isNewSite {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(role: .destructive) {
+                        viewModel.tempName = ""
+                        dismiss()
+                        
+                    } label: {
+                        Text("Delete")
+                    }
+                }
+            }
+        }
         .onDisappear{
-            viewModel.saveData { dismiss() }
+            viewModel.saveData()
         }
     }
     
 }
-

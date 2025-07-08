@@ -15,15 +15,18 @@ final class MainVM: ObservableObject {
     @Published var sitesDetails: [SitesDetails] = []
     @Published var selectedWebViewID: UUID?
     @Published var externalURL: IdentifiableURL? = nil
+    @Published var isResuming: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
-
+//    private var launchCounter: Int = 0
+    
 
 
     //MARK: Init
     init(sitesRepo: SitesRepo) {
         self.sitesRepo = sitesRepo
-        
+        print("MainVM INIT", ObjectIdentifier(self))
+
         // Update Web Views - triggered by various option changes
         CombineRepo.shared.updateWebSites
              .sink { [weak self] _ in
@@ -44,6 +47,40 @@ final class MainVM: ObservableObject {
                 self?.externalURL = IdentifiableURL(url: url)
             }
             .store(in: &cancellables)
+
+
+        // Set isResuming = false to dismiss Resuming View
+        CombineRepo.shared.dismissResuming
+            .sink { [weak self] _ in
+                self?.isResuming = false
+            }
+            .store(in: &cancellables)
+
+
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task { @MainActor in
+                self.isResuming = true
+/*
+                if self.launchCounter > 0 {
+                    self.isResuming = true
+                }
+                self.launchCounter += 1
+*/
+            }
+        }
+
+    }
+
+    
+    
+    //MARK: deinit
+    deinit {
+        print("MainVM DEINIT", ObjectIdentifier(self))
+        NotificationCenter.default.removeObserver(self)
     }
 
     

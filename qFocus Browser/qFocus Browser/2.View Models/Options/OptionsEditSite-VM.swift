@@ -3,9 +3,9 @@
 //  qFocus Browser
 //
 //
-import Foundation
+//import Foundation
 import SwiftUI
-import UIKit
+//import UIKit
 
 
 
@@ -23,14 +23,12 @@ final class OptionsEditSiteVM: ObservableObject {
     var editSite: SitesStorage?
     var isNewSite: Bool
     let sitesRepo: SitesRepo
+
+
     
-
-
     //MARK: Init
     init(editSite: SitesStorage?, sitesRepo: SitesRepo) {
-#if DEBUG
-    print("Received editSite: \(String(describing: editSite))")
-#endif
+
         self.sitesRepo = sitesRepo
         self.editSite = editSite
         self.isNewSite = editSite == nil
@@ -66,6 +64,7 @@ final class OptionsEditSiteVM: ObservableObject {
             self.requestDesktop = false
             self.cookieStoreID = UUID()
         }
+        
     }
     
 
@@ -87,14 +86,14 @@ final class OptionsEditSiteVM: ObservableObject {
     
     
     //MARK: Save Data
-    func saveData(dismiss: @escaping () -> Void) {
+//    func saveData(dismiss: @escaping () -> Void) {
+    func saveData() {
         let existingSites = sitesRepo.getAllSites()
         if tempName.isEmpty {
             if !isNewSite {
                 sitesRepo.deleteSite(siteToEdit)
                 sitesRepo.reorderSites()
                 CombineRepo.shared.updateWebSites.send()
-
 
                 //TODO: enable Collector
 //                collector.save(event: "Site Deleted", parameter: "Empty Name")
@@ -136,3 +135,4 @@ final class OptionsEditSiteVM: ObservableObject {
 
     }
 }
+

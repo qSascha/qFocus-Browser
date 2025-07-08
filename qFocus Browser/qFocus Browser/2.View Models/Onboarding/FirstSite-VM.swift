@@ -111,7 +111,7 @@ class FirstSiteVM: ObservableObject {
                 siteName: siteName,
                 siteURL: siteURL,
                 siteFavIcon: faviconImage?.pngData(),
-                enableGreasy: false,
+                enableGreasy: true,
                 enableAdBlocker: true,
                 requestDesktop: false,
                 cookieStoreID: UUID()

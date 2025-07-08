@@ -70,7 +70,7 @@ struct Photos: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40)
-                        .foregroundColor(.qBlueDark)
+                        .foregroundColor(.blue)
                         .padding(.trailing, 6)
                         .padding(.top, 2)
                 }

@@ -77,7 +77,6 @@ final class OptionsVM: ObservableObject {
     
     //MARK: Refresh Sites
     func refreshSites() {
-        print("xxxxxxxx   ---=== Refreshing sites ===---   xxxxxxxxx")
         sites = sitesRepo.getAllSites().sorted(by: { $0.siteOrder < $1.siteOrder })
     }
     

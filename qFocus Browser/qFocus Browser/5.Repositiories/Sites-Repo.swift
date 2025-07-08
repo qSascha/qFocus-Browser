@@ -92,7 +92,7 @@ class SitesRepo: ObservableObject {
     
     
     // MARK: getAllSites
-    func getAllSites(order: SiteSortOrder = .ascending) -> [SitesStorage] {
+    func getAllSites(order: SortOrder = .ascending) -> [SitesStorage] {
         let request: NSFetchRequest<SitesStorage> = SitesStorage.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \SitesStorage.siteOrder, ascending: order == .ascending)]
         let sites = (try? context.fetch(request)) ?? []

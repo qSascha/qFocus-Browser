@@ -47,7 +47,7 @@ struct iOSAbout: View {
                             }
 
                         //TODO: Show correct version, from project settings
-                        Text("general.version v25.05")
+                        Text("general.version \(appVersion)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -97,7 +97,7 @@ struct iOSAbout: View {
                 // Copyright Notice
                 HStack(spacing: 0) {
                     
-                    Text("about.copyright")
+                    Text("© \(copyRightYear)")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.top, 20)

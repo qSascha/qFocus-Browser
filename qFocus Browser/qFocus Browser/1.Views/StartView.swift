@@ -13,17 +13,11 @@ struct StartView: View {
     @InjectedObject(\.startVM) var viewModel: StartVM
 
     
-    init() {
-        let adBlockRepo = Container.shared.adBlockFilterRepo()
-        let settingsRepo = Container.shared.settingsRepo()
-        let sitesRepo = Container.shared.sitesRepo()
-    }
-
-
+    
     var body: some View {
         StartViewSecond()
+
     }
-    
 }
 
 

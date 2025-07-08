@@ -24,7 +24,7 @@ enum StartViewState {
 
 
 //MARK: SiteOrders
-enum SiteSortOrder {
+enum SortOrder {
     case ascending
     case descending
 }

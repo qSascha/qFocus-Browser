@@ -3,6 +3,7 @@
 //  qFocus Browser
 //
 //
+import CoreData
 import SwiftUI
 import UIKit
 import FactoryKit
@@ -16,17 +17,39 @@ struct Site: Identifiable {
 
 
 
+class NavigationStateManager: ObservableObject {
+
+    @Published var path = NavigationPath()
+    
+}
+
+
+enum NavTarget: Hashable {
+    case greasyOption
+    case greasyWiz1
+    case greasyWiz2
+    case greasyEdit(scriptObject: GreasyScriptStorage)
+}
+
+
+
 struct iOSOptions: View {
     @InjectedObject(\.optionsVM) var viewModel: OptionsVM
+    @InjectedObject(\.greasyRepo) var greasyRepo
+    @InjectedObject(\.sitesRepo) var sitesRepo
     @Environment(\.dismiss) private var dismiss
-    
+
+    @StateObject var nav = NavigationStateManager()
+
     @State private var editMode: EditMode = .inactive
 
     
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $nav.path) {
+
             List {
+
                 Section {
                     
                     NavigationLink(destination: iOSPromotion()) {
@@ -41,11 +64,14 @@ struct iOSOptions: View {
                         }
                     }
                 }
-                
+
                 Section(header: Text("options.websites.header")) {
 
                     ForEach(viewModel.sites.map { $0 }, id: \.objectID) { site in
-                        NavigationLink(destination: iOSEditSite(editSite: site, repo: viewModel.sitesRepo)) {
+                        NavigationLink(destination: iOSEditSite(
+                           editSite: site,
+                           sitesRepo: viewModel.sitesRepo
+                        )) {
                             websiteRowContent(for: site)
                         }
                     }
@@ -53,7 +79,7 @@ struct iOSOptions: View {
 
                     // Display "Add website" row if we have room for more sites
                     if viewModel.canAddSite() {
-                        NavigationLink(destination: iOSEditSite(editSite: nil, repo: viewModel.sitesRepo)) {
+                        NavigationLink(destination: iOSEditSite(editSite: nil, sitesRepo: viewModel.sitesRepo)) {
                             HStack {
                                 Image(systemName: "plus.circle.fill")
                                     .resizable()
@@ -83,6 +109,22 @@ struct iOSOptions: View {
                 iOSOptionsViewSettings()
                 
             }
+            .navigationDestination(for: NavTarget.self) { destination in
+                switch destination {
+                case .greasyOption:
+                    iOSGreasySettings()
+                    
+                case .greasyWiz1:
+                    GreasyWizard1()
+
+                case .greasyWiz2:
+                    GreasyWizard2(viewModel: GreasyBrowserVM(url: URL(string:"https://greasyfork.org")!) )
+
+                case .greasyEdit(let scriptObject):
+                    iOSOptionsGreasyEdit(scriptObject: scriptObject, greasyRepo: greasyRepo, sitesRepo: sitesRepo)
+
+                }
+            }
             .navigationTitle("options.header.text")
             .navigationBarItems(trailing: EditButton())
             .environment(\.editMode, $editMode)
@@ -101,7 +143,10 @@ struct iOSOptions: View {
             }
 
         }
-
+        .environmentObject(nav)
+        .onChange(of: nav.path) { newValue in
+            print("Path changed: \(newValue)")
+        }
     }
     
 
@@ -155,6 +200,7 @@ struct iOSOptions: View {
     //MARK: Options View Settings
     struct iOSOptionsViewSettings: View {
         @InjectedObject(\.optionsVM) var viewModel: OptionsVM
+        @EnvironmentObject var nav: NavigationStateManager
         
         let iconSize: CGFloat = 30
         
@@ -184,18 +230,21 @@ struct iOSOptions: View {
                         }
                     }
                 }
-                
+
+                NavigationLink(value: NavTarget.greasyOption) {
+                    Text("value:options.settings.NavigationGreasy")
+                }
+
                 NavigationLink(destination: iOSAbout()) {
                     Text("options.settings.navigationAbout")
                 }
             } header: {
                 Text("options.settings.header")
             } footer: {
-                Text("general.version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
+                Text("general.version \(appVersion)")
             }
         }
     }
     
     
 }
-

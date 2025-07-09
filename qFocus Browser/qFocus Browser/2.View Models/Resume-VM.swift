@@ -25,24 +25,34 @@ class ResumeVM: ObservableObject {
     init( settingsRepo: SettingsRepo) {
         self.settingsRepo = settingsRepo
         
+        
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task { @MainActor in
+                self.onResuming()
+            }
+        }
+
     }
  
     
 
     //MARK: Start
-    func start() {
+    func onResuming() {
         self.faceIDEnabled = settingsRepo.get().faceIDEnabled
         self.isFinished = false
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if self.faceIDEnabled {
-                // Open authentication sheet
-                self.showAuthenticationSheet = true
-            } else {
-                // Directly proceed after loading
-                self.authenticationSucceeded()
-            }
+        if self.faceIDEnabled {
+            // Open authentication sheet
+            self.showAuthenticationSheet = true
+        } else {
+            // Directly proceed after loading
+            self.authenticationSucceeded()
         }
+
     }
     
     

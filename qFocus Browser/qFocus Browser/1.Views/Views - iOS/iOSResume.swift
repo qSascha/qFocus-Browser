@@ -54,12 +54,6 @@ struct iOSResume: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.gray)
         .ignoresSafeArea()
-        .onAppear {
-            viewModel.start()
-#if DEBUG
-            print("⚠️ Resuming from background")
-#endif
-        }
         .sheet(isPresented: $viewModel.showAuthenticationSheet) {
             iOSAuth { success in
                 if success {

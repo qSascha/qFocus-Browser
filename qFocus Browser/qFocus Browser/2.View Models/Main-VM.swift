@@ -18,7 +18,6 @@ final class MainVM: ObservableObject {
     @Published var isResuming: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
-//    private var launchCounter: Int = 0
     
 
 
@@ -57,22 +56,17 @@ final class MainVM: ObservableObject {
             .store(in: &cancellables)
 
 
+        
         NotificationCenter.default.addObserver(
-            forName: UIApplication.willEnterForegroundNotification,
+            forName: UIApplication.willResignActiveNotification,
             object: nil,
             queue: .main
-        ) { _ in
+        ) { notification in
             Task { @MainActor in
                 self.isResuming = true
-/*
-                if self.launchCounter > 0 {
-                    self.isResuming = true
-                }
-                self.launchCounter += 1
-*/
             }
         }
-
+        
     }
 
     

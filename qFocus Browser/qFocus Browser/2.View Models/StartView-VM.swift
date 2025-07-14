@@ -51,7 +51,7 @@ class StartVM: ObservableObject {
         print("• onboardingComplete: \(settings.onboardingComplete)")
         #endif
 
-        }
+    }
 
     
     

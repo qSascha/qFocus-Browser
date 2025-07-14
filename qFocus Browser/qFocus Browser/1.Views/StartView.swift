@@ -43,14 +43,9 @@ struct StartViewSecond: View {
                 mainView
             }
         }
-        .onAppear {
-//            viewModel.evaluateStartup()
-        }
         .onChange(of: onboardingVM.isComplete) {
             // When onboarding is done we update the StartView.
-            print("Onboarding Complete - Step 1 -----------------------------------------")
             if onboardingVM.isComplete {
-                print("Onboarding Complete - Step 1 -----------------------------------------")
                 viewModel.evaluateStartup()
             }
         }

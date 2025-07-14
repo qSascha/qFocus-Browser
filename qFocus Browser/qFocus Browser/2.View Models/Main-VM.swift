@@ -15,7 +15,7 @@ final class MainVM: ObservableObject {
     @Published var sitesDetails: [SitesDetails] = []
     @Published var selectedWebViewID: UUID?
     @Published var externalURL: IdentifiableURL? = nil
-    @Published var isResuming: Bool = false
+    @Published var showPrivacy: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
     
@@ -48,25 +48,72 @@ final class MainVM: ObservableObject {
             .store(in: &cancellables)
 
 
-        // Set isResuming = false to dismiss Resuming View
+        // Set showPrivacy = false to dismiss Resuming View
         CombineRepo.shared.dismissResuming
             .sink { [weak self] _ in
-                self?.isResuming = false
+                self?.showPrivacy = false
             }
             .store(in: &cancellables)
 
 
-        
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didEnterBackgroundNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task { @MainActor in
+                CombineRepo.shared.lockApp.send()
+            }
+        }
+
+
         NotificationCenter.default.addObserver(
             forName: UIApplication.willResignActiveNotification,
             object: nil,
             queue: .main
         ) { notification in
             Task { @MainActor in
-                self.isResuming = true
+                print("------ Showing Privacy -----")
+                self.showPrivacy = true
             }
         }
         
+
+
+// Test only
+        
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task { @MainActor in
+                print("----- Unlocking App -----")
+ //               self.onResuming()
+            }
+        }
+        
+        NotificationCenter.default.addObserver(
+//            forName: UIApplication.willEnterForegroundNotification,
+            forName: UIApplication.didBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task { @MainActor in
+                print("----- Hiding Privacy -----")
+//                self.onResuming()
+            }
+        }
+
+
+
+
+
+
+
+
+
+
     }
 
     

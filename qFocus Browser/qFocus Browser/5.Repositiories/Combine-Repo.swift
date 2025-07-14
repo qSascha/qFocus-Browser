@@ -101,13 +101,24 @@ final class CombineRepo {
     
     
     /// Observer 1: MainVM - to dismiss the Resuming View
-    /// Linked to function: variable: isResuming
+    /// Linked to function: variable: showPrivacy
     ///
     /// Parameters:
     /// none
     ///
     /// Emits when the individual site has been added, edited or deleted
     let dismissResuming = PassthroughSubject<Void, Never>()
+
+    
+    
+    /// Observer 1: ResumeVM - to lock the App
+    /// Linked to function: variable: isLocked
+    ///
+    /// Parameters:
+    /// none
+    ///
+    /// Emits when the individual site has been added, edited or deleted
+    let lockApp = PassthroughSubject<Void, Never>()
 
     
     

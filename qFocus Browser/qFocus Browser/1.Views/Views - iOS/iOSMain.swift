@@ -56,7 +56,7 @@ struct iOSMain: View {
         .fullScreenCover(isPresented: $coordinator.showOptionsView) {
             iOSOptions()
         }
-        .fullScreenCover(isPresented: $viewModel.isResuming) {
+        .fullScreenCover(isPresented: $viewModel.showPrivacy) {
             iOSResume()
         }
         .sheet(isPresented: $coordinator.showShareSheet) {

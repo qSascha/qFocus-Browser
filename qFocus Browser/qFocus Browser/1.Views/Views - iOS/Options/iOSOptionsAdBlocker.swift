@@ -19,6 +19,7 @@ struct iOSAdBlockSettings: View {
         List {
             // Global Ad-Block Toggle
             Section {
+                
                 Picker("UpdateFrequency", selection: viewModel.adBlockUpdateFrequency) {
                     Text("Disabled").tag(Int16(0))
                     Text("Always").tag(Int16(1))
@@ -26,7 +27,6 @@ struct iOSAdBlockSettings: View {
                     Text("Weekly").tag(Int16(3))
                     Text("Monthly").tag(Int16(4))
                 }
-                
             }
 
             if viewModel.isAdBlockEnabled{
@@ -108,6 +108,12 @@ struct AdBlockListRow: View {
             // List Name and Info Button
             Button(action: onExplainTapped) {
                 HStack {
+                    Image("AdBlocking-\(filter.filterID)")
+                        .resizable()
+                        .frame(
+                            width: filter.filterID.prefix(5) == "langu" ? viewModel.iconSize : viewModel.iconSize,
+                            height: filter.filterID.prefix(5) == "langu" ? viewModel.iconSize * 0.75 : viewModel.iconSize
+                        )
                     Text(filter.identName)
                         .foregroundColor(.primary)
                     

@@ -24,6 +24,7 @@ public class GreasyScriptStorage: NSManagedObject {
     @NSManaged public var siteURL: String
     @NSManaged public var scriptURL: String
     @NSManaged public var defaultScript: Bool
+    @NSManaged public var siteFavIcon: Data?
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<GreasyScriptStorage> {
         return NSFetchRequest<GreasyScriptStorage>(entityName: "GreasyScriptStorage")

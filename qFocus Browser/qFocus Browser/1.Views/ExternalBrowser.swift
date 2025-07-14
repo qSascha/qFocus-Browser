@@ -76,7 +76,9 @@ struct ExternalBrowserView: View {
             .animation(.easeInOut(duration: 0.5), value: showToolbar)
         }
         .sheet(isPresented: $isSharing) {
-            ActivityView(activityItems: viewModel.shareSheetItems())
+            ShareSheet(activityItems: viewModel.shareSheetItems())
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         }
     }
 }
@@ -150,7 +152,7 @@ struct ExtWebViewRepresentable: UIViewRepresentable {
 
 
 
-
+/*
 struct ActivityView: UIViewControllerRepresentable {
     var activityItems: [Any]
     var applicationActivities: [UIActivity]? = nil
@@ -161,7 +163,7 @@ struct ActivityView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
-
+*/
 
 
 

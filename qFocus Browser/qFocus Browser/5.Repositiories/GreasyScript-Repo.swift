@@ -45,21 +45,21 @@ final class GreasyScriptRepo: ObservableObject {
         switch type {
             case .all:
             let request: NSFetchRequest<GreasyScriptStorage> = GreasyScriptStorage.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.id, ascending: order == .ascending)]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.scriptName, ascending: order == .ascending)]
             let scripts = (try? context.fetch(request)) ?? []
             return scripts
 
             case .builtin:
             let request: NSFetchRequest<GreasyScriptStorage> = GreasyScriptStorage.fetchRequest()
             request.predicate = NSPredicate(format: "defaultScript == true")
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.id, ascending: order == .ascending)]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.scriptName, ascending: order == .ascending)]
             let scripts = (try? context.fetch(request)) ?? []
             return scripts
 
             case .custom:
             let request: NSFetchRequest<GreasyScriptStorage> = GreasyScriptStorage.fetchRequest()
             request.predicate = NSPredicate(format: "defaultScript == false")
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.id, ascending: order == .ascending)]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \GreasyScriptStorage.scriptName, ascending: order == .ascending)]
             let scripts = (try? context.fetch(request)) ?? []
             return scripts
 
@@ -97,15 +97,15 @@ final class GreasyScriptRepo: ObservableObject {
     
     
     
-    //MARK Get Enabled Scripts
+    //MARK: Get Enabled Scripts
     func getEnabledScriptItems(for coreSite: String) -> [GreasyScriptStorage] {
         loadedScripts.filter { $0.scriptEnabled && $0.coreSite == coreSite }
     }
     
     
     
-    /// Updates an existing GreasyScriptStorage with new values from a defaultGreasyScriptItem
-    func editCustomScript(script: GreasyScriptStorage, scriptName: String, coreSite: String, scriptEnabled: Bool, scriptExplanation: String, siteURL: String, scriptURL: String) {
+    ///MARK: Edit Custom Script
+    func editCustomScript(type: whichScripts = .custom, script: GreasyScriptStorage, scriptName: String, coreSite: String, scriptEnabled: Bool, scriptExplanation: String, siteURL: String, scriptURL: String, siteFavIcon: Data? = nil) {
         script.scriptName = scriptName
         script.scriptID = UUID().uuidString
         script.coreSite = coreSite
@@ -114,7 +114,13 @@ final class GreasyScriptRepo: ObservableObject {
         script.scriptLicense = ""
         script.siteURL = siteURL
         script.scriptURL = scriptURL
+        
         script.defaultScript = false
+        if type == .builtin {
+            script.defaultScript = true
+        }
+        
+        script.siteFavIcon = siteFavIcon
 
         do {
             try context.save()
@@ -126,8 +132,8 @@ final class GreasyScriptRepo: ObservableObject {
     
     
     
-    //MARK: Update Script
-    func addCustomScript(scriptName: String, coreSite: String, scriptEnabled: Bool, scriptExplanation: String, siteURL: String, scriptURL: String ) {
+    //MARK: Add Custom Script
+    func addCustomScript(scriptName: String, coreSite: String, scriptEnabled: Bool, scriptExplanation: String, siteURL: String, scriptURL: String, siteFavIcon: Data? = nil) {
 
         let entity = NSEntityDescription.entity(forEntityName: "GreasyScriptStorage", in: context)!
         let newScript = GreasyScriptStorage(entity: entity, insertInto: context)
@@ -141,6 +147,7 @@ final class GreasyScriptRepo: ObservableObject {
         newScript.siteURL = siteURL
         newScript.scriptURL = scriptURL
         newScript.defaultScript = false
+        newScript.siteFavIcon = siteFavIcon
         do {
             try context.save()
         } catch {
@@ -187,6 +194,8 @@ final class GreasyScriptRepo: ObservableObject {
                 newScript.siteURL = script.siteURL
                 newScript.scriptURL = script.scriptURL
                 newScript.defaultScript = script.defaultScript
+                newScript.siteFavIcon = nil
+
             }
         }
         do {

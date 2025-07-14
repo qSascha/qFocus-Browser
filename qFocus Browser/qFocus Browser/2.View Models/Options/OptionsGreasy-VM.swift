@@ -60,8 +60,16 @@ final class GreasySettingsVM: ObservableObject {
     
     
     
-    
-    
+    //MARK: Get Site Icon
+    func getSiteIcon(site: String) -> Data? {
+
+        if let siteStorage = sitesRepo.getAllSites().first(where: { $0.siteURL.lowercased().contains(site.lowercased()) }),
+           let iconData = siteStorage.siteFavIcon {
+            return iconData
+        }
+        // If not found return nil
+        return nil
+    }
     
     
 }

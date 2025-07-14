@@ -22,7 +22,7 @@ struct iOSLoad: View {
                 .font(.system(size: 32, weight: .bold))
                 .foregroundStyle(.white)
             
-            Image("OnboardingWelcome")
+            Image("AppIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
                 .cornerRadius(20)

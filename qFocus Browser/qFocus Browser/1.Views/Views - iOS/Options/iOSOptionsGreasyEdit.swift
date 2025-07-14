@@ -16,7 +16,6 @@ public struct iOSOptionsGreasyEdit: View {
     @StateObject private var sitesRepo: SitesRepo
     
     
-    
 
     //MARK: Init
     init(scriptObject: GreasyScriptStorage?, greasyRepo: GreasyScriptRepo, sitesRepo: SitesRepo, newScript: defaultGreasyScriptItem? = nil) {
@@ -143,7 +142,10 @@ public struct iOSOptionsGreasyEdit: View {
         }) { identifiable in
             ExternalBrowserView(viewModel: ExternalBrowserVM(url: identifiable.url))
         }
-        
+        .onChange(of: greasyEdit.coreSite) { oldValue, newValue in
+            greasyEdit.fetchFavicon(for: newValue)
+        }
+
     }
     
 }

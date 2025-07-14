@@ -144,9 +144,6 @@ struct iOSOptions: View {
 
         }
         .environmentObject(nav)
-        .onChange(of: nav.path) { newValue in
-            print("Path changed: \(newValue)")
-        }
     }
     
 
@@ -209,10 +206,19 @@ struct iOSOptions: View {
         var body: some View {
             Section {
 
-                Toggle("options.settings.toggleEnableFaceID", isOn: $viewModel.faceIDEnabled)
+                HStack {
+                    Image("Options-FaceID")
+                        .resizable()
+                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+
+                    Toggle("options.settings.toggleEnableFaceID", isOn: $viewModel.faceIDEnabled)
+                }
                 
                 NavigationLink(destination: iOSAdBlockSettings()) {
                     HStack {
+                        Image("Options-AdBlocking")
+                            .resizable()
+                            .frame(width: viewModel.iconSize, height: viewModel.iconSize)
                         Text("options.settings.NavigationAdBlocking")
                         Image(systemName: "shield.fill")
                             .foregroundColor(viewModel.adBlockUpdateFrequency != 0 ? .green : .gray)
@@ -230,13 +236,24 @@ struct iOSOptions: View {
                         }
                     }
                 }
-
-                NavigationLink(value: NavTarget.greasyOption) {
-                    Text("value:options.settings.NavigationGreasy")
+                HStack {
+                    Image("Options-GreasyFork")
+                        .resizable()
+                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+                    
+                    NavigationLink(value: NavTarget.greasyOption) {
+                        Text("value:options.settings.NavigationGreasy")
+                    }
                 }
 
-                NavigationLink(destination: iOSAbout()) {
-                    Text("options.settings.navigationAbout")
+                HStack {
+                    Image("Options-About")
+                        .resizable()
+                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+                    
+                    NavigationLink(destination: iOSAbout()) {
+                        Text("options.settings.navigationAbout")
+                    }
                 }
             } header: {
                 Text("options.settings.header")

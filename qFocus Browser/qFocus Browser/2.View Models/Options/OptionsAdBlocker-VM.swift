@@ -17,6 +17,7 @@ final class iOSAdBlockSettingsVM: ObservableObject {
     
     @Published var isUpdating: Bool = false
     @Published var filterItems: [AdBlockFilterDisplayItem] = []
+    @Published var iconSize: CGFloat = 32
 
 
     var adBlockUpdateFrequency: Binding<Int16> {

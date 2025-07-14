@@ -209,7 +209,11 @@ final class WebViewVM: NSObject, ObservableObject {
             webView.customUserAgent = nil
         }
     }
-    
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        currentURL = webView.url
+        print("----- Updated currentURL: \(String(describing: currentURL))")
+    }
 
 }
 
@@ -259,8 +263,8 @@ extension WebViewVM: WKNavigationDelegate {
         let targetMainDomain = getDomainCore(targetHost)
 
         if currentMainDomain == targetMainDomain {
-            print("URL: \(url)")
             let request = URLRequest(url: url)
+//            decisionHandler(.allow, preferences)
             decisionHandler(.cancel, preferences)
             webView.load(request)
             return
@@ -338,22 +342,14 @@ extension WebViewVM: UIScrollViewDelegate {
 
         if accumulatedScrollDistance < 0 {
             // Scrolling down
-//            if accumulatedScrollDistance >= minDownTriggerDistance && now.timeIntervalSince(lastScrollTriggerTime) >= minDownTriggerInterval {
-//            if now.timeIntervalSince(lastScrollTriggerTime) >= minDownTriggerInterval {
             if abs(accumulatedScrollDistance) >= minDownTriggerDistance {
-//                print("Scrolling Down: \(accumulatedScrollDistance)")
-                // Send Combine event for down
                 CombineRepo.shared.updateNavigationBar.send(false)
                 lastScrollTriggerTime = now
                 accumulatedScrollDistance = 0
             }
         } else if accumulatedScrollDistance > 0 {
             // Scrolling up
-//            if abs(accumulatedScrollDistance) >= minUpTriggerDistance && now.timeIntervalSince(lastScrollTriggerTime) >= minUpTriggerInterval {
-//            if now.timeIntervalSince(lastScrollTriggerTime) >= minUpTriggerInterval {
             if abs(accumulatedScrollDistance) >= minUpTriggerDistance {
-//                print("Scrolling Up: \(accumulatedScrollDistance)")
-                // Send Combine event for up
                 CombineRepo.shared.updateNavigationBar.send(true)
                 lastScrollTriggerTime = now
                 accumulatedScrollDistance = 0

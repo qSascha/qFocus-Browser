@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24233.13" systemVersion="25A5295e" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24270" systemVersion="25A5306g" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="AdBlockFilterSetting" representedClassName="AdBlockFilterSetting" syncable="YES">
         <attribute name="checksum" optional="YES" attributeType="String"/>
         <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -16,6 +16,7 @@
         <attribute name="scriptLicense" optional="YES" attributeType="String"/>
         <attribute name="scriptName" optional="YES" attributeType="String"/>
         <attribute name="scriptURL" optional="YES" attributeType="String"/>
+        <attribute name="siteFavIcon" optional="YES" attributeType="Binary"/>
         <attribute name="siteURL" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SettingsStorage" representedClassName="SettingsStorage" syncable="YES">

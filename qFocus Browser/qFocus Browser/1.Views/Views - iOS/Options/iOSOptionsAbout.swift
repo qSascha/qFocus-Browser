@@ -22,7 +22,7 @@ struct iOSAbout: View {
                 // App Icon and Title
                 VStack(alignment: .center, spacing: 15) {
                     // App Icon
-                    if let iconImage = UIImage(named: "OnboardingWelcome") {
+                    if let iconImage = UIImage(named: "AppIcon") {
                         Image(uiImage: iconImage)
                             .resizable()
                             .frame(width: 100, height: 100)

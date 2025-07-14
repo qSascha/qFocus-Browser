@@ -28,6 +28,35 @@ struct AdBlockSelect: View {
                             Button(action: {
                                 showingExplanation = filter
                             }) {
+
+                                HStack {
+                                    Image("AdBlocking-\(filter.filterID)")
+                                        .resizable()
+                                        .frame(
+                                            width: filter.filterID.prefix(5) == "langu" ? 32 : 32,
+                                            height: filter.filterID.prefix(5) == "langu" ? 32 * 0.75 : 32
+                                        )
+                                    Text(filter.identName)
+                                        .foregroundColor(.primary)
+                                    
+                                    Spacer()
+                                    
+                                    if filter.preSelectediOS {
+                                        Text("adblock.label.advised")
+                                            .font(.caption)
+                                            .foregroundColor(.green)
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 4)
+                                                    .stroke(Color.green, lineWidth: 1)
+                                            )
+                                    }
+                                }
+
+
+
+/*
                                 HStack {
                                     Text(filter.identName)
                                         .foregroundColor(.primary)
@@ -46,6 +75,8 @@ struct AdBlockSelect: View {
                                             )
                                     }
                                 }
+
+ */
                             }
 
                             // Toggle

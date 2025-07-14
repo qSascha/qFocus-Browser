@@ -18,7 +18,7 @@ struct Welcome: View {
             
             Spacer().frame(height: 20)
             
-            Image("OnboardingWelcome")
+            Image("AppIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
                 .cornerRadius(20)

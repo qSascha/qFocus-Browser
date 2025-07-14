@@ -48,26 +48,46 @@ struct iOSGreasySettings: View {
                             greasyRepo: greasyRepo,
                             sitesRepo: sitesRepo
                         )) {
-                            VStack(alignment: .leading) {
+
+                            HStack {
+                
+                                    if script.scriptEnabled {
+
+                                        if let faviconData = greasySettings.getSiteIcon(site: script.coreSite ),
+                                           let favicon = UIImage(data: faviconData) {
+                                            
+                                            ZStack(alignment: .topTrailing) {
+                                                
+                                                Image(uiImage: favicon)
+                                                    .resizable()
+                                                    .frame(width: 32, height: 32)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 32/2))
+                                                
+                                                Circle()
+                                                    .fill(Color.green)
+                                                    .frame(width: 8, height: 8)
+                                                    .offset(x: 2, y: -2)
+                                            }
+
+                                        } else {
+                                            // Fallback icon if favicon is missing
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 32, height: 32)
+                                                .foregroundColor(.gray)
+                                        }
+                                        
+                                    } else {
+                                        Image("GreasyFork-disabled")
+                                            .resizable()
+                                            .frame(width: 28, height: 28)
+                                    }
+
+
                                 Text(script.scriptName)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
-                                HStack {
-                                    if script.scriptEnabled {
-                                        Circle()
-                                            .frame(width: 8, height: 8)
-                                            .foregroundColor(.green)
-                                        Text(script.coreSite)
-                                            .font(.caption)
-                                        
-                                    } else {
-                                        Circle()
-                                            .frame(width: 8, height: 8)
-                                            .foregroundColor(.red)
-                                        Text("disabled")
-                                            .font(.caption)
-                                    }
-                                }
                                 
                             }
                         }
@@ -90,28 +110,17 @@ struct iOSGreasySettings: View {
                     
                     ForEach(greasySettings.builtinScripts.map { $0 }, id: \.id) { script in
                         NavigationLink(destination: iOSOptionsGreasyEdit(scriptObject: script, greasyRepo: greasyRepo, sitesRepo: sitesRepo)) {
-                            VStack(alignment: .leading) {
+
+                            HStack {
+                                
+                                SiteIconView(script: script, scriptsRepo: greasyRepo, sitesRepo: sitesRepo)
+
                                 Text(script.scriptName)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
-                                HStack {
-                                    if script.scriptEnabled {
-                                        Circle()
-                                            .frame(width: 8, height: 8)
-                                            .foregroundColor(.green)
-                                        Text(script.coreSite)
-                                            .font(.caption)
-                                        
-                                    } else {
-                                        Circle()
-                                            .frame(width: 8, height: 8)
-                                            .foregroundColor(.red)
-                                        Text("disabled")
-                                            .font(.caption)
-                                    }
-                                }
                                 
                             }
+                            
                         }
                     }
                 }

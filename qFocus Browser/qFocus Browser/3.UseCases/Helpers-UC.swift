@@ -33,8 +33,10 @@ func generateBlueSystemImage(named systemName: String, size: CGFloat = 32) -> UI
 // MARK: ShareSheet
 struct ShareSheet: UIViewControllerRepresentable {
     let activityItems: [Any]
-    
+
     func makeUIViewController(context: Context) -> UIActivityViewController {
+        
+        print("Sharing URL: \(activityItems)")
 
         let controller = UIActivityViewController(
             activityItems: activityItems,

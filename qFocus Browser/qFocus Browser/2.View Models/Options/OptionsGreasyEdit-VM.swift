@@ -19,7 +19,8 @@ public final class OptionsGreasyEditVM: ObservableObject {
     @Published var siteURL: String
     @Published var scriptURL: String
     @Published var defaultScript: Bool
-    
+    @Published var siteFavIcon: UIImage?
+
     var editScript: GreasyScriptStorage??
     var isNewScript: Bool
 
@@ -38,6 +39,9 @@ public final class OptionsGreasyEditVM: ObservableObject {
         self.editScript = scriptObject
         self.isNewScript = scriptObject == nil
 
+        self.greasyRepo = greasyRepo
+        self.sitesRepo = sitesRepo
+
         if let script = scriptObject {
             print("// Editing Script")
             self.scriptToEdit = script
@@ -49,6 +53,12 @@ public final class OptionsGreasyEditVM: ObservableObject {
             self.siteURL = script.siteURL
             self.scriptURL = script.scriptURL
             self.defaultScript = script.defaultScript
+            if let faviconData = script.siteFavIcon,
+               let image = UIImage(data: faviconData) {
+                self.siteFavIcon = image
+            } else {
+                self.siteFavIcon = nil
+            }
 
         } else {
             print("// Adding Script")
@@ -62,12 +72,11 @@ public final class OptionsGreasyEditVM: ObservableObject {
             self.siteURL = newScript!.siteURL
             self.scriptURL = newScript!.scriptURL
             self.defaultScript = false
+            self.siteFavIcon = nil
+
+            fetchFavicon(for: self.coreSite)
 
         }
-
-        self.greasyRepo = greasyRepo
-        self.sitesRepo = sitesRepo
-
 
         sites = sitesRepo.getAllSites()
 
@@ -77,9 +86,25 @@ public final class OptionsGreasyEditVM: ObservableObject {
         }
         
     }
+    
+    
+    
+    //MARK: Fetch FavIcon
+    func fetchFavicon(for url: String) {
+        guard !url.isEmpty else { return }
+        let fqdn = fqdnOnly(from: url)
+        guard let iconURL = URL(string: "https://icons.duckduckgo.com/ip3/\(fqdn).ico") else { return }
 
-    
-    
+        URLSession.shared.dataTask(with: iconURL) { data, response, error in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.siteFavIcon = image
+            }
+        }.resume()
+    }
+
+
+        
     //MARK: Save Data
     func saveData() {
 
@@ -113,7 +138,8 @@ public final class OptionsGreasyEditVM: ObservableObject {
                 scriptEnabled: scriptEnabled,
                 scriptExplanation: scriptExplanation,
                 siteURL: siteURL,
-                scriptURL: scriptURL
+                scriptURL: scriptURL,
+                siteFavIcon: siteFavIcon?.pngData()
             )
             CombineRepo.shared.updateGreasyScripts.send()
 
@@ -126,7 +152,8 @@ public final class OptionsGreasyEditVM: ObservableObject {
                 scriptEnabled: scriptEnabled,
                 scriptExplanation: scriptExplanation,
                 siteURL: siteURL,
-                scriptURL: scriptURL
+                scriptURL: scriptURL,
+                siteFavIcon: siteFavIcon?.pngData()
             )
             CombineRepo.shared.updateGreasyScripts.send()
 

@@ -492,6 +492,15 @@
         }
       }
     },
+    "about.eula.header" : {
+
+    },
+    "about.eula.link" : {
+
+    },
+    "about.eula.text" : {
+
+    },
     "about.header.appName" : {
       "comment" : "qFocus Browser",
       "localizations" : {
@@ -4681,6 +4690,9 @@
         }
       }
     },
+    "General.ok" : {
+
+    },
     "general.request.faceID" : {
       "comment" : "Message shown on app launch, informing the user to use FaceID to unlock the app.",
       "extractionState" : "stale",
@@ -6308,6 +6320,9 @@
     "Instructions" : {
 
     },
+    "It's\nSwedish!" : {
+
+    },
     "Loading..." : {
 
     },
@@ -7930,6 +7945,36 @@
         }
       }
     },
+    "Options.qna.answer1" : {
+
+    },
+    "Options.qna.answer2" : {
+
+    },
+    "Options.qna.answer3" : {
+
+    },
+    "Options.qna.feedback.header" : {
+
+    },
+    "Options.qna.feedback.subject" : {
+
+    },
+    "Options.qna.noemailalert" : {
+
+    },
+    "Options.qna.noemailmessage" : {
+
+    },
+    "Options.qna.question1" : {
+
+    },
+    "Options.qna.question2" : {
+
+    },
+    "Options.qna.question3" : {
+
+    },
     "options.settings.adblockLabelDisabled" : {
       "comment" : "A label shown in a navigation item, indicating that no ad-block list is currently enabled. All of them are disabled.",
       "localizations" : {
@@ -8374,6 +8419,9 @@
           }
         }
       }
+    },
+    "options.settings.navigationQnA" : {
+
     },
     "options.settings.toggleEnableFaceID" : {
       "comment" : "A toggle the user can use to enable or disable the usage of FaceID",
@@ -9869,6 +9917,9 @@
       }
     },
     "qFocus Browser" : {
+
+    },
+    "qna.header" : {
 
     },
     "qSascha" : {

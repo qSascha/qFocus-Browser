@@ -127,3 +127,9 @@ struct iOSOnboarding: View {
     
     
 }
+
+
+
+#Preview {
+    iOSOnboarding()
+}

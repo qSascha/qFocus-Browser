@@ -63,8 +63,11 @@ struct iOSOptions: View {
                                 .padding(.leading)
                         }
                     }
+                } footer: {
+                    ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 60, offsetY: 30, textOffsetX: 0, textOffsetY: -10)
                 }
-
+                
+                
                 Section(header: Text("options.websites.header")) {
 
                     ForEach(viewModel.sites.map { $0 }, id: \.objectID) { site in
@@ -247,6 +250,16 @@ struct iOSOptions: View {
                 }
 
                 HStack {
+                    Image("Options-QnA")
+                        .resizable()
+                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+                    
+                    NavigationLink(destination: iOSOptionsQnA()) {
+                        Text("options.settings.navigationQnA")
+                    }
+                }
+
+                HStack {
                     Image("Options-About")
                         .resizable()
                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
@@ -264,4 +277,10 @@ struct iOSOptions: View {
     }
     
     
+}
+
+
+
+#Preview {
+    iOSOptions()
 }

@@ -74,7 +74,6 @@ struct iOSAbout: View {
                         .padding(.top, 30)
 
                     Text("about.credits.text")
-//                        .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading, spacing: 8) {
 
@@ -88,6 +87,26 @@ struct iOSAbout: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
+                            }
+
+                    }
+                }
+                
+                
+                // Terms Section
+                Group {
+                    Text("about.eula.header")
+                        .font(.headline)
+                        .padding(.top, 30)
+
+                    Text("about.eula.text")
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+
+                        Text("about.eula.link")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qsascha.dev/licensed-application-end-user-license-agreement/")!)
                             }
 
                     }

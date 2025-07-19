@@ -16,18 +16,14 @@ struct Welcome: View {
                 .multilineTextAlignment(.center)
                 .lineSpacing(8)
             
-            Spacer().frame(height: 20)
+            Spacer().frame(height: 40)
             
             Image("AppIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                )
-                .shadow(color: .gray.opacity(0.3), radius: 4, x: 0, y: 2)
-            
+
+            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 80, offsetY: -260, textOffsetX: 0, textOffsetY: -10)
+
             Spacer()
             
         }

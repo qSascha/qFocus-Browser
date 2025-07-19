@@ -264,9 +264,9 @@ extension WebViewVM: WKNavigationDelegate {
 
         if currentMainDomain == targetMainDomain {
             let request = URLRequest(url: url)
-//            decisionHandler(.allow, preferences)
-            decisionHandler(.cancel, preferences)
-            webView.load(request)
+            decisionHandler(.allow, preferences)
+//            decisionHandler(.cancel, preferences)
+//            webView.load(request)
             return
         } else {
             decisionHandler(.cancel, preferences)

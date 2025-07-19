@@ -15,7 +15,7 @@ struct ABSExplanationView: View {
 
 
     var body: some View {
-//        NavigationStack {
+        NavigationStack {
             VStack(alignment: .leading, spacing: 6) {
 
                 if filter.preSelectediOS {
@@ -46,6 +46,6 @@ struct ABSExplanationView: View {
                     }
                 }
             }
-//        }
+        }
     }
 }

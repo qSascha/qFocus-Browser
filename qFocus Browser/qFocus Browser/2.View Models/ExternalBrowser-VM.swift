@@ -84,7 +84,7 @@ final class ExternalBrowserVM: NSObject, ObservableObject {
 //MARK: Navigation Delegate
 extension ExternalBrowserVM: WKNavigationDelegate {
    
-    
+/*
     @objc
     func webView(
         _ webView: WKWebView,
@@ -108,7 +108,7 @@ extension ExternalBrowserVM: WKNavigationDelegate {
             decisionHandler(.cancel, preferences)
             return
         }
-
+    
         // Only handle http(s) links in the following logic
         guard scheme == "http" || scheme == "https" else {
             decisionHandler(.allow, preferences)
@@ -136,7 +136,7 @@ extension ExternalBrowserVM: WKNavigationDelegate {
         }
     }
 
-
+*/
 
 
     

@@ -3,12 +3,9 @@
 //  qFocus Browser
 //
 //
+import CloudKit
 
 
-
-
-
-//MARK: CloudKit Collector
 /*
 @Model
 class collectorModel {

@@ -263,12 +263,18 @@ extension WebViewVM: WKNavigationDelegate {
         let targetMainDomain = getDomainCore(targetHost)
 
         if currentMainDomain == targetMainDomain {
-            let request = URLRequest(url: url)
             decisionHandler(.allow, preferences)
-//            decisionHandler(.cancel, preferences)
-//            webView.load(request)
+/*
+            decisionHandler(.cancel, preferences)
+            print("URL: \(url)")
+            var request = URLRequest(url: url)
+            webView.load(request)
+*/
             return
+
         } else {
+            
+            // Different domain, opening in external browser
             decisionHandler(.cancel, preferences)
             CombineRepo.shared.triggerExternalBrowser.send(url)
         }

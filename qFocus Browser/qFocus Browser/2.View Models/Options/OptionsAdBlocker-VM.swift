@@ -76,6 +76,7 @@ final class iOSAdBlockSettingsVM: ObservableObject {
             },
             set: { newValue in
                 self.adBlockFilterRepo.addOrUpdateSetting(for: filter.filterID, enabled: newValue)
+                Collector.shared.save(event: "Setting", parameter: "AdBlockFilter-\(filter.filterID): \(newValue)")
             }
         )
     }
@@ -85,7 +86,8 @@ final class iOSAdBlockSettingsVM: ObservableObject {
     //MARK: Update Now Button
     func updateNow() async {
         adBlockUC.compileAdBlockLists(manually: true)
-    }
+        Collector.shared.save(event: "Setting", parameter: "AdBlockFilter-Update-Manual")
+}
     
     
     

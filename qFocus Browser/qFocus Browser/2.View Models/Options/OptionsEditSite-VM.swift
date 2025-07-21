@@ -85,7 +85,6 @@ final class OptionsEditSiteVM: ObservableObject {
     
     
     //MARK: Save Data
-//    func saveData(dismiss: @escaping () -> Void) {
     func saveData() {
         let existingSites = sitesRepo.getAllSites()
         if tempName.isEmpty {
@@ -94,8 +93,7 @@ final class OptionsEditSiteVM: ObservableObject {
                 sitesRepo.reorderSites()
                 CombineRepo.shared.updateWebSites.send()
 
-                //TODO: enable Collector
-//                collector.save(event: "Site Deleted", parameter: "Empty Name")
+                Collector.shared.save(event: "Site Deleted", parameter: siteToEdit.siteURL)
             }
             return
         }
@@ -113,8 +111,8 @@ final class OptionsEditSiteVM: ObservableObject {
                 cookieStoreID: UUID()
             )
             CombineRepo.shared.updateWebSites.send()
-            //TODO: enable Collector
-//        collector.save(event: "Site Added", parameter: tempURL)
+            Collector.shared.save(event: "Site Added", parameter: tempURL)
+            
         } else {
             sitesRepo.editSite(
                 site: siteToEdit,
@@ -128,8 +126,8 @@ final class OptionsEditSiteVM: ObservableObject {
                 cookieStoreID: (siteToEdit.siteURL != tempURL ? UUID() : siteToEdit.cookieStoreID)
             )
             CombineRepo.shared.updateWebSites.send()
-            //TODO: enable Collector
-//        collector.save(event: "Site Updated", parameter: tempURL)
+            Collector.shared.save(event: "Site Updated", parameter: tempURL)
+
         }
 
     }

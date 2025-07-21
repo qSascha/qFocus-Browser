@@ -142,6 +142,7 @@ public final class OptionsGreasyEditVM: ObservableObject {
                 siteFavIcon: siteFavIcon?.pngData()
             )
             CombineRepo.shared.updateGreasyScripts.send()
+            Collector.shared.save(event: "GreasyEdit-added", parameter: scriptURL)
 
         } else {
             print("Edditing ----->")
@@ -156,6 +157,7 @@ public final class OptionsGreasyEditVM: ObservableObject {
                 siteFavIcon: siteFavIcon?.pngData()
             )
             CombineRepo.shared.updateGreasyScripts.send()
+            Collector.shared.save(event: "GreasyEdit-edited", parameter: scriptURL)
 
         }
 

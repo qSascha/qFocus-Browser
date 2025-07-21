@@ -157,6 +157,9 @@ struct iOSEditSite: View {
                 }
             }
         }
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-EditSite")
+        }
         .onDisappear{
             viewModel.saveData()
         }

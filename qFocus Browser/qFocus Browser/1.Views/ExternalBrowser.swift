@@ -38,6 +38,9 @@ struct ExternalBrowserView: View {
                 }
             )
             .ignoresSafeArea()
+            .onAppear() {
+                Collector.shared.save(event: "ExternalBroser", parameter: "URL: \(viewModel.url)")
+            }
 
             HStack(spacing: 32) {
                 Button {

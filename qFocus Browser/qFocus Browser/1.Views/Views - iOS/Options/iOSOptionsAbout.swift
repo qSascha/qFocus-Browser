@@ -11,7 +11,6 @@ import FactoryKit
 
 struct iOSAbout: View {
     @InjectedObject(\.optionsVM) var optionsVM: OptionsVM
-
     
     
     var body: some View {
@@ -26,12 +25,6 @@ struct iOSAbout: View {
                         Image(uiImage: iconImage)
                             .resizable()
                             .frame(width: 100, height: 100)
-                            .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                            )
-                            .shadow(color: .gray.opacity(0.3), radius: 4, x: 0, y: 2)
                     }
 
                     
@@ -43,6 +36,7 @@ struct iOSAbout: View {
                             .fontWeight(.bold)
                             .foregroundColor(.blue)
                             .onTapGesture {
+                                Collector.shared.save(event: "Viewed", parameter: "qSascha.dev/qFocus")
                                 optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qsascha.dev/qfocus-browser/")!)
                             }
 
@@ -80,12 +74,14 @@ struct iOSAbout: View {
                         Text("about.link.adguardFilters")
                             .foregroundColor(.blue)
                             .onTapGesture {
+                                Collector.shared.save(event: "Viewed", parameter: "AdGuard-FiltersRegistry")
                                 optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://github.com/AdguardTeam/FiltersRegistry")!)
                             }
 
                         Text("about.link.adguardConverter")
                             .foregroundColor(.blue)
                             .onTapGesture {
+                                Collector.shared.save(event: "Viewed", parameter: "AdGuard-SafariConverterLib")
                                 optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://github.com/AdguardTeam/SafariConverterLib")!)
                             }
 
@@ -106,6 +102,7 @@ struct iOSAbout: View {
                         Text("about.eula.link")
                             .foregroundColor(.blue)
                             .onTapGesture {
+                                Collector.shared.save(event: "Viewed", parameter: "EULA")
                                 optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qsascha.dev/licensed-application-end-user-license-agreement/")!)
                             }
 
@@ -126,6 +123,7 @@ struct iOSAbout: View {
                         .foregroundColor(.blue)
                         .padding(.top, 20)
                         .onTapGesture {
+                            Collector.shared.save(event: "Viewed", parameter: "qSascha.dev")
                             optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qSascha.dev")!)
                         }
 
@@ -134,8 +132,7 @@ struct iOSAbout: View {
             }
             .padding()
             .onAppear() {
-                //TODO: Collector
-//                collector.save(event: "Viewed", parameter: "About")
+                Collector.shared.save(event: "Viewed", parameter: "Options-About")
             }
 
 

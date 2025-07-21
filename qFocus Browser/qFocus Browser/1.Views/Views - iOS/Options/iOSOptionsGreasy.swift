@@ -135,7 +135,10 @@ struct iOSGreasySettings: View {
             
         }
         .navigationTitle("greasy.header")
-        
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-GreasyMonkey")
+        }
+
     }
     
 

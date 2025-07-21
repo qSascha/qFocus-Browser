@@ -74,13 +74,15 @@ class OnboardingVM: ObservableObject {
             settings.greasyScriptsEnabled = true
         }
 
-
         // Insert default GreasyFork Scripts
         greasyRepo.createDefaultGreasyScripts()
 
         
         // Inform the StartView about this.
         isComplete = true
+
+        Collector.shared.save(event: "Completed", parameter: "Onboarding")
+
     }
     
     

@@ -108,7 +108,10 @@ struct iOSPromotion: View {
                 
             }
         }
-        
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-Promotion")
+        }
+
     }
 
 }
@@ -163,8 +166,6 @@ struct InteractiveLocalizedTextModifier: ViewModifier {
         content
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "action" && url.host == "tap-sascha" {
-                    //TODO
-//                    collector.save(event: "Promotion", parameter: "Tapped Sascha")
                     navigateToSascha = true
                     return .handled
                 }

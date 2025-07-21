@@ -78,6 +78,9 @@ struct iOSAdBlockSettings: View {
             }
         }
         .navigationTitle("adblock.header")
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-AdBlocker")
+        }
         .sheet(item: $showingExplanation) { filter in
             ExplanationView(filter: filter)
                 .presentationDetents([.medium])
@@ -179,6 +182,9 @@ struct ExplanationView: View {
             }
             .navigationTitle(filter.identName)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear() {
+                Collector.shared.save(event: "Viewed", parameter: "Options-AdBlock-Explanation")
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

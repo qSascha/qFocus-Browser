@@ -109,8 +109,7 @@ struct iOSOptionsQnA: View {
                 Text(String(localized:"Options.qna.noemailmessage"))
         }
         .onAppear() {
-            //TODO: Collector
-//           collector.save(event: "Viewed", parameter: "QnA")
+           Collector.shared.save(event: "Viewed", parameter: "Options-QnA")
         }
             
     }
@@ -143,6 +142,9 @@ struct AnswerView: View {
             }
             .navigationTitle(question)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear() {
+                Collector.shared.save(event: "Viewed", parameter: "Options-QnA-\(question)")
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

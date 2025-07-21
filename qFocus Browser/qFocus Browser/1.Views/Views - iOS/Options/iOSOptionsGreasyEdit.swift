@@ -125,6 +125,9 @@ public struct iOSOptionsGreasyEdit: View {
 
         }
         .navigationTitle("greasyedit.header")
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-GreasyMonkey-Edit")
+        }
         .toolbar {
             if greasyEdit.defaultScript != true  && greasyEdit.scriptLicense != "###" {
                 ToolbarItem(placement: .navigationBarTrailing) {

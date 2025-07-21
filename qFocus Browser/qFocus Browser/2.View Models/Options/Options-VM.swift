@@ -57,6 +57,8 @@ final class OptionsVM: ObservableObject {
         set {
             settingsRepo.update { settings in
                 settings.faceIDEnabled = newValue
+                Collector.shared.save(event: "Setting", parameter: "FaceID: \(newValue)")
+
             }
         }
     }
@@ -69,6 +71,7 @@ final class OptionsVM: ObservableObject {
         set {
             settingsRepo.update { settings in
                 settings.adBlockUpdateFrequency = newValue
+                Collector.shared.save(event: "Setting", parameter: "AdBlock-Update-Frequency: \(newValue)")
             }
         }
     }

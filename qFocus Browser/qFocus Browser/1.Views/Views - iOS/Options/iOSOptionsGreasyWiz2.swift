@@ -50,6 +50,9 @@ struct GreasyWizard2: View {
         .navigationDestination(isPresented: $showEditView) {
             iOSOptionsGreasyEdit(scriptObject: nil, greasyRepo: greasyRepo, sitesRepo: sitesRepo, newScript: newScript)
         }
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-GreasyMonkey-Wizard2")
+        }
 
     }
     

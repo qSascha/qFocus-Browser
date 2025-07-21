@@ -11,13 +11,12 @@ import FactoryKit
 
 struct StartView: View {
     @InjectedObject(\.startVM) var viewModel: StartVM
-
     
     
     var body: some View {
         StartViewSecond()
-
     }
+
 }
 
 

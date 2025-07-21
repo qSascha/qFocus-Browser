@@ -73,6 +73,9 @@ struct GreasyWizard1: View {
             .padding(20)
         }
         .navigationTitle("greasy.wizard.header")
+        .onAppear() {
+            Collector.shared.save(event: "Viewed", parameter: "Options-GreasyMonkey-Wizard1")
+        }
 
     }
 

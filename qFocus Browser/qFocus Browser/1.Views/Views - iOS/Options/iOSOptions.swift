@@ -40,115 +40,146 @@ struct iOSOptions: View {
     @Environment(\.dismiss) private var dismiss
 
     @StateObject var nav = NavigationStateManager()
-
+    @State private var showSwedish = true
+    @State private var swedishOpacity = 1.0
+    @State private var swedishTimer: Timer? = nil
     @State private var editMode: EditMode = .inactive
 
     
     
     var body: some View {
-        NavigationStack(path: $nav.path) {
-
-            List {
-
-                Section {
+        
+        ZStack(alignment: .topLeading) {
+            
+            NavigationStack(path: $nav.path) {
+                
+                List {
                     
-                    NavigationLink(destination: iOSPromotion()) {
-                        HStack {
-                            Image(uiImage: UIImage(named: "Promotion-BMC-logo")!)
-                                .resizable()
-                                .frame(width: viewModel.iconSize * 1.1, height: viewModel.iconSize*1.1)
-                                .cornerRadius(viewModel.iconSize*1.3/2)
-                            
-                            Text("options.settings.navigationPromotion")
-                                .padding(.leading)
-                        }
-                    }
-                } footer: {
-                    ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 60, offsetY: 30, textOffsetX: 0, textOffsetY: -10)
-                }
-                
-                
-                Section(header: Text("options.websites.header")) {
-
-                    ForEach(viewModel.sites.map { $0 }, id: \.objectID) { site in
-                        NavigationLink(destination: iOSEditSite(
-                           editSite: site,
-                           sitesRepo: viewModel.sitesRepo
-                        )) {
-                            websiteRowContent(for: site)
-                        }
-                    }
-                    .onMove(perform: moveSite)
-
-                    // Display "Add website" row if we have room for more sites
-                    if viewModel.canAddSite() {
-                        NavigationLink(destination: iOSEditSite(editSite: nil, sitesRepo: viewModel.sitesRepo)) {
+                    Section {
+                        
+                        NavigationLink(destination: iOSPromotion()) {
                             HStack {
-                                Image(systemName: "plus.circle.fill")
+                                Image(uiImage: UIImage(named: "Promotion-BMC-logo")!)
                                     .resizable()
-                                    .frame(width: viewModel.iconSize, height: viewModel.iconSize)
-                                    .foregroundColor(.blue)
+                                    .frame(width: viewModel.iconSize * 1.1, height: viewModel.iconSize*1.1)
+                                    .cornerRadius(viewModel.iconSize*1.3/2)
                                 
-                                Text("Add Website")
-                                    .foregroundColor(.blue)
-                                    .padding(.leading, 8)
-                                
-                                Spacer()
-                                
-                                if viewModel.sites.count > 0 {
-                                    // Show how many more sites can be added
-                                    let remaining = viewModel.maxSites - viewModel.sitesRepo.getAllSites().count
-                                    Text("\(remaining) remaining")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
+                                Text("options.settings.navigationPromotion")
+                                    .padding(.leading)
                             }
                         }
                     }
                     
-                }
-
-                // Settings Section
-                iOSOptionsViewSettings()
-                
-            }
-            .navigationDestination(for: NavTarget.self) { destination in
-                switch destination {
-                case .greasyOption:
-                    iOSGreasySettings()
+                    Section(header: Text("options.websites.header")) {
+                        
+                        ForEach(viewModel.sites.map { $0 }, id: \.objectID) { site in
+                            NavigationLink(destination: iOSEditSite(
+                                editSite: site,
+                                sitesRepo: viewModel.sitesRepo
+                            )) {
+                                websiteRowContent(for: site)
+                            }
+                        }
+                        .onMove(perform: moveSite)
+                        
+                        // Display "Add website" row if we have room for more sites
+                        if viewModel.canAddSite() {
+                            NavigationLink(destination: iOSEditSite(editSite: nil, sitesRepo: viewModel.sitesRepo)) {
+                                HStack {
+                                    Image(systemName: "plus.circle.fill")
+                                        .resizable()
+                                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+                                        .foregroundColor(.blue)
+                                    
+                                    Text("Add Website")
+                                        .foregroundColor(.blue)
+                                        .padding(.leading, 8)
+                                    
+                                    Spacer()
+                                    
+                                    if viewModel.sites.count > 0 {
+                                        // Show how many more sites can be added
+                                        let remaining = viewModel.maxSites - viewModel.sitesRepo.getAllSites().count
+                                        Text("\(remaining) remaining")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
                     
-                case .greasyWiz1:
-                    GreasyWizard1()
-
-                case .greasyWiz2:
-                    GreasyWizard2(viewModel: GreasyBrowserVM(url: URL(string:"https://greasyfork.org")!) )
-
-                case .greasyEdit(let scriptObject):
-                    iOSOptionsGreasyEdit(scriptObject: scriptObject, greasyRepo: greasyRepo, sitesRepo: sitesRepo)
-
+                    // Settings Section
+                    iOSOptionsViewSettings()
+                    
                 }
-            }
-            .navigationTitle("options.header.text")
-            .navigationBarItems(trailing: EditButton())
-            .environment(\.editMode, $editMode)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("general.done") {
-                        try? viewModel.save()
-                        dismiss()
+                .navigationDestination(for: NavTarget.self) { destination in
+                    switch destination {
+                    case .greasyOption:
+                        iOSGreasySettings()
+                        
+                    case .greasyWiz1:
+                        GreasyWizard1()
+                        
+                    case .greasyWiz2:
+                        GreasyWizard2(viewModel: GreasyBrowserVM(url: URL(string:"https://greasyfork.org")!) )
+                        
+                    case .greasyEdit(let scriptObject):
+                        iOSOptionsGreasyEdit(scriptObject: scriptObject, greasyRepo: greasyRepo, sitesRepo: sitesRepo)
+                        
                     }
                 }
+                .navigationTitle("options.header.text")
+                .navigationBarItems(trailing: EditButton())
+                .environment(\.editMode, $editMode)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("general.done") {
+                            try? viewModel.save()
+                            dismiss()
+                        }
+                    }
+                }
+                .onAppear {
+                    // Start timer on first appearance only
+                    if swedishTimer == nil {
+                        swedishTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    swedishOpacity = 0
+                                }
+                                // Remove the view after the fade completes (1 second here)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    showSwedish = false
+                                    swedishTimer?.invalidate()
+                                    swedishTimer = nil
+                                }
+                            }
+                        }
+                    }
+                }
+                .sheet(item: $viewModel.externalURL, onDismiss: {
+                    viewModel.externalURL = nil
+                }) { identifiable in
+                    ExternalBrowserView(viewModel: ExternalBrowserVM(url: identifiable.url))
+                }
+                
             }
-            .sheet(item: $viewModel.externalURL, onDismiss: {
-                viewModel.externalURL = nil
-            }) { identifiable in
-                ExternalBrowserView(viewModel: ExternalBrowserVM(url: identifiable.url))
+            .environmentObject(nav)
+            .onAppear() {
+                Collector.shared.save(event: "Viewed", parameter: "Options")
             }
 
+            if showSwedish {
+                ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 130, offsetY: -10, textOffsetX: 0, textOffsetY: -10)
+                    .opacity(swedishOpacity)
+                    .animation(.easeInOut(duration: 1), value: swedishOpacity)
+            }
+
+            
         }
-        .environmentObject(nav)
     }
-    
 
     
     //MARK: Move Site

@@ -52,7 +52,7 @@ struct iOSAdBlockSettings: View {
                             Text("adblock.updatenow.button")
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.accentColor)
+                                .background(Color.blue)
                                 .cornerRadius(8)
                                 .shadow(radius: 2)
                         }

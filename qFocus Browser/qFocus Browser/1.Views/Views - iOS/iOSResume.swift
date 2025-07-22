@@ -57,10 +57,12 @@ struct iOSResume: View {
             .ignoresSafeArea()
             .sheet(isPresented: $viewModel.showAuthenticationSheet) {
                 iOSAuth { success in
-                    if success {
-                        viewModel.authenticationSucceeded()
-                    } else {
-                        viewModel.authenticationFailed()
+                    Task { @MainActor in
+                        if success {
+                            viewModel.authenticationSucceeded()
+                        } else {
+                            viewModel.authenticationFailed()
+                        }
                     }
                 }
                 .presentationDetents([.medium])

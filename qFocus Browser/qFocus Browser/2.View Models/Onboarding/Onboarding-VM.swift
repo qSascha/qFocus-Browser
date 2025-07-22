@@ -89,31 +89,20 @@ class OnboardingVM: ObservableObject {
     
     //MARK: Request Photo Access
     func requestPhotoAccess() {
-        func accessLevel(for status: PHAuthorizationStatus) -> PictureAccessLevel {
-            switch status {
-            case .notDetermined: return .unknown
-            case .authorized: return .full
-            case .limited: return .limited
-            case .denied: return .denied
-            case .restricted: return .denied
-            @unknown default: return .unknown
-            }
-        }
-
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         // Update immediately so user sees the current status before action
-        pictureAccessLevel = accessLevel(for: status)
+        pictureAccessLevel = PictureAccessLevel.accessLevel(for: status)
 
         switch status {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] newStatus in
                 Task { @MainActor in
-                    self?.pictureAccessLevel = accessLevel(for: newStatus)
+                    self?.pictureAccessLevel = PictureAccessLevel.accessLevel(for: newStatus)
                 }
             }
         case .authorized, .limited, .denied, .restricted:
             // Update access level (even though it should already be current)
-            pictureAccessLevel = accessLevel(for: status)
+            pictureAccessLevel = PictureAccessLevel.accessLevel(for: status)
             // Optionally, print or take further action here.
         @unknown default:
             pictureAccessLevel = .unknown
@@ -131,6 +120,17 @@ extension OnboardingVM.PictureAccessLevel {
         case .limited: return "Limited"
         case .denied: return "Denied"
         case .restricted: return "Restricted"
+        }
+    }
+    
+    static nonisolated func accessLevel(for status: PHAuthorizationStatus) -> OnboardingVM.PictureAccessLevel {
+        switch status {
+        case .notDetermined: return .unknown
+        case .authorized: return .full
+        case .limited: return .limited
+        case .denied: return .denied
+        case .restricted: return .denied
+        @unknown default: return .unknown
         }
     }
 }

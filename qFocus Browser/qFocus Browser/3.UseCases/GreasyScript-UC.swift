@@ -167,20 +167,22 @@ final class GreasyScriptUC: ObservableObject {
         for script in matchingScripts {
             loadingGroup.enter()
             
-            loadRemoteScript(from: script.scriptURL) { [weak self] result in
+            let scriptName = script.scriptName
+            let scriptURL = script.scriptURL
+            loadRemoteScript(from: scriptURL) { [weak self, scriptName] result in
                 defer { loadingGroup.leave() }
                 
                 switch result {
                 case .success(let content):
-                    if let parsed = self?.parseScript(content) {
-                        DispatchQueue.main.async {
-                            self?.loadedScripts[script.scriptName] = parsed
+                    DispatchQueue.main.async {
+                        if let parsed = self?.parseScript(content) {
+                            self?.loadedScripts[scriptName] = parsed
+                        } else {
+                            print("Failed to parse script: \(scriptName)")
                         }
-                    } else {
-                        print("Failed to parse script: \(script.scriptName)")
                     }
                 case .failure(let error):
-                    print("Failed to load script \(script.scriptName): \(error)")
+                    print("Failed to load script \(scriptName): \(error)")
                 }
             }
         }
@@ -287,51 +289,40 @@ final class GreasyScriptUC: ObservableObject {
     
     //MARK: Load Dependencies
     func loadDependencies(for identifier: String, completion: @escaping (Bool) -> Void) {
-        /// Loads and processes dependencies for a script.
-        /// Takes a script identifier, fetches any required dependency scripts listed in its metadata,
-        /// and prepends them to the original script's code. This ensures that libraries and
-        /// helper functions are available to the main script when it executes.
-        
         guard let script = loadedScripts[identifier] else {
             completion(false)
             return
         }
-        
         let dependencies = script.metadata.requires
         guard !dependencies.isEmpty else {
             completion(true)
             return
         }
-        
-        let group = DispatchGroup()
-        var success = true
-        
+        var allSucceeded = true
         for dependency in dependencies {
-            group.enter()
-            
             loadRemoteScript(from: dependency) { [weak self] result in
                 switch result {
                 case .success(let content):
-                    if let existingScript = self?.loadedScripts[identifier] {
-                        let newCode = content + "\n" + existingScript.code
-                        self?.loadedScripts[identifier] = (existingScript.metadata, newCode)
+                    DispatchQueue.main.async {
+                        if let existingScript = self?.loadedScripts[identifier] {
+                            let newCode = content + "\n" + existingScript.code
+                            self?.loadedScripts[identifier] = (existingScript.metadata, newCode)
+                        }
                     }
                 case .failure(_):
-                    success = false
+                    DispatchQueue.main.async {
+                           allSucceeded = false
+                    }
                 }
-                group.leave()
             }
         }
-        
-        group.notify(queue: .main) {
-            completion(success)
-        }
+        completion(allSucceeded)
     }
     
     
     
     //MARK: Load Remote Scripts
-    private func loadRemoteScript(from url: String, completion: @escaping (Result<String, Error>) -> Void) {
+    private func loadRemoteScript(from url: String, completion: @Sendable @escaping (Result<String, Error>) -> Void) {
         /// Fetches a script from a remote URL.
         /// Creates a network request to download script content from a given URL and returns
         /// the result asynchronously. This private helper method is used for fetching both
@@ -359,4 +350,3 @@ final class GreasyScriptUC: ObservableObject {
     }
     
 }
-

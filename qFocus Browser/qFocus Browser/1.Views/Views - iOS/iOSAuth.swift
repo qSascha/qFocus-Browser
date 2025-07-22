@@ -11,7 +11,8 @@ import SwiftUI
 struct iOSAuth: View {
     @StateObject private var viewModel = AuthenticationVM()
 
-    let completion: (Bool) -> Void
+//    let completion: (Bool) -> Void
+    let completion: @Sendable (Bool) -> Void
 
     var body: some View {
 

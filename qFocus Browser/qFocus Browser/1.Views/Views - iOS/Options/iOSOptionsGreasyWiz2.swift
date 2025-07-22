@@ -136,7 +136,8 @@ struct GreasyWebViewRepresentable: UIViewRepresentable {
             
             webView.evaluateJavaScript("document.body.innerText.split('\\n').slice(0,100)") { result, error in
                 if let lines = result as? [String] {
-                    if let userScriptLine = lines.first(where: { $0.contains("=UserScript=") }) {
+//                    if let userScriptLine = lines.first(where: { $0.contains("=UserScript=") }) {
+                    if lines.first(where: { $0.contains("=UserScript=") }) != nil {
                         self.onDetectedUserScriptPage?(true)
                         print("=== Found Script ===")
                         // Look for name and description anywhere after the UserScript line

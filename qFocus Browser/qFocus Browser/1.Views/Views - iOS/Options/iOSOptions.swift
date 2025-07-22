@@ -136,7 +136,7 @@ struct iOSOptions: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("general.done") {
-                            try? viewModel.save()
+                            viewModel.save()
                             dismiss()
                         }
                     }

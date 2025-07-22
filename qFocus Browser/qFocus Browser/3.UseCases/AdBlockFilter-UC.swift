@@ -202,7 +202,6 @@ final class AdBlockFilterUC: ObservableObject {
             close(originalStdout)
 
             let jsonStringSimple = result.safariRulesJSON
-            let jsonStringAdvanced = result.advancedRulesText ?? ""
 
             // Compile the entire rule list at once
             guard let store = WKContentRuleListStore.default() else {
@@ -223,7 +222,7 @@ final class AdBlockFilterUC: ObservableObject {
                 }
             }
 
-            guard let compiledList = compiledList else {
+            if compiledList == nil {
                 throw CompilerError.compilationFailed
             }
 

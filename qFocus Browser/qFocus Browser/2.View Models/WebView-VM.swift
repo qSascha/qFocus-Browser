@@ -122,7 +122,7 @@ final class WebViewVM: NSObject, ObservableObject {
         }
         
         config.userContentController = userContentController
-        config.processPool = WKProcessPool()
+//        config.processPool = WKProcessPool()
         
         // Build WKWebView with full configuration AFTER all rules are loaded
         let newWebView = WKWebView(frame: .zero, configuration: config)

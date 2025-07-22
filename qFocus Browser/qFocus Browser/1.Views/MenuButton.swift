@@ -15,7 +15,7 @@ struct MenuButton: View {
 
     
     var body: some View {
-        let host = URL(string: webSites[index].siteURL)?.host ?? ""
+//        let host = URL(string: webSites[index].siteURL)?.host ?? ""
 //        let hasInjectedScript = greasyScripts.domainsWithInjectedScripts.contains(host)
         
         return Button(action: action) {

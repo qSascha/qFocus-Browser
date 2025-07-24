@@ -91,7 +91,7 @@ struct iOSOptions: View {
                                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
                                         .foregroundColor(.blue)
                                     
-                                    Text("Add Website")
+                                    Text("options.websites.add")
                                         .foregroundColor(.blue)
                                         .padding(.leading, 8)
                                     
@@ -276,7 +276,7 @@ struct iOSOptions: View {
                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
                     
                     NavigationLink(value: NavTarget.greasyOption) {
-                        Text("value:options.settings.NavigationGreasy")
+                        Text("options.settings.NavigationGreasy")
                     }
                 }
 

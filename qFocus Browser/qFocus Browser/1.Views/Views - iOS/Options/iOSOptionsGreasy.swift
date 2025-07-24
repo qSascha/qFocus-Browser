@@ -24,17 +24,17 @@ struct iOSGreasySettings: View {
     var body: some View {
         List {
             Section {
-                Toggle("options.settings.toggleGreasyMonkey", isOn: $greasySettings.toggleGreasy)
+                Toggle("options.greasy.toggleGreasyMonkey", isOn: $greasySettings.toggleGreasy)
             }
             header: {
-                Text("optionsEdit.settings.greasy.toggle.header")
+                Text("optionsEdit.greasy.toggle.header")
             }
             footer: {
-                Text("optionsEdit.settings.greasy.toggle.footer")
+                Text("optionsEdit.greasy.toggle.footer")
             }
             
             if !greasySettings.toggleGreasy {
-                Text("optionsEdit.settings.greasy.disabled")
+                Text("optionsEdit.greasy.disabled")
                     .foregroundColor(.gray)
                     .italic()
 
@@ -93,16 +93,16 @@ struct iOSGreasySettings: View {
                         }
                     }
                     
-                    Button("Add Custom Script") {
+                    Button("optionsEdit.greasy.addcustombutton") {
                         nav.path.append(NavTarget.greasyWiz1)
                     }
                     
                 }
                 header: {
-                    Text("optionsEdit.settings.greasy.custom.header")
+                    Text("optionsEdit.greasy.custom.header")
                 }
                 footer: {
-                    Text("optionsEdit.settings.greasy.custom.footer")
+                    Text("optionsEdit.greasy.custom.footer")
                 }
                 
                 // Default builtin scripts
@@ -125,16 +125,16 @@ struct iOSGreasySettings: View {
                     }
                 }
                 header: {
-                    Text("optionsEdit.settings.greasy.default.header")
+                    Text("optionsEdit.greasy.default.header")
                 }
                 footer: {
-                    Text("optionsEdit.settings.greasy.default.footer")
+                    Text("optionsEdit.greasy.default.footer")
                 }
 
             }
             
         }
-        .navigationTitle("greasy.header")
+        .navigationTitle("optionsEdit.greasy.header")
         .onAppear() {
             Collector.shared.save(event: "Viewed", parameter: "Options-GreasyMonkey")
         }

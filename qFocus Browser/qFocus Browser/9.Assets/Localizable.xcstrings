@@ -198,121 +198,105 @@
       }
     },
     "%lld remaining" : {
-
-    },
-    "%lld/400" : {
-
-    },
-    "© %@" : {
-
-    },
-    "1. Disable all other scripts, temporarily, so you can test the beheavior of the added script and see if it works as expected" : {
-
-    },
-    "2. Scripts that are not designed for mobile Safari may not work as expected." : {
-
-    },
-    "3. If you encounter any problems with the script then please contact the script author." : {
-
-    },
-    "4. If you add a script that doesn't provide the expected functionality then please ensure to disable or uninstall it, as it may lead to additional unexpected behavior." : {
-
-    },
-    "about.copyright" : {
-      "comment" : "© 2025",
-      "extractionState" : "stale",
+      "comment" : "Shows the amount of entries that can still be added. XX is the value and should not be translated but also in the target be shown as XX, so I know where to put the variable.",
       "localizations" : {
-        "aa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "© 2025"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "المتبقي: %lld"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "%lld verbleibend"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "%lld remaining"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "Quedan %lld"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "Il en reste %lld"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "शेष: %lld"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "%lld rimanenti"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "残り: %lld"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nog %lld over"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "%lld restantes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "Осталось: %lld"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "Återstår: %lld"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "Залишилось: %lld"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "باقی ہیں: %lld"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025"
+            "value" : "剩余：%lld"
           }
         }
       }
+    },
+    "%lld/400" : {
+      "shouldTranslate" : false
+    },
+    "© %@" : {
+
     },
     "about.credits.header" : {
       "comment" : "Section header for the credits part.",
@@ -493,13 +477,197 @@
       }
     },
     "about.eula.header" : {
-
+      "comment" : "Section header",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اتفاقية ترخيص المستخدم النهائي"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endbenutzer-Lizenzvereinbarung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End User License Agreement"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acuerdo de licencia de usuario final"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrat de licence utilisateur final"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अंतिम उपयोगकर्ता लाइसेंस समझौता"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contratto di licenza con l’utente finale"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エンドユーザーライセンス契約"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licentieovereenkomst voor eindgebruikers"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acordo de Licença do Utilizador Final"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лицензионное соглашение с конечным пользователем"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slutanvändarlicensavtal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ліцензійна угода з кінцевим користувачем"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "صارف کے لائسنس کا معاہدہ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最终用户许可协议"
+          }
+        }
+      }
     },
     "about.eula.link" : {
-
+      "comment" : "Text of a link, opening a website showing the end user license agreement.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رابط إلى اتفاقية ترخيص المستخدم النهائي الكاملة"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link zur vollständigen Endbenutzer-Lizenzvereinbarung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link to full EULA"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlace al Acuerdo de licencia de usuario final completo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lien vers le contrat de licence utilisateur final complet"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पूर्ण अंतिम उपयोगकर्ता लाइसेंस समझौते का लिंक"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collegamento all’accordo di licenza con l’utente finale completo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エンドユーザーライセンス契約全文へのリンク"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link naar volledige licentieovereenkomst voor eindgebruikers"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ligação para o Acordo de Licença do Utilizador Final completo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ссылка на полную Лицензионную договоренность с конечным пользователем"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länk till fullständigt slutanvändarlicensavtal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посилання на повну Ліцензійну угоду кінцевого користувача"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مکمل صارف کے لائسنس معاہدے کا لنک"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完整最终用户许可协议的链接"
+          }
+        }
+      }
     },
     "about.eula.text" : {
-
+      "comment" : "Showing the full EULA. Needs to be translated, but not in Oatly communication style. Needs to be translated very precise."
     },
     "about.header.appName" : {
       "comment" : "qFocus Browser",
@@ -1035,96 +1203,6 @@
         }
       }
     },
-    "adblock.enable.toggle" : {
-      "comment" : "Global toggle for ad-blocking.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "شغّل قوى حظر الإعلانات الخارقة"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schalte Ad-Blocking-Superkräfte ein"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn On Ad-Blocking Superpowers"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa tus superpoderes anti-anuncios"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez les Super-pouvoirs Anti-pub"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "विज्ञापन-ब्लॉकिंग सुपरपावर्स चालू करें"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva i Superpoteri Anti-Pubblicità"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "広告ブロッキング超能力をオンにする"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ative os Superpoderes de Bloqueio de Anúncios"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Включить суперсилы блокировки рекламы"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivera annonsblockeringens superkrafter"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Увімкнути Супер-Сили Блокування Реклами"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اشتہارات بلاکنگ کی سپر پاورز چالو کریں"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "开启广告拦截超能力"
-          }
-        }
-      }
-    },
     "adblock.header" : {
       "comment" : "The header of the ad-block view",
       "localizations" : {
@@ -1481,95 +1559,293 @@
         }
       }
     },
-    "adblock.section.header" : {
-      "comment" : "Header for all the filters shown in a list.",
-      "extractionState" : "stale",
+    "adblock.update.always" : {
+      "comment" : "A picker/selector entry of which the user choses one.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اختر دروعك"
+            "value" : "دائمًا"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle deine Schutzschilde"
+            "value" : "Immer"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pick Your Shields"
+            "value" : "Always"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elige tus escudos"
+            "value" : "Siempre"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choisissez Vos Boucliers"
+            "value" : "Toujours"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अपनी ढाल चुनें"
+            "value" : "हमेशा"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scegli i Tuoi Scudi"
+            "value" : "Sempre"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "シールドを選ぼう"
+            "value" : "常に"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altijd"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Escolha Seus Escudos"
+            "value" : "Sempre"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выбери свои щиты"
+            "value" : "Всегда"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Välj dina sköldar"
+            "value" : "Alltid"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Обери Свої Щити"
+            "value" : "Завжди"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اپنی ڈھالیں چنیں"
+            "value" : "ہمیشہ"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "选择你的防护盾"
+            "value" : "始终"
           }
         }
       }
+    },
+    "adblock.update.daily" : {
+      "comment" : "A picker/selector entry of which the user choses one.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يوميًا"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Täglich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diariamente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quotidiennement"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दैनिक"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quotidianamente"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "毎日"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagelijks"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diariamente"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ежедневно"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagligen"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Щодня"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "روزانہ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每天"
+          }
+        }
+      }
+    },
+    "adblock.update.disabled" : {
+      "comment" : "A picker/selector entry of which the user choses one.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معطّل"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktiviert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabled"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अक्षम"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabilitato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無効"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uitgeschakeld"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desativado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отключено"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inaktiverad"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вимкнено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غیر فعال"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已禁用"
+          }
+        }
+      }
+    },
+    "adblock.update.frequency" : {
+      "comment" : "Name / description of a picker/selector."
     },
     "adblock.update.message %lld/%lld" : {
       "comment" : "Message shown while the ad-block lists are updating, together with the number of lists that have been updated and the total that needs to be updated.",
@@ -1660,8 +1936,14 @@
         }
       }
     },
+    "adblock.update.monthly" : {
+      "comment" : "A picker/selector entry of which the user choses one."
+    },
     "adblock.update.msgManually" : {
-
+      "comment" : "Text shown when the user manually triggers an update."
+    },
+    "adblock.update.weekly" : {
+      "comment" : "A picker/selector entry of which the user choses one."
     },
     "adblock.updatenow.button" : {
       "comment" : "Button the user can press to force an update now, without waiting for the next update.",
@@ -1751,6 +2033,9 @@
           }
         }
       }
+    },
+    "adblock.updatingnow" : {
+      "comment" : "Message showing when user triggered an update."
     },
     "adblocklist.annoyances.explanation" : {
       "comment" : "Explanation text that explains the user the relevance of this ad-block list.",
@@ -1931,10 +2216,26 @@
       }
     },
     "adblocklist.base_filter.explanation" : {
-
+      "comment" : "Explanation text for this language ad-block list.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base filter for ad blocking. It is strongly recommended to keep this filter enabled."
+          }
+        }
+      }
     },
     "adblocklist.base_filter.name" : {
-
+      "comment" : "Name of the ad-block list, shown as a list entry.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base filter (must have)"
+          }
+        }
+      }
     },
     "adblocklist.language_chinese.explanation" : {
       "comment" : "Explanation text for this language ad-block list.",
@@ -2288,42 +2589,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "荷兰语"
-          }
-        }
-      }
-    },
-    "adblocklist.language_english.explanation" : {
-      "comment" : "Explanation text for this language ad-block list.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dies ist der Standardfilter für den Werbefilter. Er ist absolut notwendig."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Base filter for ad blocking. It is strongly recommended to keep this filter enabled."
-          }
-        }
-      }
-    },
-    "adblocklist.language_english.name" : {
-      "comment" : "Name of the ad-block list, shown as a list entry.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basisfilter"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Base filter (must have)"
           }
         }
       }
@@ -3396,186 +3661,6 @@
         }
       }
     },
-    "adblocklist.language_turkish.explanation" : {
-      "comment" : "Explanation text for this language ad-block list.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "يزيل الإعلانات من المواقع ذات المحتوى التركي."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entfernt Werbung von Websites mit türkischen Inhalten."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Removes ads from websites with Turkish content."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elimina anuncios de sitios web con contenido en turco."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprime les publicités des sites web avec du contenu turc."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "तुर्की सामग्री वाली वेबसाइटों से विज्ञापनों को हटाता है।"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rimuove gli annunci dai siti web con contenuti in turco."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トルコ語コンテンツのウェブサイトから広告を削除します。"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove anúncios de sites com conteúdo em turco."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Удаляет рекламу с сайтов с турецким контентом."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tar bort annonser från webbplatser med turkiskt innehåll."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видаляє рекламу з веб-сайтів з турецьким вмістом."
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ترکی مواد والی ویب سائٹس سے اشتہارات ہٹاتا ہے۔"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移除土耳其语内容网站上的广告。"
-          }
-        }
-      }
-    },
-    "adblocklist.language_turkish.name" : {
-      "comment" : "Name of the ad-block list, shown as a list entry.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اللغة التركية"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Türkische Sprache"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turkish Language"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Idioma turco"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Langue Turque"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "तुर्की भाषा"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lingua Turca"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トルコ語"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Idioma Turco"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Турецкий язык"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turkiska"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Турецька Мова"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ترکی زبان"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "土耳其语"
-          }
-        }
-      }
-    },
     "adblocklist.language_ukrainian.explanation" : {
       "comment" : "Explanation text for this language ad-block list.",
       "localizations" : {
@@ -4466,50 +4551,28 @@
         }
       }
     },
-    "Add Custom Script" : {
-
+    "authenctication.failed.header" : {
+      "comment" : "Header text of a view that is shown when the user authentication failed."
     },
-    "Add Website" : {
-
+    "authenctication.failed.retrybutton" : {
+      "comment" : "A retry button that is shown when the initial user authentication failed."
     },
-    "Always" : {
-
+    "authenctication.failed.text" : {
+      "comment" : "Text of a view that is shown when the user authentication failed."
     },
-    "Attention" : {
-
+    "authenctication.required.header" : {
+      "comment" : "Header text of a view that is shown when the systems requires a user authentication."
     },
-    "Authentication Failed" : {
-
-    },
-    "Authentication Required" : {
-
+    "authenctication.required.text" : {
+      "comment" : "Text of a view that is shown when the systems requires a user authentication."
     },
     "brought to you" : {
-
+      "comment" : "#DoNotTranslate",
+      "shouldTranslate" : false
     },
     "by" : {
-
-    },
-    "Confirm" : {
-
-    },
-    "Connect Site" : {
-
-    },
-    "Daily" : {
-
-    },
-    "Delete" : {
-
-    },
-    "Disabled" : {
-
-    },
-    "Face ID authentication was unsuccessful. Please try again." : {
-
-    },
-    "FaceID is required to access qFocus Browser." : {
-
+      "comment" : "#DoNotTranslate",
+      "shouldTranslate" : false
     },
     "general.done" : {
       "comment" : "Button used in the top left corner of views, to close them.",
@@ -4600,188 +4663,8 @@
         }
       }
     },
-    "general.initializing" : {
-      "comment" : "Message shown on app launch, if required, during initialization.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "تجهيز قلعة خصوصيتك..."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mache deine Privatsphäre-Festung startklar..."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Getting your privacy fortress ready..."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preparando tu fortaleza de privacidad..."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Préparation de votre forteresse de confidentialité..."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "आपका निजता किला तैयार किया जा रहा है..."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preparando la tua fortezza della privacy..."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシー要塞を準備中..."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preparando sua fortaleza de privacidade..."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Готовим твою крепость приватности..."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Förbereder ditt integritetsfäste..."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Готуємо твою фортецю приватності..."
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "آپ کا رازداری قلعہ تیار کیا جا رہا ہے..."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在准备你的隐私堡垒..."
-          }
-        }
-      }
-    },
-    "General.ok" : {
-
-    },
-    "general.request.faceID" : {
-      "comment" : "Message shown on app launch, informing the user to use FaceID to unlock the app.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "استخدم بصمة الوجه للفتح"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face ID zum Entsperren verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use Face ID to unlock"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Face ID para desbloquear"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez Face ID pour déverrouiller"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "अनलॉक करने के लिए फेस आईडी का उपयोग करें"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Face ID per sbloccare"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face IDでロック解除"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use o Face ID para desbloquear"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Используйте Face ID для разблокировки"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Använd Face ID för att låsa upp"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Використай Face ID для розблокування"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "انلاک کرنے کے لیے Face ID استعمال کریں"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用Face ID解锁"
-          }
-        }
-      }
+    "general.ok" : {
+      "comment" : "A confirmation button used for dismissing warning messages. "
     },
     "general.version %@" : {
       "comment" : "Version followed by year a month and sometimes a letter. E.g. \"25.02\" or \"25.02.a\".",
@@ -5049,9 +4932,6 @@
           }
         }
       }
-    },
-    "greasy.header" : {
-
     },
     "greasy.instagram.adblocker_2025-02-16.explanation" : {
       "comment" : "Explanation of the features this GreasyFork script provides.",
@@ -5587,8 +5467,148 @@
         }
       }
     },
-    "greasy.wizard.header" : {
-
+    "greasy.wiz.attention.header" : {
+      "comment" : "Header for an important text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention"
+          }
+        }
+      }
+    },
+    "greasy.wiz.attention.text1" : {
+      "comment" : "An important text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is an advanced feature. Please read below carefully and if you don't know what any of this means then this feature is not for you."
+          }
+        }
+      }
+    },
+    "greasy.wiz.attention.text2" : {
+      "comment" : "An important text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some scripts are very powerful and may cause problems with qFocus Browser. If you are unsure about adding a script then please do not add it."
+          }
+        }
+      }
+    },
+    "greasy.wiz.confirmbutton" : {
+      "comment" : "Confirmation button, which takes the user to the next step of the process. The word should emphasize the user to read the provided instructions, but still be only 1 or two words long. ",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        }
+      }
+    },
+    "greasy.wiz.header" : {
+      "comment" : "Header of a view. The view is providing instructions for the user for the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Script"
+          }
+        }
+      }
+    },
+    "greasy.wiz.hints.1" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Disable all other scripts, temporarily, so you can test the beheavior of the added script and see if it works as expected."
+          }
+        }
+      }
+    },
+    "greasy.wiz.hints.2" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Scripts that are not designed for mobile Safari may not work as expected."
+          }
+        }
+      }
+    },
+    "greasy.wiz.hints.3" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. If you encounter any problems with the script then please contact the script author."
+          }
+        }
+      }
+    },
+    "greasy.wiz.hints.4" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. If you add a script that doesn't provide the expected functionality then please ensure to disable or uninstall it, as it may lead to additional unexpected behavior."
+          }
+        }
+      }
+    },
+    "greasy.wiz.hints.header" : {
+      "comment" : "A section header shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hints & Tips"
+          }
+        }
+      }
+    },
+    "greasy.wiz.instructions.header" : {
+      "comment" : "A section header shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instructions"
+          }
+        }
+      }
+    },
+    "greasy.wiz.instructions.text" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sometimes when when you click on \\\"Install this Script\\\" you will be presented with a \\\"How to install\\\"-pop-up.\\nWhen this happens click on \\\"(I already have a user script manager. let me install it!)\\\"\""
+          }
+        }
+      }
+    },
+    "greasy.wiz.intro" : {
+      "comment" : "A text shown in a view, guiding a user in the upcoming step.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This feature allows you to add a Greasy Fork script to your browser. Greasy Fork is a website that allows you to find and download scripts for qFocus Browser."
+          }
+        }
+      }
     },
     "greasy.x.adblocker_2025-02-16.explanation" : {
       "comment" : "Explanation of the features this GreasyFork script provides.",
@@ -6302,38 +6322,47 @@
         }
       }
     },
+    "greasyedit.deletebutton" : {
+      "comment" : "A button to delete the currently shown detailed record."
+    },
     "greasyedit.header" : {
-
+      "comment" : "Header of a view."
+    },
+    "greasyedit.name" : {
+      "comment" : "“Name” description of an entry."
+    },
+    "greasyedit.nonedisabled" : {
+      "comment" : "Selector of a picker/selector, describing that the user has not selected and entry and that this script is therefore disabled."
+    },
+    "greasyedit.picker.connectsite" : {
+      "comment" : "“Connect Site”, descrition of an entry. The user will or has selected a site for the currently shown record."
     },
     "greasyedit.sect-info.header" : {
-
+      "comment" : "Section header"
     },
     "greasyedit.sect-picker.footer" : {
-
+      "comment" : "Section footer"
     },
     "greasyedit.sect-picker.header" : {
-
-    },
-    "Hints & Tips" : {
-
-    },
-    "Instructions" : {
-
+      "comment" : "Section header"
     },
     "It's\nSwedish!" : {
-
+      "comment" : "#DoNotTranslate",
+      "shouldTranslate" : false
     },
     "Loading..." : {
 
     },
-    "Monthly" : {
-
-    },
-    "Name:" : {
-
-    },
     "none/disabled" : {
-
+      "comment" : "Shown when the user has not selected an entry from a list of websites.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "none/disabled"
+          }
+        }
+      }
     },
     "onboarding.010welcome.header" : {
       "comment" : "Header of this step/view during the onboarding process.",
@@ -7048,10 +7077,10 @@
       }
     },
     "onboarding.040photos.denied" : {
-
+      "comment" : "Text shown after the user has denied access for this app to access their photo library. Saying that the app has identified this access level."
     },
     "onboarding.040photos.full" : {
-
+      "comment" : "Text shown after the user has granted full access for this app to their photo library. Saying that the app has identified this access level."
     },
     "onboarding.040photos.header" : {
       "comment" : "Header of this step/view during the onboarding process.",
@@ -7143,7 +7172,7 @@
       }
     },
     "onboarding.040photos.limited" : {
-
+      "comment" : "Text shown after the user has granted limited / partial access for this app to their photo library. Saying that the app has identified this access level."
     },
     "onboarding.040photos.text" : {
       "comment" : "Explanation that it is safe to grant this app access to the photos library.",
@@ -7856,6 +7885,9 @@
         }
       }
     },
+    "options.greasy.toggleGreasyMonkey" : {
+      "comment" : "A toggle that allows the user to turn a feature on or off."
+    },
     "options.header.text" : {
       "comment" : "Header for this view.",
       "localizations" : {
@@ -7946,34 +7978,34 @@
       }
     },
     "Options.qna.answer1" : {
-
+      "comment" : "Answer that is shown to a question that the user has selected."
     },
     "Options.qna.answer2" : {
-
+      "comment" : "Answer that is shown to a question that the user has selected."
     },
     "Options.qna.answer3" : {
-
+      "comment" : "Answer that is shown to a question that the user has selected."
     },
     "Options.qna.feedback.header" : {
-
+      "comment" : "A header shown on at the top of the view, informing the user of the topic of this view."
     },
     "Options.qna.feedback.subject" : {
-
+      "comment" : "Text for the subject line of an email that the user is sending from his email account to me, the developer."
     },
     "Options.qna.noemailalert" : {
-
+      "comment" : "Alert message shown to the user if no email account could be found from which an email could be sent. This is more of a header. The Full text warning will be another entry."
     },
     "Options.qna.noemailmessage" : {
-
+      "comment" : "Full text message shown to the user if no email account could be found from which an email could be sent."
     },
     "Options.qna.question1" : {
-
+      "comment" : "A question that the user may select, from a list, to which a pre-defined answer will be shown."
     },
     "Options.qna.question2" : {
-
+      "comment" : "A question that the user may select, from a list, to which a pre-defined answer will be shown."
     },
     "Options.qna.question3" : {
-
+      "comment" : "A question that the user may select, from a list, to which a pre-defined answer will be shown."
     },
     "options.settings.adblockLabelDisabled" : {
       "comment" : "A label shown in a navigation item, indicating that no ad-block list is currently enabled. All of them are disabled.",
@@ -8331,6 +8363,9 @@
         }
       }
     },
+    "options.settings.NavigationGreasy" : {
+      "comment" : "Navigation item leading the user to the GreasyMonkey Scripts view."
+    },
     "options.settings.navigationPromotion" : {
       "comment" : "Navigation item, leading the user to a view promoting myself and ask them to \"buy-me-a-coffee\".",
       "localizations" : {
@@ -8421,7 +8456,7 @@
       }
     },
     "options.settings.navigationQnA" : {
-
+      "comment" : "Entry in a list of options the user can select to navigate to this topic in order to handle the related details."
     },
     "options.settings.toggleEnableFaceID" : {
       "comment" : "A toggle the user can use to enable or disable the usage of FaceID",
@@ -8512,98 +8547,8 @@
         }
       }
     },
-    "options.settings.toggleGreasyMonkey" : {
-
-    },
-    "options.settings.toggleNavbar" : {
-      "comment" : "By default the UI is using a floating button for navigation. With this toggle the user can enable an navigation bar instead, that will be shown at the top of the screen.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "إظهار شريط التنقل"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navigationsleiste verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show the Navigation Bar"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar la barra de navegación"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la Barre de Navigation"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "नेविगेशन बार दिखाएं"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra la Barra di Navigazione"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ナビゲーションバーを表示"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar a Barra de Navegação"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Показать панель навигации"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visa navigeringsfältet"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Показувати Панель Навігації"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "نیویگیشن بار دکھائیں"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "显示导航栏"
-          }
-        }
-      }
+    "options.websites.add" : {
+      "comment" : "A List entry that allows the user to add a new entry to this list."
     },
     "options.websites.header" : {
       "comment" : "Section header",
@@ -8962,382 +8907,52 @@
       }
     },
     "optionsAdvanced.enableAdBlocker.footer" : {
-
+      "comment" : "Section footer"
     },
     "optionsAdvanced.enableAdBlocker.header" : {
-
+      "comment" : "Section header"
     },
     "optionsAdvanced.enableAdBlocker.toggle" : {
-
-    },
-    "optionsAdvanced.enableBlocker.footer" : {
-      "comment" : "Footer explaining when to use a feature. Should be 2 - 3 sentences long",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "لقد حزمنا بعض نصوص GreasyFork الرائعة التي تساعد في إبعاد تلك الإعلانات المزعجة. إنها تعمل افتراضيًا، ولكن إذا حدث أي خلل، يمكنك تبديلها من هنا."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wir haben ein paar super GreasyFork-Skripte eingepackt, die diese nervige Werbung fernhalten. Sie sind standardmäßig an, aber wenn was komisch wird, kannst du sie hier umschalten."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "We've packed some awesome GreasyFork scripts that help keep those pesky ads away. They're on by default, but if anything gets wonky, you can toggle them right here."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hemos empaquetado unos scripts increíbles de GreasyFork que mantienen los anuncios molestos a raya. Están activados por defecto, pero si algo se pone raro, puedes ajustarlos aquí."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On a intégré des scripts GreasyFork géniaux qui aident à bloquer ces pubs agaçantes. Ils sont activés par défaut, mais si quelque chose cloche, vous pouvez les ajuster ici."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "हमने कुछ शानदार ग्रीज़ीफोर्क स्क्रिप्ट पैक की हैं जो उन परेशान करने वाले विज्ञापनों से दूर रखने में मदद करती हैं। वे डिफॉल्ट रूप से चालू हैं, लेकिन अगर कुछ गड़बड़ हो जाए, तो आप उन्हें यहीं से टॉगल कर सकते हैं।"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbiamo inserito alcuni fantastici script GreasyFork che aiutano a tenere lontani quegli annunci fastidiosi. Sono attivi di default, ma se qualcosa va storto, puoi attivarli o disattivarli proprio qui."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "しつこい広告を遠ざけるための素晴らしいGreasyForkスクリプトを搭載しています。デフォルトでオンになっていますが、何か問題があれば、ここで切り替えられます。"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Incluímos alguns scripts incríveis do GreasyFork que ajudam a manter aqueles anúncios chatos longe. Eles estão ativos por padrão, mas se algo ficar estranho, você pode alterá-los aqui mesmo."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Мы упаковали несколько крутых скриптов GreasyFork, которые помогают держать назойливую рекламу подальше. Они включены по умолчанию, но если что-то пойдёт не так, ты можешь переключить их прямо здесь."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vi har packat in några superbra GreasyFork-skript som håller irriterande annonser borta. De är på som standard, men om något krånglar kan du stänga av dem här."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ми вбудували декілька крутих скриптів з GreasyFork, які допомагають тримати набридливу рекламу подалі. Вони ввімкнені за замовчуванням, але якщо щось піде не так, ти можеш керувати ними прямо тут."
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ہم نے کچھ زبردست GreasyFork سکرپٹس شامل کی ہیں جو ان تکلیف دہ اشتہارات کو دور رکھنے میں مدد کرتی ہیں۔ وہ پہلے سے آن ہیں، لیکن اگر کچھ عجیب ہو جائے، تو آپ انہیں یہاں ٹوگل کر سکتے ہیں۔"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我们打包了一些很棒的GreasyFork脚本，帮助阻挡那些烦人的广告。它们默认是开启的，但如果有什么不对劲，你可以在这里切换它们。"
-          }
-        }
-      }
-    },
-    "optionsAdvanced.enableBlocker.header" : {
-      "comment" : "Section header",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "نصوص GreasyForks"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForks Skripte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForks Scripts"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scripts GreasyFork"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scripts GreasyFork"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ग्रीज़ीफोर्क्स स्क्रिप्ट"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Script GreasyForks"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForksスクリプト"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scripts GreasyFork"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скрипты GreasyForks"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForks-skript"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скрипти GreasyForks"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForks سکرپٹس"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForks脚本"
-          }
-        }
-      }
-    },
-    "optionsAdvanced.enableBlocker.toggle" : {
-      "comment" : "Toggle to enable disable this feature.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "تمكين نصوص GreasyFork"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyFork Skripte aktivieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable GreasyFork Scripts"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar scripts GreasyFork"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer les Scripts GreasyFork"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ग्रीज़ीफोर्क स्क्रिप्ट सक्षम करें"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva Script GreasyFork"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyForkスクリプトを有効にする"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ativar Scripts GreasyFork"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Включить скрипты GreasyFork"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivera GreasyFork-skript"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Увімкнути Скрипти GreasyFork"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GreasyFork سکرپٹس فعال کریں"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用GreasyFork脚本"
-          }
-        }
-      }
+      "comment" : "A toggle to enable or disable related feature."
     },
     "optionsAdvanced.enableGreasy.footer" : {
-
+      "comment" : "Section footer"
     },
     "optionsAdvanced.enableGreasy.header" : {
-
+      "comment" : "Section header"
     },
     "optionsAdvanced.enableGreasy.toggle" : {
-
+      "comment" : "Toggle to enable disable this feature."
     },
-    "optionsEdit.navigation.advanced" : {
-      "comment" : "Navigation item, leading the user to the Advanced view.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "متقدم"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erweitert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advanced"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avanzado"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avancé"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "उन्नत"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avanzate"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "詳細設定"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avançado"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Дополнительно"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avancerat"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Розширені"
-          }
-        },
-        "ur" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ایڈوانسڈ"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高级"
-          }
-        }
-      }
+    "optionsEdit.deletebutton" : {
+      "comment" : "A delete button that allows the user to delete the currently shown entry."
+    },
+    "optionsEdit.greasy.addcustombutton" : {
+      "comment" : "A list entry that allows the user to add another script to the list."
+    },
+    "optionsEdit.greasy.custom.footer" : {
+      "comment" : "Section footer"
+    },
+    "optionsEdit.greasy.custom.header" : {
+      "comment" : "Section header"
+    },
+    "optionsEdit.greasy.default.footer" : {
+      "comment" : "Section footer"
+    },
+    "optionsEdit.greasy.default.header" : {
+      "comment" : "Section header"
+    },
+    "optionsEdit.greasy.disabled" : {
+      "comment" : "Section footer"
+    },
+    "optionsEdit.greasy.header" : {
+      "comment" : "Section header"
+    },
+    "optionsEdit.greasy.toggle.footer" : {
+      "comment" : "A toggle that allows the user to enable or disable a feature."
+    },
+    "optionsEdit.greasy.toggle.header" : {
+      "comment" : "Section header"
     },
     "optionsEdit.newSite.header" : {
       "comment" : "Section Header provided when adding a new site.",
@@ -9349,27 +8964,6 @@
           }
         }
       }
-    },
-    "optionsEdit.settings.greasy.custom.footer" : {
-
-    },
-    "optionsEdit.settings.greasy.custom.header" : {
-
-    },
-    "optionsEdit.settings.greasy.default.footer" : {
-
-    },
-    "optionsEdit.settings.greasy.default.header" : {
-
-    },
-    "optionsEdit.settings.greasy.disabled" : {
-
-    },
-    "optionsEdit.settings.greasy.toggle.footer" : {
-
-    },
-    "optionsEdit.settings.greasy.toggle.header" : {
-
     },
     "optionsEdit.site.footer" : {
       "comment" : "Short explanation how to delete / remove a site.",
@@ -9917,43 +9511,25 @@
       }
     },
     "qFocus Browser" : {
-
+      "comment" : "#DoNotTranslate",
+      "shouldTranslate" : false
     },
     "qna.header" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View header for a specific feature."
+          }
+        }
+      }
     },
     "qSascha" : {
-
-    },
-    "Retry" : {
-
-    },
-    "Some scripts are very powerful and may cause problems with qFocus Browser. If you are unsure about adding a script then please do not add it." : {
-
-    },
-    "Sometimes when when you click on \"Install this Script\" you will be presented with a \"How to install\"-pop-up.\nWhen this happens click on \"(I already have a user script manager. let me install it!)\"" : {
-
-    },
-    "This feature allows you to add a Greasy Fork script to your browser. Greasy Fork is a website that allows you to find and download scripts for qFocus Browser." : {
-
-    },
-    "This is an advanced feature. Please read below carefully and if you don't know what any of this means then this feature is not for you." : {
-
-    },
-    "UpdateFrequency" : {
-
-    },
-    "updating now" : {
-
+      "comment" : "#DoNotTranslate",
+      "shouldTranslate" : false
     },
     "URL: %@" : {
-
-    },
-    "value:options.settings.NavigationGreasy" : {
-
-    },
-    "Weekly" : {
-
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

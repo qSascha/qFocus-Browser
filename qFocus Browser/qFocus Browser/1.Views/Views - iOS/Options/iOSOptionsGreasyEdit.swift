@@ -35,7 +35,7 @@ public struct iOSOptionsGreasyEdit: View {
             Section {
                                 
                 HStack {
-                    Text("Name:")
+                    Text("greasyedit.name")
                         .frame(width: 50, alignment: .leading)
                     if greasyEdit.defaultScript {
                         Text(greasyEdit.scriptName)
@@ -51,16 +51,16 @@ public struct iOSOptionsGreasyEdit: View {
                 
                 if greasyEdit.defaultScript {
                     HStack {
-                        Text("Connect Site")
+                        Text("greasyedit.picker.connectsite")
                         Spacer()
                         Text(greasyEdit.coreSite)
                     }
                     
                 } else {
 
-                    Picker("Connect Site", selection: $greasyEdit.coreSite) {
+                    Picker("greasyedit.picker.connectsite", selection: $greasyEdit.coreSite) {
                         
-                        Text("none/disabled").tag("###disabled###")
+                        Text("greasyedit.nonedisabled").tag("###disabled###")
                         
                         ForEach(greasyEdit.sites, id: \.cookieStoreID) { site in
                             Text(site.siteName).tag(site.siteURL.replacingOccurrences(of: "https://", with: ""))
@@ -135,7 +135,7 @@ public struct iOSOptionsGreasyEdit: View {
                         greasyEdit.scriptName = ""
                         dismiss()
                     } label: {
-                        Text("Delete")
+                        Text("greasyedit.deletebutton")
                     }
                 }
             }

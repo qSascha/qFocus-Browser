@@ -14,7 +14,7 @@ struct iOSAuthFail: View {
     var body: some View {
         VStack() {
 
-            Text("Authentication Failed")
+            Text("authenctication.failed.header")
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -25,7 +25,7 @@ struct iOSAuthFail: View {
                 .foregroundColor(.blue)
                 .padding(.vertical, 16)
 
-            Text("Face ID authentication was unsuccessful. Please try again.")
+            Text("authenctication.failed.text")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -34,7 +34,7 @@ struct iOSAuthFail: View {
             Button(action: {
                 retryAction()
             }) {
-                Text("Retry")
+                Text("authenctication.failed.retrybutton")
                     .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)

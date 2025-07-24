@@ -39,7 +39,7 @@ struct iOSOptionsQnA: View {
              answerText: String(localized:"Options.qna.answer2")
             ),
         QnAs(id: UUID(),
-             questionNo: 2,
+             questionNo: 3,
              questionText: String(localized:"Options.qna.question3"),
              answerText: String(localized:"Options.qna.answer3")
             )
@@ -104,7 +104,7 @@ struct iOSOptionsQnA: View {
             MailView(recipient: "contact@qsascha.dev", subject: String(localized:"Options.qna.feedback.subject"))
         }
         .alert(String(localized:"Options.qna.noemailalert"), isPresented: $showMailAlert) {
-            Button(String(localized:"General.ok"), role: .cancel) { }
+            Button(String(localized:"general.ok"), role: .cancel) { }
             } message: {
                 Text(String(localized:"Options.qna.noemailmessage"))
         }

@@ -152,7 +152,7 @@ struct iOSEditSite: View {
                         dismiss()
                         
                     } label: {
-                        Text("Delete")
+                        Text("optionsEdit.deletebutton")
                     }
                 }
             }

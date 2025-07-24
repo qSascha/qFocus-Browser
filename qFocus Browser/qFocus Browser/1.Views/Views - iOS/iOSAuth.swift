@@ -18,7 +18,7 @@ struct iOSAuth: View {
 
         VStack() {
 
-            Text("Authentication Required")
+            Text("authenctication.required.header")
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -29,7 +29,7 @@ struct iOSAuth: View {
                 .foregroundColor(.blue)
                 .padding(.vertical, 16)
 
-            Text("FaceID is required to access qFocus Browser.")
+            Text("authenctication.required.text")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)

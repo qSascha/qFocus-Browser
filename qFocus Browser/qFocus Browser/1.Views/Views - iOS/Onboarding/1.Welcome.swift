@@ -22,7 +22,7 @@ struct Welcome: View {
                 .resizable()
                 .frame(width: 150, height: 150)
 
-            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 80, offsetY: -260, textOffsetX: 0, textOffsetY: -10)
+//            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 80, offsetY: -260, textOffsetX: 0, textOffsetY: -10)
 
             Spacer()
             

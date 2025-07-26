@@ -74,7 +74,7 @@ struct iOSResume: View {
                 .presentationDetents([.medium])
             }
             
-            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 90, offsetY: -165, textOffsetX: 0, textOffsetY: -10)
+//            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 90, offsetY: -165, textOffsetX: 0, textOffsetY: -10)
             
         }
     }

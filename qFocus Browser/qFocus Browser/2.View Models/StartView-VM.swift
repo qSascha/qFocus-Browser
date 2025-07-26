@@ -51,6 +51,10 @@ class StartVM: ObservableObject {
         print("• onboardingComplete: \(settings.onboardingComplete)")
         #endif
 
+        
+        let tempD = settingsRepo.get().id.uuidString
+        Collector.shared.setIdentifier(tempD)
+        print("StartView-Collector")
     }
 
     

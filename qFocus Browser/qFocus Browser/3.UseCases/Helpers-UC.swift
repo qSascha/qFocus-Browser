@@ -10,7 +10,7 @@ import SwiftUI
 
 
 //MARK: App Version
-let appVersion = "25.06"
+let appVersion = "25.07"
 let copyRightYear = "2025"
 
 

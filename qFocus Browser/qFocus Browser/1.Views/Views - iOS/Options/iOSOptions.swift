@@ -172,7 +172,7 @@ struct iOSOptions: View {
             }
 
             if showSwedish {
-                ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 130, offsetY: -10, textOffsetX: 0, textOffsetY: -10)
+                ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 200, offsetY: 30, textOffsetX: 0, textOffsetY: -10)
                     .opacity(swedishOpacity)
                     .animation(.easeInOut(duration: 1), value: swedishOpacity)
             }

@@ -63,8 +63,8 @@ struct iOSPromotion: View {
                     Spacer()
                 }
                 
-                // Main text
-                InteractiveLocalizedText()
+                // Text 1
+                InteractiveLocalizedText(text: String(localized: ("promotion.text")))
                 
                 // Bottom Secction, with image
                 HStack {
@@ -104,7 +104,10 @@ struct iOSPromotion: View {
                     
                 }
                 
-                Spacer(minLength: 20)
+                // Text 3
+                InteractiveLocalizedText(text: String(localized: ("promotion.text3")))
+
+                Spacer(minLength: 40)
                 
             }
         }
@@ -122,8 +125,8 @@ struct iOSPromotion: View {
 //MARK: Tap Sascha
 // Functions to highlight and allow tap on "Sascha"
 struct InteractiveLocalizedText: View {
+    let text: String
     @InjectedObject(\.optionsVM) var optionsVM: OptionsVM
-   
 
 
     var body: some View {
@@ -132,25 +135,47 @@ struct InteractiveLocalizedText: View {
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, 30)
             .environment(\.openURL, OpenURLAction { url in
+                // Open Link: Sascha
                 if url.scheme == "action" && url.host == "tap-sascha" {
                     optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qsascha.dev")!)
                     return .handled
                 }
+
+                // Open Link: fika
+                if url.scheme == "action" && url.host == "tap-fika" {
+                    optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://visitsweden.com/what-to-do/food-drink/swedish-kitchen/all-about-swedish-fika/")!)
+                    Collector.shared.save(event: "ExternalBrowser", parameter: "Swedish Fika Link")
+                    return .handled
+                }
+
                 return .discarded
             })
     }
     
     private var attributedPromotionText: AttributedString {
-        var attributedString = AttributedString(localized: "promotion.text")
-        
+        var attributedString = AttributedString(text)
+
+        // Trigger: Sascha (first occurrence only, to match original logic)
         if let range = attributedString.range(of: "Sascha") {
             attributedString[range].foregroundColor = .blue
-            
             if let customURL = URL(string: "action://tap-sascha") {
                 attributedString[range].link = customURL
             }
         }
-        
+
+        // Trigger: fika and Fika (ALL occurrences, both cases)
+        for variant in ["fika", "Fika"] {
+            var position = attributedString.startIndex
+            while position < attributedString.endIndex,
+                  let foundRange = attributedString[position...].range(of: variant) {
+                attributedString[foundRange].foregroundColor = .blue
+                if let customURL = URL(string: "action://tap-fika") {
+                    attributedString[foundRange].link = customURL
+                }
+                position = foundRange.upperBound
+            }
+        }
+
         return attributedString
     }
 }
@@ -177,3 +202,4 @@ struct InteractiveLocalizedTextModifier: ViewModifier {
 #Preview {
     iOSPromotion()
 }
+

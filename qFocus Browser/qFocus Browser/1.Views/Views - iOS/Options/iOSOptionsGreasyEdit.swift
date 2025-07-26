@@ -78,9 +78,9 @@ public struct iOSOptionsGreasyEdit: View {
             header: {
                 Text("greasyedit.sect-picker.header")
             }
-            footer: {
-                Text("greasyedit.sect-picker.footer")
-            }
+//            footer: {
+//                Text("greasyedit.sect-picker.footer")
+//            }
             
             
             Section {

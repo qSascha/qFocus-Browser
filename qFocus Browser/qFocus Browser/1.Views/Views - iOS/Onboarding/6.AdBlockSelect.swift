@@ -38,7 +38,8 @@ struct AdBlockSelect: View {
                                         )
                                     Text(filter.identName)
                                         .foregroundColor(.primary)
-                                    
+                                        .multilineTextAlignment(.leading)
+
                                     Spacer()
                                     
                                     if filter.preSelectediOS {

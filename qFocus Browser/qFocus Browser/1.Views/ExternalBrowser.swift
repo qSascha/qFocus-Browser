@@ -16,78 +16,151 @@ struct ExternalBrowserView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isSharing = false
     @State private var showToolbar: Bool = true
-
     
-
+    
+    
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            ExtWebViewRepresentable(
-                webView: viewModel.webView,
-                onSwipeBack: {
-                    viewModel.goBackOrClose { dismiss() }
-                },
-                onScrollDirection: { direction in
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        switch direction {
-                        case .up:
-                            showToolbar = false
-                        case .down:
-                            showToolbar = true
+        
+        if #available(iOS 26.0, *) {
+            
+            ZStack(alignment: .bottomTrailing) {
+                ExtWebViewRepresentable(
+                    webView: viewModel.webView,
+                    onSwipeBack: {
+                        viewModel.goBackOrClose { dismiss() }
+                    },
+                    onScrollDirection: { direction in
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            switch direction {
+                            case .up:
+                                showToolbar = false
+                            case .down:
+                                showToolbar = true
+                            }
                         }
                     }
+                )
+                .ignoresSafeArea()
+                .onAppear() {
+                    Collector.shared.save(event: "ExternalBrowser", parameter: "URL: \(viewModel.url)")
                 }
-            )
-            .ignoresSafeArea()
-            .onAppear() {
-                Collector.shared.save(event: "ExternalBroser", parameter: "URL: \(viewModel.url)")
+                
+                HStack(spacing: 32) {
+                    Button {
+                        isSharing = true
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (24), height: (24), alignment: .center)
+                    }
+                    
+                    Button {
+                        UIApplication.shared.open(viewModel.webView.url ?? viewModel.url)
+                    } label: {
+                        Image(systemName: "safari")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (22), height: (22), alignment: .center)
+                    }
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (20), height: (20), alignment: .center)
+                    }
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 20)
+                .glassEffect()
+                .padding(.trailing, 32)
+                .offset(y: showToolbar ? 0 : 120)
+                .opacity(showToolbar ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5), value: showToolbar)
             }
-
-            HStack(spacing: 32) {
-                Button {
-                    isSharing = true
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: (24), height: (24), alignment: .center)
-                }
-
-                Button {
-                    UIApplication.shared.open(viewModel.webView.url ?? viewModel.url)
-                } label: {
-                    Image(systemName: "safari")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: (22), height: (22), alignment: .center)
-                }
-
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: (20), height: (20), alignment: .center)
-                }
+            .sheet(isPresented: $isSharing) {
+                ShareSheet(activityItems: viewModel.shareSheetItems())
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
             }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 20)
-            .glassEffect()
-            .padding(.trailing, 32)
-            .offset(y: showToolbar ? 0 : 120)
-            .opacity(showToolbar ? 1 : 0)
-            .animation(.easeInOut(duration: 0.5), value: showToolbar)
-        }
-        .sheet(isPresented: $isSharing) {
-            ShareSheet(activityItems: viewModel.shareSheetItems())
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+        } else {
+            
+            //Legacy Versions
+            ZStack(alignment: .bottomTrailing) {
+                ExtWebViewRepresentable(
+                    webView: viewModel.webView,
+                    onSwipeBack: {
+                        viewModel.goBackOrClose { dismiss() }
+                    },
+                    onScrollDirection: { direction in
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            switch direction {
+                            case .up:
+                                showToolbar = false
+                            case .down:
+                                showToolbar = true
+                            }
+                        }
+                    }
+                )
+                .ignoresSafeArea()
+                .onAppear() {
+                    Collector.shared.save(event: "ExternalBrowser", parameter: "URL: \(viewModel.url)")
+                }
+                
+                HStack(spacing: 32) {
+                    Button {
+                        isSharing = true
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (24), height: (24), alignment: .center)
+                    }
+                    
+                    Button {
+                        UIApplication.shared.open(viewModel.webView.url ?? viewModel.url)
+                    } label: {
+                        Image(systemName: "safari")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (22), height: (22), alignment: .center)
+                    }
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: (20), height: (20), alignment: .center)
+                    }
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 20)
+                .background(Color.gray.opacity(0.5))
+                .cornerRadius(20)
+                .padding(.trailing, 32)
+                .offset(y: showToolbar ? 0 : 120)
+                .opacity(showToolbar ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5), value: showToolbar)
+            }
+            .sheet(isPresented: $isSharing) {
+                ShareSheet(activityItems: viewModel.shareSheetItems())
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+            }
+            
         }
     }
 }
 
 
 
+//MARK: Ext Web View Representable
 struct ExtWebViewRepresentable: UIViewRepresentable {
     let webView: WKWebView
     let onSwipeBack: () -> Void

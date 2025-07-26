@@ -24,7 +24,6 @@ final class MainVM: ObservableObject {
     //MARK: Init
     init(sitesRepo: SitesRepo) {
         self.sitesRepo = sitesRepo
-        print("MainVM INIT", ObjectIdentifier(self))
 
         // Update Web Views - triggered by various option changes
         CombineRepo.shared.updateWebSites
@@ -120,7 +119,6 @@ final class MainVM: ObservableObject {
     
     //MARK: deinit
     deinit {
-        print("MainVM DEINIT", ObjectIdentifier(self))
         NotificationCenter.default.removeObserver(self)
     }
 

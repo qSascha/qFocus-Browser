@@ -30,18 +30,23 @@ struct iOSOptionsQnA: View {
         
         QnAs(id: UUID(),
              questionNo: 1,
-             questionText: String(localized:"Options.qna.question1"),
-             answerText: String(localized:"Options.qna.answer1")
+             questionText: String(localized:"Options.qna.1question"),
+             answerText: String(localized:"Options.qna.1answer")
             ),
         QnAs(id: UUID(),
              questionNo: 2,
-             questionText: String(localized:"Options.qna.question2"),
-             answerText: String(localized:"Options.qna.answer2")
+             questionText: String(localized:"Options.qna.2question"),
+             answerText: String(localized:"Options.qna.2answer")
             ),
         QnAs(id: UUID(),
              questionNo: 3,
-             questionText: String(localized:"Options.qna.question3"),
-             answerText: String(localized:"Options.qna.answer3")
+             questionText: String(localized:"Options.qna.3question"),
+             answerText: String(localized:"Options.qna.3answer")
+            ),
+        QnAs(id: UUID(),
+             questionNo: 4,
+             questionText: String(localized:"Options.qna.4question"),
+             answerText: String(localized:"Options.qna.4answer")
             )
 
         ]
@@ -67,6 +72,7 @@ struct iOSOptionsQnA: View {
                                 .frame(width: iconSize, height: iconSize)
                             
                             Text(LocalizedStringKey(qna.questionText))
+                                .foregroundColor(.primary)
                         }
                     }
                 }
@@ -88,7 +94,8 @@ struct iOSOptionsQnA: View {
                             .frame(width: iconSize, height: iconSize)
                         
                         Text (String(localized:"Options.qna.feedback.header"))
-                        
+                            .foregroundColor(.primary)
+
                     }
                 }
 

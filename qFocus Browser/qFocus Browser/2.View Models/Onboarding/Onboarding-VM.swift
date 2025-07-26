@@ -80,9 +80,7 @@ class OnboardingVM: ObservableObject {
         
         // Inform the StartView about this.
         isComplete = true
-
-        Collector.shared.save(event: "Completed", parameter: "Onboarding")
-
+        
     }
     
     

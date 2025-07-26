@@ -26,12 +26,12 @@ struct iOSGreasySettings: View {
             Section {
                 Toggle("options.greasy.toggleGreasyMonkey", isOn: $greasySettings.toggleGreasy)
             }
-            header: {
-                Text("optionsEdit.greasy.toggle.header")
-            }
-            footer: {
-                Text("optionsEdit.greasy.toggle.footer")
-            }
+//            header: {
+//                Text("optionsEdit.greasy.toggle.header")
+//            }
+//            footer: {
+//                Text("optionsEdit.greasy.toggle.footer")
+//            }
             
             if !greasySettings.toggleGreasy {
                 Text("optionsEdit.greasy.disabled")
@@ -65,7 +65,7 @@ struct iOSGreasySettings: View {
                                                 
                                                 Circle()
                                                     .fill(Color.green)
-                                                    .frame(width: 8, height: 8)
+                                                    .frame(width: 10, height: 10)
                                                     .offset(x: 2, y: -2)
                                             }
 
@@ -79,11 +79,20 @@ struct iOSGreasySettings: View {
                                         }
                                         
                                     } else {
-                                        Image("GreasyFork-disabled")
-                                            .resizable()
-                                            .frame(width: 28, height: 28)
+                                        ZStack(alignment: .topTrailing) {
+                                            
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 32, height: 32)
+                                                .foregroundColor(.gray)
+                                            
+                                            Circle()
+                                                .fill(Color.red)
+                                                .frame(width: 14, height: 14)
+                                                .offset(x: 2, y: -2)
+                                        }
                                     }
-
 
                                 Text(script.scriptName)
                                     .lineLimit(1)
@@ -127,9 +136,9 @@ struct iOSGreasySettings: View {
                 header: {
                     Text("optionsEdit.greasy.default.header")
                 }
-                footer: {
-                    Text("optionsEdit.greasy.default.footer")
-                }
+//                footer: {
+//                    Text("optionsEdit.greasy.default.footer")
+//                }
 
             }
             

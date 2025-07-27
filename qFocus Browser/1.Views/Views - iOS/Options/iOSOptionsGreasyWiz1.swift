@@ -130,6 +130,7 @@ struct GreasyWizard1: View {
                                 .padding(.horizontal, 20)
                                 .foregroundColor(.white)
                                 .background(Color.blue)
+                                .cornerRadius(20)
                         }
                         
                         Spacer()

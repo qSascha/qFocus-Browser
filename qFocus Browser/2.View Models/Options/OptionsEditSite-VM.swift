@@ -86,6 +86,9 @@ final class OptionsEditSiteVM: ObservableObject {
     
     //MARK: Save Data
     func saveData() {
+        
+        fetchFavicon(for: tempURL)
+
         let existingSites = sitesRepo.getAllSites()
         if tempName.isEmpty {
             if !isNewSite {

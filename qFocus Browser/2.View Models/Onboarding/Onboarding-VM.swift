@@ -8,7 +8,7 @@ import Photos
 import SwiftUI
 
 
-
+ 
 @MainActor
 class OnboardingVM: ObservableObject {
     

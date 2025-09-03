@@ -1272,7 +1272,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ad-Blocking-Magie"
+            "value" : "Keine Werbung"
           }
         },
         "en" : {
@@ -1332,7 +1332,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Annonsblockeringsmagi"
+            "value" : "Annonsblockering"
           }
         },
         "uk" : {
@@ -1636,6 +1636,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "嘿！先打开那个开关，释放你的广告拦截能力！"
+          }
+        }
+      }
+    },
+    "adblock.toggle" : {
+      "comment" : "Main switch (SiwftUI toggle) to turn on and off the ad blocking feature in the app.",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad Blocking"
           }
         }
       }
@@ -6226,7 +6238,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block ads and unwanted promotional content on Duolingo, including dynamically named ad classes, while preserving essential lesson content and handling fullscreen ads by pressing the exit button automatically or selecting \\\"No Thanks\\\" on specific ads."
+            "value" : "Block ads and unwanted promotional content on Duolingo, including dynamically named ad classes, while preserving essential lesson content and handling fullscreen ads by pressing the exit button automatically or selecting \"No Thanks\" on specific ads."
           }
         },
         "es" : {
@@ -8031,7 +8043,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sometimes when when you click on \\\"Install this Script\\\" you will be presented with a \\\"How to install\\\"-pop-up.\\nWhen this happens click on \\\"(I already have a user script manager. let me install it!)\\\"\""
+            "value" : "Sometimes when when you click on \"Install this Script\" you will be presented with a \"How to install\\\"-pop-up. When this happens click on \"(I already have a user script manager. let me install it!)”."
           }
         },
         "es" : {
@@ -9635,14 +9647,13 @@
     "Loading..." : {
       "shouldTranslate" : false
     },
-    "none/disabled" : {
-      "comment" : "Shown when the user has not selected an entry from a list of websites.",
-      "extractionState" : "stale",
+    "none-disabled" : {
+      "comment" : "Selector from drop-down list that is chosen when no other website is activated.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "لا شيء/معطل"
+            "value" : "لا شيء/معطّل"
           }
         },
         "de" : {
@@ -9672,7 +9683,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कोई नहीं/अक्षम"
+            "value" : "कोई नहीं/बंद"
           }
         },
         "it" : {
@@ -9714,19 +9725,19 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "немає/вимкнено"
+            "value" : "жоден/вимкнено"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "کچھ نہیں/غیر فعال"
+            "value" : "کوئی نہیں/غیر فعال"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无/已禁用"
+            "value" : "无/禁用"
           }
         }
       }
@@ -10202,6 +10213,196 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用FaceID"
+          }
+        }
+      }
+    },
+    "onboarding.030faceID.disabled" : {
+      "comment" : "A message shown to the user, during onboarding, before FaceID has been enabled as well as if the user choose not to enable FaceID.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم تفعيل FaceID. لحماية خصوصيتك أوصي بشدة بتفعيله."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID ist aus. Zum Schutz deiner Privatsphäre empfehle ich dir dringend, es zu aktivieren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID is off. To keep your privacy safe, I strongly recommend turning it on."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID está desactivado. Para proteger tu privacidad te recomiendo encarecidamente activarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID n’est pas activé. Pour protéger ta confidentialité, je te recommande vivement de l’activer."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID बंद है। आपकी प्राइवेसी की सुरक्षा के लिए मैं इसे चालू करने की कड़ी सलाह देता हूँ।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID non è attivo. Per proteggere la tua privacy ti consiglio vivamente di attivarlo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceIDはオフです。プライバシーを守るため、有効にすることを強くおすすめします。"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID staat uit. Om je privacy te beschermen raad ik je sterk aan het in te schakelen."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID está desligado. Para proteger a tua privacidade, recomendo vivamente que o atives."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID выключен. Для защиты твоей конфиденциальности настоятельно рекомендую включить его."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID är av. För att skydda din integritet rekommenderar jag starkt att du slår på det."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID вимкнено. Для захисту твоєї приватності я настійно рекомендую його увімкнути."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID غیر فعال ہے۔ اپنی پرائیویسی کے تحفظ کے لیے میں اسے فعال کرنے کی سخت سفارش کرتا ہوں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID 未开启。为了保护你的隐私，我强烈建议你启用它。"
+          }
+        }
+      }
+    },
+    "onboarding.030faceID.enabled" : {
+      "comment" : "A message shown to the user, during onboarding, if FaceID has successfully been enabled.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم تفعيل FaceID. وجهك يضيف الآن طبقة إضافية من الأمان والخصوصية."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID ist an. Dein Gesicht sorgt jetzt für eine zusätzliche Schicht Sicherheit und Privatsphäre."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID is on. Your face now adds an extra layer of security and privacy."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID está activado. Tu cara ahora añade una capa extra de seguridad y privacidad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID est activé. Ton visage ajoute maintenant une couche supplémentaire de sécurité et de confidentialité."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID चालू है। आपका चेहरा अब सुरक्षा और गोपनीयता की एक अतिरिक्त परत जोड़ता है।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID è attivo. Il tuo volto ora aggiunge un ulteriore livello di sicurezza e privacy."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceIDはオン。あなたの顔がセキュリティとプライバシーにもう一層の守りをプラスします。"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID staat aan. Je gezicht voegt nu een extra laag beveiliging en privacy toe."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID está ligado. O teu rosto agora adiciona uma camada extra de segurança e privacidade."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID включён. Твоё лицо теперь добавляет дополнительный слой безопасности и конфиденциальности。"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID är på. Ditt ansikte lägger nu till ett extra lager av säkerhet och integritet."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID увімкнено. Твоє обличчя тепер додає ще один шар безпеки та приватності."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID فعال ہے۔ آپ کا چہرہ اب سیکیورٹی اور رازداری کی ایک اضافی تہہ شامل کرتا ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID 已开启。你的脸现在多加了一层安全和隐私保护。"
           }
         }
       }
@@ -10943,7 +11144,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ingen fara! När vi ber om fotoåtkomst är det bara så att DU kan dela bilder när DU vill. Vi kikar inte, bearbetar inget eller gör något lurigt med dina foton - svurit på minsta fingret!"
+            "value" : "Ingen fara! När vi ber om fotoåtkomst är det bara så att DU kan dela bilder när DU vill. Vi kikar inte, bearbetar inget eller gör något lurigt med dina foton. Lovar!"
           }
         },
         "uk" : {
@@ -11376,7 +11577,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "C'est l'heure de choisir vos boucliers anti-pub ! On a présélectionné ceux qui vous donneront la meilleure expérience, mais n'hésitez pas à faire votre propre mix.\\nAstuce de pro : Touchez le nom d'un filtre pour savoir ce qu'il fait!"
+            "value" : "C'est l'heure de choisir vos boucliers anti-pub ! On a présélectionné ceux qui vous donneront la meilleure expérience, mais n'hésitez pas à faire votre propre mix. Astuce de pro : Touchez le nom d'un filtre pour savoir ce qu'il fait!"
           }
         },
         "hi" : {
@@ -11630,6 +11831,481 @@
         }
       }
     },
+    "options.disableEB.enabled" : {
+      "comment" : "Very short word to indicate that the function state is ok.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "موافق"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ठीक"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОК"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确定"
+          }
+        }
+      }
+    },
+    "options.disableEB.footer" : {
+      "comment" : "Long explanation to help the user with this toggle.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استخدم هذه الوظيفة في حال عدم تمكنك من تسجيل الدخول إلى موقع ويب. للمزيد من التفاصيل يرجى الاطلاع على السؤال 1 في قسم الأسئلة والأجوبة."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwenden Sie diese Funktion, falls Sie sich nicht bei einer Website anmelden können. Für weitere Details schauen Sie bitte bei Frage 1 im Fragen & Antworten Bereich nach."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use this function in case you can’t login to a website. For more details please have a look at question 1 in the Questions & Answers section."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa esta función en caso de que no puedas iniciar sesión en un sitio web. Para más detalles consulta la pregunta 1 en la sección de Preguntas y Respuestas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisez cette fonction si vous ne pouvez pas vous connecter à un site web. Pour plus de détails, veuillez consulter la question 1 dans la section Questions et Réponses."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "यदि आप किसी वेबसाइट में लॉगिन नहीं कर पा रहे हैं तो इस फ़ंक्शन का उपयोग करें। अधिक जानकारी के लिए कृपया प्रश्न और उत्तर अनुभाग में प्रश्न 1 देखें।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa questa funzione nel caso non riuscissi ad accedere a un sito web. Per maggiori dettagli consulta la domanda 1 nella sezione Domande e Risposte."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウェブサイトにログインできない場合は、この機能を使用してください。詳細については、質問と回答セクションの質問1をご覧ください。"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik deze functie als u niet kunt inloggen op een website. Voor meer details kijk naar vraag 1 in het vraag & antwoord gedeelte."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use esta função caso não consiga iniciar sessão num website. Para mais detalhes consulte a pergunta 1 na secção de Perguntas e Respostas."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Используйте эту функцию, если вы не можете войти на веб-сайт. Для получения более подробной информации посмотрите вопрос 1 в разделе Вопросы и Ответы."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Använd denna funktion om du inte kan logga in på en webbplats. För mer information, se fråga 1 i avsnittet Frågor & Svar."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Використовуйте цю функцію, якщо ви не можете увійти на веб-сайт. Для отримання додаткової інформації перегляньте питання 1 у розділі Питання та Відповіді."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اگر آپ کسی ویب سائٹ میں لاگ ان نہیں کر سکتے تو اس فنکشن کا استعمال کریں۔ مزید تفصیلات کے لیے براہ کرم سوالات اور جوابات کے سیکشن میں سوال 1 دیکھیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果您无法登录网站，请使用此功能。有关更多详细信息，请查看问答部分的问题1。"
+          }
+        }
+      }
+    },
+    "options.disableEB.header" : {
+      "comment" : "Short header",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "روابط طرف ثالث"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drittanbieter-Links"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3rd Party Links"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlaces de terceros"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liens tiers"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "तृतीय पक्ष लिंक"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link di terze parti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サードパーティリンク"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links van derden"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ligações de Terceiros"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ссылки третьих лиц"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tredjepartslänkar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посилання третіх сторін"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تیسری پارٹی کے لنکس"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第三方链接"
+          }
+        }
+      }
+    },
+    "options.disableEB.textDisabledEB" : {
+      "comment" : "Text on button that changes depending on the state of the function being enabled or disabled.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فتح في نفس النافذة"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im selben Fenster öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Same Window"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en la misma ventana"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir dans la même fenêtre"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "एक ही विंडो में खोलें"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri nella stessa finestra"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同じウィンドウで開く"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in hetzelfde venster"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir na Mesma Janela"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть в том же окне"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna i samma fönster"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрити в тому ж вікні"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ایک ہی ونڈو میں کھولیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在同一窗口中打开"
+          }
+        }
+      }
+    },
+    "options.disableEB.textEnabledEB" : {
+      "comment" : "Text on button that changes depending on the state of the function being enabled or disabled.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فتح في نافذة جديدة"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In neuem Fenster öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in New Window"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en ventana nueva"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir dans une nouvelle fenêtre"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नई विंडो में खोलें"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri in nuova finestra"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しいウィンドウで開く"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in nieuw venster"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir em Nova Janela"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть в новом окне"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna i nytt fönster"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрити в новому вікні"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نئی ونڈو میں کھولیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在新窗口中打开"
+          }
+        }
+      }
+    },
     "options.greasy.toggleGreasyMonkey" : {
       "comment" : "A toggle that allows the user to turn a feature on or off.",
       "localizations" : {
@@ -11821,6 +12497,7 @@
       }
     },
     "Options.qna.1answer" : {
+      "comment" : "Well explained answer to the question a user may have regarding a specific feature of the app.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -11915,6 +12592,7 @@
       }
     },
     "Options.qna.1question" : {
+      "comment" : "A question the user may select from a list, tap on and be provided with an answer.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12009,6 +12687,7 @@
       }
     },
     "Options.qna.2answer" : {
+      "comment" : "Well explained answer to the question a user may have regarding a specific feature of the app.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12103,6 +12782,7 @@
       }
     },
     "Options.qna.2question" : {
+      "comment" : "A question the user may select from a list, tap on and be provided with an answer.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12197,6 +12877,7 @@
       }
     },
     "Options.qna.3answer" : {
+      "comment" : "Well explained answer to the question a user may have regarding a specific feature of the app.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12291,6 +12972,7 @@
       }
     },
     "Options.qna.3question" : {
+      "comment" : "A question the user may select from a list, tap on and be provided with an answer.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12385,6 +13067,7 @@
       }
     },
     "Options.qna.4answer" : {
+      "comment" : "Well explained answer to the question a user may have regarding a specific feature of the app.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12479,6 +13162,7 @@
       }
     },
     "Options.qna.4question" : {
+      "comment" : "A question the user may select from a list, tap on and be provided with an answer.",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12568,6 +13252,196 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "我在哪里可以编辑照片访问权限？"
+          }
+        }
+      }
+    },
+    "Options.qna.5answer" : {
+      "comment" : "Well explained answer to the question a user may have regarding a specific feature of the app.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متصفح qFocus مبني على الخصوصية. لذلك كل رابط يشير إلى موقع آخر غير الذي أنت عليه حالياً يُفتح في نافذة أخرى. هذا يضمن عدم مشاركة ملفات تعريف الارتباط وأن المواقع لن تعرف شيئاً أو القليل جداً عن بعضها البعض. ومع ذلك، عند تسجيل الدخول إلى بعض المواقع (مثل Messenger) يتم استخدام مواقع أخرى (مثل Facebook) لتسجيل دخول المستخدم. سيفشل هذا مع المفهوم أعلاه! إذا حدث هذا يرجى تفعيل \"فتح في نافذة جديدة\" ولفترة محدودة ستُفتح جميع الروابط في نفس النافذة، مما يسمح لك بتسجيل الدخول."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser ist auf Datenschutz ausgerichtet. Daher wird jeder Link, der auf eine andere Website als die aktuelle verweist, in einem anderen Fenster geöffnet. Dies stellt sicher, dass Cookies nicht geteilt werden und die Seiten nichts bis sehr wenig voneinander wissen. Beim Anmelden bei einigen Seiten (z.B. Messenger) werden jedoch andere Seiten (z.B. Facebook) verwendet, um den Benutzer anzumelden. Dies wird mit dem obigen Konzept fehlschlagen! Wenn dies passiert, aktivieren Sie bitte \"In neuem Fenster öffnen\" und für eine begrenzte Zeit werden alle Links im selben Fenster geöffnet, sodass Sie sich anmelden können."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser is built around privacy. Therefore every link that is pointing at another website than the one you are currently on is opened in another window. This ensures that cookies won’t be shared and the sites will know nothing to very little about each other. However, when logging in to some sites (for example Messenger) than other sites (for example Facebook) are used to login the user. This will fail with the above concept! If this happens please enable “Open in New Window” and for a limited time all links are opened in the same window, allowing you to login."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El navegador qFocus está construido en torno a la privacidad. Por lo tanto, cada enlace que apunta a otro sitio web diferente al que estás actualmente se abre en otra ventana. Esto asegura que las cookies no se compartirán y los sitios no sabrán nada o muy poco el uno del otro. Sin embargo, al iniciar sesión en algunos sitios (por ejemplo, Messenger) se utilizan otros sitios (por ejemplo, Facebook) para iniciar sesión del usuario. ¡Esto fallará con el concepto anterior! Si esto sucede, habilita \"Abrir en ventana nueva\" y durante un tiempo limitado todos los enlaces se abrirán en la misma ventana, permitiéndote iniciar sesión."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le navigateur qFocus est conçu autour de la confidentialité. Par conséquent, chaque lien pointant vers un autre site web que celui sur lequel vous êtes actuellement est ouvert dans une autre fenêtre. Cela garantit que les cookies ne seront pas partagés et que les sites ne sauront rien ou très peu l'un de l'autre. Cependant, lors de la connexion à certains sites (par exemple Messenger), d'autres sites (par exemple Facebook) sont utilisés pour connecter l'utilisateur. Cela échouera avec le concept ci-dessus ! Si cela se produit, veuillez activer \"Ouvrir dans une nouvelle fenêtre\" et pendant un temps limité, tous les liens s'ouvriront dans la même fenêtre, vous permettant de vous connecter."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus ब्राउज़र गोपनीयता के आसपास बनाया गया है। इसलिए हर लिंक जो आपकी वर्तमान वेबसाइट के अलावा किसी अन्य वेबसाइट की ओर इशारा करता है, दूसरी विंडो में खुलता है। यह सुनिश्चित करता है कि कुकीज़ साझा नहीं की जाएंगी और साइटें एक-दूसरे के बारे में कुछ नहीं या बहुत कम जानेंगी। हालांकि, कुछ साइटों (जैसे Messenger) में लॉगिन करते समय अन्य साइटों (जैसे Facebook) का उपयोग उपयोगकर्ता को लॉगिन करने के लिए किया जाता है। यह उपरोक्त अवधारणा के साथ विफल हो जाएगा! यदि ऐसा होता है तो कृपया \"नई विंडो में खोलें\" सक्षम करें और सीमित समय के लिए सभी लिंक एक ही विंडो में खुलेंगे, जिससे आप लॉगिन कर सकेंगे।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser è costruito attorno alla privacy. Pertanto ogni link che punta a un altro sito web diverso da quello su cui ti trovi attualmente viene aperto in un'altra finestra. Questo garantisce che i cookie non vengano condivisi e che i siti non sappiano nulla o molto poco l'uno dell'altro. Tuttavia, quando si accede ad alcuni siti (ad esempio Messenger) vengono utilizzati altri siti (ad esempio Facebook) per far accedere l'utente. Questo fallirà con il concetto sopra! Se ciò accade, abilita \"Apri in nuova finestra\" e per un tempo limitato tutti i link verranno aperti nella stessa finestra, permettendoti di accedere."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocusブラウザはプライバシーを中心に構築されています。そのため、現在アクセスしているウェブサイト以外を指すすべてのリンクは別のウィンドウで開かれます。これにより、クッキーが共有されず、サイト同士がお互いについて何も知らないか、ほとんど知らないことが保証されます。ただし、一部のサイト（例：Messenger）にログインする際、他のサイト（例：Facebook）を使用してユーザーをログインさせることがあります。これは上記のコンセプトでは失敗します！これが起こった場合は、「新しいウィンドウで開く」を有効にしてください。限られた時間、すべてのリンクが同じウィンドウで開かれ、ログインできるようになります。"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser is gebouwd rond privacy. Daarom wordt elke link die naar een andere website wijst dan degene waar u momenteel op bent, in een ander venster geopend. Dit zorgt ervoor dat cookies niet worden gedeeld en de sites niets tot zeer weinig van elkaar weten. Echter, bij het inloggen op sommige sites (bijvoorbeeld Messenger) worden andere sites (bijvoorbeeld Facebook) gebruikt om de gebruiker in te loggen. Dit zal falen met het bovenstaande concept! Als dit gebeurt, schakel dan \"Openen in nieuw venster\" in en voor een beperkte tijd worden alle links in hetzelfde venster geopend, zodat u kunt inloggen."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O navegador qFocus é construído em torno da privacidade. Portanto, cada ligação que aponta para outro website diferente daquele em que está atualmente é aberta noutra janela. Isto garante que os cookies não serão partilhados e os sites não saberão nada ou muito pouco uns sobre os outros. No entanto, ao iniciar sessão em alguns sites (por exemplo, Messenger), outros sites (por exemplo, Facebook) são usados para fazer login do utilizador. Isto falhará com o conceito acima! Se isto acontecer, ative \"Abrir em Nova Janela\" e por um tempo limitado todas as ligações serão abertas na mesma janela, permitindo-lhe iniciar sessão."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Браузер qFocus построен на основе конфиденциальности. Поэтому каждая ссылка, указывающая на другой веб-сайт, отличный от того, на котором вы находитесь, открывается в другом окне. Это гарантирует, что файлы cookie не будут использоваться совместно, и сайты не будут знать друг о друге ничего или очень мало. Однако при входе на некоторые сайты (например, Messenger) для входа пользователя используются другие сайты (например, Facebook). Это не будет работать с вышеуказанной концепцией! Если это произойдет, включите «Открыть в новом окне», и в течение ограниченного времени все ссылки будут открываться в том же окне, позволяя вам войти в систему."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus Browser är byggd kring integritet. Därför öppnas varje länk som pekar på en annan webbplats än den du för närvarande är på i ett annat fönster. Detta säkerställer att cookies inte delas och att webbplatserna inte vet något eller mycket lite om varandra. Men när man loggar in på vissa webbplatser (till exempel Messenger) används andra webbplatser (till exempel Facebook) för att logga in användaren. Detta kommer att misslyckas med ovanstående koncept! Om detta händer, aktivera \"Öppna i nytt fönster\" och under en begränsad tid öppnas alla länkar i samma fönster, vilket gör att du kan logga in."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Браузер qFocus побудований навколо конфіденційності. Тому кожне посилання, що вказує на інший веб-сайт, ніж той, на якому ви зараз перебуваєте, відкривається в іншому вікні. Це гарантує, що файли cookie не будуть спільними, а сайти не знатимуть нічого або дуже мало один про одного. Однак при вході на деякі сайти (наприклад, Messenger) для входу користувача використовуються інші сайти (наприклад, Facebook). Це не спрацює з вищевказаною концепцією! Якщо це станеться, увімкніть «Відкрити в новому вікні», і протягом обмеженого часу всі посилання відкриватимуться в тому самому вікні, дозволяючи вам увійти."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus براؤزر رازداری کے ارد گرد بنایا گیا ہے۔ اس لیے ہر لنک جو آپ کی موجودہ ویب سائٹ کے علاوہ کسی اور ویب سائٹ کی طرف اشارہ کرتا ہے، دوسری ونڈو میں کھلتا ہے۔ یہ یقینی بناتا ہے کہ کوکیز شیئر نہیں ہوں گی اور سائٹس ایک دوسرے کے بارے میں کچھ نہیں یا بہت کم جانیں گی۔ تاہم، کچھ سائٹس (جیسے Messenger) میں لاگ ان کرتے وقت دوسری سائٹس (جیسے Facebook) صارف کو لاگ ان کرنے کے لیے استعمال کی جاتی ہیں۔ یہ اوپر والے تصور کے ساتھ ناکام ہو جائے گا! اگر ایسا ہوتا ہے تو براہ کرم \"نئی ونڈو میں کھولیں\" کو فعال کریں اور محدود وقت کے لیے تمام لنکس ایک ہی ونڈو میں کھلیں گے، جس سے آپ لاگ ان کر سکیں گے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus浏览器围绕隐私而构建。因此，每个指向当前网站以外的其他网站的链接都会在另一个窗口中打开。这确保了cookies不会被共享，网站之间几乎不会相互了解。但是，在登录某些网站（例如Messenger）时，会使用其他网站（例如Facebook）来登录用户。这将与上述概念冲突！如果发生这种情况，请启用\"在新窗口中打开\"，在有限的时间内所有链接都将在同一窗口中打开，允许您登录。"
+          }
+        }
+      }
+    },
+    "Options.qna.5question" : {
+      "comment" : "A question the user may select from a list, tap on and be provided with an answer.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "روابط طرف ثالث - ماذا يعني ذلك؟"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drittanbieter-Links - Was bedeutet das?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3rd Party Links - What does it mean?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlaces de terceros - ¿Qué significa?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liens tiers - Qu'est-ce que cela signifie ?"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "तृतीय पक्ष लिंक - इसका क्या मतलब है?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link di terze parti - Cosa significa?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サードパーティリンク - どういう意味ですか？"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links van derden - Wat betekent dit?"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ligações de Terceiros - O que significa?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ссылки третьих лиц - Что это значит?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tredjepartslänkar - Vad betyder det?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посилання третіх сторін - Що це означає?"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تیسری پارٹی کے لنکس - اس کا کیا مطلب ہے؟"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第三方链接 - 这是什么意思？"
           }
         }
       }
@@ -13613,6 +14487,101 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "问答"
+          }
+        }
+      }
+    },
+    "options.settings.PhotoLibrary" : {
+      "comment" : "A label in a list view that provides the user the possibility to review the access to the Photos Library.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الوصول إلى الصور"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotozugriff"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photos Access"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceso a fotos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès aux photos"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "फ़ोटो एक्सेस"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accesso alle foto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "写真へのアクセス"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toegang tot foto's"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acesso a Fotos"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступ к фото"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoåtkomst"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступ до фото"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تصاویر تک رسائی"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "照片访问权限"
           }
         }
       }
@@ -15989,6 +16958,481 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加网站"
+          }
+        }
+      }
+    },
+    "PhotoLibrary-Allowed" : {
+      "comment" : "Single short word that describes the access level to the photo library on device.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مسموح"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erlaubt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allowed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisé"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अनुमत"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consentito"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "許可済み"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toegestaan"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitido"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разрешено"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tillåten"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дозволено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اجازت یافتہ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已允许"
+          }
+        }
+      }
+    },
+    "PhotoLibrary-Denied" : {
+      "comment" : "Single short word that describes the access level to the photo library on device.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محظور"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verweigert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denied"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denegado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refusé"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अस्वीकृत"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拒否済み"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geweigerd"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запрещено"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nekad"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заборонено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مسترد"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已拒绝"
+          }
+        }
+      }
+    },
+    "PhotoLibrary-Limited" : {
+      "comment" : "Single short word that describes the access level to the photo library on device.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محدود"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eingeschränkt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limited"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limité"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सीमित"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "制限付き"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beperkt"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ограничено"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begränsad"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обмежено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محدود"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "受限"
+          }
+        }
+      }
+    },
+    "PhotoLibrary-Not determined" : {
+      "comment" : "Single short word that describes the access level to the photo library on device.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير محدد"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht festgelegt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not determined"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No determinado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non déterminé"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "निर्धारित नहीं"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non determinato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未決定"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niet bepaald"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não Determinado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не определено"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ej fastställd"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не визначено"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غیر متعین"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未确定"
+          }
+        }
+      }
+    },
+    "PhotoLibrary-Unknown" : {
+      "comment" : "Single short word that describes the access level to the photo library on device.",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير معروف"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desconocido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inconnu"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अज्ञात"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sconosciuto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不明"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onbekend"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desconhecido"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестно"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okänd"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідомо"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نامعلوم"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未知"
           }
         }
       }

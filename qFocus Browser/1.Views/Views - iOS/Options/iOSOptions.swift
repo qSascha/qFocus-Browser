@@ -110,6 +110,9 @@ struct iOSOptions: View {
                         
                     }
                     
+                    // Temp Disable External Browser Section
+                    disableExternalBrowser()
+                    
                     // Settings Section
                     iOSOptionsViewSettings()
                     
@@ -182,6 +185,85 @@ struct iOSOptions: View {
     }
 
     
+    
+    //MARK: Temp Disable External Browser
+    struct disableExternalBrowser: View {
+        @InjectedObject(\.optionsVM) var viewModel: OptionsVM
+
+        let iconSize: CGFloat = 30
+
+        var body: some View {
+            Section {
+
+
+                Button(action: {
+                    viewModel.disableExternalBrowser()
+                }) {
+                    HStack {
+                        Image("3rd Party Links")
+                            .resizable()
+                            .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+
+                        if viewModel.disableEBCountdownActive {
+                            Text("options.disableEB.textDisabledEB")
+                            
+                            Spacer()
+
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .resizable()
+                                .frame(width: viewModel.iconSize * 0.75, height: viewModel.iconSize * 0.75)
+                                .foregroundColor(.red)
+                                .padding(.horizontal, 6)
+
+                            Text(viewModel.disableEBCountdownText)
+                                .font(.caption)
+                                .foregroundColor(.gray)
+
+                        } else  {
+                            Text("options.disableEB.textEnabledEB")
+                            
+                            Spacer()
+
+                            Image(systemName: "exclamationmark.triangle")
+                                .resizable()
+                                .frame(width: viewModel.iconSize * 0.75, height: viewModel.iconSize * 0.75)
+                                .foregroundColor(.green)
+                                .padding(.horizontal, 6)
+
+                            Text("options.disableEB.enabled")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+                .listRowBackground(
+                    // Add pulsing background when countdown is active, otherwise use default
+                    Group {
+                        if viewModel.disableEBCountdownActive {
+                            PulsingListRowBackground(color: .red)
+                        } else {
+                            Color(UIColor.systemBackground)
+                        }
+                    }
+                )
+
+            } header: {
+                Text("options.disableEB.header")
+                    .padding(.top, 30)
+
+            } footer: {
+                Text("options.disableEB.footer")
+                    .padding(.bottom, 30)
+            }
+
+
+        }
+    }
+
+    
+    
     //MARK: Move Site
     private func moveSite(from source: IndexSet, to destination: Int) {
         viewModel.sites.move(fromOffsets: source, toOffset: destination)
@@ -248,18 +330,52 @@ struct iOSOptions: View {
                     Toggle("options.settings.toggleEnableFaceID", isOn: $viewModel.faceIDEnabled)
                 }
                 
+                Button {
+                    viewModel.photoLibraryRequestAccess()
+                } label: {
+                    HStack {
+                        Image("Options-PhotoLibrary")
+                            .resizable()
+                            .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+
+                        Text("options.settings.PhotoLibrary")
+                        
+                        Image(systemName: "arrow.up.right.square")
+                            .resizable()
+                            .frame(width: viewModel.iconSize * 0.5, height: viewModel.iconSize * 0.5)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 6)
+                        Spacer()
+                        
+                            
+                        Image(systemName: viewModel.alPhotoLibraryImage)
+                            .resizable()
+                            .frame(width: viewModel.iconSize * 0.75, height: viewModel.iconSize * 0.75)
+                            .foregroundColor(viewModel.alPhotoLibraryColor)
+                            .padding(.horizontal, 6)
+                        Text(viewModel.alPhotoLibraryText)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .buttonStyle(.plain)
+                
                 NavigationLink(destination: iOSAdBlockSettings()) {
                     HStack {
                         Image("Options-AdBlocking")
                             .resizable()
                             .frame(width: viewModel.iconSize, height: viewModel.iconSize)
                         Text("options.settings.NavigationAdBlocking")
-                        Image(systemName: "shield.fill")
-                            .foregroundColor(viewModel.adBlockUpdateFrequency != 0 ? .green : .gray)
-                        
+
                         Spacer()
-                        
-                        if viewModel.adBlockUpdateFrequency != 0 {
+
+                        Image(systemName: "shield.fill")
+                            .resizable()
+                            .frame(width: viewModel.iconSize * 0.5, height: viewModel.iconSize * 0.75)
+                            .foregroundColor(viewModel.isAdBlockEnabled ? .green : .gray)
+                            .padding(.horizontal, 6)
+
+                        if viewModel.isAdBlockEnabled {
                             Text("\(viewModel.enabledFilterCount) adblock.activeCounts")
                                 .font(.caption)
                             .foregroundColor(.gray)
@@ -311,6 +427,25 @@ struct iOSOptions: View {
 }
 
 
+
+// MARK: - Pulsing List Row Background
+struct PulsingListRowBackground: View {
+    let color: Color
+    @State private var isPulsing = false
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 8)
+            .fill(color.opacity(isPulsing ? 0.2 : 0.7))
+            .onAppear {
+                withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) {
+                    isPulsing = true
+                }
+            }
+            .onDisappear {
+                isPulsing = false
+            }
+    }
+}
 
 #Preview {
     iOSOptions()

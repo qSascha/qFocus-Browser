@@ -7,7 +7,7 @@ import SwiftUI
 import FactoryKit
 
 
-
+ 
 struct Photos: View {
     @InjectedObject(\.onboardingVM) var viewModel: OnboardingVM
 
@@ -35,7 +35,6 @@ struct Photos: View {
                 .glassEffect(.regular.tint(.blue))
                 .padding(.trailing, 20)
                 .padding(.top, 10)
-                
                 
                 HStack(alignment: .top, spacing: 10) {
                     // Symbol at the top left of the text

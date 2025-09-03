@@ -10,7 +10,7 @@ import SwiftUI
 
 
 //MARK: App Version
-let appVersion = "25.07"
+let appVersion = "25.08"
 let copyRightYear = "2025"
 
 
@@ -74,4 +74,14 @@ struct IdentifiableURL: Identifiable {
     let url: URL
 }
 
+
+
+//MARK: Open App Settings
+@MainActor
+func openAppSettings() {
+    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+    if UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+}
 

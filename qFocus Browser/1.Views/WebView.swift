@@ -14,19 +14,23 @@ import FactoryKit
 
 
 
+//MARK: Web View
 struct WebView: View {
-    let viewModel: WebViewVM
-    
-    
+//    let viewModel: WebViewVM
+    @ObservedObject var viewModel: WebViewVM
+
     var body: some View {
         WebViewRepresentable(webView: viewModel.getWebView(), viewModel: viewModel)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(edges: .bottom)
+
     }
     
 }
 
 
 
+//MARK: Web View Representable
 struct WebViewRepresentable: UIViewRepresentable {
     let webView: WKWebView
     let viewModel: WebViewVM
@@ -79,3 +83,5 @@ struct WebViewRepresentable: UIViewRepresentable {
 
     
 }
+
+

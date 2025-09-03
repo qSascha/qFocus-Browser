@@ -264,7 +264,16 @@ extension Container {
     
     var persistentContainer: Factory<NSPersistentContainer> {
         Factory(self) {
+            // IMPORTANT: This must match your .xcdatamodeld name (without version suffix)
             let container = NSPersistentContainer(name: "qFocusModel")
+            
+            // Configure the (single) store description BEFORE loading stores.
+            if let description = container.persistentStoreDescriptions.first {
+                description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+                description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+            }
+            
+            // Now the options above are applied when the store is opened/migrated.
             container.loadPersistentStores { _, error in
                 if let error = error {
                     fatalError("Core Data stack init failed: \(error)")
@@ -281,4 +290,3 @@ extension Container {
     }
     
 }
-

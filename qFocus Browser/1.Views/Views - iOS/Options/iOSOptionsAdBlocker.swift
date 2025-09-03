@@ -19,17 +19,33 @@ struct iOSAdBlockSettings: View {
         List {
             // Global Ad-Block Toggle
             Section {
-                
-                Picker("adblock.update.frequency", selection: viewModel.adBlockUpdateFrequency) {
-                    Text("adblock.update.disabled").tag(Int16(0))
-                    Text("adblock.update.always").tag(Int16(1))
-                    Text("adblock.update.daily").tag(Int16(2))
-                    Text("adblock.update.weekly").tag(Int16(3))
-                    Text("adblock.update.monthly").tag(Int16(4))
+                HStack {
+                    Image("Options-AdBlocking")
+                        .resizable()
+                        .frame(width: viewModel.iconSize, height: viewModel.iconSize)
+                    Text("options.settings.NavigationAdBlocking")
+                    
+                    Spacer()
+                    
+                    Toggle("", isOn: viewModel.isAdBlockEnabled)
                 }
             }
 
-            if viewModel.isAdBlockEnabled{
+            // Update frequency
+            if viewModel.isAdBlockEnabled.wrappedValue {
+                Section {
+                    
+                    Picker("adblock.update.frequency", selection: viewModel.adBlockUpdateFrequency) {
+                        Text("adblock.update.disabled").tag(Int16(0))
+                        Text("adblock.update.always").tag(Int16(1))
+                        Text("adblock.update.daily").tag(Int16(2))
+                        Text("adblock.update.weekly").tag(Int16(3))
+                        Text("adblock.update.monthly").tag(Int16(4))
+                    }
+                }
+            }
+            
+            if viewModel.isAdBlockEnabled.wrappedValue {
                 HStack {
                     Spacer()
                     VStack {
@@ -64,7 +80,7 @@ struct iOSAdBlockSettings: View {
 
             // Ad Block Lists
             Section {
-                if viewModel.isAdBlockEnabled {
+                if viewModel.isAdBlockEnabled.wrappedValue {
                     ForEach( viewModel.filterItems, id: \.filterID) { filter in
                         AdBlockListRow(filter: filter) {
                             showingExplanation = filter
@@ -197,4 +213,3 @@ struct ExplanationView: View {
         }
     }
 }
-

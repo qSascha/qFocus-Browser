@@ -151,6 +151,10 @@ struct iOSOnboarding: View {
                         .frame(width: 30)
                         .padding(10)
                 }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(Color.gray.gradient.opacity(0.94))
+                .cornerRadius(20)
             }
             
             Spacer()
@@ -164,6 +168,10 @@ struct iOSOnboarding: View {
                         .frame(width: 30)
                         .padding(10)
                 }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(Color.gray.gradient.opacity(0.94))
+                .cornerRadius(20)
                 .disabled(!viewModel.canProceed)
             } else {
                 
@@ -177,11 +185,13 @@ struct iOSOnboarding: View {
                         .frame(width: 30)
                         .padding(10)
                 }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 3)
+                .background(Color.gray.gradient.opacity(0.94))
+                .cornerRadius(20)
             }
         }
-        .background(Color.gray.opacity(0.5))
-        .cornerRadius(20)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 30)
         .onAppear {
 #if DEBUG
             print("⚠️ iOSOnboarding")

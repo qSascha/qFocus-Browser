@@ -120,12 +120,12 @@ public final class OptionsGreasyEditVM: ObservableObject {
         // If the script has no site selected it defaults to "###disabled###"
         let validSiteTags = sites.map { $0.siteURL.replacingOccurrences(of: "https://", with: "").replacingOccurrences(of: "http://", with: "") }
         if !validSiteTags.contains(self.coreSite) {
-            self.coreSite = "none/disabled"
+            self.coreSite = NSLocalizedString("none-disabled", comment: "")
             self.scriptEnabled = false
             print("ScriptEnabled = false")
         } else {
             self.scriptEnabled = true
-            print("ScriptEnabled = truee")
+            print("ScriptEnabled = true")
         }
 
 

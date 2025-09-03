@@ -6,16 +6,21 @@
 import Foundation
 import WebKit
 import Combine
+import SwiftUI
 
 
 
 @MainActor
 final class WebViewVM: NSObject, ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+
     @Published var isLoading: Bool = false
     @Published var estimatedProgress: Double = 0.0
     @Published var canGoBack: Bool = false
     @Published var canGoForward: Bool = false
     @Published var currentURL: URL?
+    @Published var disableEB: Bool = false
+    
     private var lastNavigationTime: Date?
     private var initialHost: String?
 
@@ -51,6 +56,16 @@ final class WebViewVM: NSObject, ObservableObject {
         
         self.webView = WKWebView()
         
+        super.init()
+
+        // Subscribe to global external browser disabled state
+        CombineRepo.shared.externalBrowserDisabled
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] disabled in
+                self?.disableEB = disabled
+            }
+            .store(in: &cancellables)
+
     }
 
 
@@ -99,7 +114,7 @@ final class WebViewVM: NSObject, ObservableObject {
         let userContentController = WKUserContentController()
 
         // Enable AdBlocking
-        if settingsRepo.get().adBlockUpdateFrequency != 0 && site.enableAdBlocker {
+        if settingsRepo.get().adBlockEnabled && site.enableAdBlocker {
             for setting in adBlockRepo.getAllEnabled() {
                 do {
                     if let ruleList = try await WKContentRuleListStore.default().contentRuleList(forIdentifier: setting.filterID) {
@@ -238,7 +253,7 @@ extension WebViewVM: WKNavigationDelegate {
             decisionHandler(.allow, preferences)
             return
         }
-
+        
         // Handle mailto:, tel:, etc. externally
         let externalSchemes = ["mailto", "tel", "sms", "maps", "facetime"]
         if externalSchemes.contains(scheme) {
@@ -246,13 +261,21 @@ extension WebViewVM: WKNavigationDelegate {
             decisionHandler(.cancel, preferences)
             return
         }
-
+        
+        // Handle AppStore links
+        if let url = navigationAction.request.url,
+           url.host == "apps.apple.com" {
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel, preferences)
+            return
+        }
+        
         // Only handle http(s) links in the following logic
         guard scheme == "http" || scheme == "https" else {
             decisionHandler(.allow, preferences)
             return
         }
-
+        
         // Compare domain for internal/external navigation
         guard let targetHost = url.host,
               let currentHost = webView.url?.host else {
@@ -262,24 +285,24 @@ extension WebViewVM: WKNavigationDelegate {
         let currentMainDomain = getDomainCore(currentHost)
         let targetMainDomain = getDomainCore(targetHost)
 
-        if currentMainDomain == targetMainDomain {
+        // Allow if same main domain OR external browsing is disabled; otherwise, open externally
+        if (currentMainDomain == targetMainDomain) || disableEB {
             decisionHandler(.allow, preferences)
-/*
-            decisionHandler(.cancel, preferences)
-            print("URL: \(url)")
-            var request = URLRequest(url: url)
-            webView.load(request)
-*/
-            return
 
+            /*
+             decisionHandler(.cancel, preferences)
+             print("URL: \(url)")
+             var request = URLRequest(url: url)
+             webView.load(request)
+             */
+
+//            return
         } else {
-            
             // Different domain, opening in external browser
             decisionHandler(.cancel, preferences)
             CombineRepo.shared.triggerExternalBrowser.send(url)
         }
     }
-
 
 
 
@@ -329,8 +352,6 @@ extension WebViewVM: WKNavigationDelegate {
         let mainDomain = components.suffix(2).joined(separator: ".")
         return mainDomain
     }
-
-
 
 
 

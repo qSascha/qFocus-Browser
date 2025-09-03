@@ -10,7 +10,7 @@ import FactoryKit
 
 struct NavBar: View {
     @InjectedObject(\.navigationVM) var viewModel: NavigationVM
-    
+
     @ObservedObject var coordinator: AppCoordinator
     @Namespace var navBarAnimation
 
@@ -24,29 +24,36 @@ struct NavBar: View {
                 
                 ZStack {
                     if viewModel.minimizeNavBar {
-
+                        
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
                             Group {
                                 if viewModel.selectedWebIndex >= 0 && viewModel.selectedWebIndex < viewModel.sitesButton.count {
-
-                                    if let image = UIImage(data: viewModel.sitesButton[viewModel.selectedWebIndex].siteFavIcon!) {
-                                        
-                                        HStack() {
+                                    
+                                    let faviconData = viewModel.sitesButton[viewModel.selectedWebIndex].siteFavIcon
+                                    let faviconImage = faviconData.flatMap { UIImage(data: $0) }
+                                    
+                                    HStack() {
+                                        if let image = faviconImage {
                                             Image(uiImage: image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 16, height: 16)
                                                 .clipShape(Circle())
-                                            
-                                            Text(viewModel.sitesButton[viewModel.selectedWebIndex].siteName)
-                                                .font(.caption)
+                                        } else {
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 16, height: 16)
+                                                .clipShape(Circle())
                                         }
-                                        .padding(.vertical, 2)
-                                        .padding(.horizontal, 6)
-
+                                        Text(viewModel.sitesButton[viewModel.selectedWebIndex].siteName)
+                                            .font(.caption)
                                     }
+                                    .padding(.vertical, 2)
+                                    .padding(.horizontal, 6)
+
                                 } else {
                                     Text("Loading...")
                                         .font(.caption)
@@ -116,29 +123,36 @@ struct NavBar: View {
                 
                 ZStack {
                     if viewModel.minimizeNavBar {
-
+                        
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
                             Group {
                                 if viewModel.selectedWebIndex >= 0 && viewModel.selectedWebIndex < viewModel.sitesButton.count {
-
-                                    if let image = UIImage(data: viewModel.sitesButton[viewModel.selectedWebIndex].siteFavIcon!) {
-                                        
-                                        HStack() {
+                                    
+                                    let faviconData = viewModel.sitesButton[viewModel.selectedWebIndex].siteFavIcon
+                                    let faviconImage = faviconData.flatMap { UIImage(data: $0) }
+                                    
+                                    HStack() {
+                                        if let image = faviconImage {
                                             Image(uiImage: image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 16, height: 16)
                                                 .clipShape(Circle())
-                                            
-                                            Text(viewModel.sitesButton[viewModel.selectedWebIndex].siteName)
-                                                .font(.caption)
+                                        } else {
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 16, height: 16)
+                                                .clipShape(Circle())
                                         }
-                                        .padding(.vertical, 2)
-                                        .padding(.horizontal, 6)
-
+                                        Text(viewModel.sitesButton[viewModel.selectedWebIndex].siteName)
+                                            .font(.caption)
                                     }
+                                    .padding(.vertical, 2)
+                                    .padding(.horizontal, 6)
+
                                 } else {
                                     Text("Loading...")
                                         .font(.caption)
@@ -147,7 +161,7 @@ struct NavBar: View {
                             }
 
                         }
-                        .background(Color.gray.opacity(0.5))
+                        .background(Color.gray.gradient.opacity(0.94))
                         .cornerRadius(20)
                         .padding(.bottom, 20)
                         .matchedGeometryEffect(id: "navBar", in: navBarAnimation)
@@ -166,7 +180,7 @@ struct NavBar: View {
                             }
                             .padding(.vertical, 14)
                             .padding(.horizontal, 14)
-                            .background(Color.gray.opacity(0.5))
+                            .background(Color.gray.gradient.opacity(0.94))
                             .cornerRadius(20)
                             .padding(.leading, 20)
                             
@@ -189,7 +203,7 @@ struct NavBar: View {
                             }
                             .padding(.vertical, 14)
                             .padding(.horizontal, 14)
-                            .background(Color.gray.opacity(0.5))
+                            .background(Color.gray.gradient.opacity(0.94))
                             .cornerRadius(20)
                             .padding(.trailing, 20)
                             
@@ -213,6 +227,7 @@ struct NavBar: View {
 //MARK: WebSite Selector View
 struct WebsiteSelectorView: View {
     @InjectedObject(\.navigationVM) var viewModel: NavigationVM
+    @InjectedObject(\.mainVM) var mainVM: MainVM
 
     @Binding var selectedIndex: Int
     let websites: [SitesNavButton]
@@ -222,69 +237,86 @@ struct WebsiteSelectorView: View {
     var body: some View {
         if #available(iOS 26.0, *) {
             
-            
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         
                         ForEach(Array(websites.enumerated()), id: \.element.id) { idx, site in
-                            if let image = UIImage(data: site.siteFavIcon!) {
+                            let faviconImage = site.siteFavIcon.flatMap { UIImage(data: $0) }
+                            
+                            if selectedIndex == idx {
                                 
-                                if selectedIndex == idx {
-                                    
-                                    // Selected button with glass effect
-                                    Button(action: {
-                                        selectedIndex = idx
-                                        withAnimation(.easeInOut) {
-                                            proxy.scrollTo(idx, anchor: .center)
-                                        }
-                                    }) {
-                                        VStack(spacing: 0) {
+                                // Selected button with glass effect
+                                Button(action: {
+                                    selectedIndex = idx
+                                    withAnimation(.easeInOut) {
+                                        proxy.scrollTo(idx, anchor: .center)
+                                    }
+                                    mainVM.updateTopAreaColor()
+
+                                }) {
+                                    VStack(spacing: 0) {
+                                        if let image = faviconImage {
                                             Image(uiImage: image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 30, height: 30)
                                                 .clipShape(Circle())
-                                            
-                                            Text (site.siteName)
-                                                .font(.caption)
-                                        }
-                                        .frame(width: 100, height: 48)
-                                        .padding(.vertical, 2)
-                                    }
-                                    .id(idx)
-                                    .glassEffect()
-                                    .padding(.vertical, 4)
-                                    .animation(.easeInOut, value: selectedIndex)
-                                    
-                                } else {
-                                    
-                                    // Non-selected item
-                                    Button(action: {
-                                        selectedIndex = idx
-                                        withAnimation(.easeInOut) {
-                                            proxy.scrollTo(idx, anchor: .center)
-                                        }
-                                    }) {
-                                        VStack(spacing: 0) {
-                                            Image(uiImage: image)
+                                        } else {
+                                            Image(systemName: "globe")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 30, height: 30)
                                                 .clipShape(Circle())
-                                            
-                                            Text (site.siteName)
-                                                .font(.caption)
                                         }
-                                        .frame(width: 70, height: 48)
-                                        .padding(.vertical, 2)
+                                        
+                                        Text (site.siteName)
+                                            .font(.caption)
                                     }
-                                    .id(idx)
-                                    .padding(.vertical, 4)
-                                    .animation(.easeInOut, value: selectedIndex)
-                                    
-                                    
+                                    .frame(width: 100, height: 48)
+                                    .padding(.vertical, 2)
                                 }
+                                .id(idx)
+                                .glassEffect()
+                                .padding(.vertical, 4)
+                                .animation(.easeInOut, value: selectedIndex)
+                                
+                            } else {
+                                
+                                // Non-selected item
+                                Button(action: {
+                                    selectedIndex = idx
+                                    withAnimation(.easeInOut) {
+                                        proxy.scrollTo(idx, anchor: .center)
+                                    }
+                                    mainVM.updateTopAreaColor()
+                                }) {
+                                    VStack(spacing: 0) {
+                                        if let image = faviconImage {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        } else {
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        }
+                                        
+                                        Text (site.siteName)
+                                            .font(.caption)
+                                    }
+                                    .frame(width: 70, height: 48)
+                                    .padding(.vertical, 2)
+                                }
+                                .id(idx)
+                                .padding(.vertical, 4)
+                                .animation(.easeInOut, value: selectedIndex)
+                                
+                                
                             }
                         }
                     }
@@ -317,71 +349,88 @@ struct WebsiteSelectorView: View {
                     HStack(spacing: 8) {
                         
                         ForEach(Array(websites.enumerated()), id: \.element.id) { idx, site in
-                            if let image = UIImage(data: site.siteFavIcon!) {
-
-                                if selectedIndex == idx {
-                                    
-                                    // Selected button with glass effect
-                                    Button(action: {
-                                        selectedIndex = idx
-                                        withAnimation(.easeInOut) {
-                                            proxy.scrollTo(idx, anchor: .center)
-                                        }
-                                    }) {
-                                        VStack(spacing: 0) {
+                            let faviconImage = site.siteFavIcon.flatMap { UIImage(data: $0) }
+                            
+                            if selectedIndex == idx {
+                                
+                                // Selected button with glass effect
+                                Button(action: {
+                                    selectedIndex = idx
+                                    withAnimation(.easeInOut) {
+                                        proxy.scrollTo(idx, anchor: .center)
+                                    }
+                                    mainVM.updateTopAreaColor()
+                                }) {
+                                    VStack(spacing: 0) {
+                                        if let image = faviconImage {
                                             Image(uiImage: image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 30, height: 30)
                                                 .clipShape(Circle())
-                                            
-                                            Text (site.siteName)
-                                                .font(.caption)
-                                        }
-                                        .frame(width: 100, height: 48)
-                                        .padding(.vertical, 2)
-                                    }
-                                    .id(idx)
-                                    .background(Color.gray.opacity(0.5))
-                                    .cornerRadius(20)
-                                    .padding(.vertical, 4)
-                                    .animation(.easeInOut, value: selectedIndex)
-
-                                } else {
-                                    
-                                    // Non-selected item
-                                    Button(action: {
-                                        selectedIndex = idx
-                                        withAnimation(.easeInOut) {
-                                            proxy.scrollTo(idx, anchor: .center)
-                                        }
-                                    }) {
-                                        VStack(spacing: 0) {
-                                            Image(uiImage: image)
+                                        } else {
+                                            Image(systemName: "globe")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(width: 30, height: 30)
                                                 .clipShape(Circle())
-                                            
-                                            Text (site.siteName)
-                                                .font(.caption)
                                         }
-                                        .frame(width: 70, height: 48)
-                                        .padding(.vertical, 2)
+                                        
+                                        Text (site.siteName)
+                                            .font(.caption)
                                     }
-                                    .id(idx)
-                                    .padding(.vertical, 4)
-                                    .animation(.easeInOut, value: selectedIndex)
-
-                                    
+                                    .frame(width: 100, height: 48)
+                                    .padding(.vertical, 2)
                                 }
+                                .id(idx)
+                                .background(Color.gray.gradient.opacity(0.94))
+                                .cornerRadius(20)
+                                .padding(.vertical, 4)
+                                .animation(.easeInOut, value: selectedIndex)
+
+                            } else {
+                                
+                                // Non-selected item
+                                Button(action: {
+                                    selectedIndex = idx
+                                    withAnimation(.easeInOut) {
+                                        proxy.scrollTo(idx, anchor: .center)
+                                    }
+                                    mainVM.updateTopAreaColor()
+                                }) {
+                                    VStack(spacing: 0) {
+                                        if let image = faviconImage {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        } else {
+                                            Image(systemName: "globe")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(Circle())
+                                        }
+                                        
+                                        Text (site.siteName)
+                                            .font(.caption)
+                                    }
+                                    .frame(width: 70, height: 48)
+                                    .padding(.vertical, 2)
+                                }
+                                .id(idx)
+                                .padding(.vertical, 4)
+                                .animation(.easeInOut, value: selectedIndex)
+
+                                
                             }
                         }
                     }
                     .padding(.horizontal, 4)
                 }
                 .clipShape(Capsule())
-                .background(Color.gray.opacity(0.5))
+                .background(Color.gray.gradient.opacity(0.94))
                 .cornerRadius(20)
                 .onChange(of: selectedIndex) {
                     withAnimation(.easeInOut) {
@@ -416,6 +465,8 @@ struct AnyViewModifier: ViewModifier {
         bodyModifier(content)
     }
 }
+
+
 
 
 

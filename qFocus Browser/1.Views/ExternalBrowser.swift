@@ -141,7 +141,7 @@ struct ExternalBrowserView: View {
                 }
                 .padding(.vertical, 12)
                 .padding(.horizontal, 20)
-                .background(Color.gray.opacity(0.5))
+                .background(Color.gray.gradient.opacity(0.94))
                 .cornerRadius(20)
                 .padding(.trailing, 32)
                 .offset(y: showToolbar ? 0 : 120)

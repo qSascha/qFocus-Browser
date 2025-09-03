@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24295.2" systemVersion="25A5349a" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="AdBlockFilterSetting" representedClassName="AdBlockFilterSetting" syncable="YES">
+        <attribute name="checksum" optional="YES" attributeType="String"/>
+        <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="filterID" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="GreasyScriptStorage" representedClassName="GreasyScriptStorage" syncable="YES">
+        <attribute name="coreSite" optional="YES" attributeType="String"/>
+        <attribute name="defaultScript" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="scriptEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="scriptExplanation" optional="YES" attributeType="String"/>
+        <attribute name="scriptID" optional="YES" attributeType="String"/>
+        <attribute name="scriptLicense" optional="YES" attributeType="String"/>
+        <attribute name="scriptName" optional="YES" attributeType="String"/>
+        <attribute name="scriptURL" optional="YES" attributeType="String"/>
+        <attribute name="siteFavIcon" optional="YES" attributeType="Binary"/>
+        <attribute name="siteURL" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SettingsStorage" representedClassName="SettingsStorage" syncable="YES">
+        <attribute name="adBlockEnabled" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="adBlockLastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="adBlockUpdateFrequency" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="faceIDEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="freeFlowXPercent" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="freeFlowYPercent" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="greasyScriptsEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="onboardingComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showNavBar" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="SitesStorage" representedClassName="SitesStorage" syncable="YES">
+        <attribute name="cookieStoreID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="enableAdBlocker" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="enableGreasy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="requestDesktop" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="siteFavIcon" optional="YES" attributeType="Binary"/>
+        <attribute name="siteName" optional="YES" attributeType="String"/>
+        <attribute name="siteOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="siteURL" optional="YES" attributeType="String"/>
+    </entity>
+</model>

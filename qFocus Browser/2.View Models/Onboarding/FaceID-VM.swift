@@ -13,11 +13,13 @@ import SwiftUI
 @MainActor
 final class FaceIDVM: ObservableObject {
     private let settingsRepo: SettingsRepo
+    @Published var faceIDEnabled: Bool
 
-
+    
 
     init(settingsRepo: SettingsRepo) {
         self.settingsRepo = settingsRepo
+        self.faceIDEnabled = settingsRepo.get().faceIDEnabled
     }
 
     
@@ -36,6 +38,8 @@ final class FaceIDVM: ObservableObject {
                     self.settingsRepo.update { settings in
                         settings.faceIDEnabled = success
                     }
+                    self.faceIDEnabled = success
+
                     print(success
                         ? "✅ FaceID has been enabled successfully."
                         : "❌ FaceID could not be enabled.")

@@ -30,21 +30,26 @@ struct iOSOptionsQnA: View {
         
         QnAs(id: UUID(),
              questionNo: 1,
+             questionText: String(localized:"Options.qna.5question"),
+             answerText: String(localized:"Options.qna.5answer")
+            ),
+        QnAs(id: UUID(),
+             questionNo: 2,
              questionText: String(localized:"Options.qna.1question"),
              answerText: String(localized:"Options.qna.1answer")
             ),
         QnAs(id: UUID(),
-             questionNo: 2,
+             questionNo: 3,
              questionText: String(localized:"Options.qna.2question"),
              answerText: String(localized:"Options.qna.2answer")
             ),
         QnAs(id: UUID(),
-             questionNo: 3,
+             questionNo: 4,
              questionText: String(localized:"Options.qna.3question"),
              answerText: String(localized:"Options.qna.3answer")
             ),
         QnAs(id: UUID(),
-             questionNo: 4,
+             questionNo: 5,
              questionText: String(localized:"Options.qna.4question"),
              answerText: String(localized:"Options.qna.4answer")
             )

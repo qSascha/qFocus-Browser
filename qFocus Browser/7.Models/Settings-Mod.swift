@@ -18,6 +18,7 @@ final class SettingsStorage: NSManagedObject, Identifiable {
     @NSManaged var onboardingComplete: Bool
     @NSManaged var adBlockUpdateFrequency: Int16
     @NSManaged var greasyScriptsEnabled: Bool
+    @NSManaged var adBlockEnabled: Bool
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<SettingsStorage> {
         return NSFetchRequest<SettingsStorage>(entityName: "SettingsStorage")

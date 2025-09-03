@@ -3,7 +3,7 @@
 //  qFocus Browser
 //
 //
-import SwiftUI
+import SwiftUI 
 import FactoryKit
 
 
@@ -35,8 +35,13 @@ struct FirstSite: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled(true)
                     .onChange(of: viewModel.siteURL) {
-                        viewModel.onURLChange(viewModel.siteURL)
-                    }            }
+                        let noSpaces = viewModel.siteURL.replacingOccurrences(of: " ", with: "")
+                        if noSpaces != viewModel.siteURL {
+                            viewModel.siteURL = noSpaces
+                        }
+                        viewModel.onURLChange(noSpaces)
+                    }            
+            }
 
             // Favicon
             if let image = viewModel.faviconImage {

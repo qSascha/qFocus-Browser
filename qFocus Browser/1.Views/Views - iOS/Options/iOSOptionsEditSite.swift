@@ -72,6 +72,11 @@ struct iOSEditSite: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
                         .onChange(of: viewModel.tempURL) { _, newValue in
+                            let noSpaces = viewModel.tempURL.replacingOccurrences(of: " ", with: "")
+                            if noSpaces != viewModel.tempURL {
+                                viewModel.tempURL = noSpaces
+                            }
+
                             debounceTimer?.invalidate()
                             debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) { _ in
                                 Task { @MainActor in

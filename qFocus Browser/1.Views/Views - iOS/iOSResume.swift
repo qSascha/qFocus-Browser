@@ -21,9 +21,9 @@ struct iOSResume: View {
                 
                 Text("qFocus Browser")
                     .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                 
-                Image("AppIcon")
+                Image("AppIcon-dark")
                     .resizable()
                     .frame(width: 150, height: 150)
                     .cornerRadius(20)
@@ -36,17 +36,17 @@ struct iOSResume: View {
                 VStack(spacing: 0) {
                     Text("brought to you")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 8)
                     
                     Text("by")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 20)
                     
                     Text("qSascha")
                         .font(.system(size: 30, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                 }
                 
                 Spacer()
@@ -78,4 +78,10 @@ struct iOSResume: View {
             
         }
     }
+}
+
+
+
+#Preview {
+    iOSResume()
 }

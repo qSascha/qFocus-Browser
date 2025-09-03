@@ -122,8 +122,22 @@ final class CombineRepo {
 
     
     
+    /// Observer 1: WebViewVM - to reflect whether opening external browser
+    /// should be disabled (true) or enabled (false).
+    ///
+    /// Linked to:
+    /// - OptionsVM: starts a 2-minute countdown and broadcasts true
+    /// - OptionsVM: finishes or cancels countdown and broadcasts false
+    ///
+    /// Parameters:
+    /// disabled - a Bool indicating external browser disabled (true) or enabled (false).
+    ///
+    /// Emits app-wide external browser disabled state so multiple WebViewVMs can react.
+    let externalBrowserDisabled = PassthroughSubject<Bool, Never>()
+
+    
+    
     private init() {}
     
 }
-
 

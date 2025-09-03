@@ -32,7 +32,43 @@ struct FaceID: View {
                         .padding(.vertical, 16)
                 }
                 .glassEffect(.regular.tint(.blue))
+                .padding(.trailing, 20)
+                .padding(.top, 10)
                 
+                HStack(alignment: .top, spacing: 10) {
+                    // Symbol at the top left of the text
+                    if viewModel.faceIDEnabled {
+                        Image(systemName: "exclamationmark.shield.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .foregroundColor(.green)
+                            .padding(.trailing, 6)
+                            .padding(.top, 2)
+
+                        Text("onboarding.030faceID.enabled")
+                            .font(.caption)
+
+                    } else {
+                        Image(systemName: "exclamationmark.shield.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .foregroundColor(.red)
+                            .padding(.trailing, 6)
+                            .padding(.top, 2)
+
+                        Text("onboarding.030faceID.disabled")
+                            .font(.caption)
+
+                    }
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 30)
+                .padding(.top, 8)
+                .multilineTextAlignment(.leading)
+
                 Spacer().frame(height: 10)
                 
                 Image(systemName: "faceid")
@@ -65,6 +101,41 @@ struct FaceID: View {
                 }
                 .background(Color.blue)
                 .cornerRadius(20)
+                
+                
+                HStack(alignment: .top, spacing: 10) {
+                    // Symbol at the top left of the text
+                    if viewModel.faceIDEnabled {
+                        Image(systemName: "exclamationmark.shield.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .foregroundColor(.green)
+                            .padding(.trailing, 6)
+                            .padding(.top, 2)
+
+                        Text("onboarding.030faceID.enabled")
+                            .font(.caption)
+
+                    } else {
+                        Image(systemName: "exclamationmark.shield.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .foregroundColor(.red)
+                            .padding(.trailing, 6)
+                            .padding(.top, 2)
+
+                        Text("onboarding.030faceID.disabled")
+                            .font(.caption)
+
+                    }
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 30)
+                .padding(.top, 8)
+                .multilineTextAlignment(.leading)
                 
                 Spacer().frame(height: 10)
                 

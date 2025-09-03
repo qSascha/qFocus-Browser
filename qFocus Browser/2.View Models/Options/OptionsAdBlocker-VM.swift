@@ -34,13 +34,23 @@ final class iOSAdBlockSettingsVM: ObservableObject {
         )
     }
     
-    var isAdBlockEnabled: Bool {
-        if settingsRepo.get().adBlockUpdateFrequency > 0 {
-            return true
-        } else {
-            return false
-        }
+
+
+    var isAdBlockEnabled: Binding<Bool> {
+        Binding<Bool>(
+            get: {
+                self.settingsRepo.get().adBlockEnabled
+            },
+            set: { newValue in
+                self.settingsRepo.update { settings in
+                    settings.adBlockEnabled = newValue
+                }
+                // Notify web views to reconfigure
+                CombineRepo.shared.updateWebSites.send()
+            }
+        )
     }
+    
     
 
 

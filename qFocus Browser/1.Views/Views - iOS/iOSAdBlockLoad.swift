@@ -60,7 +60,7 @@ struct AdBlockLoadStatus: View {
                 }
                 .padding(.vertical, 16)
                 .padding(.horizontal, 24)
-                .background(Color.gray.opacity(0.5))
+                .background(Color.gray.gradient.opacity(0.94))
                 .cornerRadius(20)
                 .offset(y: -110)
                 

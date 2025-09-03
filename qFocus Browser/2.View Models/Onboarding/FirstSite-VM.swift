@@ -90,6 +90,9 @@ class FirstSiteVM: ObservableObject {
     
     //MARK: saveSite
     func saveSite() {
+        
+        updateFavicon(for: siteURL)
+
         if let existing = existingSite {
             sitesRepo.editSite(
                 site: existing,

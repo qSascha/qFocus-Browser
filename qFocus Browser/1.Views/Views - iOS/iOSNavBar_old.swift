@@ -7,7 +7,7 @@ import SwiftUI
 import FactoryKit
 
 
-
+/*
 struct NavBar: View {
     @InjectedObject(\.navigationVM) var viewModel: NavigationVM
 
@@ -24,7 +24,7 @@ struct NavBar: View {
                 
                 ZStack {
                     if viewModel.minimizeNavBar {
-                        //MARK: Button Minimized
+                        
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
@@ -69,10 +69,8 @@ struct NavBar: View {
                     } else {
                         
                         HStack(alignment: .center) {
-
-                            //MARK: Button Options
+                            
                             Button(action: {
-                                viewModel.minimizeNavBar = true
                                 coordinator.showOptionsView.toggle()
                             }) {
                                 Image(systemName: "slider.horizontal.3")
@@ -94,9 +92,7 @@ struct NavBar: View {
                             
                             Spacer()
                             
-                            //MARK: Button ShareSheet
                             Button(action: {
-                                viewModel.minimizeNavBar = true
                                 coordinator.showShareSheet.toggle()
                             }) {
                                 Image(systemName: "square.and.arrow.up")
@@ -128,7 +124,6 @@ struct NavBar: View {
                 ZStack {
                     if viewModel.minimizeNavBar {
                         
-                        //MARK: Legacy Button Minimized
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
@@ -175,9 +170,7 @@ struct NavBar: View {
                         
                         HStack(alignment: .center) {
                             
-                            //MARK: Legacy Button Options
                             Button(action: {
-                                viewModel.minimizeNavBar = true
                                 coordinator.showOptionsView.toggle()
                             }) {
                                 Image(systemName: "slider.horizontal.3")
@@ -200,9 +193,7 @@ struct NavBar: View {
                             
                             Spacer()
                             
-                            //MARK: Legacy Button ShareSheet
                             Button(action: {
-                                viewModel.minimizeNavBar = true
                                 coordinator.showShareSheet.toggle()
                             }) {
                                 Image(systemName: "square.and.arrow.up")
@@ -255,13 +246,13 @@ struct WebsiteSelectorView: View {
                             
                             if selectedIndex == idx {
                                 
-                                //MARK: Button Select Site
+                                // Selected button with glass effect
                                 Button(action: {
                                     selectedIndex = idx
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
+                                    mainVM.updateTopAreaColor()
 
                                 }) {
                                     VStack(spacing: 0) {
@@ -298,7 +289,7 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
+                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {
@@ -334,12 +325,10 @@ struct WebsiteSelectorView: View {
                 .clipShape(Capsule())
                 .glassEffect()
                 .onChange(of: selectedIndex) {
-                    viewModel.minimizeNavBar = true
-                    mainVM.updateTopAreaColor()
                     withAnimation(.easeInOut) {
                         proxy.scrollTo(selectedIndex, anchor: .center)
+                        CombineRepo.shared.selectWebView.send(selectedIndex)
                     }
-                    CombineRepo.shared.selectWebView.send(selectedIndex)
                 }
                 .onAppear {
                     print("Scrolling to marker")
@@ -364,13 +353,13 @@ struct WebsiteSelectorView: View {
                             
                             if selectedIndex == idx {
                                 
-                                //MARK: Legacy Button: Select Site
+                                // Selected button with glass effect
                                 Button(action: {
                                     selectedIndex = idx
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
+                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {
@@ -407,7 +396,7 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
+                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {
@@ -444,11 +433,10 @@ struct WebsiteSelectorView: View {
                 .background(Color.gray.gradient.opacity(0.94))
                 .cornerRadius(20)
                 .onChange(of: selectedIndex) {
-                    viewModel.minimizeNavBar = true
                     withAnimation(.easeInOut) {
                         proxy.scrollTo(selectedIndex, anchor: .center)
+                        CombineRepo.shared.selectWebView.send(selectedIndex)
                     }
-                    CombineRepo.shared.selectWebView.send(selectedIndex)
                 }
                 .onAppear {
                     print("Scrolling to marker")
@@ -477,7 +465,7 @@ struct AnyViewModifier: ViewModifier {
         bodyModifier(content)
     }
 }
-
+*/
 
 
 

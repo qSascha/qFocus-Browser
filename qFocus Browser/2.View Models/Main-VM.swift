@@ -64,6 +64,9 @@ final class MainVM: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] disabled in
                 self?.disableEB = disabled
+                if !disabled {
+                    self?.updateTopAreaColor()
+                }
             }
             .store(in: &cancellables)
 

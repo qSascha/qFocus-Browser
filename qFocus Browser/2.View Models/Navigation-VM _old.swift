@@ -7,7 +7,7 @@ import Foundation
 import Combine
 
 
-
+/*
 @MainActor
 class NavigationVM: ObservableObject {
     @Published var sitesRepo: SitesRepo
@@ -45,7 +45,13 @@ class NavigationVM: ObservableObject {
                 }
             }.store(in: &cancellables)
 
-
+        // Update when webview scrolling
+        CombineRepo.shared.updateNavigationBar
+            .sink { [weak self] hide in
+//                print("Scrolling received: \(hide)")
+                self?.minimizeNavBar = hide
+            }
+            .store(in: &cancellables)
 
     }
     
@@ -89,7 +95,9 @@ class NavigationVM: ObservableObject {
             }
         }
     }
-    
 
+    
 }
+
+*/
 

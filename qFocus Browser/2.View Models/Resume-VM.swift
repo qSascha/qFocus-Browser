@@ -94,7 +94,7 @@ class ResumeVM: ObservableObject {
         isLocked = false
         
         CombineRepo.shared.dismissResuming.send()
-        CombineRepo.shared.updateNavigationBar.send(false)
+//        CombineRepo.shared.updateNavigationBar.send(false)
     }
     
     

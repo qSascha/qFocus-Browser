@@ -3,11 +3,6 @@
 //  qFocus Browser
 //
 //
-
-// Pure SwiftUI/UIViewRepresentable.
-// Renders the WKWebView.
-// Binds to the WebView ViewModel to observe state (e.g., loading, progress).
-
 import SwiftUI
 import WebKit
 import FactoryKit
@@ -16,7 +11,6 @@ import FactoryKit
 
 //MARK: Web View
 struct WebView: View {
-//    let viewModel: WebViewVM
     @ObservedObject var viewModel: WebViewVM
 
     var body: some View {

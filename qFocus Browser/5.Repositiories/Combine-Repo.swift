@@ -76,7 +76,7 @@ final class CombineRepo {
     let triggerExternalBrowser = PassthroughSubject<URL, Never>()
 
     
-    
+/*
     /// Observer 1: NavigationVM - to minimze the Navigation Bar on scroll
     /// Linked to function: variable: minimizeNavigationBar
     ///
@@ -86,7 +86,7 @@ final class CombineRepo {
     /// 1. Emits when the user scrolls a webview up (true) or down (false)
     /// 2. Emits when resuming from background to show the nav bar.
     let updateNavigationBar = PassthroughSubject<Bool, Never>()
-
+*/
     
     
     /// Observer 1: GreasySettingsVM - to list of Greasy Scripts in the list
@@ -135,6 +135,17 @@ final class CombineRepo {
     /// Emits app-wide external browser disabled state so multiple WebViewVMs can react.
     let externalBrowserDisabled = PassthroughSubject<Bool, Never>()
 
+    
+    
+    /// Observer: MainVM - to update TopBarColor
+    ///
+    /// Link to: updateTopAreaColor()
+    ///
+    /// Parameters:
+    /// none
+    ///
+    /// Emits when user is navigating, to ensure that top bar color matches new site color
+    let updateTopAreaColor = PassthroughSubject<Void, Never>()
     
     
     private init() {}

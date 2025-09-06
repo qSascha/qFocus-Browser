@@ -81,7 +81,7 @@ final class WebViewVM: NSObject, ObservableObject {
 #endif
             return
         }
-        
+/*
 #if DEBUG
         print("✅ Initializing WebView for site \(site.siteName)")
         print("URL: \(site.siteURL)")
@@ -91,7 +91,7 @@ final class WebViewVM: NSObject, ObservableObject {
         print("Enable AdBlocker: \(site.enableAdBlocker)")
         print("-------------------------------------------------")
 #endif
-        
+*/
         guard let url = URL(string: site.siteURL) else {
 #if DEBUG
             print("❌ Invalid URL string: \(site.siteURL)")
@@ -137,6 +137,10 @@ final class WebViewVM: NSObject, ObservableObject {
         }
         
         config.userContentController = userContentController
+        config.dataDetectorTypes = .all
+        config.preferences.isFraudulentWebsiteWarningEnabled = true
+        config.ignoresViewportScaleLimits = false
+        config.mediaTypesRequiringUserActionForPlayback = .all
 //        config.processPool = WKProcessPool()
         
         // Build WKWebView with full configuration AFTER all rules are loaded
@@ -150,8 +154,9 @@ final class WebViewVM: NSObject, ObservableObject {
         ? "Mozilla/5.0 (Macintosh; Apple Silicon Mac OS X 14_3_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15"
         : nil
         
+
         self.webView = newWebView
-        webView.scrollView.delegate = self
+//        webView.scrollView.delegate = self
 
         /// Navigation Delegate to  inspect for external URL
         webView.navigationDelegate = self
@@ -237,7 +242,7 @@ final class WebViewVM: NSObject, ObservableObject {
 //MARK: Navigation Delegate
 extension WebViewVM: WKNavigationDelegate {
     
-
+ 
     @objc
     func webView(
         _ webView: WKWebView,
@@ -288,6 +293,8 @@ extension WebViewVM: WKNavigationDelegate {
         // Allow if same main domain OR external browsing is disabled; otherwise, open externally
         if (currentMainDomain == targetMainDomain) || disableEB {
             decisionHandler(.allow, preferences)
+
+            CombineRepo.shared.updateTopAreaColor.send()
 
             /*
              decisionHandler(.cancel, preferences)
@@ -358,7 +365,7 @@ extension WebViewVM: WKNavigationDelegate {
 }
 
 
-
+/*
 //MARK: UI Scroll View Delegate
 extension WebViewVM: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -386,4 +393,4 @@ extension WebViewVM: UIScrollViewDelegate {
         lastContentOffsetY = currentOffsetY
     }
 }
-
+*/

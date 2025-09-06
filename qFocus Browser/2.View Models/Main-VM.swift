@@ -34,6 +34,13 @@ final class MainVM: ObservableObject {
                  Task { await self?.loadAllWebViews() }
              } .store(in: &cancellables)
 
+        
+        // Update Web Views - triggered by various option changes
+        CombineRepo.shared.updateTopAreaColor
+             .sink { [weak self] _ in
+                 Task { self?.updateTopAreaColor() }
+             } .store(in: &cancellables)
+
 
         // Select Web Views - triggered by Menu button in NavigationBar and NavigationFlow
         CombineRepo.shared.selectWebView

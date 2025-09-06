@@ -10,24 +10,30 @@ import FactoryKit
 
 struct NavBar: View {
     @InjectedObject(\.navigationVM) var viewModel: NavigationVM
-
+    
     @ObservedObject var coordinator: AppCoordinator
     @Namespace var navBarAnimation
+    
+    @GestureState private var isDragging = false
+    @GestureState private var isLongPressing = false
+    
+    let pressFeedback = UIImpactFeedbackGenerator(style: .rigid)
+    let tapFeedback = UIImpactFeedbackGenerator(style: .medium)
 
     
     
     var body: some View {
-        if #available(iOS 26.0, *) {
-            
-            VStack {
-                Spacer()
+        GeometryReader { geometry in
+            if #available(iOS 26.0, *) {
                 
                 ZStack {
                     if viewModel.minimizeNavBar {
+/*
                         //MARK: Button Minimized
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
+*/
                             Group {
                                 if viewModel.selectedWebIndex >= 0 && viewModel.selectedWebIndex < viewModel.sitesButton.count {
                                     
@@ -53,23 +59,76 @@ struct NavBar: View {
                                     }
                                     .padding(.vertical, 2)
                                     .padding(.horizontal, 6)
-
+                                    
                                 } else {
                                     Text("Loading...")
                                         .font(.caption)
                                         .padding()
                                 }
                             }
-
-                        }
+                            
+//                        }
                         .glassEffect()
-                        .padding(.bottom, 20)
                         .matchedGeometryEffect(id: "navBar", in: navBarAnimation)
+                        .scaleEffect(isDragging || isLongPressing ? 1.1 : 1.0)
+         
+                        .position(
+                            x: viewModel.updateXPercent * geometry.size.width,
+                            y: viewModel.updateYPercent * geometry.size.height
+                        )
+
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                viewModel.minimizeNavBar = false
+                            }
+                            tapFeedback.impactOccurred(intensity: 0.5)
+                        }
+                        .gesture(
+                            LongPressGesture(minimumDuration: 0.5)
+                                .sequenced(before: DragGesture())
+                                .updating($isLongPressing) { value, state, _ in
+                                    switch value {
+                                    case .first(true):
+                                        state = true
+                                    case .second(true, nil):
+                                        pressFeedback.impactOccurred(intensity: 1.0)
+                                        state = true
+                                    case .second(true, _):
+                                        state = true
+                                    default:
+                                        state = false
+                                    }
+                                }
+                                .simultaneously(with:
+                                                    DragGesture()
+                                    .updating($isDragging) { value, state, _ in
+                                        state = true
+                                    }
+
+                                    .onChanged { gesture in
+                                        if isDragging {
+                                            let newXPercent = Double(gesture.location.x / geometry.size.width)
+                                            let newYPercent = Double(gesture.location.y / geometry.size.height)
+                                            viewModel.updateFreeFlowXYPercent(newXPercent, newYPercent, save: false)
+
+                                        }
+                                    }
+
+                                    .onEnded { gesture in
+                                        pressFeedback.impactOccurred(intensity: 0.5)
+                                        let newXPercent = Double(gesture.location.x / geometry.size.width)
+                                        let newYPercent = Double(gesture.location.y / geometry.size.height)
+                                        viewModel.updateFreeFlowXYPercent(newXPercent, newYPercent, save: true)
+                                    }
+                                               )
+                        )
+                        .animation(.interactiveSpring(), value: isDragging)
+
                         
                     } else {
                         
                         HStack(alignment: .center) {
-
+                            
                             //MARK: Button Options
                             Button(action: {
                                 viewModel.minimizeNavBar = true
@@ -110,28 +169,27 @@ struct NavBar: View {
                             .padding(.trailing, 20)
                             
                         }
-                        .padding(.bottom, 20)
                         .matchedGeometryEffect(id: "navBar", in: navBarAnimation)
+                        .position(
+                            x: geometry.size.width * 0.5, // Full width, centered horizontally
+                            y: geometry.size.height * viewModel.updateYPercent
+                        )
                         
                     }
                 }
                 .animation(.easeInOut(duration: 0.35), value: viewModel.minimizeNavBar)
-            }
-            .zIndex(5)
-
-        } else {
-
-            //Legacy Version
-            VStack {
-                Spacer()
                 
+            } else {
+                
+                //Legacy Version
                 ZStack {
                     if viewModel.minimizeNavBar {
-                        
+/*
                         //MARK: Legacy Button Minimized
                         Button {
                             viewModel.minimizeNavBar = false
                         } label: {
+*/
                             Group {
                                 if viewModel.selectedWebIndex >= 0 && viewModel.selectedWebIndex < viewModel.sitesButton.count {
                                     
@@ -157,19 +215,71 @@ struct NavBar: View {
                                     }
                                     .padding(.vertical, 2)
                                     .padding(.horizontal, 6)
-
+                                    
                                 } else {
                                     Text("Loading...")
                                         .font(.caption)
                                         .padding()
                                 }
                             }
-
-                        }
+                            
+//                        }
                         .background(Color.gray.gradient.opacity(0.94))
                         .cornerRadius(20)
-                        .padding(.bottom, 20)
                         .matchedGeometryEffect(id: "navBar", in: navBarAnimation)
+                        .scaleEffect(isDragging || isLongPressing ? 1.1 : 1.0)
+         
+                        .position(
+                            x: viewModel.updateXPercent * geometry.size.width,
+                            y: viewModel.updateYPercent * geometry.size.height
+                        )
+
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                viewModel.minimizeNavBar = false
+                            }
+                            tapFeedback.impactOccurred(intensity: 0.5)
+                        }
+                        .gesture(
+                            LongPressGesture(minimumDuration: 0.5)
+                                .sequenced(before: DragGesture())
+                                .updating($isLongPressing) { value, state, _ in
+                                    switch value {
+                                    case .first(true):
+                                        state = true
+                                    case .second(true, nil):
+                                        pressFeedback.impactOccurred(intensity: 1.0)
+                                        state = true
+                                    case .second(true, _):
+                                        state = true
+                                    default:
+                                        state = false
+                                    }
+                                }
+                                .simultaneously(with:
+                                                    DragGesture()
+                                    .updating($isDragging) { value, state, _ in
+                                        state = true
+                                    }
+
+                                    .onChanged { gesture in
+                                        if isDragging {
+                                            let newXPercent = Double(gesture.location.x / geometry.size.width)
+                                            let newYPercent = Double(gesture.location.y / geometry.size.height)
+                                            viewModel.updateFreeFlowXYPercent(newXPercent, newYPercent, save: false)
+
+                                        }
+                                    }
+
+                                    .onEnded { gesture in
+                                        pressFeedback.impactOccurred(intensity: 0.5)
+                                        let newXPercent = Double(gesture.location.x / geometry.size.width)
+                                        let newYPercent = Double(gesture.location.y / geometry.size.height)
+                                        viewModel.updateFreeFlowXYPercent(newXPercent, newYPercent, save: true)
+                                    }
+                                               )
+                        )
+                        .animation(.interactiveSpring(), value: isDragging)
                         
                     } else {
                         
@@ -217,19 +327,19 @@ struct NavBar: View {
                             .padding(.trailing, 20)
                             
                         }
-                        .padding(.bottom, 20)
                         .matchedGeometryEffect(id: "navBar", in: navBarAnimation)
+                        .position(
+                            x: geometry.size.width * 0.5, // Full width, centered horizontally
+                            y: geometry.size.height * viewModel.updateYPercent
+                        )
                         
                     }
                 }
                 .animation(.easeInOut(duration: 0.35), value: viewModel.minimizeNavBar)
             }
-            .zIndex(5)
         }
-
     }
 }
-
 
 
 
@@ -261,7 +371,6 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
 
                                 }) {
                                     VStack(spacing: 0) {
@@ -298,7 +407,6 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {
@@ -370,7 +478,6 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {
@@ -407,7 +514,6 @@ struct WebsiteSelectorView: View {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(idx, anchor: .center)
                                     }
-//                                    mainVM.updateTopAreaColor()
                                 }) {
                                     VStack(spacing: 0) {
                                         if let image = faviconImage {

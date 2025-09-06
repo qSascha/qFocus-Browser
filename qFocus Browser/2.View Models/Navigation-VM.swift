@@ -17,10 +17,9 @@ class NavigationVM: ObservableObject {
 
     @Published var updateXPercent: CGFloat = 0.85
     @Published var updateYPercent: CGFloat = 0.75
-    @Published var isShowingMenu: Bool = false
     @Published var selectedWebIndex: Int = 0
     @Published var sitesButton: [SitesNavButton] = []
-    @Published var minimizeNavBar: Bool = false
+    @Published var minimizeNavBar: Bool = true
 
     var showShareSheet = false
     var menuIconSize: CGFloat = 32
@@ -73,6 +72,7 @@ class NavigationVM: ObservableObject {
         let settings = settingsRepo.get()
         self.updateXPercent = settings.freeFlowXPercent
         self.updateYPercent = settings.freeFlowYPercent
+        print("Position loaded: \(updateXPercent), \(updateYPercent) -----------------------------------")
     }
 
     
@@ -80,7 +80,7 @@ class NavigationVM: ObservableObject {
     //MARK: Update Free Flos XY Percent
     func updateFreeFlowXYPercent(_ newXPercent: CGFloat, _ newYPercent: CGFloat, save: Bool = false) {
         updateXPercent = max(0.1, min(0.9, newXPercent))
-        updateYPercent = max(0.1, min(0.9, newYPercent))
+        updateYPercent = max(0.05, min(0.93, newYPercent))
 
         if save {
             settingsRepo.update() { settings in

@@ -30,6 +30,9 @@ struct iOSMain: View {
             
             // Navigation Bar
             NavBar(coordinator: coordinator)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .allowsHitTesting(true)
+                .zIndex(5)
 
             // Loading message for ad-blocker
             if adBlockUC.updatingFilters {

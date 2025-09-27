@@ -1,6 +1,7 @@
 # qFocus Browser
 
-## What
+## Stay private, confine social media
+
 qFocus is not “just another browser”!
 Most browsers try to block ads and trackers but still run everything together. qFocus takes the radical step of splitting social media from the rest of the internet. That’s what makes it unique. It’s not about giving you another copy of Safari or Chrome. It’s about giving you back control. 
 

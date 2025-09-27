@@ -15,12 +15,12 @@ Why this matters:
 * True Privacy: Social networks thrive on cross-site tracking. By walling them off, qFocus breaks the loop. 
 * All-in-One Hub: No more juggling between apps, you open qFocus, and your chosen social sites are neatly organized in one secure space. 
 * Peace of Mind: You can browse, research, or shop in your main browser knowing your social accounts are locked away. 
-* Cleaner Focus: Having them in a dedicated app keeps distraction under control. When you want social, it’s there. When you don’t, it’s gone. 
+* Cleaner Focus: Having them in a dedicated app keeps distraction under control. When you want social, it’s there. When you don’t, it’s gone.
 
 Who is qFocus for? 
 * Professionals who use LinkedIn, Slack-style communities, or Reddit groups but don’t want their personal browsing profiled.
 * Everyday users who love social media, but not the constant surveillance. 
-* Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise. 
+* Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise.
 
 Why not just use the apps?
 You might think: “Why not just install the official app for Facebook, Instagram, or LinkedIn?” The truth is, social media apps don’t just track what you do inside them, they often track what you do across your entire phone. Location data, contacts, notifications, even background activity can be harvested. By keeping these platforms inside qFocus, you avoid the extra layers of surveillance that come bundled with their native apps. You still get the full experience of the site, but without handing over even more of your digital life.
@@ -29,13 +29,13 @@ How it works:
 1. Download qFocus Browser. 
 2. Pick up to six social media platforms you want to contain. 
 3. Use them inside qFocus, which isolates them from your main browsing. 
-4. Keep your normal browser free, private, and untouched by social media tracking. 
+4. Keep your normal browser free, private, and untouched by social media tracking.
 
 Pro-tip: Clear the cookies in your normal browser once. This wipes out old trackers, so from then on social media stays locked where it belongs. 
 
 By using qFocus, you finally decide when and where social networks live in your digital life. They don’t get to decide for you. 
 
-The bigger picture: 
+The bigger picture:
 The internet today is full of invisible strings. Social networks pull at them constantly, predicting, nudging, and shaping what you see. qFocus cuts those strings. Your social apps live together, securely contained. Your browsing stays yours. 
 
 It’s privacy, structure, and calm, all in one. 

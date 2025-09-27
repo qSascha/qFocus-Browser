@@ -1,16 +1,45 @@
 # qFocus Browser
 
 ## What
-qFocus Browser is a privacy-focused web browser designed for Apple platforms, including iPhone, iPad, Mac, and VisionPro. It combines a modern, minimalist design with powerful features to ensure a seamless and user-friendly experience across all devices. Built with a privacy-first approach, it blocks intrusive ads, trackers, and social media scripts, keeping your browsing secure and distraction-free. One of its standout features is the ability to limit browsing to sites defined by the user, such as social media pages, which helps separate browsing history, cookies, ads, and tracking from other online activity. With intuitive navigation, modern design and easy-to-use approach, qFocus Browser prioritizes convenience without sacrificing security. Exclusive VisionPro support takes browsing to an immersive level, enabling hands-free navigation in augmented reality. By pairing elegant design with robust privacy features, qFocus Browser empowers users to explore the web freely and securely.
+qFocus is not “just another browser”!
+Most browsers try to block ads and trackers but still run everything together. qFocus takes the radical step of splitting social media from the rest of the internet. That’s what makes it unique. It’s not about giving you another copy of Safari or Chrome. It’s about giving you back control. 
 
-## Features
-Here is a list of the features that make qFocus Browser so fantastic:
-- [ ] ___User-Defined Browsing Scope:___ Limit browsing to specific user-defined sites, such as social media pages, keeping history, cookies, ads, and tracking separate from general web activity.
-- [ ] ___Privacy-First Design:___ Built-in anti-tracking technology and a no-log policy ensure maximum privacy with no user data retention.
-- [ ] ___Comprehensive Ad Blocking:___ Specialized tools for removing trackers and ads on social media pages block intrusive ads on general websites and social media platforms, reducing distractions and improving page load times.
-- [ ] ___Modern Apple Ecosystem Integration:___ Sleek, minimalist design optimized for iPhone, iPad, Mac, and VisionPro, offering a consistent and fluid experience across devices.
-- [ ] ___Exclusive VisionPro Support:___ Immersive browsing experience with hands-free navigation tailored for augmented reality environments.
-- [ ] ___Enhanced Security:___ Password manager integration, Touch ID/Face ID support.
+Social media is powerful, but it doesn’t need to follow you everywhere. 
+With qFocus Browser, your favorite platforms live in one place, securely locked away from the rest of your digital life. 
+
+qFocus isn’t a typical web browser. It’s designed to separate social media from your everyday browsing. Instead of scattering Facebook, LinkedIn, Reddit, Instagram, and other platforms across apps and tabs, and letting them track what you do elsewhere. You add them into qFocus and once added, they stay contained, isolated, and locked inside the app. 
+Think of it as a cage for social media. You still have full access to all their features, and the ability to scroll or post, but the tracking stops there. When you leave qFocus and open your standard browser, those social networks cannot see or influence what you do. 
+
+Why this matters: 
+• True Privacy: Social networks thrive on cross-site tracking. By walling them off, qFocus breaks the loop. 
+• All-in-One Hub: No more juggling between apps, you open qFocus, and your chosen social sites are neatly organized in one secure space. 
+• Peace of Mind: You can browse, research, or shop in your main browser knowing your social accounts are locked away. 
+• Cleaner Focus: Having them in a dedicated app keeps distraction under control. When you want social, it’s there. When you don’t, it’s gone. 
+
+Who is qFocus for? 
+• Professionals who use LinkedIn, Slack-style communities, or Reddit groups but don’t want their personal browsing profiled. 
+• Everyday users who love social media, but not the constant surveillance. 
+• Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise. 
+
+Why not just use the apps?
+You might think: “Why not just install the official app for Facebook, Instagram, or LinkedIn?” The truth is, social media apps don’t just track what you do inside them, they often track what you do across your entire phone. Location data, contacts, notifications, even background activity can be harvested. By keeping these platforms inside qFocus, you avoid the extra layers of surveillance that come bundled with their native apps. You still get the full experience of the site, but without handing over even more of your digital life.
+
+How it works: 
+1. Download qFocus Browser. 
+2. Pick up to six social media platforms you want to contain. 
+3. Use them inside qFocus, which isolates them from your main browsing. 
+4. Keep your normal browser free, private, and untouched by social media tracking. 
+
+Pro-tip: Clear the cookies in your normal browser once. This wipes out old trackers, so from then on social media stays locked where it belongs. 
+
+By using qFocus, you finally decide when and where social networks live in your digital life. They don’t get to decide for you. 
+
+The bigger picture: 
+The internet today is full of invisible strings. Social networks pull at them constantly, predicting, nudging, and shaping what you see. qFocus cuts those strings. Your social apps live together, securely contained. Your browsing stays yours. 
+
+It’s privacy, structure, and calm, all in one. 
+
+---
 
 ## Support
 

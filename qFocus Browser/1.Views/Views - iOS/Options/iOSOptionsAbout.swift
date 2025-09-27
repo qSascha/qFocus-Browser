@@ -113,12 +113,12 @@ struct iOSAbout: View {
                 // Copyright Notice
                 HStack(spacing: 0) {
                     
-                    Text("© \(copyRightYear)")
+                    Text("© \(copyRightYear) ")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.top, 20)
 
-                    Text(" qSascha")
+                    Text("qSascha")
                         .font(.footnote)
                         .foregroundColor(.blue)
                         .padding(.top, 20)

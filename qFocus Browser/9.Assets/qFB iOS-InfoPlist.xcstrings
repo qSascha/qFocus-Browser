@@ -1,0 +1,78 @@
+{
+  "sourceLanguage" : "aa",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "qFocus"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFocus"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "qFB iOS"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "qFB iOS"
+          }
+        }
+      }
+    },
+    "NSFaceIDUsageDescription" : {
+      "comment" : "Privacy - Face ID Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Use Face ID to unlock qFocus Browser"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dùng Face ID để mở khóa qFocus Browser"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "comment" : "Privacy - Photo Library Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "aa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "If you want to upload or download pictures from websites."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nếu bạn muốn tải lên hoặc tải xuống hình ảnh từ các trang web."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

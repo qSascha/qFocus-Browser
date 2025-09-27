@@ -12,15 +12,15 @@ qFocus isn’t a typical web browser. It’s designed to separate social media f
 Think of it as a cage for social media. You still have full access to all their features, and the ability to scroll or post, but the tracking stops there. When you leave qFocus and open your standard browser, those social networks cannot see or influence what you do. 
 
 Why this matters: 
-• True Privacy: Social networks thrive on cross-site tracking. By walling them off, qFocus breaks the loop. 
-• All-in-One Hub: No more juggling between apps, you open qFocus, and your chosen social sites are neatly organized in one secure space. 
-• Peace of Mind: You can browse, research, or shop in your main browser knowing your social accounts are locked away. 
-• Cleaner Focus: Having them in a dedicated app keeps distraction under control. When you want social, it’s there. When you don’t, it’s gone. 
+* True Privacy: Social networks thrive on cross-site tracking. By walling them off, qFocus breaks the loop. 
+* All-in-One Hub: No more juggling between apps, you open qFocus, and your chosen social sites are neatly organized in one secure space. 
+* Peace of Mind: You can browse, research, or shop in your main browser knowing your social accounts are locked away. 
+* Cleaner Focus: Having them in a dedicated app keeps distraction under control. When you want social, it’s there. When you don’t, it’s gone. 
 
 Who is qFocus for? 
-• Professionals who use LinkedIn, Slack-style communities, or Reddit groups but don’t want their personal browsing profiled. 
-• Everyday users who love social media, but not the constant surveillance. 
-• Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise. 
+* Professionals who use LinkedIn, Slack-style communities, or Reddit groups but don’t want their personal browsing profiled.
+* Everyday users who love social media, but not the constant surveillance. 
+* Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise. 
 
 Why not just use the apps?
 You might think: “Why not just install the official app for Facebook, Instagram, or LinkedIn?” The truth is, social media apps don’t just track what you do inside them, they often track what you do across your entire phone. Location data, contacts, notifications, even background activity can be harvested. By keeping these platforms inside qFocus, you avoid the extra layers of surveillance that come bundled with their native apps. You still get the full experience of the site, but without handing over even more of your digital life.

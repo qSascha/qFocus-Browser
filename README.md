@@ -22,7 +22,7 @@ Who is qFocus for?
 * Everyday users who love social media, but not the constant surveillance. 
 * Parents, students, and privacy-minded individuals who want a simple, no-setup way to reduce digital noise.
 
-Why not just use the apps?
+Why not just use the apps?</br>
 You might think: “Why not just install the official app for Facebook, Instagram, or LinkedIn?” The truth is, social media apps don’t just track what you do inside them, they often track what you do across your entire phone. Location data, contacts, notifications, even background activity can be harvested. By keeping these platforms inside qFocus, you avoid the extra layers of surveillance that come bundled with their native apps. You still get the full experience of the site, but without handing over even more of your digital life.
 
 How it works: 

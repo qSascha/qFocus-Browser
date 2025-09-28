@@ -289,6 +289,8 @@ extension WebViewVM: WKNavigationDelegate {
         }
         let currentMainDomain = getDomainCore(currentHost)
         let targetMainDomain = getDomainCore(targetHost)
+        print("CurrentDomain: \(currentMainDomain)")
+        print("TargetDomain:  \(targetMainDomain)")
 
         // Allow if same main domain OR external browsing is disabled; otherwise, open externally
         if (currentMainDomain == targetMainDomain) || disableEB {
@@ -303,7 +305,7 @@ extension WebViewVM: WKNavigationDelegate {
              webView.load(request)
              */
 
-//            return
+            return
         } else {
             // Different domain, opening in external browser
             decisionHandler(.cancel, preferences)

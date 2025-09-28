@@ -21,6 +21,7 @@ final class MainVM: ObservableObject {
     @Published var disableEB: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
+    private var topAreaColorTask: Task<Void, Never>? = nil
     
 
 
@@ -191,42 +192,26 @@ final class MainVM: ObservableObject {
     
     //MARK: Update Top Area Color
     func updateTopAreaColor() {
-        // Update the color several times, for the best user experience possible
+        // Cancel any previous scheduled updates to avoid overlap
+        topAreaColorTask?.cancel()
 
-        if let topAreaColor = self.getTopAreaColor() {
-            self.statusBarBackgroundColor = topAreaColor
-        }
+        // Start a new task that updates immediately, then every 0.5s up to 10 seconds
+        topAreaColorTask = Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            let start = Date()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
+            while !Task.isCancelled {
+                if let topAreaColor = self.getTopAreaColor() {
+                    self.statusBarBackgroundColor = topAreaColor
+                }
+
+                // Stop if we've reached 10 seconds total duration
+                if Date().timeIntervalSince(start) >= 10 { break }
+
+                // Sleep for 0.5 seconds before next update
+                try? await Task.sleep(nanoseconds: 500_000_000)
             }
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
     }
     
 

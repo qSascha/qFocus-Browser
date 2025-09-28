@@ -936,6 +936,7 @@
     },
     "about.eula.header" : {
       "comment" : "Section header",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1157,6 +1158,7 @@
     },
     "about.eula.link" : {
       "comment" : "Text of a link, opening a website showing the end user license agreement.",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1378,6 +1380,7 @@
     },
     "about.eula.text" : {
       "comment" : "Showing the full EULA. Needs to be translated, but not in Oatly communication style. Needs to be translated very precise.",
+      "extractionState" : "stale",
       "localizations" : {
         "th" : {
           "stringUnit" : {

@@ -89,39 +89,18 @@ struct iOSAbout: View {
                 }
                 
                 
-                // Terms Section
-                Group {
-                    Text("about.eula.header")
-                        .font(.headline)
-                        .padding(.top, 30)
-
-                    Text("about.eula.text")
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-
-                        Text("about.eula.link")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                Collector.shared.save(event: "Viewed", parameter: "EULA")
-                                optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qsascha.dev/licensed-application-end-user-license-agreement/")!)
-                            }
-
-                    }
-                }
-                
-                
                 // Copyright Notice
                 HStack(spacing: 0) {
                     
                     Text("© \(copyRightYear) ")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                        .padding(.top, 20)
+//                        .padding(.top, 20)
 
                     Text("qSascha")
                         .font(.footnote)
                         .foregroundColor(.blue)
-                        .padding(.top, 20)
+//                        .padding(.top, 20)
                         .onTapGesture {
                             Collector.shared.save(event: "Viewed", parameter: "qSascha.dev")
                             optionsVM.externalURL = IdentifiableURL(url: URL(string: "https://qSascha.dev")!)
@@ -129,6 +108,7 @@ struct iOSAbout: View {
 
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 40)
             }
             .padding()
             .onAppear() {

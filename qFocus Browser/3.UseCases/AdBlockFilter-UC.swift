@@ -83,23 +83,24 @@ final class AdBlockFilterUC: ObservableObject {
             print("Lists to update: \(filtersToCompile.count)")
             #endif
 
-            // Compile all parallel
+/*            // Compile all parallel
             let tasks = filtersToCompile.map { filter in
-                Task.detached(priority: .utility) { [self] in
+                Task.detached(priority: .background) { [self] in
                     await self.compileFilter(filter)
                 }
             }
             for task in tasks {
                 await task.value
             }
+*/
 
-            /* Sequential
+            // Compile Sequential
              for filter in filtersToCompile {
-                 await Task.detached(priority: .utility) {
+                 await Task.detached(priority: .background) {
                      await self.compileFilter(filter)
                  }.value
              }
-             */
+             
             
             
             settingsRepo.update() { settings in

@@ -100,10 +100,9 @@ final class MainVM: ObservableObject {
             }
         }
         
-
-
-// Test only
         
+
+/*
         NotificationCenter.default.addObserver(
             forName: UIApplication.willEnterForegroundNotification,
             object: nil,
@@ -126,14 +125,7 @@ final class MainVM: ObservableObject {
 //                self.onResuming()
             }
         }
-
-
-
-
-
-
-
-
+*/
 
 
     }

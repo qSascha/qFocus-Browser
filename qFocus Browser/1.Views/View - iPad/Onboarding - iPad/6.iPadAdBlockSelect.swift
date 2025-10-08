@@ -1,5 +1,5 @@
 //
-//  AdBlockSelect.swift
+//  iPadAdBlockSelect.swift
 //  qFocus Browser
 //
 //
@@ -8,24 +8,25 @@ import FactoryKit
 
 
 
-struct AdBlockSelect: View {
+struct iPadAdBlockSelect: View {
     @InjectedObject(\.adBlockSelectVM) var viewModel: AdBlockSelectVM
     
     @State private var showingExplanation: AdBlockFilterDisplayItem?
 
 
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 50) {
+        
+        VStack(alignment: .leading, spacing: 60) {
             // Header
-            Text(String(localized: "onboarding.060adblock.header"))
+            Text("onboarding.060adblock.header")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.blue)
                 .padding(.top, 40)
             
             Text("onboarding.060adblock.text")
-                .multilineTextAlignment(.leading)
-                .lineSpacing(8)
+                .padding(.bottom)
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
@@ -105,9 +106,9 @@ struct AdBlockSelect: View {
                 }
             }
         }
-        .padding(.horizontal, 20)
+        .padding()
         .sheet(item: $showingExplanation) { filter in
-            ABSExplanationView(filter: filter)
+            iPadABSExplanationView(filter: filter)
                 .presentationDetents([.medium])
         }
 

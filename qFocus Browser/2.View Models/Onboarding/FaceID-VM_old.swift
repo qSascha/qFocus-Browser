@@ -3,7 +3,7 @@
 //  qFocus Browser
 //
 //
-
+/*
 import LocalAuthentication
 import SwiftUI
 
@@ -32,7 +32,7 @@ final class FaceIDVM: ObservableObject {
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             laContext.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
-                localizedReason: "onboarding.030faceID.localizedReason"
+                localizedReason: "onboarding.030faceID.localizedReason-old"
             ) { success, _ in
                 Task { @MainActor in
                     self.settingsRepo.update { settings in
@@ -50,3 +50,4 @@ final class FaceIDVM: ObservableObject {
         
 
 }
+*/

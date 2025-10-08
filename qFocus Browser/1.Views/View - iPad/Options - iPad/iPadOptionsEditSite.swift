@@ -1,5 +1,5 @@
 //
-//  iOSoptionsEditSite.swift
+//  iPadOptionsEditSite.swift
 //  qFocus Browser
 //
 //
@@ -8,7 +8,7 @@ import UIKit
 
 
 
-struct iOSEditSite: View {
+struct iPadEditSite: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) private var dismiss
     
@@ -36,7 +36,6 @@ struct iOSEditSite: View {
                     TextField("", text: $viewModel.tempName)
                         .focused($isNameFieldFocused)
                         .onChange(of: viewModel.tempName) { _, newValue in
-                            viewModel.statusText = String(localized: "onboarding.site.statusChecking")
                             debounceTimer?.invalidate()
                             debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) { _ in
                                 Task { @MainActor in
@@ -73,7 +72,6 @@ struct iOSEditSite: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
                         .onChange(of: viewModel.tempURL) { _, newValue in
-                            viewModel.statusText = String(localized: "onboarding.site.statusChecking")
                             let noSpaces = viewModel.tempURL.replacingOccurrences(of: " ", with: "")
                             if noSpaces != viewModel.tempURL {
                                 viewModel.tempURL = noSpaces
@@ -85,35 +83,8 @@ struct iOSEditSite: View {
                                     viewModel.fetchFavicon(for: newValue)
                                 }
                             }
-                            
-                            Task { @MainActor in
-                                viewModel.checkReachabilityAndUpdate(viewModel.tempURL) { reachable in
-                                    if reachable == false {
-                                        viewModel.statusText = String(localized: "onboarding.site.statusCantBeReached")
-                                    } else {
-                                        viewModel.statusText = String(localized: "onboarding.site.statusGood")
-                                    }
-                                }
-                            }
-
                         }
                 }
-
-                // Status Field
-                HStack {
-                    Text("onboarding.site.status")
-                        .font(.system(size: 12))
-                        .frame(width: 50, alignment: .leading)
-                        .foregroundColor(.blue)
-                    
-                    TextField("", text: $viewModel.statusText)
-                        .font(.system(size: 12))
-                        .foregroundColor(.blue)
-                        .allowsHitTesting(false)
-
-                }
-                
-
             }
             header: {
                 Text(viewModel.isNewSite ? "optionsEdit.newSite.header" : "optionsEdit.site.header")
@@ -129,17 +100,6 @@ struct iOSEditSite: View {
                 if !viewModel.tempURL.isEmpty && viewModel.tempURL != "https://" {
                     viewModel.fetchFavicon(for: viewModel.tempURL)
                 }
-
-                Task { @MainActor in
-                    viewModel.checkReachabilityAndUpdate(viewModel.tempURL) { reachable in
-                        if reachable == false {
-                            viewModel.statusText = String(localized: "onboarding.site.statusCantBeReached")
-                        } else {
-                            viewModel.statusText = String(localized: "onboarding.site.statusGood")
-                        }
-                    }
-                }
-
             }
             
 

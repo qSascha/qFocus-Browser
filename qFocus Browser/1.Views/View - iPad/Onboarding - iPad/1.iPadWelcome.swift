@@ -1,5 +1,5 @@
 //
-//  Welcome.swift
+//  iPadWelcome.swift
 //  qFocus Browser
 //
 //
@@ -7,21 +7,25 @@ import SwiftUI
 
 
 
-struct Welcome: View {
+struct iPadWelcome: View {
     var body: some View {
 
-        VStack(spacing: 50) {
+        VStack(spacing: 30) {
             // Header
             Text(String(localized: "onboarding.010welcome.header"))
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.blue)
-                .padding(.top, 40)
+                .padding(.top, 80)
+            
+            Spacer().frame(height: 40)
 
             Text("onboarding.010welcome.text")
-                .multilineTextAlignment(.leading)
+                .multilineTextAlignment(.center)
                 .lineSpacing(8)
-
+            
+            Spacer().frame(height: 40)
+            
             Image("AppIcon")
                 .resizable()
                 .frame(width: 150, height: 150)
@@ -29,7 +33,6 @@ struct Welcome: View {
             Spacer()
             
         }
-        .padding(.horizontal, 20)
     }
     
 }

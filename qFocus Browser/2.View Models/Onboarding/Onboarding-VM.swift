@@ -26,6 +26,9 @@ class OnboardingVM: ObservableObject {
     @Published var currentStep: Int = 1
     @Published var isComplete: Bool = false
     @Published var pictureAccessLevel: PictureAccessLevel = .unknown
+    @Published var showFirstSiteWarning: Bool = false
+    @Published var canProceed: Bool = true
+
     let totalSteps: Int = 7
 
     
@@ -36,17 +39,14 @@ class OnboardingVM: ObservableObject {
     }
 
 
-
-    //MARK: Can Proceed
-    var canProceed: Bool {
-        //TODO: Add custom validation per step here.
-        true
-    }
-
-    
     
     //MARK: Next Step
     func nextStep() {
+        if currentStep == 5 && canProceed == false {
+            showFirstSiteWarning = true
+            return
+        }
+
         if currentStep < totalSteps {
             currentStep += 1
         }
@@ -58,6 +58,7 @@ class OnboardingVM: ObservableObject {
     func previousStep() {
         if currentStep > 1 {
             currentStep -= 1
+            canProceed = true
         }
     }
 
@@ -68,17 +69,16 @@ class OnboardingVM: ObservableObject {
         print("Onboarding Complete - Step 0 -----------------------------------------")
         settingsRepo.update() { settings in
             settings.onboardingComplete = true;
-            settings.freeFlowXPercent = 0.75;
-            settings.freeFlowYPercent = 0.85;
-            settings.adBlockUpdateFrequency = 3;   // Weekly
+            settings.freeFlowXPercent = 0.5;
+            settings.freeFlowYPercent = 0.90;
+            settings.adBlockUpdateFrequency = 4;
             settings.greasyScriptsEnabled = true
         }
 
         // Insert default GreasyFork Scripts
         greasyRepo.createDefaultGreasyScripts()
 
-        
-        // Inform the StartView about this.
+        // Inform the StartView that onboarding is finalized.
         isComplete = true
         
     }

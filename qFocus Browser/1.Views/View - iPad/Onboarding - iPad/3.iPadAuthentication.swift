@@ -1,5 +1,5 @@
 //
-//  FaceID.swift
+//  iPadFaceID.swift
 //  qFocus Browser
 //
 //
@@ -8,25 +8,29 @@ import FactoryKit
 
 
 
-struct FaceID: View {
-    @InjectedObject(\.faceIDVM) var viewModel: FaceIDVM
+struct iPadAuthentication: View {
+    @InjectedObject(\.authenticationVM) var viewModel: AuthenticationVM
 
 
     var body: some View {
         if #available(iOS 26.0, *) {
 
-            VStack(spacing: 30) {
+            VStack(spacing: 60) {
+                // Header
+                Text(viewModel.biometryHeader)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+                    .padding(.top, 80)
                 
-                Text("onboarding.030faceid.text")
+                Text(viewModel.biometryText)
                     .multilineTextAlignment(.center)
                     .lineSpacing(8)
-
-                Spacer().frame(height: 10)
-
+                
                 Button {
                     viewModel.enableFaceID()
                 } label: {
-                    Text("onboarding.030faceid.button")
+                    Text(viewModel.biometryTextButton)
                         .foregroundColor(.white)
                         .padding(.horizontal, 40)
                         .padding(.vertical, 16)
@@ -37,7 +41,7 @@ struct FaceID: View {
                 
                 HStack(alignment: .top, spacing: 10) {
                     // Symbol at the top left of the text
-                    if viewModel.faceIDEnabled {
+                    if viewModel.authEnabled {
                         Image(systemName: "exclamationmark.shield.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -46,7 +50,7 @@ struct FaceID: View {
                             .padding(.trailing, 6)
                             .padding(.top, 2)
 
-                        Text("onboarding.030faceID.enabled")
+                        Text(viewModel.biometryTextEnabled)
                             .font(.caption)
 
                     } else {
@@ -58,7 +62,7 @@ struct FaceID: View {
                             .padding(.trailing, 6)
                             .padding(.top, 2)
 
-                        Text("onboarding.030faceID.disabled")
+                        Text(viewModel.biometryTextDisabled)
                             .font(.caption)
 
                     }
@@ -71,7 +75,7 @@ struct FaceID: View {
 
                 Spacer().frame(height: 10)
                 
-                Image(systemName: "faceid")
+                Image(systemName: viewModel.biometrySFSymbol)
                     .font(.system(size: 150))
                     .foregroundColor(.blue)
                     .buttonStyle(.glass)
@@ -83,18 +87,22 @@ struct FaceID: View {
         } else {
             // Legacy Version
 
-            VStack(spacing: 30) {
-                
-                Text("onboarding.030faceid.text")
+            VStack(spacing: 60) {
+                // Header
+                Text(viewModel.biometryHeader)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+                    .padding(.top, 80)
+
+                Text(viewModel.biometryText)
                     .multilineTextAlignment(.center)
                     .lineSpacing(8)
-
-                Spacer().frame(height: 10)
 
                 Button {
                     viewModel.enableFaceID()
                 } label: {
-                    Text("onboarding.030faceid.button")
+                    Text(viewModel.biometryTextButton)
                         .foregroundColor(.white)
                         .padding(.horizontal, 40)
                         .padding(.vertical, 16)
@@ -102,10 +110,9 @@ struct FaceID: View {
                 .background(Color.blue)
                 .cornerRadius(20)
                 
-                
                 HStack(alignment: .top, spacing: 10) {
                     // Symbol at the top left of the text
-                    if viewModel.faceIDEnabled {
+                    if viewModel.authEnabled {
                         Image(systemName: "exclamationmark.shield.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -114,7 +121,7 @@ struct FaceID: View {
                             .padding(.trailing, 6)
                             .padding(.top, 2)
 
-                        Text("onboarding.030faceID.enabled")
+                        Text(viewModel.biometryTextEnabled)
                             .font(.caption)
 
                     } else {
@@ -126,7 +133,7 @@ struct FaceID: View {
                             .padding(.trailing, 6)
                             .padding(.top, 2)
 
-                        Text("onboarding.030faceID.disabled")
+                        Text(viewModel.biometryTextDisabled)
                             .font(.caption)
 
                     }
@@ -139,7 +146,7 @@ struct FaceID: View {
                 
                 Spacer().frame(height: 10)
                 
-                Image(systemName: "faceid")
+                Image(systemName: viewModel.biometrySFSymbol)
                     .font(.system(size: 150))
                     .foregroundColor(.blue)
                 
@@ -152,4 +159,3 @@ struct FaceID: View {
 
     }
 }
-

@@ -44,10 +44,10 @@ extension Container {
     }
     
     
-    var faceIDVM: Factory<FaceIDVM> {
+    var authenticationVM: Factory<AuthenticationVM> {
         Factory(self) {
             MainActor.assumeIsolated {
-                FaceIDVM(
+                AuthenticationVM(
                     settingsRepo: self.settingsRepo()
                 )
             }

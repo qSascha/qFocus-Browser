@@ -64,9 +64,8 @@ struct StartViewSecond: View {
         switch viewModel.state {
         case .loading(let platform):
             switch platform {
-            case .iOS:
-                iOSLoad()
-//            case .iPadOS: iPadLoad()
+            case .iOS: iOSLoad()
+            case .iPadOS: iPadLoad()
 //            case .macOS: macLoad()
 //            case .visionOS: visionLoad()
             default: EmptyView()
@@ -85,9 +84,8 @@ struct StartViewSecond: View {
         switch viewModel.state {
         case .onboarding(let platform):
             switch platform {
-            case .iOS:
-                iOSOnboarding()
-//            case .iPadOS: iPadOnboarding()
+            case .iOS: iOSOnboarding()
+            case .iPadOS: iPadOnboarding()
 //            case .macOS: macOnboarding()
 //            case .visionOS: visionOnboarding()
             default: EmptyView()
@@ -104,9 +102,8 @@ struct StartViewSecond: View {
         switch viewModel.state {
         case .main(let platform):
             switch platform {
-            case .iOS:
-                iOSMain()
-//            case .iPadOS: iPadMain()
+            case .iOS: iOSMain()
+            case .iPadOS: iPadMain()
 //            case .macOS: macMain()
 //            case .visionOS: visionMain()
             default: EmptyView()

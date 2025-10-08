@@ -43,7 +43,6 @@ class StartVM: ObservableObject {
 
         let settings = settingsRepo.get()
         print("🔧 Settings:")
-//        print("• AdBlock Frequency: \(settings.adBlockUpdateFrequency)")
         print("• freeFlowXPercent: \(settings.freeFlowXPercent)")
         print("• freeFlowYPercent: \(settings.freeFlowYPercent)")
         print("• adBlockLastUpdate: \(settings.adBlockLastUpdate?.description ?? "nil")")
@@ -54,7 +53,6 @@ class StartVM: ObservableObject {
         
         let tempD = settingsRepo.get().id.uuidString
         Collector.shared.setIdentifier(tempD)
-        print("StartView-Collector")
     }
 
     

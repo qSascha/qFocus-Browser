@@ -9,32 +9,6 @@ import Foundation
 
 
 
-@MainActor
-class AuthenticationManager {
-    
-    static let shared = AuthenticationManager()
-    
-    private init() {}
-
-    func authenticateWithBiometrics(reason: String = "Unlock qFocus Browser", completion: @Sendable @escaping (Bool, Error?) -> Void) {
-        let context = LAContext()
-        var authError: NSError?
-        
-        // Check if biometric authentication is available
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [completion] success, evaluateError in
-                DispatchQueue.main.async {
-                    completion(success, evaluateError)
-                }
-            }
-        } else {
-            DispatchQueue.main.async { [completion] in
-                completion(false, authError)
-            }
-        }
-    }
-}
-
 
 
 

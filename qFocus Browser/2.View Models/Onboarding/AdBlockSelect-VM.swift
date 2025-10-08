@@ -53,37 +53,5 @@ class AdBlockSelectVM: ObservableObject {
         adBlockFilterRepo.initializeSettingsIfNeeded(for: filters)
     }
     
-    
- /*
-    //MARK: reorderAdBlockList
-    private func reorderAdBlockList(adBlockLists: [AdBlockFilterItem]) -> [AdBlockFilterItem] {
-        let deviceLanguage = String(Locale.preferredLanguages[0].prefix(2))
-        var reorderedList = adBlockLists
-        if let index = reorderedList.firstIndex(where: { $0.languageCode == deviceLanguage }) {
-            var languageItem = reorderedList.remove(at: index)
-            languageItem.preSelectediOS = true
-            reorderedList.insert(languageItem, at: 5)
-        }
-        return reorderedList
-    }
-  */
-    
-    
-    //MARK: saveCurrentSettings
-    func saveCurrentSettings() {
-/*
-        for filter in reorderedFilters {
-            let isEnabledNow = isEnabled(filter: filter)
-            repository.addOrUpdateSetting(for: filter, enabled: isEnabledNow)
-        }
-
-        let anyEnabled = reorderedFilters.contains { isEnabled(filter: $0) }
-        SettingsRepo.shared.update(context: modelContext) { settings in
-            settings.enableAdBlock = anyEnabled
-        }
- */
-    }
-    
-    
 }
 

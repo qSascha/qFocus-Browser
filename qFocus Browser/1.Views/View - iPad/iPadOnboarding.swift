@@ -1,15 +1,14 @@
 //
-//  iOSOnboarding.swift
+//  iPadOnboarding.swift
 //  qFocus Browser
 //
 //
-
 import SwiftUI
 import FactoryKit
 
 
 
-struct iOSOnboarding: View {
+struct iPadOnboarding: View {
     @InjectedObject(\.onboardingVM) var viewModel: OnboardingVM
     @Environment(\.dismiss) private var dismiss
     
@@ -17,9 +16,9 @@ struct iOSOnboarding: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-
+            
             contentForStep
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 100)
             .ignoresSafeArea(edges: .bottom)
             
             if #available(iOS 26.0, *) {
@@ -31,24 +30,20 @@ struct iOSOnboarding: View {
             }
             
         }
-        .alert("onboarding.030firstSite.alertHeader", isPresented: $viewModel.showFirstSiteWarning) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("onboarding.030firstSite.alertText")
-        }
         
     }
-        
+    
+    
     @ViewBuilder
     private var contentForStep: some View {
         switch viewModel.currentStep {
-        case 1: Welcome()
-        case 2: Privacy()
-        case 3: Authentication()
-        case 4: Photos()
-        case 5: FirstSite()
-        case 6: AdBlockSelect()
-        case 7: Done()
+        case 1: iPadWelcome()
+        case 2: iPadPrivacy()
+        case 3: iPadAuthentication()
+        case 4: iPadPhotos()
+        case 5: iPadFirstSite()
+        case 6: iPadAdBlockSelect()
+        case 7: iPadDone()
         default: EmptyView()
         }
     }
@@ -97,7 +92,13 @@ struct iOSOnboarding: View {
             }
         }
         .buttonStyle(.glass)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 30)
+        .padding(.bottom, 20)
+        .onAppear {
+#if DEBUG
+            print("⚠️ iOSOnboarding")
+#endif
+        }
         
         
     }
@@ -160,8 +161,17 @@ struct iOSOnboarding: View {
         }
         .padding(.horizontal, 30)
         .padding(.bottom, 20)
-
+        
     }
+    
+
+    
+    
     
 }
 
+
+
+#Preview {
+    iPadOnboarding()
+}

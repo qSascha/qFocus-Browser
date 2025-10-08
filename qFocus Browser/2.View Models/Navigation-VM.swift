@@ -15,8 +15,8 @@ class NavigationVM: ObservableObject {
     
     @Published private(set) var webSites: [SitesStorage] = []
 
-    @Published var updateXPercent: CGFloat = 0.85
-    @Published var updateYPercent: CGFloat = 0.75
+    @Published var updateXPercent: CGFloat = 0.5
+    @Published var updateYPercent: CGFloat = 0.90
     @Published var selectedWebIndex: Int = 0
     @Published var sitesButton: [SitesNavButton] = []
     @Published var minimizeNavBar: Bool = true

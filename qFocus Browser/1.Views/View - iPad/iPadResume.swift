@@ -1,0 +1,87 @@
+//
+//  iPadResume.swift
+//  qFocus Browser
+//
+//
+import SwiftUI
+import FactoryKit
+
+
+
+struct iPadResume: View {
+    @InjectedObject(\.resumeVM) var viewModel: ResumeVM
+
+
+    var body: some View {
+        ZStack {
+            
+            VStack(spacing: 100) {
+                
+                Spacer()
+                
+                Text("qFocus Browser")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundStyle(.black)
+                
+                Image("AppIcon-dark")
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .gray.opacity(0.3), radius: 4, x: 0, y: 2)
+                
+                VStack(spacing: 0) {
+                    Text("brought to you")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 8)
+                    
+                    Text("by")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 20)
+                    
+                    Text("qSascha")
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundStyle(.black)
+                }
+                
+                Spacer()
+                
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.gray)
+            .ignoresSafeArea()
+            .sheet(isPresented: $viewModel.showAuthenticationSheet) {
+                iOSAuth { success in
+                    Task { @MainActor in
+                        if success {
+                            viewModel.authenticationSucceeded()
+                        } else {
+                            viewModel.authenticationFailed()
+                        }
+                    }
+                }
+                .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $viewModel.showAuthenticationFailedSheet) {
+                iOSAuthFail(retryAction: {
+                    viewModel.retryAuthentication()
+                })
+                .presentationDetents([.medium])
+            }
+            
+//            ItIsSwedish(textSize: 18, bubbleWidth: 100, bubbleHeight: 90, offsetX: 90, offsetY: -165, textOffsetX: 0, textOffsetY: -10)
+            
+        }
+    }
+}
+
+
+
+#Preview {
+    iOSResume()
+}

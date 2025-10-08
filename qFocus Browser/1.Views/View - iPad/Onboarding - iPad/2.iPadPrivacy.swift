@@ -1,5 +1,5 @@
 //
-//  Privacy.swift
+//  iPadPrivacy.swift
 //  qFocus Browser
 //
 //
@@ -7,19 +7,19 @@ import SwiftUI
 
 
 
-struct Privacy: View {
+struct iPadPrivacy: View {
     var body: some View {
         
-        VStack(spacing: 50) {
+        VStack(spacing: 60) {
             // Header
             Text(String(localized: "onboarding.020privacy.header"))
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.blue)
-                .padding(.top, 40)
-            
+                .padding(.top, 80)
+                        
             Text("onboarding.020privacy.text")
-                .multilineTextAlignment(.leading)
+                .multilineTextAlignment(.center)
                 .lineSpacing(8)
             
             Image("OnboardingPrivacy")
@@ -30,6 +30,5 @@ struct Privacy: View {
             Spacer()
             
         }
-        .padding(.horizontal, 20)
     }
 }

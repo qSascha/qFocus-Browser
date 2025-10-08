@@ -1,5 +1,5 @@
 //
-//  Photos.swift
+//  iPadPhotos.swift
 //  qFocus Browser
 //
 //
@@ -8,24 +8,28 @@ import FactoryKit
 
 
  
-struct Photos: View {
+struct iPadPhotos: View {
     @InjectedObject(\.onboardingVM) var viewModel: OnboardingVM
 
 
     var body: some View {
         if #available(iOS 26.0, *) {
             
-            VStack(spacing: 50) {
+            VStack(spacing: 30) {
                 // Header
-                Text(String(localized: "onboarding.040photos.header"))
+                Text("onboarding.040photos.header")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-                    .padding(.top, 40)
+                    .padding(.top, 80)
                 
+                Spacer().frame(height: 40)
+
                 Text("onboarding.040photos.text")
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.center)
                     .lineSpacing(8)
+                
+                Spacer().frame(height: 40)
                 
                 Button {
                     viewModel.requestPhotoAccess()
@@ -36,8 +40,8 @@ struct Photos: View {
                         .padding(.vertical, 16)
                 }
                 .glassEffect(.regular.tint(.blue))
-                .padding(.top, -20)
-//                .padding(.trailing, 20)
+                .padding(.trailing, 20)
+                .padding(.top, 10)
                 
                 HStack(alignment: .top, spacing: 10) {
                     // Symbol at the top left of the text
@@ -100,28 +104,35 @@ struct Photos: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 30)
-                .padding(.top, -40)
+                .padding(.top, 8)
                 .multilineTextAlignment(.leading)
+                
+                Spacer().frame(height: 20)
                 
                 Image("OnboardingPhotos")
                     .resizable()
-                    .frame(width: 200, height: 200)
+                    .frame(width: 250, height: 250)
                     .overlay(
                         RoundedRectangle(cornerRadius: 2)
                             .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                     )
                     .shadow(color: .gray.opacity(0.6), radius: 8, x: 8, y: 8)
-                    .padding(.top, -20)
-
+                
                 Spacer()
                 
             }
-            .padding(.horizontal, 20)
-
+            
         } else {
             // Legacy Versions
-            VStack(spacing: 50) {
+            VStack(spacing: 60) {
                 
+                // Header
+                Text("onboarding.040photos.header")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+                    .padding(.top, 80)
+
                 Text("onboarding.040photos.text")
                     .multilineTextAlignment(.center)
                     .lineSpacing(8)
@@ -199,8 +210,8 @@ struct Photos: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.top, -40)
                 .padding(.horizontal, 30)
+                .padding(.top, 8)
                 .multilineTextAlignment(.leading)
                 
                 Image("OnboardingPhotos")
@@ -215,7 +226,6 @@ struct Photos: View {
                 Spacer()
                 
             }
-            .padding(.horizontal, 20)
 
         }
         

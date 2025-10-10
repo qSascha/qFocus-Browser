@@ -323,11 +323,21 @@ struct iOSOptions: View {
             Section {
 
                 HStack {
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
+                    // THIS ALSO NEEDS TO BE ADJUSTED
                     Image("Options-FaceID")
                         .resizable()
                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
 
-                    Toggle("options.settings.toggleEnableFaceID", isOn: $viewModel.faceIDEnabled)
+                    Toggle(viewModel.biometryText, isOn: $viewModel.faceIDEnabled)
                 }
                 
                 Button {

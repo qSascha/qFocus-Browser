@@ -36,7 +36,6 @@ struct Authentication: View {
                         .padding(.vertical, 16)
                 }
                 .glassEffect(.regular.tint(.blue))
-                .padding(.trailing, 20)
                 
                 HStack(alignment: .center, spacing: 10) {
                     // Symbol at the top left of the text
@@ -47,7 +46,6 @@ struct Authentication: View {
                             .frame(width: 40)
                             .foregroundColor(.green)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextEnabled)
                             .font(.caption)
@@ -59,7 +57,6 @@ struct Authentication: View {
                             .frame(width: 40)
                             .foregroundColor(.red)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextDisabled)
                             .font(.caption)
@@ -68,14 +65,13 @@ struct Authentication: View {
                     
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.top, -40)
+                .padding(.top, -30)
                 .padding(.horizontal, 30)
                 .multilineTextAlignment(.leading)
                 
                 Image(systemName: viewModel.biometrySFSymbol)
                     .font(.system(size: 150))
                     .foregroundColor(.blue)
-//                    .buttonStyle(.glass)
                 
                 Spacer()
                 
@@ -111,7 +107,6 @@ struct Authentication: View {
                             .frame(width: 40)
                             .foregroundColor(.green)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextEnabled)
                             .font(.caption)
@@ -123,7 +118,6 @@ struct Authentication: View {
                             .frame(width: 40)
                             .foregroundColor(.red)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextDisabled)
                             .font(.caption)
@@ -133,8 +127,7 @@ struct Authentication: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 30)
-                .padding(.top, -40)
-                .padding(.top, 8)
+                .padding(.top, -30)
                 .multilineTextAlignment(.leading)
                 
                 Image(systemName: viewModel.biometrySFSymbol)

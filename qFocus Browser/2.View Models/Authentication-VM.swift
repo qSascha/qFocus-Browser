@@ -27,7 +27,8 @@ final class AuthenticationVM: ObservableObject {
     init(settingsRepo: SettingsRepo) {
         self.settingsRepo = settingsRepo
         self.authEnabled = settingsRepo.get().faceIDEnabled
-        refreshBiometryType()
+        biometryType = AuthenticationManager.shared.currentBiometryType()
+//        refreshBiometryType()
 
         switch biometryType {
         case .faceID:
@@ -63,11 +64,12 @@ final class AuthenticationVM: ObservableObject {
     }
 
     
-    
+/*
     func refreshBiometryType() {
         biometryType = AuthenticationManager.shared.currentBiometryType()
     }
-    
+*/
+
     func attemptFaceID(completion: @Sendable @escaping (Bool) -> Void) {
         AuthenticationManager.shared.authenticateWithBiometrics { [weak self] success, error in
             guard let self = self else { return }
@@ -106,15 +108,17 @@ final class AuthenticationManager {
     
     private init() {}
 
+    
+
     func currentBiometryType() -> LABiometryType {
         let context = LAContext()
-        var authError: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            return context.biometryType
-        } else {
-            return .none
-        }
+        var error: NSError?
+        // Call once to initialize biometryType, ignore result on purpose
+        _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        return context.biometryType
     }
+
+
 
     func authenticateWithBiometrics(reason: String = "Unlock qFocus Browser", completion: @Sendable @escaping (Bool, Error?) -> Void) {
         let context = LAContext()

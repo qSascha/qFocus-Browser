@@ -36,8 +36,6 @@ struct iPadAuthentication: View {
                         .padding(.vertical, 16)
                 }
                 .glassEffect(.regular.tint(.blue))
-                .padding(.trailing, 20)
-                .padding(.top, 10)
                 
                 HStack(alignment: .top, spacing: 10) {
                     // Symbol at the top left of the text
@@ -48,7 +46,6 @@ struct iPadAuthentication: View {
                             .frame(width: 40)
                             .foregroundColor(.green)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextEnabled)
                             .font(.caption)
@@ -60,7 +57,6 @@ struct iPadAuthentication: View {
                             .frame(width: 40)
                             .foregroundColor(.red)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextDisabled)
                             .font(.caption)
@@ -69,12 +65,10 @@ struct iPadAuthentication: View {
                     
                 }
                 .frame(maxWidth: .infinity)
+                .padding(.top, -30)
                 .padding(.horizontal, 30)
-                .padding(.top, 8)
                 .multilineTextAlignment(.leading)
 
-                Spacer().frame(height: 10)
-                
                 Image(systemName: viewModel.biometrySFSymbol)
                     .font(.system(size: 150))
                     .foregroundColor(.blue)
@@ -119,7 +113,6 @@ struct iPadAuthentication: View {
                             .frame(width: 40)
                             .foregroundColor(.green)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextEnabled)
                             .font(.caption)
@@ -131,7 +124,6 @@ struct iPadAuthentication: View {
                             .frame(width: 40)
                             .foregroundColor(.red)
                             .padding(.trailing, 6)
-                            .padding(.top, 2)
 
                         Text(viewModel.biometryTextDisabled)
                             .font(.caption)
@@ -140,11 +132,9 @@ struct iPadAuthentication: View {
                     
                 }
                 .frame(maxWidth: .infinity)
+                .padding(.top, -30)
                 .padding(.horizontal, 30)
-                .padding(.top, 8)
                 .multilineTextAlignment(.leading)
-                
-                Spacer().frame(height: 10)
                 
                 Image(systemName: viewModel.biometrySFSymbol)
                     .font(.system(size: 150))
@@ -153,7 +143,6 @@ struct iPadAuthentication: View {
                 Spacer()
                 
             }
-
 
         }
 

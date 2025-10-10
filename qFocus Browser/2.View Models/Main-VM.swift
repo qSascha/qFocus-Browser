@@ -184,6 +184,64 @@ final class MainVM: ObservableObject {
     
     //MARK: Update Top Area Color
     func updateTopAreaColor() {
+        // Update the color several times, for the best user experience possible
+
+        if let topAreaColor = self.getTopAreaColor() {
+            self.statusBarBackgroundColor = topAreaColor
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            if let topAreaColor = self.getTopAreaColor() {
+                self.statusBarBackgroundColor = topAreaColor
+            }
+        }
+
+    }
+
+/*
+    func updateTopAreaColor() {
         // Cancel any previous scheduled updates to avoid overlap
         topAreaColorTask?.cancel()
 
@@ -205,7 +263,7 @@ final class MainVM: ObservableObject {
             }
         }
     }
-    
+*/
 
     
     //MARK: Get Top Area Color

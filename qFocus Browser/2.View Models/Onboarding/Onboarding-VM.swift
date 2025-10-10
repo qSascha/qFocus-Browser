@@ -70,7 +70,7 @@ class OnboardingVM: ObservableObject {
         settingsRepo.update() { settings in
             settings.onboardingComplete = true;
             settings.freeFlowXPercent = 0.5;
-            settings.freeFlowYPercent = 0.90;
+            settings.freeFlowYPercent = 0.93;
             settings.adBlockUpdateFrequency = 4;
             settings.greasyScriptsEnabled = true
         }

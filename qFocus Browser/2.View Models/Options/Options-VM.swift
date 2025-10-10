@@ -6,6 +6,7 @@
 import SwiftUI
 import Photos
 import Combine
+@preconcurrency import LocalAuthentication
 
 
 
@@ -22,6 +23,10 @@ final class OptionsVM: ObservableObject {
     @Published var alPhotoLibraryText: LocalizedStringKey = ""
     @Published var alPhotoLibraryColor: Color = .primary
     @Published var alPhotoLibraryLink: Bool = false
+
+    @Published var biometryType: LABiometryType = .none
+    @Published var biometrySFSymbol: String = ""
+    @Published var biometryText: String = ""
 
     // Countdown state
     @Published var disableEBCountdownActive: Bool = false
@@ -58,6 +63,36 @@ final class OptionsVM: ObservableObject {
         self.settings = settingsRepo.get()
         
         refreshSites()
+
+        
+        
+        biometryType = AuthenticationManager.shared.currentBiometryType()
+//        refreshBiometryType()
+
+        switch biometryType {
+        case .faceID:
+            biometrySFSymbol = "faceid"
+            biometryText = NSLocalizedString("options.settings.authTypeFaceID", comment: "")
+        case .touchID:
+            biometrySFSymbol = "touchid"
+            biometryText = NSLocalizedString("options.settings.authTypeTouchID", comment: "")
+        case .opticID:
+            biometrySFSymbol = "eye.circle"
+            biometryText = NSLocalizedString("options.settings.authTypeOpticID", comment: "")
+        default:
+            biometrySFSymbol = "lock"
+            biometryText = NSLocalizedString("options.settings.authTypeGeneral", comment: "")
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // Publish current Photos authorization to show an initial value in the UI
         photoLibraryPublishStatus()
 

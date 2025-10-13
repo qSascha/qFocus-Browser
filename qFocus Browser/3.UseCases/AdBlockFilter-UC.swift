@@ -65,7 +65,6 @@ final class AdBlockFilterUC: ObservableObject {
         print("------------ Updating ...")
 
         triggeredManually = manually
-        updatingFilters = true
 
         Task { @MainActor in
             let enabledSettings = adBlockRepo.getAllEnabled()
@@ -83,16 +82,16 @@ final class AdBlockFilterUC: ObservableObject {
             print("Lists to update: \(filtersToCompile.count)")
             #endif
 
-/*            // Compile all parallel
-            let tasks = filtersToCompile.map { filter in
-                Task.detached(priority: .background) { [self] in
-                    await self.compileFilter(filter)
-                }
+
+            // Wait 20 seconds for initial websites to load
+            if !manually {
+                // Hop off MainActor to perform the delay
+                await Task.detached(priority: .background) {
+                    try? await Task.sleep(nanoseconds: 20_000_000_000)
+                }.value
             }
-            for task in tasks {
-                await task.value
-            }
-*/
+            print("------------ Updating starting now...")
+            updatingFilters = true
 
             // Compile Sequential
              for filter in filtersToCompile {
@@ -102,14 +101,13 @@ final class AdBlockFilterUC: ObservableObject {
              }
              
             
-            
             settingsRepo.update() { settings in
                 settings.adBlockLastUpdate = Date()
             }
 
             updatingFilters = false
 
-            // If triggered manuall, through Update button in AdBlock settings then update all webviews.
+            // If triggered manually, through Update button in AdBlock settings then update all webviews.
             if manually {
                 CombineRepo.shared.updateWebSites.send()
             }

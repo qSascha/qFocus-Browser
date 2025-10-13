@@ -40,7 +40,7 @@ struct iOSMain: View {
                 // Loading message for ad-blocker
                 if adBlockUC.updatingFilters {
                     AdBlockLoadStatus()
-                        .zIndex(1)
+                        .zIndex(4)
                         .allowsHitTesting(false)
                 }
                 

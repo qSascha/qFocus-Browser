@@ -130,8 +130,8 @@ final class WebViewVM: NSObject, ObservableObject, WKUIDelegate {
         config.userContentController = userContentController
         config.dataDetectorTypes = .all
         config.preferences.isFraudulentWebsiteWarningEnabled = true
-//        config.ignoresViewportScaleLimits = false
-        config.ignoresViewportScaleLimits = true
+        config.ignoresViewportScaleLimits = false
+//        config.ignoresViewportScaleLimits = true
         config.mediaTypesRequiringUserActionForPlayback = .all
 //        config.processPool = WKProcessPool()
         

@@ -23,7 +23,7 @@ struct AdBlockLoadStatus: View {
                     ProgressView()
                     VStack(alignment: .leading) {
                         
-                        Text("adblock.update.message \(viewModel.updateCounter)/\(viewModel.totalCounter)")
+                        Text("adblock.update.message \(viewModel.updateCounter + 1)/\(viewModel.totalCounter)")
                             .font(.caption)
                         
                         if viewModel.triggeredManually {

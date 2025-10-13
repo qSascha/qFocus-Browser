@@ -45,10 +45,10 @@ struct iOSOnboarding: View {
         case 1: Welcome()
         case 2: Privacy()
         case 3: Authentication()
-        case 4: Photos()
-        case 5: FirstSite()
-        case 6: AdBlockSelect()
-        case 7: Done()
+//        case 4: Photos()
+        case 4: FirstSite()
+        case 5: AdBlockSelect()
+        case 6: Done()
         default: EmptyView()
         }
     }

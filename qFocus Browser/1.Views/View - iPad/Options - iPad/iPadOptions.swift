@@ -320,13 +320,15 @@ struct iPadOptions: View {
             Section {
 
                 HStack {
-                    Image("Options-FaceID")
+
+                    Image("Options-Auth-FaceID")
                         .resizable()
                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
 
                     Toggle("options.settings.toggleEnableFaceID", isOn: $viewModel.faceIDEnabled)
                 }
                 
+/*
                 Button {
                     viewModel.photoLibraryRequestAccess()
                 } label: {
@@ -356,7 +358,8 @@ struct iPadOptions: View {
                     }
                 }
                 .buttonStyle(.plain)
-                
+*/
+
                 NavigationLink(destination: iPadAdBlockSettings()) {
                     HStack {
                         Image("Options-AdBlocking")

@@ -7,11 +7,13 @@ import Foundation
 import WebKit
 import Combine
 import SwiftUI
+import PhotosUI
+import UniformTypeIdentifiers
 
 
 
 @MainActor
-final class WebViewVM: NSObject, ObservableObject {
+final class WebViewVM: NSObject, ObservableObject, WKUIDelegate {
     private var cancellables = Set<AnyCancellable>()
 
     @Published var isLoading: Bool = false
@@ -41,9 +43,8 @@ final class WebViewVM: NSObject, ObservableObject {
     private let minDownTriggerDistance: CGFloat = 8
     
     var webViewID: UUID = UUID()
-    
-    
-    
+    private var pendingOpenPanelCompletion: (([URL]?) -> Void)?
+    private var pickerContinuationTask: Task<Void, Never>?
     
     
 
@@ -81,17 +82,7 @@ final class WebViewVM: NSObject, ObservableObject {
 #endif
             return
         }
-/*
-#if DEBUG
-        print("✅ Initializing WebView for site \(site.siteName)")
-        print("URL: \(site.siteURL)")
-        print("CookieStore: \(site.cookieStoreID)")
-        print("Request Desktop: \(site.requestDesktop)")
-        print("Enable Greasy: \(site.enableGreasy)")
-        print("Enable AdBlocker: \(site.enableAdBlocker)")
-        print("-------------------------------------------------")
-#endif
-*/
+
         guard let url = URL(string: site.siteURL) else {
 #if DEBUG
             print("❌ Invalid URL string: \(site.siteURL)")
@@ -139,7 +130,8 @@ final class WebViewVM: NSObject, ObservableObject {
         config.userContentController = userContentController
         config.dataDetectorTypes = .all
         config.preferences.isFraudulentWebsiteWarningEnabled = true
-        config.ignoresViewportScaleLimits = false
+//        config.ignoresViewportScaleLimits = false
+        config.ignoresViewportScaleLimits = true
         config.mediaTypesRequiringUserActionForPlayback = .all
 //        config.processPool = WKProcessPool()
         
@@ -160,23 +152,11 @@ final class WebViewVM: NSObject, ObservableObject {
 
         /// Navigation Delegate to  inspect for external URL
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         print("🧭 navigationDelegate for \(site.siteName) set to: \(ObjectIdentifier(self))")
 
         webView.load(URLRequest(url: url))
 
-/*
-        // Workaround
-        /// Sometimes websites won't load the Desktop version, even so it is enabled in the settings.
-        /// Programaticaly reloading the site after a short while helps.
-        ///
-
-        if site.requestDesktop {
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-                webView.reload()
-            }
-        }
-*/
     }
     
     
@@ -241,7 +221,6 @@ final class WebViewVM: NSObject, ObservableObject {
 
 //MARK: Navigation Delegate
 extension WebViewVM: WKNavigationDelegate {
-    
  
     @objc
     func webView(
@@ -312,12 +291,6 @@ extension WebViewVM: WKNavigationDelegate {
             CombineRepo.shared.triggerExternalBrowser.send(url)
         }
     }
-
-
-
-    
-    
-    
     
 
 
@@ -362,37 +335,148 @@ extension WebViewVM: WKNavigationDelegate {
         return mainDomain
     }
 
-
-
 }
 
 
-/*
-//MARK: UI Scroll View Delegate
-extension WebViewVM: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentOffsetY = scrollView.contentOffset.y
-        let deltaY = currentOffsetY - lastContentOffsetY
-        accumulatedScrollDistance += deltaY
-        let now = Date()
 
-        if accumulatedScrollDistance < 0 {
-            // Scrolling down
-            if abs(accumulatedScrollDistance) >= minDownTriggerDistance {
-                CombineRepo.shared.updateNavigationBar.send(false)
-                lastScrollTriggerTime = now
-                accumulatedScrollDistance = 0
-            }
-        } else if accumulatedScrollDistance > 0 {
-            // Scrolling up
-            if abs(accumulatedScrollDistance) >= minUpTriggerDistance {
-                CombineRepo.shared.updateNavigationBar.send(true)
-                lastScrollTriggerTime = now
-                accumulatedScrollDistance = 0
-            }
+//MARK: File upload support via PHPicker
+extension WebViewVM {
+    // Handle <input type="file"> requests from web content
+    func webView(_ webView: WKWebView,
+                 runOpenPanelWith parameters: WKOpenPanelParameters,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping ([URL]?) -> Void) {
+        // Retain completion to call after picking
+        pendingOpenPanelCompletion = completionHandler
+
+        // Configure PHPicker based on parameters
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = parameters.allowsMultipleSelection ? 0 : 1 // 0 = unlimited
+        config.filter = .any(of: [.images, .videos])
+
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+
+        // Present from the topmost view controller
+        guard let presenter = Self.topMostViewController() else {
+            completionHandler(nil)
+            pendingOpenPanelCompletion = nil
+            return
         }
-        accumulatedScrollDistance = 0
-        lastContentOffsetY = currentOffsetY
+        presenter.present(picker, animated: true)
+    }
+
+    // Helper to find top-most view controller to present from
+    private static func topMostViewController(base: UIViewController? = UIApplication.shared.connectedScenes
+        .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+        .first?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topMostViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return topMostViewController(base: selected)
+        }
+        if let presented = base?.presentedViewController {
+            return topMostViewController(base: presented)
+        }
+        return base
     }
 }
-*/
+
+
+
+//MARK: PHPickerViewControllerDelegate
+extension WebViewVM: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        // Dismiss picker
+        picker.dismiss(animated: true)
+        
+        guard let completion = pendingOpenPanelCompletion else { return }
+        
+        // If user cancelled
+        if results.isEmpty {
+            completion(nil)
+            pendingOpenPanelCompletion = nil
+            return
+        }
+        
+        // Load file representations and write to temporary URLs for WebKit
+        pickerContinuationTask?.cancel()
+        pickerContinuationTask = Task { @MainActor in
+            var urls: [URL] = []
+            
+            for result in results {
+                if result.itemProvider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+                    if let url = await loadFileURL(from: result.itemProvider, preferredType: .image) {
+                        urls.append(url)
+                    }
+                } else if result.itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) ||
+                            result.itemProvider.hasItemConformingToTypeIdentifier(UTType.video.identifier) {
+                    if let url = await loadFileURL(from: result.itemProvider, preferredType: .movie) {
+                        urls.append(url)
+                    }
+                } else {
+                    // Try any file representation
+                    if let url = await loadAnyFileURL(from: result.itemProvider) {
+                        urls.append(url)
+                    }
+                }
+            }
+            
+            completion(urls.isEmpty ? nil : urls)
+            pendingOpenPanelCompletion = nil
+        }
+    }
+    
+    // MARK: Item loading helpers
+    private func loadFileURL(from provider: NSItemProvider, preferredType: UTType) async -> URL? {
+        await withCheckedContinuation { continuation in
+            let typeIdentifier = preferredType.identifier
+            provider.loadFileRepresentation(forTypeIdentifier: typeIdentifier) { url, error in
+                if let sourceURL = url {
+                    // Copy to a temp location WebKit can access after provider releases the original URL
+                    let destination = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension(preferredType.preferredFilenameExtension ?? "dat")
+                    do {
+                        if FileManager.default.fileExists(atPath: destination.path) {
+                            try? FileManager.default.removeItem(at: destination)
+                        }
+                        try FileManager.default.copyItem(at: sourceURL, to: destination)
+                        continuation.resume(returning: destination)
+                    } catch {
+                        continuation.resume(returning: nil)
+                    }
+                } else {
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
+    private func loadAnyFileURL(from provider: NSItemProvider) async -> URL? {
+        // Try image first, then movie, then any data
+        if let url = await loadFileURL(from: provider, preferredType: .image) { return url }
+        if let url = await loadFileURL(from: provider, preferredType: .movie) { return url }
+        
+        // Fallback: load data representation and write to temp
+        return await withCheckedContinuation { continuation in
+            if provider.hasItemConformingToTypeIdentifier(UTType.data.identifier) {
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { data, error in
+                    guard let data else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    let destination = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+                    do {
+                        try data.write(to: destination)
+                        continuation.resume(returning: destination)
+                    } catch {
+                        continuation.resume(returning: nil)
+                    }
+                }
+            } else {
+                continuation.resume(returning: nil)
+            }
+        }
+    }
+    
+}

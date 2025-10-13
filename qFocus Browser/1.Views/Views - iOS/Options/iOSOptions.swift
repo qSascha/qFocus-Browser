@@ -323,16 +323,6 @@ struct iOSOptions: View {
             Section {
 
                 HStack {
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
-                    // THIS ALSO NEEDS TO BE ADJUSTED
                     Image("Options-FaceID")
                         .resizable()
                         .frame(width: viewModel.iconSize, height: viewModel.iconSize)
@@ -340,6 +330,7 @@ struct iOSOptions: View {
                     Toggle(viewModel.biometryText, isOn: $viewModel.faceIDEnabled)
                 }
                 
+/*
                 Button {
                     viewModel.photoLibraryRequestAccess()
                 } label: {
@@ -369,7 +360,8 @@ struct iOSOptions: View {
                     }
                 }
                 .buttonStyle(.plain)
-                
+*/
+
                 NavigationLink(destination: iOSAdBlockSettings()) {
                     HStack {
                         Image("Options-AdBlocking")

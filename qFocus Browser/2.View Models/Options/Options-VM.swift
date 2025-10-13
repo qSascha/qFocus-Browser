@@ -25,7 +25,7 @@ final class OptionsVM: ObservableObject {
     @Published var alPhotoLibraryLink: Bool = false
 
     @Published var biometryType: LABiometryType = .none
-    @Published var biometrySFSymbol: String = ""
+    @Published var biometryIcon: String = ""
     @Published var biometryText: String = ""
 
     // Countdown state
@@ -64,33 +64,21 @@ final class OptionsVM: ObservableObject {
         
         refreshSites()
 
-        
-        
         biometryType = AuthenticationManager.shared.currentBiometryType()
-//        refreshBiometryType()
-
         switch biometryType {
         case .faceID:
-            biometrySFSymbol = "faceid"
+            biometryIcon = "Options-Auth-FaceID"
             biometryText = NSLocalizedString("options.settings.authTypeFaceID", comment: "")
         case .touchID:
-            biometrySFSymbol = "touchid"
+            biometryIcon = "Options-Auth-TouchID"
             biometryText = NSLocalizedString("options.settings.authTypeTouchID", comment: "")
         case .opticID:
-            biometrySFSymbol = "eye.circle"
+            biometryIcon = "Options-Auth-OpticID"
             biometryText = NSLocalizedString("options.settings.authTypeOpticID", comment: "")
         default:
-            biometrySFSymbol = "lock"
+            biometryIcon = "Options-Auth-FaceID"
             biometryText = NSLocalizedString("options.settings.authTypeGeneral", comment: "")
         }
-
-        
-        
-        
-        
-        
-        
-        
         
         
         // Publish current Photos authorization to show an initial value in the UI

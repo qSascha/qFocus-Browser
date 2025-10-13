@@ -184,64 +184,6 @@ final class MainVM: ObservableObject {
     
     //MARK: Update Top Area Color
     func updateTopAreaColor() {
-        // Update the color several times, for the best user experience possible
-
-        if let topAreaColor = self.getTopAreaColor() {
-            self.statusBarBackgroundColor = topAreaColor
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            if let topAreaColor = self.getTopAreaColor() {
-                self.statusBarBackgroundColor = topAreaColor
-            }
-        }
-
-    }
-
-/*
-    func updateTopAreaColor() {
         // Cancel any previous scheduled updates to avoid overlap
         topAreaColorTask?.cancel()
 
@@ -263,7 +205,7 @@ final class MainVM: ObservableObject {
             }
         }
     }
-*/
+
 
     
     //MARK: Get Top Area Color
@@ -276,14 +218,25 @@ final class MainVM: ObservableObject {
             return nil
         }
         let statusBarHeight = window.safeAreaInsets.top
-        let captureHeight: CGFloat = 50
+        
+        let captureHeight: CGFloat = 40
         let captureRect = CGRect(x: 0, y: statusBarHeight, width: window.bounds.width, height: captureHeight)
-
-        let renderer = UIGraphicsImageRenderer(bounds: captureRect)
-
+        
+        // Render into a tiny context to keep work minimal
+        let targetSize = CGSize(width: 64, height: 16)
+        let format = UIGraphicsImageRendererFormat()
+        format.opaque = true
+        format.preferredRange = .standard
+        let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
         let image = renderer.image { ctx in
-            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
-            // Removed red stroke drawing here; replaced by debug overlay view
+            let cg = ctx.cgContext
+            // Map captureRect into the tiny target size
+            let sx = targetSize.width / captureRect.width
+            let sy = targetSize.height / captureRect.height
+            cg.scaleBy(x: sx, y: sy)
+            cg.translateBy(x: -captureRect.minX, y: -captureRect.minY)
+            // Cheaper than drawHierarchy; avoids forcing a full update
+            window.layer.render(in: cg)
         }
 
         guard let cgImage = image.cgImage else {
@@ -323,3 +276,4 @@ final class MainVM: ObservableObject {
 
 
 }
+

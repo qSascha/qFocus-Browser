@@ -40068,6 +40068,7 @@
     },
     "options.settings.PhotoLibrary" : {
       "comment" : "A label in a list view that provides the user the possibility to review the access to the Photos Library.",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

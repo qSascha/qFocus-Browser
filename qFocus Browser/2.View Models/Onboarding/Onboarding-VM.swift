@@ -29,7 +29,7 @@ class OnboardingVM: ObservableObject {
     @Published var showFirstSiteWarning: Bool = false
     @Published var canProceed: Bool = true
 
-    let totalSteps: Int = 7
+    let totalSteps: Int = 6
 
     
 
@@ -42,7 +42,7 @@ class OnboardingVM: ObservableObject {
     
     //MARK: Next Step
     func nextStep() {
-        if currentStep == 5 && canProceed == false {
+        if currentStep == 4 && canProceed == false {
             showFirstSiteWarning = true
             return
         }

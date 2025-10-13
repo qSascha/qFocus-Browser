@@ -40,10 +40,10 @@ struct iPadOnboarding: View {
         case 1: iPadWelcome()
         case 2: iPadPrivacy()
         case 3: iPadAuthentication()
-        case 4: iPadPhotos()
-        case 5: iPadFirstSite()
-        case 6: iPadAdBlockSelect()
-        case 7: iPadDone()
+//        case 4: iPadPhotos()
+        case 4: iPadFirstSite()
+        case 5: iPadAdBlockSelect()
+        case 6: iPadDone()
         default: EmptyView()
         }
     }
